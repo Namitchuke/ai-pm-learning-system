@@ -83,9 +83,8 @@ def _validate_env() -> None:
     if missing:
         msg = f"Missing or placeholder env vars: {', '.join(missing)}"
         logger.critical(msg)
-        if settings.environment == "production":
-            raise RuntimeError(msg)
-        logger.warning("Continuing in development mode despite missing env vars.")
+        logger.warning("App will start but affected features will be unavailable until credentials are set.")
+
 
 
 # ──────────────────────────────────────────────────────────────────────────────
