@@ -6,7 +6,6 @@ FRD v2.0 §FS-01, §FS-07, §FS-08, §FS-09, §FS-10, §FS-12
 Trigger endpoints: /trigger/rss, /trigger/email, /trigger/grade-check, /trigger/weekly
 All protected by X-Cron-Secret header.
 """
-from __future__ import annotations
 
 from datetime import datetime
 from typing import Any

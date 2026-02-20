@@ -6,7 +6,6 @@ FRD v2.0 §FS-06 Grading Engine, §FS-08 API Endpoints
 Endpoints: /api/grade, /api/health, /api/dashboard-data
 Dual auth: API Key OR Basic Auth (L2-13, L2-19 fixes).
 """
-from __future__ import annotations
 
 from typing import Any, Optional
 

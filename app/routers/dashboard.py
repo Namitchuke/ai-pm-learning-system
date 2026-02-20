@@ -5,7 +5,6 @@ PRD v2.0 §FR-08 Dashboard, §NFR-02 Auth
 FRD v2.0 §FS-08.2 Dashboard Authentication
 HTTP Basic Auth + CSRF protection for all dashboard HTML pages.
 """
-from __future__ import annotations
 
 from pathlib import Path
 from typing import Any

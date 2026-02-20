@@ -6,7 +6,6 @@ FRD v2.0 §API Endpoints
 Includes: lifespan management, CORS, rate limiting, security headers,
           startup validation, ping keep-alive endpoint (PRD FR-10.5).
 """
-from __future__ import annotations
 
 from contextlib import asynccontextmanager
 from typing import AsyncIterator
