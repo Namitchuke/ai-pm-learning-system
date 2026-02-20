@@ -227,7 +227,7 @@ class QueuedArticle(BaseModel):
 
 class PipelineState(BaseModel):
     schema_version: str = "2.0"
-    date: str  # ISO date YYYY-MM-DD
+    date: str = Field(default_factory=lambda: datetime.utcnow().strftime("%Y-%m-%d"))  # ISO date YYYY-MM-DD
     slots: dict[str, SlotState] = Field(
         default_factory=lambda: {
             "morning": SlotState(),
@@ -398,7 +398,7 @@ class QuarterlyReport(BaseModel):
 
 class QuarterlyReportsFile(BaseModel):
     schema_version: str = "2.0"
-    year: int
+    year: int = Field(default_factory=lambda: datetime.utcnow().year)
     reports: list[QuarterlyReport] = []
 
 
