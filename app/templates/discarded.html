@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Discarded Articles{% endblock %}
+{% block content %}
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+    <h2 style="font-size:1.1rem;font-weight:700;">Discarded Articles (showing {{ discarded|length }} of {{ total_count
+        }})</h2>
+    <a href="/dashboard" style="color:#64748b;font-size:0.85rem;">← Back</a>
+</div>
+<div class="card" style="padding:0;">
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Source</th>
+                <th>Avg Score</th>
+                <th>Rejection Reason</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in discarded|reverse %}
+            <tr>
+                <td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"
+                    title="{{ entry.title }}">{{ entry.title[:70] }}</td>
+                <td style="color:#64748b;white-space:nowrap;">{{ entry.source_name }} (T{{ entry.source_tier }})</td>
+                <td>{{ "%.1f"|format(entry.avg_score) }}</td>
+                <td style="color:#f87171;font-size:0.8rem;">{{ entry.rejection_reason }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" style="color:#64748b;text-align:center;padding:2rem;">No discarded articles yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

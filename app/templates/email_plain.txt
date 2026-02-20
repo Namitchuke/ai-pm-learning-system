@@ -1,0 +1,31 @@
+AI PM Daily Learning Digest — {{ date }}
+Mode: {{ mode_friendly }} | {{ topic_count }} topics today | 🔥 {{ streak }}-day streak
+=======================================================================
+
+{% for topic in topics %}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TOPIC: {{ topic.topic_name }}
+Category: {{ topic.category }}
+
+TL;DR: {{ topic.tldr }}
+
+WHY IT MATTERS:
+{{ topic.why_it_matters }}
+
+CORE MECHANISM:
+{{ topic.core_mechanism }}
+
+PRODUCT APPLICATIONS:
+{{ topic.product_applications }}
+
+{% if topic.key_takeaways %}
+KEY TAKEAWAYS:
+{% for kw in topic.key_takeaways %}- {{ kw }}
+{% endfor %}{% endif %}
+
+{% if topic.source_url %}Source: {{ topic.source_url }}{% endif %}
+
+{% endfor %}
+=======================================================================
+You're subscribed as {{ recipient_email }}.

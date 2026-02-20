@@ -1,0 +1,44 @@
+[
+    {
+        "title": "GPT-4 API Rate Limits and Production Best Practices",
+        "source": "OpenAI Blog (Tier 1)",
+        "scores": {
+            "relevance_to_ai_pm": 9,
+            "technical_depth": 8,
+            "actionability": 9,
+            "novelty": 7,
+            "recency_relevance": 9,
+            "credibility": 10,
+            "is_promotional": false
+        },
+        "reasoning": "High relevance — directly impacts AI PM tooling decisions. Actionable rate limit strategies. Tier 1 authoritative source."
+    },
+    {
+        "title": "10 Ways AI Will Transform Your Business in 2025",
+        "source": "Generic Marketing Blog (Tier 5)",
+        "scores": {
+            "relevance_to_ai_pm": 4,
+            "technical_depth": 2,
+            "actionability": 3,
+            "novelty": 2,
+            "recency_relevance": 5,
+            "credibility": 3,
+            "is_promotional": true
+        },
+        "reasoning": "Promotional listicle with no technical depth. No actionable specifics. Credibility low — anonymous author, no citations."
+    },
+    {
+        "title": "Lessons from Shipping an ML Feature at Scale: Latency, Fallbacks, and Shadow Mode Testing",
+        "source": "Chip Huyen Blog (Tier 2)",
+        "scores": {
+            "relevance_to_ai_pm": 10,
+            "technical_depth": 9,
+            "actionability": 10,
+            "novelty": 8,
+            "recency_relevance": 8,
+            "credibility": 9,
+            "is_promotional": false
+        },
+        "reasoning": "Extremely relevant — covers production ML deployment topics critical for AI PMs. Highly actionable patterns. Expert author."
+    }
+]

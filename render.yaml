@@ -1,0 +1,68 @@
+# ============================================================
+# AI PM Autonomous Learning & Intelligence System
+# render.yaml — TDD v2.0 §Deployment / Render Configuration
+# ============================================================
+
+services:
+  - type: web
+    name: ai-pm-learning
+    env: python
+    plan: free
+    region: singapore  # Closest to IST timezone
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
+    healthCheckPath: /health
+
+    envVars:
+      # -- Authentication --
+      - key: API_KEY
+        sync: false
+
+      - key: CRON_SECRET
+        sync: false
+
+      - key: DASHBOARD_USER
+        sync: false
+
+      - key: DASHBOARD_PASS
+        sync: false
+
+      - key: CSRF_SECRET
+        sync: false
+
+      # -- Google APIs --
+      - key: GEMINI_API_KEY
+        sync: false
+
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+
+      - key: GOOGLE_REFRESH_TOKEN
+        sync: false
+
+      - key: DRIVE_FOLDER_NAME
+        value: AI_PM_SYSTEM
+
+      # -- Email --
+      - key: SENDER_EMAIL
+        sync: false
+
+      - key: RECIPIENT_EMAIL
+        sync: false
+
+      # -- Model Configuration (L2-17) --
+      - key: GEMINI_BULK_MODEL
+        value: gemini-2.0-flash-lite
+
+      - key: GEMINI_GRADE_MODEL
+        value: gemini-2.5-flash
+
+      # -- App Settings --
+      - key: ENVIRONMENT
+        value: production
+
+      - key: LOG_LEVEL
+        value: INFO

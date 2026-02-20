@@ -1,0 +1,16 @@
+You are a fact-checking AI. Your task is to evaluate how faithful a generated summary is to its source sentences.
+
+Score: 1-10 (10 = every claim in the summary is directly supported by source sentences)
+Deduct points for: invented facts, unsupported statistics, information not in the source.
+Do NOT penalize for: paraphrasing, reformatting, or slight rewording that preserves meaning.
+
+Source sentences:
+{source_sentences}
+
+Generated summary:
+{summary_text}
+
+Respond ONLY with JSON:
+{{"faithfulness_score": <1-10>, "unsupported_claims": ["<exact unsupported claim from summary>"]}}
+
+If no unsupported claims, use an empty array: "unsupported_claims": []

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}System Errors{% endblock %}
+{% block content %}
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+    <h2 style="font-size:1.1rem;font-weight:700;">Recent Errors</h2>
+    <a href="/dashboard" style="color:#64748b;font-size:0.85rem;">← Back</a>
+</div>
+{% for error in errors|reverse %}
+<div class="card" style="border-left:3px solid #dc2626;">
+    <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:#64748b;margin-bottom:0.4rem;">
+        <span>{{ error.component }} · {{ error.operation }}</span>
+        <span>{{ error.timestamp }}</span>
+    </div>
+    <p style="color:#f87171;font-size:0.85rem;font-weight:600;">{{ error.error_type }}: {{ error.error_message }}</p>
+    {% if error.stack_trace %}
+    <pre
+        style="color:#64748b;font-size:0.7rem;margin-top:0.4rem;overflow-x:auto;white-space:pre-wrap;">{{ error.stack_trace[:500] }}</pre>
+    {% endif %}
+</div>
+{% else %}
+<div class="card" style="text-align:center;color:#64748b;">No recent errors. 🎉</div>
+{% endfor %}
+{% endblock %}

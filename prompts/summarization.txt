@@ -1,0 +1,23 @@
+You are an expert AI PM educator. Create a structured learning summary for a learner using ONLY the verified sentences provided.
+
+STRICT RULES:
+- Only use information present in the verified sentences below
+- Do NOT invent facts, statistics, numbers, or examples not in the provided sentences
+- Do NOT use external knowledge (things you know but aren't in the sentences)
+- keywords_glossary: include 2-5 technical terms that appear in the sentences, define in plain English
+
+Verified source sentences (USE ONLY THESE):
+{verified_sentences}
+
+Generate a JSON summary with these exact fields:
+{{
+  "why_it_matters": "<2-3 sentences: Why this matters for an AI PM>",
+  "core_mechanism": "<2-3 sentences: How it works technically>",
+  "product_applications": "<2-3 sentences: How to apply in product work>",
+  "risks_limitations": "<1-2 sentences: Key risks or limitations>",
+  "key_takeaways": ["<takeaway 1>", "<takeaway 2>", "<takeaway 3>"],
+  "tldr": "<One memorable sentence summary>",
+  "keywords_glossary": {{
+    "<technical_term_from_text>": "<plain-English definition>"
+  }}
+}}

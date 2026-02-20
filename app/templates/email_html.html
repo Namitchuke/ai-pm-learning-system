@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{date}} — AI PM Daily Learning Digest</title>
+    <style>
+        body {
+            background: #0f172a;
+            color: #e2e8f0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #1e293b;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 1.3rem;
+            color: #818cf8;
+            margin: 0 0 4px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .streak {
+            display: inline-block;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 9999px;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            margin-bottom: 24px;
+        }
+
+        .topic-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .topic-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin: 0;
+        }
+
+        .category-badge {
+            background: #1e3a5f;
+            color: #60a5fa;
+            border-radius: 9999px;
+            padding: 3px 10px;
+            font-size: 0.72rem;
+            white-space: nowrap;
+        }
+
+        .tldr {
+            background: #111827;
+            border-left: 3px solid #818cf8;
+            padding: 8px 12px;
+            border-radius: 0 6px 6px 0;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+
+        .section-content {
+            color: #cbd5e1;
+            font-size: 0.85rem;
+            line-height: 1.55;
+            margin-bottom: 10px;
+        }
+
+        .takeaways {
+            padding-left: 16px;
+            margin: 0;
+        }
+
+        .takeaways li {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+
+        .grade-btn {
+            display: inline-block;
+            background: #4f46e5;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #475569;
+            font-size: 0.75rem;
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #1e293b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <h1>🧠 AI PM Daily Learning Digest</h1>
+            <p>{{ date }}</p>
+        </div>
+
+        <div style="text-align:center;margin-bottom:20px;">
+            <span class="streak">🔥 {{ streak }}-day streak</span>
+            {% if streak == 1 %}<span style="font-size:0.8rem;color:#64748b;display:block;margin-top:4px;">New streak
+                started!</span>{% endif %}
+        </div>
+
+        {% for topic in topics %}
+        <div class="topic-card">
+            <div class="topic-header">
+                <div class="topic-name">{{ topic.topic_name }}</div>
+                <span class="category-badge">{{ topic.category }}</span>
+            </div>
+
+            {% if topic.tldr %}
+            <div class="tldr">{{ topic.tldr }}</div>
+            {% endif %}
+
+            {% if topic.why_it_matters %}
+            <div class="section-label">Why It Matters</div>
+            <div class="section-content">{{ topic.why_it_matters }}</div>
+            {% endif %}
+
+            {% if topic.core_mechanism %}
+            <div class="section-label">Core Mechanism</div>
+            <div class="section-content">{{ topic.core_mechanism }}</div>
+            {% endif %}
+
+            {% if topic.product_applications %}
+            <div class="section-label">Product Applications</div>
+            <div class="section-content">{{ topic.product_applications }}</div>
+            {% endif %}
+
+            {% if topic.key_takeaways %}
+            <div class="section-label">Key Takeaways</div>
+            <ul class="takeaways">
+                {% for kw in topic.key_takeaways %}<li>{{ kw }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if topic.source_url %}
+            <div style="margin-top:10px;font-size:0.78rem;color:#475569;">
+                Source: <a href="{{ topic.source_url }}" style="color:#818cf8;">{{ topic.source_title or
+                    topic.source_url }}</a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="footer">
+            <p>Mode: {{ mode_friendly }} · {{ topic_count }} topics today</p>
+            <p style="margin-top:4px;">You're subscribed as {{ recipient_email }}</p>
+        </div>
+    </div>
+</body>
+
+</html>

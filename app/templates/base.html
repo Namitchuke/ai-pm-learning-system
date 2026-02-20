@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI PM Learning System{% endblock %}</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+        header { border-bottom: 1px solid #1e293b; padding: 1rem 0; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+        header h1 { font-size: 1.2rem; font-weight: 700; color: #818cf8; }
+        nav a { color: #94a3b8; text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; }
+        nav a:hover { color: #e2e8f0; }
+        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
+        .badge-normal { background: #1e3a5f; color: #60a5fa; }
+        .badge-reduced { background: #3b2c00; color: #fbbf24; }
+        .badge-minimal { background: #2c1515; color: #f87171; }
+        .badge-healthy { background: #1a3a1e; color: #4ade80; }
+        .badge-yellow { background: #3b2c00; color: #fbbf24; }
+        .badge-red { background: #2c1515; color: #f87171; }
+        .card { background: #1e293b; border: 1px solid #334155; border-radius: 0.75rem; padding: 1rem; margin-bottom: 1rem; }
+        .card-title { font-size: 1rem; font-weight: 600; color: #e2e8f0; margin-bottom: 0.5rem; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .stat-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.75rem; padding: 1rem; text-align: center; }
+        .stat-value { font-size: 2rem; font-weight: 700; color: #818cf8; }
+        .stat-label { font-size: 0.75rem; color: #64748b; margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .slot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1.5rem; }
+        .slot-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 0.75rem; text-align: center; font-size: 0.85rem; }
+        .slot-done { border-color: #16a34a; }
+        .slot-in_progress { border-color: #f59e0b; }
+        .slot-failed { border-color: #dc2626; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; font-size: 0.75rem; text-transform: uppercase; color: #64748b; padding: 0.5rem; border-bottom: 1px solid #334155; }
+        td { padding: 0.75rem 0.5rem; border-bottom: 1px solid #1e293b; font-size: 0.875rem; }
+        tr:hover td { background: #1e293b; }
+        a { color: #818cf8; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .depth-bar { display: flex; gap: 2px; }
+        .depth-pip { width: 12px; height: 12px; border-radius: 2px; background: #334155; }
+        .depth-pip.filled { background: #818cf8; }
+        footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #1e293b; font-size: 0.75rem; color: #475569; text-align: center; }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>🧠 AI PM Learning System</h1>
+        <nav>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/dashboard/discarded">Discarded</a>
+            <a href="/dashboard/errors">Errors</a>
+            <a href="/api/health">Health</a>
+        </nav>
+    </header>
+    {% block content %}{% endblock %}
+    <footer>AI PM Autonomous Learning & Intelligence System v2.0</footer>
+</div>
+{% block scripts %}{% endblock %}
+</body>
+</html>

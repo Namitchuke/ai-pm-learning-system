@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — AI PM Learning System{% endblock %}
+{% block content %}
+
+<div class="stat-grid">
+    <div class="stat-card">
+        <div class="stat-value">{{ streak }}</div>
+        <div class="stat-label">🔥 Day Streak</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{{ topic_count }}</div>
+        <div class="stat-label">Active Topics</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">${{ "%.4f"|format(daily_cost_usd) }}</div>
+        <div class="stat-label">Daily Gemini Cost</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{{ longest_streak }}</div>
+        <div class="stat-label">Longest Streak</div>
+    </div>
+</div>
+
+<div style="display:flex;gap:0.75rem;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center;">
+    <span>Adaptive Mode:
+        <span
+            class="badge badge-{{ 'normal' if current_mode == 'normal' else ('reduced' if 'reduced' in current_mode else 'minimal') }}">
+            {{ current_mode.replace('_', ' ').title() }}
+        </span>
+    </span>
+    <span>Budget:
+        <span class="badge badge-{{ budget_status }}">{{ budget_status.upper() }}</span>
+    </span>
+    <span style="color:#475569;font-size:0.8rem;">{{ pipeline_state_date }}</span>
+</div>
+
+<div class="slot-grid">
+    {% for slot_name, slot_status in slot_statuses.items() %}
+    <div class="slot-card slot-{{ slot_status }}">
+        <div style="font-weight:600;text-transform:capitalize;">{{ slot_name }}</div>
+        <div style="color:#94a3b8;font-size:0.8rem;margin-top:2px;">{{ slot_status }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="card">
+    <div class="card-title">Active Learning Topics</div>
+    {% if topics %}
+    <table>
+        <thead>
+            <tr>
+                <th>Topic</th>
+                <th>Category</th>
+                <th>Depth</th>
+                <th>Mastery</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for topic in topics %}
+            <tr>
+                <td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"
+                    title="{{ topic.topic_name }}">
+                    <a href="/dashboard/topic/{{ topic.topic_id }}">{{ topic.topic_name[:70] }}</a>
+                </td>
+                <td style="color:#94a3b8;">{{ topic.category.value.replace('_',' ').title() }}</td>
+                <td>
+                    <div class="depth-bar">
+                        {% for i in range(1,6) %}
+                        <div class="depth-pip{% if i <= topic.current_depth %} filled{% endif %}"></div>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td>{{ "%.0f"|format(topic.mastery_score) }}%</td>
+                <td>
+                    <span class="badge badge-{{ 'reduced' if topic.status.value == 'reteaching' else 'normal' }}">
+                        {{ topic.status.value }}
+                    </span>
+                </td>
+                <td><a href="/dashboard/topic/{{ topic.topic_id }}">Grade →</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color:#64748b;padding:1rem 0;">No active topics yet. Trigger the RSS pipeline to populate topics.</p>
+    {% endif %}
+</div>
+{% endblock %}

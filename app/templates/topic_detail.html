@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.topic_name[:50] }} — AI PM Learning{% endblock %}
+{% block content %}
+
+<div style="margin-bottom:1rem;">
+    <a href="/dashboard" style="color:#64748b;font-size:0.85rem;">← Back to Dashboard</a>
+</div>
+
+<div class="card">
+    <div
+        style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">
+        <div>
+            <h2 style="font-size:1.25rem;font-weight:700;color:#e2e8f0;margin-bottom:0.25rem;">{{ topic.topic_name }}
+            </h2>
+            <span style="color:#94a3b8;font-size:0.85rem;">{{ topic.category.value.replace('_',' ').title() }} · Tier {{
+                topic.source_tier }}</span>
+        </div>
+        <div style="text-align:right;">
+            <div class="badge badge-{{ 'reduced' if topic.status.value == 'reteaching' else 'normal' }}">{{
+                topic.status.value }}</div>
+            <div style="margin-top:0.4rem;font-size:0.85rem;color:#94a3b8;">Mastery: {{
+                "%.0f"|format(topic.mastery_score) }}%</div>
+        </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1.25rem;">
+        <span style="font-size:0.8rem;color:#64748b;">Depth:</span>
+        <div class="depth-bar">
+            {% for i in range(1,6) %}
+            <div class="depth-pip{% if i <= topic.current_depth %} filled{% endif %}" style="width:18px;height:18px;">
+            </div>
+            {% endfor %}
+        </div>
+        <span style="font-size:0.85rem;color:#94a3b8;">{{ topic.current_depth }}/5</span>
+    </div>
+
+    {% if topic.summary %}
+    <div style="margin-bottom:1.25rem;">
+        <div style="font-weight:600;color:#e2e8f0;margin-bottom:0.4rem;">📌 TL;DR</div>
+        <p style="color:#94a3b8;line-height:1.6;">{{ topic.summary.tldr }}</p>
+    </div>
+
+    <div
+        style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.75rem;margin-bottom:1.25rem;">
+        <div style="background:#111827;border-radius:0.5rem;padding:0.75rem;">
+            <div style="font-size:0.75rem;text-transform:uppercase;color:#64748b;margin-bottom:0.4rem;">Why It Matters
+            </div>
+            <p style="font-size:0.875rem;color:#cbd5e1;line-height:1.5;">{{ topic.summary.why_it_matters }}</p>
+        </div>
+        <div style="background:#111827;border-radius:0.5rem;padding:0.75rem;">
+            <div style="font-size:0.75rem;text-transform:uppercase;color:#64748b;margin-bottom:0.4rem;">Core Mechanism
+            </div>
+            <p style="font-size:0.875rem;color:#cbd5e1;line-height:1.5;">{{ topic.summary.core_mechanism }}</p>
+        </div>
+        <div style="background:#111827;border-radius:0.5rem;padding:0.75rem;">
+            <div style="font-size:0.75rem;text-transform:uppercase;color:#64748b;margin-bottom:0.4rem;">Applications
+            </div>
+            <p style="font-size:0.875rem;color:#cbd5e1;line-height:1.5;">{{ topic.summary.product_applications }}</p>
+        </div>
+    </div>
+
+    {% if topic.summary.key_takeaways %}
+    <div style="margin-bottom:1.25rem;">
+        <div style="font-weight:600;color:#e2e8f0;margin-bottom:0.4rem;">Key Takeaways</div>
+        <ul style="padding-left:1.25rem;color:#94a3b8;line-height:1.8;">
+            {% for kw in topic.summary.key_takeaways %}<li>{{ kw }}</li>{% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endif %}
+
+    {% if topic.source_url %}
+    <div style="font-size:0.8rem;color:#64748b;">
+        Source: <a href="{{ topic.source_url }}" target="_blank">{{ topic.source_title or topic.source_url }}</a>
+    </div>
+    {% endif %}
+</div>
+
+<div class="card">
+    <div class="card-title">📝 Grade Your Understanding — Depth {{ topic.current_depth }}</div>
+    <p style="color:#64748b;font-size:0.85rem;margin-bottom:1rem;">
+        Retries available: {{ [0, 3 - topic.retries_used]|max }}
+        {% if topic.status.value == 'reteaching' %} · <span style="color:#f87171;">Currently in reteaching mode</span>{%
+        endif %}
+    </p>
+
+    <div id="grade-result" style="display:none;margin-bottom:1rem;"></div>
+
+    <form id="grade-form">
+        <textarea id="answer" rows="6" placeholder="Write your answer here (minimum 50 characters)..." style="width:100%;background:#111827;border:1px solid #334155;border-radius:0.5rem;
+                   color:#e2e8f0;padding:0.75rem;font-size:0.875rem;resize:vertical;font-family:inherit;"></textarea>
+        <button type="submit" id="submit-btn" style="margin-top:0.75rem;background:#4f46e5;color:white;border:none;border-radius:0.5rem;
+                   padding:0.6rem 1.5rem;font-size:0.875rem;cursor:pointer;font-weight:600;">
+            Submit Answer
+        </button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById("grade-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const answer = document.getElementById("answer").value.trim();
+        if (answer.length < 50) {
+            alert("Answer must be at least 50 characters.");
+            return;
+        }
+        const btn = document.getElementById("submit-btn");
+        btn.disabled = true;
+        btn.textContent = "Grading...";
+
+        try {
+            const resp = await fetch("/api/grade", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ topic_id: "{{ topic.topic_id }}", answer_text: answer })
+            });
+            const data = await resp.json();
+
+            const resultDiv = document.getElementById("grade-result");
+            resultDiv.style.display = "block";
+
+            if (!resp.ok) {
+                resultDiv.style.background = "#2c1515";
+                resultDiv.style.border = "1px solid #7f1d1d";
+                resultDiv.style.borderRadius = "0.5rem";
+                resultDiv.style.padding = "1rem";
+                resultDiv.innerHTML = `<strong style="color:#f87171;">Error:</strong> ${data.detail || "Grading failed"}`;
+            } else {
+                const decisionColors = { "advance": "#16a34a", "retry": "#f59e0b", "reteach": "#dc2626" };
+                const color = decisionColors[data.decision] || "#818cf8";
+                resultDiv.style.background = "#111827";
+                resultDiv.style.border = `1px solid ${color}`;
+                resultDiv.style.borderRadius = "0.5rem";
+                resultDiv.style.padding = "1rem";
+                resultDiv.innerHTML = `
+                <div style="font-size:1.1rem;font-weight:700;color:${color};margin-bottom:0.5rem;">
+                    Score: ${Math.round(data.score)} / 100 — ${data.decision.toUpperCase()}
+                    ${data.cached ? '<span style="font-size:0.75rem;color:#475569;"> (cached)</span>' : ''}
+                </div>
+                <p style="color:#94a3b8;margin-bottom:0.5rem;">${data.feedback}</p>
+                ${data.new_depth !== data.depth ? `<p style="color:#4ade80;">Depth advanced: ${data.depth} → ${data.new_depth}</p>` : ''}
+                ${data.quality_warning ? `<p style="color:#f59e0b;font-size:0.8rem;">⚠ ${data.quality_warning}</p>` : ''}
+                ${data.message ? `<p style="color:#64748b;font-size:0.8rem;margin-top:0.25rem;">${data.message}</p>` : ''}
+            `;
+            }
+        } catch (err) {
+            alert("Network error: " + err.message);
+        } finally {
+            btn.disabled = false;
+            btn.textContent = "Submit Answer";
+        }
+    });
+</script>
+{% endblock %}

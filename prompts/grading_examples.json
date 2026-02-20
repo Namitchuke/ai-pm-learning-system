@@ -1,0 +1,30 @@
+[
+    {
+        "topic": "Attention Mechanisms in Transformer Models",
+        "depth": 1,
+        "answer": "Attention mechanisms allow transformer models to weigh the importance of different parts of the input. As an AI PM, this means I need to understand that attention is what makes LLMs context-aware, and why longer context windows require more compute — which affects pricing and latency tradeoffs in our product.",
+        "scores": {
+            "concept_clarity": 22,
+            "technical_correctness": 20,
+            "application_thinking": 23,
+            "ai_pm_relevance": 22
+        },
+        "total": 87,
+        "decision": "advance",
+        "feedback": "Strong answer demonstrating solid conceptual understanding and excellent PM application thinking around the latency/cost tradeoffs."
+    },
+    {
+        "topic": "RAG (Retrieval-Augmented Generation)",
+        "depth": 2,
+        "answer": "RAG is when you use search to find relevant documents and give them to the LLM as context. It helps with hallucinations.",
+        "scores": {
+            "concept_clarity": 12,
+            "technical_correctness": 14,
+            "application_thinking": 8,
+            "ai_pm_relevance": 9
+        },
+        "total": 43,
+        "decision": "retry",
+        "feedback": "The core idea is correct but too vague for depth 2. Expand on how retrieval works, when to use RAG vs fine-tuning, and what product metrics you'd track."
+    }
+]
