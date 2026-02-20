@@ -155,6 +155,65 @@ async def ping():
     return {"status": "ok", "version": "2.0.0"}
 
 
+@app.get("/api/debug", tags=["health"])
+async def debug_state():
+    """Temporary debug endpoint — shows exact error when dashboard state loading fails."""
+    import traceback
+    results = {}
+    
+    try:
+        from app.config import get_settings
+        s = get_settings()
+        results["settings_ok"] = True
+        results["dashboard_user_set"] = bool(s.dashboard_user)
+        results["dashboard_pass_set"] = bool(s.dashboard_pass)
+        results["gemini_key_set"] = bool(s.gemini_api_key)
+    except Exception as e:
+        results["settings_error"] = str(e)
+
+    try:
+        from app.models import PipelineState, TopicsFile, Metrics
+        ps = PipelineState()
+        tf = TopicsFile()
+        m = Metrics()
+        results["models_ok"] = True
+        results["pipeline_date"] = ps.date
+    except Exception as e:
+        results["models_error"] = str(e)
+        results["models_traceback"] = traceback.format_exc()
+
+    try:
+        from app.clients import drive_client
+        from app.clients.drive_client import read_json_file
+        data = read_json_file("topics.json")
+        results["drive_read_ok"] = True
+        results["drive_data"] = str(data)[:100] if data else None
+    except Exception as e:
+        results["drive_error"] = str(e)
+
+    try:
+        from app.core.cost_tracker import get_budget_status
+        from app.models import Metrics
+        bs = get_budget_status(Metrics())
+        results["cost_tracker_ok"] = True
+        results["budget_status"] = str(bs)
+    except Exception as e:
+        results["cost_tracker_error"] = str(e)
+        results["cost_tracker_traceback"] = traceback.format_exc()
+
+    try:
+        from pathlib import Path
+        tmpl_dir = Path(__file__).parent / "app" / "templates"
+        results["templates_dir"] = str(tmpl_dir)
+        results["templates_exist"] = tmpl_dir.exists()
+        if tmpl_dir.exists():
+            results["template_files"] = [f.name for f in tmpl_dir.glob("*.html")]
+    except Exception as e:
+        results["templates_error"] = str(e)
+
+    return results
+
+
 # ── Root redirect to dashboard ────────────────────────────────────────────────
 @app.get("/", include_in_schema=False)
 async def root():
