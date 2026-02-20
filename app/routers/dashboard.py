@@ -107,7 +107,15 @@ async def dashboard_home(
         },
     }
 
-    return templates.TemplateResponse("dashboard.html", context)
+    try:
+        return templates.TemplateResponse("dashboard.html", context)
+    except Exception as exc:
+        import traceback
+        from fastapi.responses import PlainTextResponse
+        return PlainTextResponse(
+            f"TEMPLATE ERROR:\n{type(exc).__name__}: {exc}\n\n{traceback.format_exc()}\n\nTEMPLATES_DIR={TEMPLATES_DIR}\nExists={TEMPLATES_DIR.exists()}",
+            status_code=500
+        )
 
 
 
