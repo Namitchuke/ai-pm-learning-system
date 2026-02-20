@@ -33,22 +33,33 @@ templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
 
 def _load_dashboard_state() -> dict[str, Any]:
-    """Load all state files needed for dashboard rendering."""
+    """Load all state files needed for dashboard rendering. Returns empty defaults on Drive failure."""
     def _safe_read(filename: str, model_class):
-        data = drive_client.read_json_file(filename)
         try:
+            data = drive_client.read_json_file(filename)
             return model_class(**(data or {}))
         except Exception:
             return model_class()
 
-    return {
-        "topics_file": _safe_read("topics.json", TopicsFile),
-        "archived_file": _safe_read("archived_topics.json", ArchivedTopicsFile),
-        "metrics": _safe_read("metrics.json", Metrics),
-        "pipeline_state": _safe_read("pipeline_state.json", PipelineState),
-        "discarded_file": _safe_read("discarded.json", DiscardedFile),
-        "errors_file": _safe_read("errors.json", ErrorsFile),
-    }
+    try:
+        return {
+            "topics_file": _safe_read("topics.json", TopicsFile),
+            "archived_file": _safe_read("archived_topics.json", ArchivedTopicsFile),
+            "metrics": _safe_read("metrics.json", Metrics),
+            "pipeline_state": _safe_read("pipeline_state.json", PipelineState),
+            "discarded_file": _safe_read("discarded.json", DiscardedFile),
+            "errors_file": _safe_read("errors.json", ErrorsFile),
+        }
+    except Exception:
+        # Fallback: return all empty defaults so dashboard always renders
+        return {
+            "topics_file": TopicsFile(),
+            "archived_file": ArchivedTopicsFile(),
+            "metrics": Metrics(),
+            "pipeline_state": PipelineState(),
+            "discarded_file": DiscardedFile(),
+            "errors_file": ErrorsFile(),
+        }
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -62,44 +73,42 @@ async def dashboard_home(
     _auth: bool = Depends(verify_basic_auth),
 ) -> HTMLResponse:
     """Main dashboard: active topics, streak, mode, slot status."""
-    try:
-        state = _load_dashboard_state()
-        topics_file: TopicsFile = state["topics_file"]
-        metrics: Metrics = state["metrics"]
-        pipeline_state: PipelineState = state["pipeline_state"]
+    state = _load_dashboard_state()
+    topics_file: TopicsFile = state["topics_file"]
+    metrics: Metrics = state["metrics"]
+    pipeline_state: PipelineState = state["pipeline_state"]
 
+    try:
         from app.core.cost_tracker import get_budget_status, get_daily_cost
         budget_status = get_budget_status(metrics)
         daily_cost = get_daily_cost(metrics)
+    except Exception:
+        budget_status = "unknown"
+        daily_cost = 0.0
 
-        active_topics = [
-            t for t in topics_file.topics
-            if t.status.value not in ("archived", "completed")
-        ]
+    active_topics = [
+        t for t in topics_file.topics
+        if t.status.value not in ("archived", "completed")
+    ]
 
-        context = {
-            "request": request,
-            "topics": active_topics,
-            "topic_count": len(active_topics),
-            "streak": metrics.streak_count,
-            "longest_streak": metrics.longest_streak,
-            "current_mode": metrics.current_topic_mode.value,
-            "budget_status": budget_status,
-            "daily_cost_usd": round(daily_cost, 4),
-            "pipeline_state_date": pipeline_state.date,
-            "slot_statuses": {
-                slot: s.status.value
-                for slot, s in pipeline_state.slots.items()
-            },
-        }
+    context = {
+        "request": request,
+        "topics": active_topics,
+        "topic_count": len(active_topics),
+        "streak": metrics.streak_count,
+        "longest_streak": metrics.longest_streak,
+        "current_mode": metrics.current_topic_mode.value,
+        "budget_status": budget_status,
+        "daily_cost_usd": round(daily_cost, 4),
+        "pipeline_state_date": pipeline_state.date,
+        "slot_statuses": {
+            slot: s.status.value
+            for slot, s in pipeline_state.slots.items()
+        },
+    }
 
-        return templates.TemplateResponse("dashboard.html", context)
-    except Exception as exc:
-        logger.error(f"Dashboard render error: {exc}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Dashboard unavailable. Check logs.",
-        )
+    return templates.TemplateResponse("dashboard.html", context)
+
 
 
 # ──────────────────────────────────────────────────────────────────────────────
