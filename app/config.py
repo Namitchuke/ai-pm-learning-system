@@ -109,8 +109,8 @@ class Settings(BaseSettings):
     slot_morning_end: int = 10
     slot_midday_start: int = 10
     slot_midday_end: int = 14
-    slot_evening_start: int = 14
-    slot_evening_end: int = 19
+    slot_evening_start: int = 0
+    slot_evening_end: int = 24
 
     # ── File retention caps — PRD FR-11 / FRD FS-11.1 ────────────────────────
     discarded_max_entries: int = 500
