@@ -264,15 +264,23 @@ async def _run_rss_pipeline() -> None:
         _save_all_state(state)
 
     except Exception as exc:
-        logger.error(f"RSS pipeline failed for slot {slot}: {exc}")
-        import traceback
-        tb = traceback.format_exc()
-        # Try to save state even on failure
+        import traceback as tb_module
+        tb = tb_module.format_exc()
+        logger.error(f"RSS pipeline failed for slot {slot}: {exc}\n{tb}")
         try:
+            from app.models import ErrorEntry
+            error_entry = ErrorEntry(
+                component="rss_pipeline",
+                operation=f"slot_{slot}",
+                error_type=type(exc).__name__,
+                error_message=str(exc),
+                stack_trace=tb,
+            )
+            state["errors_file"].errors.append(error_entry)
             state["pipeline_state"].slots[slot].status = SlotStatus.FAILED
             _save_all_state(state)
-        except Exception:
-            pass
+        except Exception as save_exc:
+            logger.error(f"Failed to save error state: {save_exc}")
 
 
 # ──────────────────────────────────────────────────────────────────────────────
