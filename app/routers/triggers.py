@@ -118,7 +118,7 @@ async def trigger_rss(
     return {"status": "accepted", "message": "RSS pipeline started"}
 
 
-async def _run_rss_pipeline() -> None:
+def _run_rss_pipeline() -> None:
     """Full RSS pipeline execution (runs in background task)."""
     slot = get_current_slot()
     today = today_ist_str()
@@ -297,7 +297,7 @@ async def trigger_email(
     return {"status": "accepted", "message": "Email trigger accepted"}
 
 
-async def _run_email_send() -> None:
+def _run_email_send() -> None:
     """Email sending execution."""
     today = today_ist_str()
     logger.info(f"Email trigger fired for {today}.")
@@ -348,7 +348,7 @@ async def trigger_weekly(
     return {"status": "accepted", "message": "Weekly trigger accepted"}
 
 
-async def _run_weekly() -> None:
+def _run_weekly() -> None:
     """Weekly backup + maintenance."""
     logger.info("Weekly trigger fired.")
     try:
