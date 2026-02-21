@@ -31,7 +31,7 @@ settings = get_settings()
 # OAuth scopes — FRD INT-02
 # ──────────────────────────────────────────────────────────────────────────────
 SCOPES = [
-    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive",
     "https://www.googleapis.com/auth/gmail.send",
 ]
 
