@@ -244,7 +244,7 @@ async def _run_rss_pipeline() -> None:
         )
         topics_file.topics.extend(new_topics)
         topics_file.last_updated = datetime.utcnow()
-        slot_state.topics_added = len(new_topics)
+        slot_state.topics_selected = len(new_topics)
 
         # Update adaptive mode daily counter (for evening slot — full day perspective)
         if slot == "evening":

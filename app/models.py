@@ -20,6 +20,7 @@ from pydantic import BaseModel, Field, field_validator
 
 class SlotStatus(str, Enum):
     PENDING = "PENDING"
+    IN_PROGRESS = "IN_PROGRESS"
     FETCHING = "FETCHING"
     SCORING = "SCORING"
     SUMMARIZING = "SUMMARIZING"
