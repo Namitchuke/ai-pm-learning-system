@@ -16,7 +16,6 @@ from loguru import logger
 from app.clients import drive_client
 from app.clients.gmail_client import send_alert_email
 from app.core.auth import verify_cron_secret
-from app.core.rate_limiter import limiter, RATE_LIMITS
 from app.models import (
     ArchivedTopicsFile,
     CacheData,
@@ -106,7 +105,6 @@ def _save_all_state(state: dict[str, Any]) -> None:
 # ──────────────────────────────────────────────────────────────────────────────
 
 @router.post("/rss")
-@limiter.limit(RATE_LIMITS["triggers"])
 async def trigger_rss(
     request: Request,
     background_tasks: BackgroundTasks,
@@ -289,7 +287,6 @@ async def _run_rss_pipeline() -> None:
 # ──────────────────────────────────────────────────────────────────────────────
 
 @router.post("/email")
-@limiter.limit(RATE_LIMITS["triggers"])
 async def trigger_email(
     request: Request,
     background_tasks: BackgroundTasks,
@@ -341,7 +338,6 @@ async def _run_email_send() -> None:
 # ──────────────────────────────────────────────────────────────────────────────
 
 @router.post("/weekly")
-@limiter.limit(RATE_LIMITS["triggers"])
 async def trigger_weekly(
     request: Request,
     background_tasks: BackgroundTasks,
