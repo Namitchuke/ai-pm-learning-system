@@ -68,7 +68,7 @@ class Settings(BaseSettings):
     min_credibility_score: float = 6.0
 
     # ── Caching — PRD FR-11 / FRD FS-03.4 ────────────────────────────────────
-    url_dedup_ttl_days: int = 30
+    url_dedup_ttl_days: int = 2190
     grading_cache_ttl_days: int = 30
     summary_cache_ttl_days: int = 90
     max_cache_entries: int = 1000
