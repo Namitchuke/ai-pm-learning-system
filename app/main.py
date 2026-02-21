@@ -158,15 +158,16 @@ async def ping():
 
 
 
-@app.get("/api/debug", tags=["health"])
-async def debug_state():
+@app.get("/api/debug-clear", tags=["health"])
+async def debug_clear():
     import traceback
     try:
         from app.clients import drive_client
-        state = drive_client.read_json_file("pipeline_state.json")
-        sources = drive_client.read_json_file("rss_sources.json")
-        errors = drive_client.read_json_file("errors.json")
-        return {"pipeline": state, "sources": sources, "errors": errors}
+        cache = drive_client.read_json_file("cache.json")
+        count = len(cache.get("processed_urls", {}))
+        cache["processed_urls"] = {}
+        drive_client.write_json_file("cache.json", cache)
+        return {"status": "cleared", "urls_removed": count}
     except Exception as e:
         return {"error": str(e), "traceback": traceback.format_exc()}
 
