@@ -109,14 +109,23 @@ async def trigger_rss(
     request: Request,
     background_tasks: BackgroundTasks,
     force_slot: str | None = None,
+    force_sync: str | None = None,
     _auth: bool = Depends(verify_cron_secret),
 ) -> dict[str, Any]:
     """
     RSS content pipeline trigger.
     Runs the full pipeline: fetch → dedup → extract → score → summarize → select → email.
     """
-    background_tasks.add_task(_run_rss_pipeline, force_slot)
-    return {"status": "accepted", "message": f"RSS pipeline started (forced {force_slot})" if force_slot else "RSS pipeline started"}
+    if force_sync:
+        try:
+            _run_rss_pipeline(force_slot)
+            return {"status": "success", "message": "Pipeline ran synchronously"}
+        except Exception as e:
+            import traceback
+            return {"status": "error", "error": str(e), "traceback": traceback.format_exc()}
+    else:
+        background_tasks.add_task(_run_rss_pipeline, force_slot)
+        return {"status": "accepted", "message": f"RSS pipeline started (forced {force_slot})" if force_slot else "RSS pipeline started"}
 
 
 def _run_rss_pipeline(force_slot: str | None = None) -> None:
