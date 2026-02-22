@@ -172,6 +172,19 @@ async def debug_clear():
         return {"error": str(e), "traceback": traceback.format_exc()}
 
 
+@app.get("/api/debug", tags=["health"])
+async def debug_state():
+    import traceback
+    try:
+        from app.clients import drive_client
+        state = drive_client.read_json_file("pipeline_state.json")
+        sources = drive_client.read_json_file("rss_sources.json")
+        errors = drive_client.read_json_file("errors.json")
+        return {"pipeline": state, "sources": sources, "errors": errors}
+    except Exception as e:
+        return {"error": str(e), "traceback": traceback.format_exc()}
+
+
 # ── Root redirect to dashboard ────────────────────────────────────────────────
 @app.get("/", include_in_schema=False)
 async def root():

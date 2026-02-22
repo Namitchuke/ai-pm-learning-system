@@ -108,19 +108,20 @@ def _save_all_state(state: dict[str, Any]) -> None:
 async def trigger_rss(
     request: Request,
     background_tasks: BackgroundTasks,
+    force_slot: str | None = None,
     _auth: bool = Depends(verify_cron_secret),
 ) -> dict[str, Any]:
     """
     RSS content pipeline trigger.
     Runs the full pipeline: fetch → dedup → extract → score → summarize → select → email.
     """
-    background_tasks.add_task(_run_rss_pipeline)
-    return {"status": "accepted", "message": "RSS pipeline started"}
+    background_tasks.add_task(_run_rss_pipeline, force_slot)
+    return {"status": "accepted", "message": f"RSS pipeline started (forced {force_slot})" if force_slot else "RSS pipeline started"}
 
 
-def _run_rss_pipeline() -> None:
+def _run_rss_pipeline(force_slot: str | None = None) -> None:
     """Full RSS pipeline execution (runs in background task)."""
-    slot = get_current_slot()
+    slot = force_slot or get_current_slot()
     today = today_ist_str()
     logger.info(f"RSS pipeline triggered. Slot: {slot}, Date: {today}")
 
