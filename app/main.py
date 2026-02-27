@@ -8,6 +8,9 @@ Includes: lifespan management, CORS, rate limiting, security headers,
 """
 
 from contextlib import asynccontextmanager
+import os
+import threading
+import time
 from typing import AsyncIterator
 
 from fastapi import FastAPI, Request, Response
@@ -24,6 +27,45 @@ from app.core.rate_limiter import limiter
 from app.routers import api, dashboard, triggers
 
 settings = get_settings()
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Self-Ping Keep-Alive — prevents Render free-tier cold starts
+# Pings /api/ping every 8 minutes from a daemon thread launched at startup.
+# No external cron service needed. daemon=True means thread auto-dies with app.
+# ──────────────────────────────────────────────────────────────────────────────
+
+_PING_INTERVAL_SECONDS = 8 * 60  # 8 minutes
+
+
+def _self_ping_worker(base_url: str) -> None:
+    """Background daemon thread: ping own health endpoint every 8 minutes."""
+    import httpx
+    time.sleep(60)  # Wait 1 minute after startup before first ping
+    while True:
+        try:
+            httpx.get(f"{base_url}/api/ping", timeout=10)
+            logger.debug("Self-ping OK.")
+        except Exception as exc:
+            logger.warning(f"Self-ping failed (non-fatal): {exc}")
+        time.sleep(_PING_INTERVAL_SECONDS)
+
+
+def _start_self_ping() -> None:
+    """Launch the self-ping keep-alive daemon thread."""
+    # Derive our own public URL from Render's env var, or use a sensible default
+    base_url = os.environ.get(
+        "RENDER_EXTERNAL_URL",
+        "https://ai-pm-learning-system.onrender.com",
+    ).rstrip("/")
+    thread = threading.Thread(
+        target=_self_ping_worker,
+        args=(base_url,),
+        daemon=True,
+        name="self-ping-keepalive",
+    )
+    thread.start()
+    logger.info(f"Self-ping keep-alive started. Pinging {base_url}/api/ping every {_PING_INTERVAL_SECONDS // 60}m.")
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -50,6 +92,11 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         await startup_sync()
     except Exception as exc:
         logger.error(f"Startup Drive sync failed (non-fatal): {exc}")
+
+    # Self-ping keep-alive — prevents Render free-tier from spinning down
+    # Fires every 8 minutes in a background daemon thread (no external cron needed)
+    if settings.environment == "production":
+        _start_self_ping()
 
     logger.info("Startup complete.")
     yield
