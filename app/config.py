@@ -103,7 +103,7 @@ class Settings(BaseSettings):
     dedup_ambiguous_lower: int = 60      # 60-85 → ask Gemini to confirm
 
     # ── Per-domain rate limit — PRD FR-01 ────────────────────────────────────
-    domain_requests_per_minute: int = 3
+    domain_requests_per_minute: int = 15  # Temporarily raised from 3 → 15 to seed initial data quickly
 
     # ── Scheduled slot windows (IST hour ranges) — PRD FR-10 ─────────────────
     slot_morning_start: int = 6
