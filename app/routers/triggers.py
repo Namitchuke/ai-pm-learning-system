@@ -110,6 +110,7 @@ async def trigger_rss(
     background_tasks: BackgroundTasks,
     force_slot: str | None = None,
     force_sync: str | None = None,
+    force_reset: str | None = None,
     _auth: bool = Depends(verify_cron_secret),
 ) -> dict[str, Any]:
     """
@@ -118,17 +119,17 @@ async def trigger_rss(
     """
     if force_sync:
         try:
-            _run_rss_pipeline(force_slot)
+            _run_rss_pipeline(force_slot, force_reset=bool(force_reset))
             return {"status": "success", "message": "Pipeline ran synchronously"}
         except Exception as e:
             import traceback
             return {"status": "error", "error": str(e), "traceback": traceback.format_exc()}
     else:
-        background_tasks.add_task(_run_rss_pipeline, force_slot)
-        return {"status": "accepted", "message": f"RSS pipeline started (forced {force_slot})" if force_slot else "RSS pipeline started"}
+        background_tasks.add_task(_run_rss_pipeline, force_slot, bool(force_reset))
+        return {"status": "accepted", "message": f"RSS pipeline started (forced {force_slot}, reset={force_reset})" if force_slot else "RSS pipeline started"}
 
 
-def _run_rss_pipeline(force_slot: str | None = None) -> None:
+def _run_rss_pipeline(force_slot: str | None = None, force_reset: bool = False) -> None:
     """Full RSS pipeline execution (runs in background task)."""
     slot = force_slot or get_current_slot()
     today = today_ist_str()
@@ -142,11 +143,11 @@ def _run_rss_pipeline(force_slot: str | None = None) -> None:
         cache: CacheData = state["cache"]
         discarded_file: DiscardedFile = state["discarded_file"]
 
-        # Date gate: reset pipeline state if it's a new day
-        if pipeline_state.date != today:
+        # Date gate: reset pipeline state if it's a new day OR forced reset
+        if pipeline_state.date != today or force_reset:
             pipeline_state = PipelineState(date=today)
             state["pipeline_state"] = pipeline_state
-            logger.info(f"New day detected. Resetting pipeline_state for {today}.")
+            logger.info(f"Pipeline state reset for {today}. (force_reset={force_reset})")
 
         slot_state = pipeline_state.slots.get(slot)
         if slot_state is None:
