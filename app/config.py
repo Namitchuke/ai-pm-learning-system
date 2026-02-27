@@ -68,7 +68,8 @@ class Settings(BaseSettings):
     min_credibility_score: float = 6.0
 
     # ── Caching — PRD FR-11 / FRD FS-03.4 ────────────────────────────────────
-    url_dedup_ttl_days: int = 2190
+    url_dedup_ttl_days: int = 30           # URL hash cache TTL (how long to skip re-processing same URL)
+    article_date_gate_days: int = 2190     # Article publication age gate (how old articles we accept from feeds)
     grading_cache_ttl_days: int = 30
     summary_cache_ttl_days: int = 90
     max_cache_entries: int = 1000

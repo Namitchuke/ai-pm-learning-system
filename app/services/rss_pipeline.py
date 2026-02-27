@@ -223,9 +223,9 @@ def fetch_feed_articles(
                 except Exception:
                     pass
 
-            # Date gate: reject articles older than 30 days — PRD FR-01
+            # Date gate: reject articles older than configured days — PRD FR-01
             if pub_date:
-                cutoff = datetime.utcnow() - timedelta(days=settings.url_dedup_ttl_days)
+                cutoff = datetime.utcnow() - timedelta(days=settings.article_date_gate_days)
                 if pub_date < cutoff:
                     continue
 
