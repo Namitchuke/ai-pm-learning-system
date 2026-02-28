@@ -245,8 +245,9 @@ async def debug_state():
         sources = drive_client.read_json_file("rss_sources.json")
         errors = drive_client.read_json_file("errors.json")
         topics = drive_client.read_json_file("topics.json")
+        dbg = drive_client.read_json_file("_debug_pipeline.json")
         topic_count = len((topics or {}).get("topics", []))
-        return {"pipeline": state, "sources": sources, "errors": errors, "topic_count": topic_count}
+        return {"pipeline": state, "sources": sources, "errors": errors, "topic_count": topic_count, "thread_marker": dbg}
     except Exception as e:
         return {"error": str(e), "traceback": traceback.format_exc()}
 
