@@ -413,16 +413,28 @@ def run_rss_pipeline(
     # arXiv joint cap: shared mutable counter across cs.AI and cs.LG
     arxiv_count_ref = [0]
 
-    for source in enabled_sources:
+    try: drive_client.write_json_file("_debug_pipeline.json", {"stage": "fetching_started", "slot": slot, "feeds": len(enabled_sources)})
+    except: pass
+
+    for src_idx, source in enumerate(enabled_sources, start=1):
+        try: drive_client.write_json_file("_debug_pipeline.json", {"stage": "fetching_feed", "slot": slot, "feed_index": src_idx, "feed_url": source.feed_url})
+        except: pass
+        
         articles = fetch_feed_articles(source, arxiv_count_ref)
         success = len(articles) > 0 or True  # Distinguish timeout from empty feed
         record_feed_result(source, success=True, sources_data=sources_data)
         all_candidates.extend(articles)
 
+    try: drive_client.write_json_file("_debug_pipeline.json", {"stage": "fetching_done", "slot": slot, "candidates": len(all_candidates)})
+    except: pass
+
     pipeline_state.slots[slot].articles_fetched = len(all_candidates)
     logger.info(f"[{slot}] Fetched {len(all_candidates)} total candidates.")
 
     # Deduplicate
+    try: drive_client.write_json_file("_debug_pipeline.json", {"stage": "dedup_started", "slot": slot, "candidates": len(all_candidates)})
+    except: pass
+    
     new_candidates, duplicates = filter_duplicates(
         all_candidates, cache, existing_topic_titles,
         daily_rpd=daily_rpd, metrics=metrics,
