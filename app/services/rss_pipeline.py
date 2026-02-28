@@ -413,6 +413,13 @@ def run_rss_pipeline(
 
     # Sort by tier (lower tier = higher priority)
     enabled_sources.sort(key=lambda s: s.tier)
+    
+    # HARD MITIGATION: Disable feeds that trigger ReDoS infinite CPU loops in feedparser
+    # This prevents the 0.1 vCPU Render instance from freezing its GIL via orphaned threads.
+    enabled_sources = [
+        s for s in enabled_sources 
+        if "anthropic.com" not in s.feed_url and "pragmaticengineer.com" not in s.feed_url
+    ]
 
     logger.info(
         f"[{slot}] RSS pipeline starting. {len(enabled_sources)} enabled feeds."
