@@ -143,8 +143,18 @@ def _run_rss_pipeline(force_slot: str | None = None, force_reset: bool = False) 
     today = today_ist_str()
     logger.info(f"RSS pipeline triggered. Slot: {slot}, Date: {today}")
 
+    # Diagnostic: write start marker to Drive so we know thread launched
     try:
+        drive_client.write_json_file("_debug_pipeline.json", {"stage": "started", "slot": slot, "date": today})
+    except Exception:
+        pass
+
+    try:
+        # Diagnostic: mark before state load
+        drive_client.write_json_file("_debug_pipeline.json", {"stage": "loading_state", "slot": slot})
         state = _load_all_state()
+        drive_client.write_json_file("_debug_pipeline.json", {"stage": "state_loaded", "slot": slot})
+
         pipeline_state: PipelineState = state["pipeline_state"]
         topics_file: TopicsFile = state["topics_file"]
         metrics: Metrics = state["metrics"]
