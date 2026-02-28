@@ -19,6 +19,7 @@ from typing import Any, Optional
 import feedparser
 from loguru import logger
 
+from app.clients import drive_client
 from app.config import get_settings
 from app.core import cache_manager, logging as app_logging
 from app.models import (
@@ -422,30 +423,39 @@ def run_rss_pipeline(
     logger.info(f"[{slot}] Fetched {len(all_candidates)} total candidates.")
 
     # Deduplicate
-    new_articles, duplicates = filter_duplicates(
+    new_candidates, duplicates = filter_duplicates(
         all_candidates, cache, existing_topic_titles,
         daily_rpd=daily_rpd, metrics=metrics,
     )
-    pipeline_state.slots[slot].articles_new = len(new_articles)
+    pipeline_state.slots[slot].articles_new = len(new_candidates)
     logger.info(
-        f"[{slot}] After dedup: {len(new_articles)} new, {len(duplicates)} duplicates."
+        f"[{slot}] After dedup: {len(new_candidates)} new, {len(duplicates)} duplicates."
     )
 
     # Extract content — process new articles only
     # IMPORTANT: Only mark URL as processed AFTER successful extraction.
     # Marking too early permanently blocks re-processing if extraction fails.
     extracted: list[ExtractedArticle] = []
-    for article in new_articles:
-        extracted_article = extract_article(article)
-        if extracted_article:
-            extracted.append(extracted_article)
-            # Only cache URLs we've successfully extracted content from
-            cache_manager.mark_url_processed(cache, article.url, article.title)
+    
+    try: drive_client.write_json_file("_debug_pipeline.json", {"stage": "extraction_started", "slot": slot, "candidates": len(new_candidates)})
+    except: pass
+    
+    for idx, cand in enumerate(new_candidates, start=1):
+        if idx % 10 == 0:
+            logger.info(f"[{slot}] Extracting article {idx}/{len(new_candidates)}...")
+            
+        try: drive_client.write_json_file("_debug_pipeline.json", {"stage": "extracting", "index": idx, "total": len(new_candidates), "url": cand.url})
+        except: pass
+        
+        art = extract_article(cand)
+        if art:
+            extracted.append(art)
+            cache_manager.mark_url_processed(cache, cand.url, cand.title)
         else:
-            logger.debug(f"Extraction failed/rejected: {article.url}")
+            logger.debug(f"Extraction failed/rejected: {cand.url}")
 
     logger.info(
-        f"[{slot}] Extraction complete: {len(extracted)}/{len(new_articles)} articles extracted."
+        f"[{slot}] Extraction complete: {len(extracted)}/{len(new_candidates)} articles extracted."
     )
 
     return extracted, sources_data
