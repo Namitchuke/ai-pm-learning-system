@@ -225,6 +225,8 @@ def _run_rss_pipeline(force_slot: str | None = None, force_reset: bool = False) 
             logger.info(f"[{slot}] No new articles after extraction. Marking slot DONE.")
             slot_state.status = SlotStatus.DONE
             slot_state.completed_at = datetime.utcnow()
+            try: drive_client.write_json_file("_debug_pipeline.json", {"stage": "DONE_EMPTY_EXTRACTION", "slot": slot})
+            except: pass
             _save_all_state(state)
             return
 
@@ -248,6 +250,8 @@ def _run_rss_pipeline(force_slot: str | None = None, force_reset: bool = False) 
             logger.info(f"[{slot}] All articles rejected by scorer.")
             slot_state.status = SlotStatus.DONE
             slot_state.completed_at = datetime.utcnow()
+            try: drive_client.write_json_file("_debug_pipeline.json", {"stage": "DONE_REJECTED_SCORER", "slot": slot})
+            except: pass
             _save_all_state(state)
             return
 
@@ -263,6 +267,8 @@ def _run_rss_pipeline(force_slot: str | None = None, force_reset: bool = False) 
             logger.info(f"[{slot}] No articles survived summarization.")
             slot_state.status = SlotStatus.DONE
             slot_state.completed_at = datetime.utcnow()
+            try: drive_client.write_json_file("_debug_pipeline.json", {"stage": "DONE_NO_SUMMARIES", "slot": slot})
+            except: pass
             _save_all_state(state)
             return
 
