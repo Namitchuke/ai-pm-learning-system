@@ -190,9 +190,15 @@ def fetch_feed_articles(
             
             # Prevent feedparser infinite hang ReDoS by enforcing hard timeout
             import concurrent.futures
-            with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
-                future = executor.submit(feedparser.parse, response.content)
+            executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+            future = executor.submit(feedparser.parse, response.content)
+            try:
                 parsed = future.result(timeout=10)
+            except concurrent.futures.TimeoutError:
+                logger.error(f"Feedparser timed out (possible ReDoS) for {source.name}")
+                return []
+            finally:
+                executor.shutdown(wait=False)
 
         if parsed.bozo and not parsed.entries:
             logger.warning(f"Feed parse error for {source.name}: {parsed.bozo_exception}")
