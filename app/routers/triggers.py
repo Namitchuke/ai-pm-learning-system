@@ -8,6 +8,7 @@ All protected by X-Cron-Secret header.
 """
 
 from datetime import datetime
+import threading
 from typing import Any
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request, status
@@ -116,6 +117,7 @@ async def trigger_rss(
     """
     RSS content pipeline trigger.
     Runs the full pipeline: fetch → dedup → extract → score → summarize → select → email.
+    Uses a daemon=False thread so the pipeline survives Render worker recycling.
     """
     if force_sync:
         try:
@@ -125,7 +127,13 @@ async def trigger_rss(
             import traceback
             return {"status": "error", "error": str(e), "traceback": traceback.format_exc()}
     else:
-        background_tasks.add_task(_run_rss_pipeline, force_slot, bool(force_reset))
+        t = threading.Thread(
+            target=_run_rss_pipeline,
+            args=(force_slot, bool(force_reset)),
+            daemon=False,  # NOT a daemon — survives beyond request lifetime
+            name=f"rss-pipeline-{force_slot or 'auto'}",
+        )
+        t.start()
         return {"status": "accepted", "message": f"RSS pipeline started (forced {force_slot}, reset={force_reset})" if force_slot else "RSS pipeline started"}
 
 
