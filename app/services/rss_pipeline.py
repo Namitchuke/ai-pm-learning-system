@@ -426,16 +426,16 @@ def run_rss_pipeline(
         f"[{slot}] After dedup: {len(new_articles)} new, {len(duplicates)} duplicates."
     )
 
-    # Mark all as processed (including duplicates) to prevent re-processing
-    for article in all_candidates:
-        cache_manager.mark_url_processed(cache, article.url, article.title)
-
-    # Extract content — process new articles
+    # Extract content — process new articles only
+    # IMPORTANT: Only mark URL as processed AFTER successful extraction.
+    # Marking too early permanently blocks re-processing if extraction fails.
     extracted: list[ExtractedArticle] = []
     for article in new_articles:
         extracted_article = extract_article(article)
         if extracted_article:
             extracted.append(extracted_article)
+            # Only cache URLs we've successfully extracted content from
+            cache_manager.mark_url_processed(cache, article.url, article.title)
         else:
             logger.debug(f"Extraction failed/rejected: {article.url}")
 
