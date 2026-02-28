@@ -245,9 +245,26 @@ async def debug_state():
         sources = drive_client.read_json_file("rss_sources.json")
         errors = drive_client.read_json_file("errors.json")
         topics = drive_client.read_json_file("topics.json")
-        dbg = drive_client.read_json_file("_debug_pipeline.json")
+        dbg_drive = drive_client.read_json_file("_debug_pipeline.json")
+        
+        # Read local tmp fallback since Drive rate limits hide the real marker
+        import json
+        from pathlib import Path
+        tmp_target = Path("/tmp/AI_PM_SYSTEM/_debug_pipeline.json")
+        dbg_tmp = None
+        if tmp_target.exists():
+            try: dbg_tmp = json.loads(tmp_target.read_text())
+            except: pass
+            
         topic_count = len((topics or {}).get("topics", []))
-        return {"pipeline": state, "sources": sources, "errors": errors, "topic_count": topic_count, "thread_marker": dbg}
+        return {
+            "pipeline": state, 
+            "sources": sources, 
+            "errors": errors, 
+            "topic_count": topic_count, 
+            "thread_marker": dbg_drive,
+            "tmp_thread_marker": dbg_tmp
+        }
     except Exception as e:
         return {"error": str(e), "traceback": traceback.format_exc()}
 
