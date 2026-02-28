@@ -219,6 +219,23 @@ async def debug_clear():
         return {"error": str(e), "traceback": traceback.format_exc()}
 
 
+@app.get("/api/debug-reset-state", tags=["health"])
+async def debug_reset_state():
+    """Directly write a fresh PipelineState for today to Drive (bypasses pipeline)."""
+    import traceback
+    try:
+        from app.clients import drive_client
+        from app.models import PipelineState
+        from app.utils.timezone import today_ist_str
+        today = today_ist_str()
+        fresh_state = PipelineState(date=today)
+        drive_client.write_json_file("pipeline_state.json", fresh_state.model_dump(mode="json"))
+        return {"status": "reset", "date": today, "note": "Pipeline state reset to fresh for today. All slots PENDING."}
+    except Exception as e:
+        return {"error": str(e), "traceback": traceback.format_exc()}
+
+
+
 @app.get("/api/debug", tags=["health"])
 async def debug_state():
     import traceback
