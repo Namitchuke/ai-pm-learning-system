@@ -70,14 +70,15 @@ def _wait_for_domain_rate_limit(domain: str) -> None:
         _domain_last_request[domain] = [
             t for t in _domain_last_request[domain] if t > window_start
         ]
+        sleep_time = 0.0
         if len(_domain_last_request[domain]) >= settings.domain_requests_per_minute:
             oldest = _domain_last_request[domain][0]
             sleep_time = 60.0 - (now - oldest) + 0.1
-            if sleep_time > 0:
-                logger.debug(f"Rate limiting domain {domain}: sleeping {sleep_time:.1f}s")
-                time.sleep(sleep_time)
-        _domain_last_request[domain].append(time.time())
+        _domain_last_request[domain].append(now + max(0, sleep_time))
 
+    if sleep_time > 0:
+        logger.debug(f"Rate limiting domain {domain}: sleeping {sleep_time:.1f}s")
+        time.sleep(sleep_time)
 
 # ──────────────────────────────────────────────────────────────────────────────
 # 42 RSS sources — PRD §FR-01 Tier 1–6 source list
@@ -181,7 +182,11 @@ def fetch_feed_articles(
     articles: list[CandidateArticle] = []
 
     try:
-        parsed = feedparser.parse(source.feed_url)
+        import httpx
+        with httpx.Client(timeout=15.0, follow_redirects=True) as client:
+            response = client.get(source.feed_url)
+            response.raise_for_status()
+            parsed = feedparser.parse(response.content)
 
         if parsed.bozo and not parsed.entries:
             logger.warning(f"Feed parse error for {source.name}: {parsed.bozo_exception}")
