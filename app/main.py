@@ -227,9 +227,65 @@ async def debug_state():
         state = drive_client.read_json_file("pipeline_state.json")
         sources = drive_client.read_json_file("rss_sources.json")
         errors = drive_client.read_json_file("errors.json")
-        return {"pipeline": state, "sources": sources, "errors": errors}
+        topics = drive_client.read_json_file("topics.json")
+        topic_count = len((topics or {}).get("topics", []))
+        return {"pipeline": state, "sources": sources, "errors": errors, "topic_count": topic_count}
     except Exception as e:
         return {"error": str(e), "traceback": traceback.format_exc()}
+
+
+@app.get("/api/debug-pipeline-run", tags=["health"])
+async def debug_pipeline_run():
+    """Step-by-step synchronous pipeline run to pinpoint where it fails."""
+    import traceback as tb_mod
+    result = {"steps": []}
+    try:
+        from app.clients import drive_client
+        from app.models import PipelineState, TopicsFile, Metrics, CacheData, DiscardedFile
+        from app.services import rss_pipeline
+        from app.utils.timezone import today_ist_str
+
+        today = today_ist_str()
+        result["today"] = today
+
+        # Step 1: Load state
+        sources_data = drive_client.read_json_file("rss_sources.json") or rss_pipeline.build_default_sources_json()
+        cache_data = drive_client.read_json_file("cache.json") or {}
+        cache = CacheData(**cache_data) if cache_data else CacheData()
+        pipeline_state = PipelineState(date=today)
+        metrics = Metrics()
+        result["steps"].append({"step": "load_state", "ok": True, "url_cache_size": len(cache.processed_urls)})
+
+        # Step 2: Fetch feeds (just first 3 for speed)
+        from app.services.rss_pipeline import load_rss_sources, fetch_feed_articles
+        sources = load_rss_sources(sources_data)
+        enabled = [s for s in sources if s.enabled][:3]
+        arxiv_ref = [0]
+        candidates = []
+        for src in enabled:
+            arts = fetch_feed_articles(src, arxiv_ref)
+            candidates.extend(arts)
+        result["steps"].append({"step": "fetch_3_feeds", "ok": True, "candidates": len(candidates)})
+
+        # Step 3: Dedup
+        from app.services.rss_pipeline import filter_duplicates
+        new_arts, dups = filter_duplicates(candidates, cache, [])
+        result["steps"].append({"step": "dedup", "ok": True, "new": len(new_arts), "dups": len(dups)})
+
+        # Step 4: Extract first article
+        if new_arts:
+            from app.services.rss_pipeline import extract_article
+            art = extract_article(new_arts[0])
+            result["steps"].append({"step": "extract_first", "ok": art is not None, "url": new_arts[0].url, "words": art.word_count if art else 0})
+        else:
+            result["steps"].append({"step": "extract_first", "ok": False, "reason": "no new articles after dedup"})
+
+        return result
+    except Exception as e:
+        result["error"] = str(e)
+        result["traceback"] = tb_mod.format_exc()
+        return result
+
 
 
 # ── Root redirect to dashboard ────────────────────────────────────────────────
