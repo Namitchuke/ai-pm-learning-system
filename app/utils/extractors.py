@@ -138,15 +138,22 @@ def _extract_with_readability(html: str, url: str) -> Optional[str]:
         return None
 
 
-def _extract_with_newspaper3k(url: str) -> Optional[str]:
+def _extract_with_newspaper3k(url: str, html: Optional[str] = None) -> Optional[str]:
     """
     Tertiary: newspaper3k extraction.
     FRD FS-01.4 Chain Step 3.
     """
     try:
-        from newspaper import Article
-        article = Article(url)
-        article.download()
+        from newspaper import Article, Config
+        config = Config()
+        config.request_timeout = 10
+        article = Article(url, config=config)
+        
+        if html:
+            article.set_html(html)
+        else:
+            article.download()
+            
         article.parse()
         text = article.text
         return text if text and len(text.strip()) >= 100 else None
@@ -186,8 +193,8 @@ def extract_article_content(
         if text:
             return text, ExtractionMethod.READABILITY
 
-    # Step 3: newspaper3k (fetches its own)
-    text = _extract_with_newspaper3k(url)
+    # Step 3: newspaper3k (reuses html or fetches with timeout)
+    text = _extract_with_newspaper3k(url, html)
     if text:
         return text, ExtractionMethod.NEWSPAPER3K
 
