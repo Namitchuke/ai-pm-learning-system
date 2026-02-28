@@ -166,21 +166,16 @@ def _run_rss_pipeline(force_slot: str | None = None, force_reset: bool = False) 
             pipeline_state = PipelineState(date=today)
             state["pipeline_state"] = pipeline_state
             logger.info(f"Pipeline state reset for {today}. (force_reset={force_reset})")
-        drive_client.write_json_file("_debug_pipeline.json", {"stage": "date_gate_done", "slot": slot})
 
         slot_state = pipeline_state.slots.get(slot)
         if slot_state is None:
-            drive_client.write_json_file("_debug_pipeline.json", {"stage": "unknown_slot_error", "slot": slot})
             logger.error(f"Unknown slot: {slot}")
             return
-        drive_client.write_json_file("_debug_pipeline.json", {"stage": "slot_found", "slot": slot, "status": slot_state.status.value})
 
         # Idempotency: skip if slot already DONE
         if slot_state.status == SlotStatus.DONE:
-            drive_client.write_json_file("_debug_pipeline.json", {"stage": "idempotency_skip", "slot": slot})
             logger.info(f"Slot {slot} already DONE. Skipping.")
             return
-        drive_client.write_json_file("_debug_pipeline.json", {"stage": "pre_cleanup", "slot": slot})
 
         # Morning only: run cleanup first (L2-02)
         # Skip cleanup on manual force_slot triggers to prevent crashes from blocking RSS fetch
@@ -208,12 +203,12 @@ def _run_rss_pipeline(force_slot: str | None = None, force_reset: bool = False) 
                 )
 
         # Mark slot as IN_PROGRESS
-        drive_client.write_json_file("_debug_pipeline.json", {"stage": "marking_in_progress", "slot": slot})
+        drive_client.write_json_file("_debug_pipeline.json", {"stage": "in_progress", "slot": slot})
         slot_state.status = SlotStatus.IN_PROGRESS
         slot_state.started_at = datetime.utcnow()
-        drive_client.write_json_file("_debug_pipeline.json", {"stage": "in_progress", "slot": slot})
 
         # Step 1-3: Fetch → Dedup → Extract
+        drive_client.write_json_file("_debug_pipeline.json", {"stage": "fetch_starting", "slot": slot})
         existing_titles = [t.topic_name for t in topics_file.topics]
         extracted_articles, updated_sources = rss_pipeline.run_rss_pipeline(
             slot=slot,
