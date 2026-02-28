@@ -9,6 +9,7 @@ All protected by X-Cron-Secret header.
 
 from datetime import datetime
 import threading
+import traceback
 from typing import Any
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request, status
@@ -259,25 +260,48 @@ def _run_rss_pipeline(force_slot: str | None = None, force_reset: bool = False) 
         state["cache"] = cache
 
         if not summarized:
-            logger.info(f"[{slot}] Summarization yielded 0 articles.")
+            logger.info(f"[{slot}] No articles survived summarization.")
             slot_state.status = SlotStatus.DONE
+            slot_state.completed_at = datetime.utcnow()
             _save_all_state(state)
             return
 
-        # Step 6: Select topics
-        new_topics, _ = topic_selector.select_daily_topics(
+        # Step 6: Select best 5 — PRD FR-02 Topic Generation
+        logger.info(f"[{slot}] Selecting best topics from {len(summarized)} summaries.")
+        selected = topic_selector.select_best_topics(
             summarized_articles=summarized,
-            existing_topics_file=topics_file,
-            pipeline_state=pipeline_state,
+            topics_file=topics_file,
             metrics=metrics,
-            slot=slot,
+            daily_rpd=pipeline_state.daily_rpd,
         )
-        topics_file.topics.extend(new_topics)
-        topics_file.last_updated = datetime.utcnow()
-        slot_state.topics_selected = len(new_topics)
 
-        # Update adaptive mode daily counter (for evening slot — full day perspective)
-        if slot == "evening":
+        pipeline_state.slots[slot].topics_selected = len(selected)
+
+        # Step 7: Update pipeline & metrics states
+        slot_state.status = SlotStatus.DONE
+        slot_state.completed_at = datetime.utcnow()
+        metrics.total_articles_ingested += len(selected)
+
+        # Write ALL updated states via Drive batching — FS-11.2 Atomicity
+        state["pipeline_state"] = pipeline_state
+        state["topics_file"] = topics_file
+        state["metrics"] = metrics
+        _save_all_state(state)
+        
+        drive_client.write_json_file("_debug_pipeline.json", {"stage": "DONE", "slot": slot, "selected": len(selected)})
+        logger.info(f"[{slot}] RSS pipeline complete! Selected {len(selected)} topics.")
+        
+    except Exception as e:
+        logger.error(f"FATAL: Pipeline thread crashed: {e}")
+        try:
+            drive_client.write_json_file("_debug_pipeline.json", {
+                "stage": "FATAL_CRASH", 
+                "slot": force_slot or "auto",
+                "error": str(e),
+                "traceback": traceback.format_exc()
+            })
+        except:
+            pass
             today_graded = [t for t in topics_file.topics
                             if any(h.date.strftime("%Y-%m-%d") == today for h in t.history)]
             today_scores = [h.score for t in today_graded for h in t.history
