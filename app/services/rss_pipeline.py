@@ -187,7 +187,12 @@ def fetch_feed_articles(
         with httpx.Client(timeout=15.0, follow_redirects=True) as client:
             response = client.get(source.feed_url)
             response.raise_for_status()
-            parsed = feedparser.parse(response.content)
+            
+            # Prevent feedparser infinite hang ReDoS by enforcing hard timeout
+            import concurrent.futures
+            with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(feedparser.parse, response.content)
+                parsed = future.result(timeout=10)
 
         if parsed.bozo and not parsed.entries:
             logger.warning(f"Feed parse error for {source.name}: {parsed.bozo_exception}")
