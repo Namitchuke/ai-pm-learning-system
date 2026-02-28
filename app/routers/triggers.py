@@ -168,7 +168,8 @@ def _run_rss_pipeline(force_slot: str | None = None, force_reset: bool = False) 
             return
 
         # Morning only: run cleanup first (L2-02)
-        if slot == "morning":
+        # Skip cleanup on manual force_slot triggers to prevent crashes from blocking RSS fetch
+        if slot == "morning" and not force_reset:
             cleanup.run_morning_cleanup(
                 topics_file=topics_file,
                 archived_topics_file=state["archived_file"],
