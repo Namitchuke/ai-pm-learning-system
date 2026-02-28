@@ -139,7 +139,7 @@ def is_duplicate_title(
     existing_titles: list[str],
     daily_rpd: Optional[dict[str, int]] = None,
     metrics: Optional[Any] = None,
-    use_gemini: bool = True,
+    use_gemini: bool = False, # HARD MITIGATION: Disabled to prevent 45-minute rate limit backup on first run of 6 years data
 ) -> tuple[bool, str, int]:
     """
     Full two-phase title dedup.
