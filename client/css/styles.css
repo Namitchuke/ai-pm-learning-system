@@ -1,4 +1,45 @@
-/* Shared CSS for AI PM Learning System */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#06080f;--bg2:#0d1117;--bg3:#161b22;--card:rgba(22,27,34,.85);--card2:rgba(30,37,48,.7);--border:rgba(99,102,241,.12);--border-h:rgba(99,102,241,.35);--t1:#f0f6fc;--t2:#c9d1d9;--t3:#8b949e;--t4:#484f58;--accent:#6366f1;--accent2:#818cf8;--grad:linear-gradient(135deg,#6366f1,#8b5cf6,#a855f7);--grad2:linear-gradient(135deg,#22d3ee,#6366f1);--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7;--cyan:#22d3ee;--pink:#ec4899;--r:14px}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
+/* Shared CSS for AI PM Learning System — Teal/Emerald Theme */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+
+:root {
+    --bg: #050b0e;
+    --bg2: #0a1419;
+    --bg3: #12222a;
+    --card: rgba(18, 34, 42, .85);
+    --card2: rgba(20, 45, 55, .7);
+    --border: rgba(20, 184, 166, .12);
+    --border-h: rgba(20, 184, 166, .35);
+    --t1: #f0fdf4;
+    --t2: #a7f3d0;
+    --t3: #6b9080;
+    --t4: #3a5a4a;
+    --accent: #14b8a6;
+    --accent2: #2dd4bf;
+    --grad: linear-gradient(135deg, #0d9488, #14b8a6, #2dd4bf);
+    --grad2: linear-gradient(135deg, #06b6d4, #14b8a6);
+    --green: #22c55e;
+    --amber: #f59e0b;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --purple: #a855f7;
+    --cyan: #06b6d4;
+    --pink: #ec4899;
+    --r: 14px;
+    --c1: #14b8a6;
+    --c2: #06b6d4;
+    --c3: #22c55e
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--t1);
+    min-height: 100vh;
+    overflow-x: hidden
+}
