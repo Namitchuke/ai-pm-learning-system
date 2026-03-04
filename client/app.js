@@ -321,7 +321,7 @@ function renderTab3() {
                             <span style="background:var(--accent);color:#fff;padding:1px 7px;border-radius:10px">${m.cat}</span>
                         </div>
                         <div style="font-weight:600;font-size:13px;line-height:1.4;${isDone ? 'text-decoration:line-through;color:var(--t3)' : ''}">${m.q}</div>
-                        ${open ? `<div style="font-size:12px;color:var(--t2);margin-top:8px;padding:8px 12px;border-left:3px solid var(--accent);background:var(--bg3);border:1px solid var(--border);border-radius:4px"><strong>Hints:</strong><br>${m.flow}</div>` : ''}
+                        ${open ? `<div style="font-size:12px;color:var(--t2);margin-top:8px;padding:8px 12px;border-left:3px solid var(--accent);background:var(--box-bg);border:1px solid var(--box-border);border-radius:4px"><strong>Hints:</strong><br>${m.flow}</div>` : ''}
                     </div>
                 </div>
                 </div>`;

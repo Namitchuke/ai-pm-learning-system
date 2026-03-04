@@ -39,6 +39,8 @@
             --purple: #a78bfa;
             --cyan: #22d3ee;
             --pink: #f472b6;
+            --box-bg: rgba(52, 211, 153, 0.04);
+            --box-border: rgba(52, 211, 153, 0.15);
             --r: 12px
         }
 
@@ -403,10 +405,11 @@
 
         .det {
             margin: 2px 0 4px 28px;
-            padding: 6px 10px;
-            background: var(--bg3);
-            border: 1px solid var(--border);
-            border-radius: 8px;
+            padding: 8px 12px;
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
+            border-left: 3px solid var(--accent);
+            border-radius: 6px;
             font-size: 11px;
             color: var(--t2);
             line-height: 1.6;
@@ -430,8 +433,8 @@
         /* Quiz inline */
         .quiz-box {
             padding: 14px;
-            background: var(--bg3);
-            border: 1px solid var(--border);
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
             border-radius: 12px;
             margin-top: 10px
         }
@@ -449,7 +452,8 @@
         .qq {
             margin-bottom: 10px;
             padding: 10px;
-            background: var(--bg3);
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 8px
         }
 
@@ -460,14 +464,7 @@
             font-weight: 500
         }
 
-        .app {
-            display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            gap: 24px;
-            align-items: flex-start;
-            padding: 24px;
-        }
+
 
         .qo {
             display: block;
@@ -532,8 +529,8 @@
         /* Resource links */
         .res-box {
             padding: 12px;
-            background: var(--bg3);
-            border: 1px solid var(--border);
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
             border-radius: 10px;
             margin-top: 8px
         }
@@ -1527,6 +1524,8 @@
             --accent: #059669;
             --accent2: #10b981;
             --grad: linear-gradient(135deg, #059669, #0d9488);
+            --box-bg: rgba(5, 150, 105, 0.05);
+            --box-border: rgba(5, 150, 105, 0.15);
         }
 
         body.light-mode::before {
