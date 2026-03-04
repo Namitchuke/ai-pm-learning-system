@@ -43,12 +43,18 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg);
             color: var(--t1);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+            margin: 0;
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+            line-height: 1.5;
+            transition: background-color 0.3s, color 0.3s;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
         body::before {
@@ -394,14 +400,14 @@
         .ci.done .ci-text {
             color: var(--t4);
             text-decoration: line-through;
-            text-decoration-color: rgba(72, 79, 88, .5)
+            text-decoration-color: var(--t3)
         }
 
         .det {
             margin: 2px 0 4px 28px;
             padding: 6px 10px;
-            background: rgba(31, 41, 55, .5);
-            border: 1px solid #1F2937;
+            background: var(--bg3);
+            border: 1px solid var(--border);
             border-radius: 8px;
             font-size: 11px;
             color: var(--t2);
@@ -548,6 +554,40 @@
         .res-box a::before {
             content: '→ ';
             color: var(--green)
+        }
+
+        details.res-details summary {
+            list-style: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--t1);
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        details.res-details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.res-details summary:hover {
+            background: var(--border);
+        }
+
+        details.res-details[open] summary svg.res-chevron {
+            transform: rotate(180deg);
+        }
+
+        details.res-details[open] summary {
+            margin-bottom: 8px;
         }
 
         /* ---- TAB 2: FULL OVERVIEW ---- */
@@ -1618,8 +1658,25 @@
                 padding: 0 8px !important;
             }
 
+            .hdr {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                padding-top: 8px !important;
+                gap: 6px !important;
+            }
+
             .hdr h1 {
                 font-size: 16px !important;
+                margin: 0 !important;
+                text-align: center;
+                margin-top: 8px !important;
+            }
+
+            #userGreeting {
+                position: static !important;
+                right: auto !important;
+                top: auto !important;
             }
 
             .tabs {

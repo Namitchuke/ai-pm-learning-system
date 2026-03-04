@@ -99,7 +99,7 @@ function renderTab0() {
         }
         // Resources toggle
         if (week.resources) {
-            h += `<details style="margin-top:10px"><summary style="font-size:12px;font-weight:600;color:var(--t3);cursor:pointer;padding:6px 0">📚 All Resources for ${week.label}</summary><div class="res-box" style="margin-top:4px"><h4>📚 Resources</h4>${week.resources.map(r => `<a href="${r.url}" target="_blank">${r.title}</a>`).join('')}</div></details>`
+            h += `<details class="res-details"><summary><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg> View Resources for ${week.label} <svg class="res-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="res-box" style="margin-top:0">${week.resources.map(r => `<a href="${r.url}" target="_blank">${r.title}</a>`).join('')}</div></details>`
         }
     } else { h += `<div class="card"><div class="card-title">Set your start date to begin!</div></div>` }
     el.innerHTML = h
@@ -109,22 +109,22 @@ function renderTab1() {
     let el = document.getElementById('tab1'), h = '';
     let op = calcOverallPct();
     // Overall bar
-    h += `<div class="card"><div class="card-title">📊 Overall Roadmap Progress</div>
+    h += `<div class="card"><div class="card-title">&#9632; Overall Roadmap Progress</div>
 <div class="ov-bar"><div class="ov-pct">${op}%</div><div class="ov-track"><div class="ov-fill" style="width:${op}%"></div></div></div></div>`;
     // Skill Depth Tracker
-    h += `<div class="card"><div class="card-title">🎯 Skill Depth Tracker</div>`;
+    h += `<div class="card"><div class="card-title">&#9675; Skill Depth Tracker</div>`;
     h += renderSkillSection('Core PM Skills', 'core', CORE_SKILLS);
     h += renderSkillSection('AI-Specific Skills', 'ai', AI_SKILLS);
     h += `</div>`;
     // Portfolio Board
-    h += `<div class="card"><div class="card-title">📦 Portfolio Status Board</div>`;
+    h += `<div class="card"><div class="card-title">&#9632; Portfolio Status Board</div>`;
     h += ARTIFACTS.map(a => { let d = S.artifacts[a.key] || false; return `<div class="pf-item ${d ? 'done' : ''}" onclick="toggleArt('${a.key}')"><div class="pf-dot"></div><div class="pf-label">${a.label}</div></div>` }).join('');
     h += `</div>`;
     // Interview Readiness
     let ir = calcReadiness();
     let irColor = ir >= 80 ? 'var(--green)' : ir >= 50 ? 'var(--amber)' : 'var(--red)';
     let irText = ir >= 80 ? 'Competitive' : ir >= 60 ? 'Ready' : ir >= 40 ? 'Getting There' : 'Not Ready Yet';
-    h += `<div class="card"><div class="card-title">🎯 Interview Readiness Score</div>
+    h += `<div class="card"><div class="card-title">&#9675; Interview Readiness Score</div>
 <div class="ir-gauge"><div class="ir-score">${ir}%</div><div class="ir-label">${irText}</div></div>
 <div class="ir-bar"><div class="ir-fill" style="width:${ir}%;background:${irColor}"></div></div>
 <div class="ir-breakdown">
@@ -135,11 +135,11 @@ function renderTab1() {
 <div class="ir-item"><span>Mock Interviews</span><span>${S.overallMetrics.mocks || 0}</span></div>
 </div></div>`;
     // Interview Prep Bank
-    h += `<div class="card"><div class="card-title">🎤 Interview Prep Bank</div>`;
+    h += `<div class="card"><div class="card-title">&#9655; Interview Prep Bank</div>`;
     INTERVIEW_BANK.forEach((ib, i) => {
         let open = !!S.expanded['ib_' + i];
         h += `<div class="pf-item" style="cursor:pointer;flex-direction:column;align-items:flex-start" onclick="toggleIb(${i})">
-<div style="font-weight:600;font-size:14px;display:flex;align-items:center;line-height:1.4"><span class="dl-cat" style="background:var(--bg3);border:1px solid var(--border);margin-right:8px">${ib.cat}</span>${ib.q}</div>
+<div style="font-weight:600;font-size:14px;display:flex;align-items:flex-start;line-height:1.4"><span class="dl-cat" style="background:var(--bg3);border:1px solid var(--border);margin-right:10px;margin-top:2px;flex-shrink:0">${ib.cat}</span><span style="flex:1">${ib.q}</span></div>
 ${open ? `<div style="font-size:13px;color:var(--t3);margin-top:8px;padding-left:12px;border-left:3px solid var(--accent)"><strong>Hint/Structure:</strong> ${ib.hint}</div>` : ''}
 </div>`;
     });
@@ -193,15 +193,17 @@ function renderTab2() {
     h += `<div class="card"><div class="card-title">Overall Progress</div>
 <div class="ov-bar"><div class="ov-pct">${op}%</div><div class="ov-track"><div class="ov-fill" style="width:${op}%"></div></div></div></div>`;
     // Achievements
+    let svgIcon = (path) => `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block">${path}</svg>`;
+
     let achievements = [
-        { id: 'first_case', icon: '&#9670;', label: 'First Case Done', desc: 'Complete 1 case study', check: () => Object.values(S.casesCompleted || {}).filter(Boolean).length >= 1 },
-        { id: 'first_mock', icon: '&#9655;', label: 'Mock Interview Given', desc: 'Practice 1 mock interview', check: () => Object.values(S.mocksDone || {}).filter(Boolean).length >= 1 },
-        { id: 'prd_written', icon: '&#9671;', label: 'PRD Written', desc: 'Complete the PRD artifact', check: () => !!(S.artifacts && S.artifacts.prd) },
-        { id: 'phase1', icon: '&#9632;', label: 'Phase 1 Complete', desc: 'Finish all Phase 1 tasks', check: () => calcPhasePct(0) === 100 },
-        { id: 'mock_pro', icon: '&#9733;', label: 'Mock Pro', desc: 'Practice 10+ mock interviews', check: () => Object.values(S.mocksDone || {}).filter(Boolean).length >= 10 },
-        { id: 'case_master', icon: '&#9830;', label: 'Case Study Pro', desc: 'Complete 10+ case studies', check: () => Object.values(S.casesCompleted || {}).filter(Boolean).length >= 10 },
-        { id: 'halfway', icon: '&#9650;', label: 'Halfway There', desc: 'Complete Phase 1-3 (Week 12)', check: () => calcPhasePct(0) === 100 && calcPhasePct(1) === 100 && calcPhasePct(2) === 100 },
-        { id: 'interview_ready', icon: '&#9733;', label: 'Interview Ready', desc: 'Practice 20+ mocks', check: () => Object.values(S.mocksDone || {}).filter(Boolean).length >= 20 }
+        { id: 'first_case', icon: svgIcon('<path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m3 15 2 2 4-4"/>'), label: 'First Case Done', desc: 'Complete 1 case study', check: () => Object.values(S.casesCompleted || {}).filter(Boolean).length >= 1 },
+        { id: 'first_mock', icon: svgIcon('<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/>'), label: 'Mock Interview Given', desc: 'Practice 1 mock interview', check: () => Object.values(S.mocksDone || {}).filter(Boolean).length >= 1 },
+        { id: 'prd_written', icon: svgIcon('<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/>'), label: 'PRD Written', desc: 'Complete the PRD artifact', check: () => !!(S.artifacts && S.artifacts.prd) },
+        { id: 'phase1', icon: svgIcon('<path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>'), label: 'Phase 1 Complete', desc: 'Finish all Phase 1 tasks', check: () => calcPhasePct(0) === 100 },
+        { id: 'mock_pro', icon: svgIcon('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>'), label: 'Mock Pro', desc: 'Practice 10+ mock interviews', check: () => Object.values(S.mocksDone || {}).filter(Boolean).length >= 10 },
+        { id: 'case_master', icon: svgIcon('<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>'), label: 'Case Study Pro', desc: 'Complete 10+ case studies', check: () => Object.values(S.casesCompleted || {}).filter(Boolean).length >= 10 },
+        { id: 'halfway', icon: svgIcon('<path d="m8 3 4 8 5-5 5 15H2L8 3z"/>'), label: 'Halfway There', desc: 'Complete Phase 1-3 (Week 12)', check: () => calcPhasePct(0) === 100 && calcPhasePct(1) === 100 && calcPhasePct(2) === 100 },
+        { id: 'interview_ready', icon: svgIcon('<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>'), label: 'Interview Ready', desc: 'Practice 20+ mocks', check: () => Object.values(S.mocksDone || {}).filter(Boolean).length >= 20 }
     ];
     h += `<div class="card"><div class="card-title">Achievements</div>
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px">`;
@@ -262,13 +264,14 @@ function renderTab3() {
     let selS = 'background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:5px 10px;border-radius:6px;font-size:11px;outline:none;cursor:pointer;font-family:inherit';
 
     let doneCount = Object.values(S.mocksDone).filter(Boolean).length;
+    let lblS = 'font-size:10px;color:var(--t3);text-transform:uppercase;font-weight:600;margin-bottom:4px';
     h += `<div class="card"><div class="card-title">Mock Interviews <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} practiced</span></div>
-            <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
-                <select style="${selS}" onchange="updMockFlt('co', this.value)"><option disabled>Company</option>${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
-                <select style="${selS}" onchange="updMockFlt('cat', this.value)"><option disabled>Category</option>${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
-                <select style="${selS}" onchange="updMockFlt('lv', this.value)"><option disabled>Difficulty</option>${levels.map(c => `<option ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
-                <select style="${selS}" onchange="updMockFlt('role', this.value)"><option disabled>Role</option>${roles.map(c => `<option ${st.role === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
-                <select style="${selS};border-color:var(--accent)" onchange="updMockFlt('status', this.value)"><option ${st.status === 'All' ? 'selected' : ''}>All</option><option ${st.status === 'Done' ? 'selected' : ''}>Done</option><option ${st.status === 'Not Done' ? 'selected' : ''}>Not Done</option></select>
+            <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+                <div style="display:flex;flex-direction:column"><label style="${lblS}">Company</label><select style="${selS}" onchange="updMockFlt('co', this.value)">${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
+                <div style="display:flex;flex-direction:column"><label style="${lblS}">Category</label><select style="${selS}" onchange="updMockFlt('cat', this.value)">${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
+                <div style="display:flex;flex-direction:column"><label style="${lblS}">Difficulty</label><select style="${selS}" onchange="updMockFlt('lv', this.value)">${levels.map(c => `<option ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
+                <div style="display:flex;flex-direction:column"><label style="${lblS}">Role</label><select style="${selS}" onchange="updMockFlt('role', this.value)">${roles.map(c => `<option ${st.role === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
+                <div style="display:flex;flex-direction:column"><label style="${lblS}">Status</label><select style="${selS};border-color:var(--accent)" onchange="updMockFlt('status', this.value)"><option ${st.status === 'All' ? 'selected' : ''}>All</option><option ${st.status === 'Done' ? 'selected' : ''}>Done</option><option ${st.status === 'Not Done' ? 'selected' : ''}>Not Done</option></select></div>
             </div>`;
 
     let filtered = MOCK_INTERVIEWS.filter(m => (st.co === 'All' || m.co === st.co) && (st.cat === 'All' || m.cat === st.cat) && (st.lv === 'All' || m.level === st.lv) && (st.role === 'All' || m.role === st.role));
@@ -298,7 +301,7 @@ function renderTab3() {
                             <span style="background:var(--accent);color:#fff;padding:1px 7px;border-radius:10px">${m.cat}</span>
                         </div>
                         <div style="font-weight:600;font-size:13px;line-height:1.4;${isDone ? 'text-decoration:line-through;color:var(--t3)' : ''}">${m.q}</div>
-                        ${open ? `<div style="font-size:12px;color:var(--t2);margin-top:8px;padding:8px 12px;border-left:3px solid var(--accent);background:rgba(31,41,55,0.5);border-radius:4px"><strong>Hints:</strong><br>${m.flow}</div>` : ''}
+                        ${open ? `<div style="font-size:12px;color:var(--t2);margin-top:8px;padding:8px 12px;border-left:3px solid var(--accent);background:var(--bg3);border:1px solid var(--border);border-radius:4px"><strong>Hints:</strong><br>${m.flow}</div>` : ''}
                     </div>
                 </div>
                 </div>`;
@@ -321,14 +324,15 @@ function renderTab4() {
     let levels = ['All', 'Easy', 'Medium', 'Hard'];
     let selS = 'background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit';
 
+    let lblS = 'font-size:10px;color:var(--t3);text-transform:uppercase;font-weight:600;margin-bottom:4px';
     let doneCount = Object.values(S.casesCompleted).filter(Boolean).length;
     h += `<div class="card"><div class="card-title">Case Studies <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} completed</span></div>
             <div style="font-size:12px;color:var(--t2);margin-bottom:10px;">Practice on a whiteboard or Google Doc. Treat them as real take-home assignments.</div>
-            <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
-                <select style="${selS}" onchange="S.casesState.co=this.value;save();renderTab4()">${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
-                <select style="${selS}" onchange="S.casesState.cat=this.value;save();renderTab4()">${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
-                <select style="${selS}" onchange="S.casesState.lv=this.value;save();renderTab4()">${levels.map(c => `<option ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
-                <select style="${selS};border-color:var(--accent)" onchange="S.casesState.status=this.value;save();renderTab4()"><option ${st.status === 'All' ? 'selected' : ''}>All</option><option ${st.status === 'Done' ? 'selected' : ''}>Done</option><option ${st.status === 'Not Done' ? 'selected' : ''}>Not Done</option></select>
+            <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+                <div style="display:flex;flex-direction:column"><label style="${lblS}">Company</label><select style="${selS}" onchange="S.casesState.co=this.value;save();renderTab4()">${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
+                <div style="display:flex;flex-direction:column"><label style="${lblS}">Category</label><select style="${selS}" onchange="S.casesState.cat=this.value;save();renderTab4()">${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
+                <div style="display:flex;flex-direction:column"><label style="${lblS}">Difficulty</label><select style="${selS}" onchange="S.casesState.lv=this.value;save();renderTab4()">${levels.map(c => `<option ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
+                <div style="display:flex;flex-direction:column"><label style="${lblS}">Status</label><select style="${selS};border-color:var(--accent)" onchange="S.casesState.status=this.value;save();renderTab4()"><option ${st.status === 'All' ? 'selected' : ''}>All</option><option ${st.status === 'Done' ? 'selected' : ''}>Done</option><option ${st.status === 'Not Done' ? 'selected' : ''}>Not Done</option></select></div>
             </div>`;
 
     let filtered = MOCK_CASES.filter(c => (st.co === 'All' || c.co === st.co) && (st.cat === 'All' || c.cat === st.cat) && (st.lv === 'All' || c.level === st.lv));

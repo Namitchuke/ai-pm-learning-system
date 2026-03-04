@@ -213,7 +213,7 @@ const PHASES = [
             {
                 label: 'Week 9', focus: 'RAG Domain Project', items: [
                     { text: 'Build domain-specific RAG assistant (healthcare/fintech/edtech)', detail: 'Pick a domain relevant to Indian companies you want to work at. Example: a fintech RAG that answers questions about RBI regulations, or an edtech RAG that helps students find the right course based on career goals.', done_when: 'A working RAG assistant that can answer domain-specific questions with cited sources. Code in your portfolio repo.' },
-                    { text: 'Implement chunking strategies and evaluate retrieval quality', detail: 'Chunking = how you split documents. Options: fixed-size (500 tokens), semantic (by paragraph/section), recursive character splitting. Test each: which retrieves the most relevant chunks? Measure recall@k.', done_when: 'Tested 2-3 chunking strategies, measured retrieval quality, and documented which works best for your domain.' },
+                    { text: 'Implement chunking strategies and evaluate retrieval quality', detail: 'Chunking = how you split documents. Options: fixed-size (500 tokens), semantic (by paragraph/section), recursive character splitting. Test each: which retrieves the most relevant chunks? Measure the retrieval recall metric.', done_when: 'Tested 2-3 chunking strategies, measured retrieval quality, and documented which works best for your domain.' },
                     { text: 'Add metadata filtering and hybrid search', detail: 'Metadata filtering: tag chunks with source, date, category. Then filter at query time (e.g., "only search RBI circulars from 2024"). Hybrid search: combine vector similarity with keyword matching (BM25) for better results.', done_when: 'Your RAG assistant supports metadata filtering and hybrid search. Documented improvement in retrieval quality.' },
                     { text: 'Document architecture decisions', detail: 'Write up: why this domain, chunking choice, embedding model, vector DB, retrieval strategy, generation prompt. Include what didn\'t work and why. This is your PM-builder artifact.', done_when: 'Architecture document in your GitHub repo covering all design decisions with rationale.' }
                 ], resources: [
@@ -687,18 +687,16 @@ const MOCK_INTERVIEWS = [
 ];
 
 const RECOMMENDED_BOOKS = [
-    { title: 'Inspired: How to Create Tech Products Customers Love', author: 'Marty Cagan', url: 'https://www.svpg.com/inspired-how-to-create-products-customers-love/', desc: 'The definitive guide to modern product management. Covers discovery, delivery, and team dynamics.' },
-    { title: 'Cracking the PM Interview', author: 'Gayle McDowell & Jackie Bavaro', url: 'https://www.crackingthepminterview.com/', desc: 'Comprehensive guide to PM interview prep including case studies, estimation, and behavioral questions.' },
-    { title: 'Decode and Conquer', author: 'Lewis Lin', url: 'https://www.lewis-lin.com/decode-and-conquer', desc: 'Frameworks for answering PM interview questions: CIRCLES, DIGS, and more.' },
-    { title: 'The Lean Startup', author: 'Eric Ries', url: 'https://theleanstartup.com/', desc: 'Build-Measure-Learn loop, MVP thinking, and validated learning for product builders.' },
-    { title: 'Hooked: How to Build Habit-Forming Products', author: 'Nir Eyal', url: 'https://www.nirandfar.com/hooked/', desc: 'The Hook Model: Trigger, Action, Variable Reward, Investment. Essential for engagement-focused PMs.' },
-    { title: 'Google People + AI Guidebook', author: 'Google PAIR', url: 'https://pair.withgoogle.com/guidebook', desc: 'Free guide on designing human-centered AI products. Essential for AI PM roles.' },
-    { title: 'Lenny\'s Newsletter (Archive)', author: 'Lenny Rachitsky', url: 'https://www.lennysnewsletter.com/', desc: 'Top product leaders share frameworks on growth, metrics, strategy, and team management.' },
-    { title: 'Stratechery', author: 'Ben Thompson', url: 'https://stratechery.com/', desc: 'Deep analysis of tech strategy. Aggregation Theory, platform dynamics, and business model analysis.' },
-    { title: 'Product Management Exercises', author: 'Various', url: 'https://www.productmanagementexercises.com/', desc: 'Free collection of PM interview questions and frameworks from top tech companies.' },
-    { title: 'Reforge Growth Series', author: 'Reforge', url: 'https://www.reforge.com/blog', desc: 'Advanced product and growth frameworks. Free blog covers retention, engagement, and monetization.' },
-    { title: 'Shape Up', author: 'Ryan Singer (Basecamp)', url: 'https://basecamp.com/shapeup', desc: 'Free book on product development methodology. Alternative to Scrum with 6-week cycles.' },
-    { title: 'An Elegant Puzzle: Systems of Engineering Management', author: 'Will Larson', url: 'https://lethain.com/elegant-puzzle/', desc: 'How to manage engineering teams and build sustainable product orgs.' }
+    { title: 'Google People + AI Guidebook', author: 'Google PAIR', url: 'https://pair.withgoogle.com/guidebook', desc: 'Free, comprehensive guide on designing human-centered AI products.' },
+    { title: 'Growth.Design Case Studies', author: 'Growth.Design', url: 'https://growth.design/case-studies', desc: 'Interactive, comic-book style case studies on UX, psychology, and product growth.' },
+    { title: 'The Product Folks Teardowns', author: 'The Product Folks', url: 'https://www.theproductfolks.com/teardowns', desc: 'In-depth teardowns of Indian startups and global products. Excellent for product sense.' },
+    { title: 'Shape Up', author: 'Ryan Singer (Basecamp)', url: 'https://basecamp.com/shapeup', desc: 'Free online book on Basecamp\'s product development methodology (6-week cycles).' },
+    { title: 'Product Management Exercises', author: 'Community', url: 'https://www.productmanagementexercises.com/', desc: 'Free community-driven collection of PM interview questions and frameworks.' },
+    { title: 'Lenny\'s Newsletter (Free Archive)', author: 'Lenny Rachitsky', url: 'https://www.lennysnewsletter.com/', desc: 'Wealth of free articles on growth, metrics, and strategy frameworks.' },
+    { title: 'Reforge Blog', author: 'Reforge', url: 'https://www.reforge.com/blog', desc: 'High-quality, in-depth articles on retention, engagement, and monetization loops.' },
+    { title: 'Exponent PM Interview Database', author: 'Exponent', url: 'https://www.tryexponent.com/questions', desc: 'Database of recent PM interview questions asked at top tech companies.' },
+    { title: 'Stripe Documentation', author: 'Stripe', url: 'https://stripe.com/docs', desc: 'The gold standard for API and technical product documentation. Great for technical PMs to study.' },
+    { title: 'Untools', author: 'Untools', url: 'https://untools.co/', desc: 'A free collection of thinking tools and frameworks to help you solve problems and make decisions.' }
 ];
 
 const MOCK_CASES = [
