@@ -32,15 +32,15 @@
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: .35;
+            filter: blur(100px);
+            opacity: .15;
             animation: float 18s ease-in-out infinite alternate;
         }
 
         .orb-1 {
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, #14b8a6, transparent 70%);
+            background: radial-gradient(circle, #34D399, transparent 70%);
             top: -80px;
             left: -100px;
             animation-duration: 22s;
@@ -49,7 +49,7 @@
         .orb-2 {
             width: 350px;
             height: 350px;
-            background: radial-gradient(circle, #06b6d4, transparent 70%);
+            background: radial-gradient(circle, #60A5FA, transparent 70%);
             bottom: -60px;
             right: -80px;
             animation-duration: 18s;
@@ -59,7 +59,7 @@
         .orb-3 {
             width: 250px;
             height: 250px;
-            background: radial-gradient(circle, #22c55e, transparent 70%);
+            background: radial-gradient(circle, #a78bfa, transparent 70%);
             top: 40%;
             left: 60%;
             animation-duration: 24s;
@@ -133,8 +133,8 @@
             height: 100%;
             z-index: 0;
             background-image:
-                linear-gradient(rgba(20, 184, 166, .04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(20, 184, 166, .04) 1px, transparent 1px);
+                linear-gradient(rgba(31, 41, 55, .4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(31, 41, 55, .4) 1px, transparent 1px);
             background-size: 60px 60px;
             mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 70%);
             -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 70%);
@@ -142,16 +142,15 @@
 
         /* --- AUTH CARD --- */
         .auth-card {
-            background: rgba(10, 20, 25, .85);
-            border: 1px solid rgba(20, 184, 166, .15);
-            border-radius: 24px;
+            background: #111827;
+            border: 1px solid #1F2937;
+            border-radius: 20px;
             padding: 40px 36px;
             max-width: 420px;
             width: 100%;
-            backdrop-filter: blur(30px);
             position: relative;
             z-index: 1;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, .5), 0 0 40px rgba(20, 184, 166, .08);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, .4);
             animation: cardEntry .7s cubic-bezier(.4, 0, .2, 1);
         }
 
@@ -194,11 +193,11 @@
 
             0%,
             100% {
-                box-shadow: 0 0 20px rgba(20, 184, 166, .3);
+                box-shadow: 0 0 15px rgba(52, 211, 153, .15);
             }
 
             50% {
-                box-shadow: 0 0 40px rgba(20, 184, 166, .6);
+                box-shadow: 0 0 25px rgba(52, 211, 153, .3);
             }
         }
 
@@ -274,7 +273,6 @@
         .form-group input:focus,
         .form-group select:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(20, 184, 166, .12);
         }
 
         .auth-btn {
@@ -298,7 +296,7 @@
         .auth-btn.primary:hover {
             opacity: .9;
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(20, 184, 166, .3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
         }
 
         .auth-divider {
@@ -381,9 +379,9 @@
             font-size: 10px;
             padding: 4px 10px;
             border-radius: 20px;
-            background: rgba(20, 184, 166, .08);
-            border: 1px solid rgba(20, 184, 166, .15);
-            color: var(--accent2);
+            background: rgba(31, 41, 55, .6);
+            border: 1px solid #374151;
+            color: var(--t2);
             font-weight: 500;
             animation: feat-in .5s ease backwards;
         }

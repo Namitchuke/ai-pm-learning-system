@@ -1,4 +1,4 @@
-/* Shared CSS for AI PM Learning System — Teal/Emerald Theme */
+/* Shared CSS for AI PM Learning System — Soft Dark Theme */
 *,
 *::before,
 *::after {
@@ -8,32 +8,29 @@
 }
 
 :root {
-    --bg: #050b0e;
-    --bg2: #0a1419;
-    --bg3: #12222a;
-    --card: rgba(18, 34, 42, .85);
-    --card2: rgba(20, 45, 55, .7);
-    --border: rgba(20, 184, 166, .12);
-    --border-h: rgba(20, 184, 166, .35);
-    --t1: #f0fdf4;
-    --t2: #a7f3d0;
-    --t3: #6b9080;
-    --t4: #3a5a4a;
-    --accent: #14b8a6;
-    --accent2: #2dd4bf;
-    --grad: linear-gradient(135deg, #0d9488, #14b8a6, #2dd4bf);
-    --grad2: linear-gradient(135deg, #06b6d4, #14b8a6);
+    --bg: #0B0F14;
+    --bg2: #111827;
+    --bg3: #1F2937;
+    --card: #111827;
+    --card2: #1a2332;
+    --border: #1F2937;
+    --border-h: #374151;
+    --t1: #E5E7EB;
+    --t2: #9CA3AF;
+    --t3: #6B7280;
+    --t4: #4B5563;
+    --accent: #34D399;
+    --accent2: #6EE7B7;
+    --grad: linear-gradient(135deg, #34D399, #2DD4BF);
+    --grad2: linear-gradient(135deg, #60A5FA, #34D399);
     --green: #22c55e;
     --amber: #f59e0b;
     --red: #ef4444;
-    --blue: #3b82f6;
-    --purple: #a855f7;
-    --cyan: #06b6d4;
-    --pink: #ec4899;
-    --r: 14px;
-    --c1: #14b8a6;
-    --c2: #06b6d4;
-    --c3: #22c55e
+    --blue: #60A5FA;
+    --purple: #a78bfa;
+    --cyan: #22d3ee;
+    --pink: #f472b6;
+    --r: 12px
 }
 
 body {
