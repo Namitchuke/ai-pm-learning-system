@@ -357,12 +357,26 @@ function renderTab4() {
     });
     h += `</div></div>`;
 
-    h += `<div class="card" style="margin-top:16px"><div class="card-title">🔗 External Case Study Libraries</div>
+    h += `<div class="card" style="margin-top:16px"><div class="card-title">External Case Study Libraries</div>
             <div style="display:flex;flex-direction:column;gap:8px">
-                <a href="https://growth.design/case-studies" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:12px">1. Growth.Design (Interactive UX/Psychology Cases) ↗</a>
-                <a href="https://www.theproductfolks.com/teardowns" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:12px">2. The Product Folks - Indian Startup Teardowns ↗</a>
-                <a href="https://www.tryexponent.com/questions" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:12px">3. Exponent PM Interview Database ↗</a>
+                <a href="https://growth.design/case-studies" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:14px">1. Growth.Design (Interactive UX/Psychology Cases) &#8599;</a>
+                <a href="https://www.theproductfolks.com/teardowns" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:14px">2. The Product Folks - Indian Startup Teardowns &#8599;</a>
+                <a href="https://www.tryexponent.com/questions" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:14px">3. Exponent PM Interview Database &#8599;</a>
             </div></div>`;
+
+    // Recommended Books
+    if (typeof RECOMMENDED_BOOKS !== 'undefined' && RECOMMENDED_BOOKS.length > 0) {
+        h += `<div class="card" style="margin-top:16px"><div class="card-title">Recommended Books & Resources</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">`;
+        RECOMMENDED_BOOKS.forEach(b => {
+            h += `<a href="${b.url}" target="_blank" style="text-decoration:none;display:block;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;transition:border-color .2s">
+                <div style="font-weight:600;font-size:13px;color:var(--t1);margin-bottom:4px">${b.title}</div>
+                <div style="font-size:11px;color:var(--accent2);margin-bottom:4px">${b.author}</div>
+                <div style="font-size:11px;color:var(--t3);line-height:1.4">${b.desc}</div>
+            </a>`;
+        });
+        h += `</div></div>`;
+    }
 
     el.innerHTML = h;
 }
