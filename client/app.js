@@ -189,10 +189,33 @@ function calcReadiness() {
 function renderTab2() {
     let el = document.getElementById('tab2'), cw = getCurWeek(), op = calcOverallPct(), h = '';
     // Overall bar
-    h += `<div class="card"><div class="card-title">📊 Overall Progress</div>
+    h += `<div class="card"><div class="card-title">Overall Progress</div>
 <div class="ov-bar"><div class="ov-pct">${op}%</div><div class="ov-track"><div class="ov-fill" style="width:${op}%"></div></div></div></div>`;
+    // Achievements
+    let achievements = [
+        { id: 'first_case', icon: '&#9670;', label: 'First Case Done', desc: 'Complete 1 case study', check: () => Object.values(S.casesCompleted || {}).filter(Boolean).length >= 1 },
+        { id: 'first_mock', icon: '&#9655;', label: 'Mock Interview Given', desc: 'Practice 1 mock interview', check: () => Object.values(S.mocksDone || {}).filter(Boolean).length >= 1 },
+        { id: 'prd_written', icon: '&#9671;', label: 'PRD Written', desc: 'Complete the PRD artifact', check: () => !!(S.artifacts && S.artifacts.prd) },
+        { id: 'phase1', icon: '&#9632;', label: 'Phase 1 Complete', desc: 'Finish all Phase 1 tasks', check: () => calcPhasePct(0) === 100 },
+        { id: 'mock_pro', icon: '&#9733;', label: 'Mock Pro', desc: 'Practice 10+ mock interviews', check: () => Object.values(S.mocksDone || {}).filter(Boolean).length >= 10 },
+        { id: 'case_master', icon: '&#9830;', label: 'Case Study Pro', desc: 'Complete 10+ case studies', check: () => Object.values(S.casesCompleted || {}).filter(Boolean).length >= 10 },
+        { id: 'halfway', icon: '&#9650;', label: 'Halfway There', desc: 'Complete Phase 1-3 (Week 12)', check: () => calcPhasePct(0) === 100 && calcPhasePct(1) === 100 && calcPhasePct(2) === 100 },
+        { id: 'interview_ready', icon: '&#9733;', label: 'Interview Ready', desc: 'Practice 20+ mocks', check: () => Object.values(S.mocksDone || {}).filter(Boolean).length >= 20 }
+    ];
+    h += `<div class="card"><div class="card-title">Achievements</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px">`;
+    achievements.forEach(a => {
+        let unlocked = false;
+        try { unlocked = a.check(); } catch (e) { }
+        h += `<div style="text-align:center;padding:12px 8px;border-radius:8px;border:1px solid ${unlocked ? 'var(--accent)' : 'var(--border)'};background:${unlocked ? 'rgba(52,211,153,.08)' : 'var(--bg2)'};opacity:${unlocked ? '1' : '.5'};transition:all .2s">
+            <div style="font-size:20px;margin-bottom:4px;${unlocked ? '' : 'filter:grayscale(1)'}">${a.icon}</div>
+            <div style="font-size:11px;font-weight:600;color:${unlocked ? 'var(--t1)' : 'var(--t3)'}">${a.label}</div>
+            <div style="font-size:9px;color:var(--t4);margin-top:2px">${a.desc}</div>
+        </div>`;
+    });
+    h += `</div></div>`;
     // 24-week grid
-    h += `<div class="card"><div class="card-title">📅 Weekly Completion Grid</div><div class="wk-grid">`;
+    h += `<div class="card"><div class="card-title">Weekly Completion Grid</div><div class="wk-grid">`;
     for (let gw = 1; gw <= 24; gw++) {
         let { pi: p, wi: w } = getPhaseAndWeekIdx(gw);
         let wp = calcWeekPct(p, w);
@@ -201,7 +224,7 @@ function renderTab2() {
     }
     h += `</div></div>`;
     // Phase cards
-    h += `<div class="card"><div class="card-title">🏗 Phases</div>`;
+    h += `<div class="card"><div class="card-title">Phases</div>`;
     PHASES.forEach((ph, pi) => {
         let exp = S.expanded[pi] || false, pct = calcPhasePct(pi), ps = pi * 4 + 1, pe = ps + 3;
         let isCur = cw >= ps && cw <= pe;
@@ -214,7 +237,7 @@ function renderTab2() {
     });
     h += `</div>`;
     // Summary metrics
-    h += `<div class="card"><div class="card-title">📈 Lifetime Metrics</div>
+    h += `<div class="card"><div class="card-title">Lifetime Metrics</div>
 <div class="sm-grid">
 <div class="sm" onclick="editOverall('cases')" style="cursor:pointer"><div class="sm-val" style="display:flex;align-items:center;justify-content:center;gap:12px;"><button class="adj-btn" onclick="event.stopPropagation();adjOM('cases',-1)">-</button><span onclick="editOverall('cases')">${S.overallMetrics.cases || 0}</span><button class="adj-btn" onclick="event.stopPropagation();adjOM('cases',1)">+</button></div><div class="sm-lbl">Total Cases</div></div>
 <div class="sm" onclick="editOverall('apps')" style="cursor:pointer"><div class="sm-val" style="display:flex;align-items:center;justify-content:center;gap:12px;"><button class="adj-btn" onclick="event.stopPropagation();adjOM('apps',-1)">-</button><span onclick="editOverall('apps')">${S.overallMetrics.apps || 0}</span><button class="adj-btn" onclick="event.stopPropagation();adjOM('apps',1)">+</button></div><div class="sm-lbl">Applications</div></div>
