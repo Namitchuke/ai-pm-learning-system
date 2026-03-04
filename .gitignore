@@ -1,29 +1,3 @@
-# Environment variables — NEVER commit this
+node_modules/
 .env
-
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-.venv/
-venv/
-env/
-*.egg-info/
-dist/
-build/
-
-# IDE
-.vscode/
-.idea/
-*.code-workspace
-
-# Logs
-*.log
-logs/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Render build artifacts
-.python-version
+client/dist/

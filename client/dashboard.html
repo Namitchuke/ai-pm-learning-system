@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI PM Learning System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #06080f;
+            --bg2: #0d1117;
+            --bg3: #161b22;
+            --card: rgba(22, 27, 34, .85);
+            --card2: rgba(30, 37, 48, .7);
+            --border: rgba(99, 102, 241, .12);
+            --border-h: rgba(99, 102, 241, .35);
+            --t1: #f0f6fc;
+            --t2: #c9d1d9;
+            --t3: #8b949e;
+            --t4: #484f58;
+            --accent: #6366f1;
+            --accent2: #818cf8;
+            --grad: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+            --grad2: linear-gradient(135deg, #22d3ee, #6366f1);
+            --green: #22c55e;
+            --amber: #f59e0b;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --purple: #a855f7;
+            --cyan: #22d3ee;
+            --pink: #ec4899;
+            --r: 14px
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--t1);
+            min-height: 100vh;
+            overflow-x: hidden
+        }
+
+        .app {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px 60px
+        }
+
+        /* Header */
+        .hdr {
+            text-align: center;
+            padding: 32px 0 20px
+        }
+
+        .hdr-badge {
+            display: inline-block;
+            background: var(--grad);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 3px 12px;
+            border-radius: 16px;
+            color: #fff;
+            margin-bottom: 8px
+        }
+
+        .hdr h1 {
+            font-size: 26px;
+            font-weight: 900;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .hdr p {
+            font-size: 13px;
+            color: var(--t3);
+            margin-top: 2px
+        }
+
+        /* Start Date */
+        .sd-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px
+        }
+
+        .sd-bar label {
+            font-size: 12px;
+            color: var(--t3);
+            font-weight: 500
+        }
+
+        .sd-bar input[type=date] {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--t1);
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            outline: none
+        }
+
+        .sd-bar input:focus {
+            border-color: var(--accent)
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+            background: var(--bg2);
+            padding: 4px;
+            border-radius: 12px;
+            border: 1px solid var(--border)
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--t3);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all .25s;
+            user-select: none
+        }
+
+        .tab svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .tab:hover {
+            color: var(--t2)
+        }
+
+        .tab.active {
+            background: var(--grad);
+            color: #fff
+        }
+
+        .tab-body {
+            display: none
+        }
+
+        .tab-body.active {
+            display: block
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 18px 20px;
+            margin-bottom: 14px;
+            backdrop-filter: blur(12px)
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--t1);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        /* ---- TAB 1: TODAY'S FOCUS ---- */
+        .focus-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 14px
+        }
+
+        @media(max-width:600px) {
+            .focus-header {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .fh-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 14px 16px;
+            text-align: center
+        }
+
+        .fh-big {
+            font-size: 32px;
+            font-weight: 900;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .fh-label {
+            font-size: 10px;
+            color: var(--t3);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            font-weight: 600;
+            margin-top: 2px
+        }
+
+        .fh-sub {
+            font-size: 11px;
+            color: var(--t2);
+            margin-top: 4px
+        }
+
+        /* Weekly Metrics */
+        .wm-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 14px
+        }
+
+        @media(max-width:600px) {
+            .wm-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        .wm {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 14px;
+            cursor: pointer;
+            transition: all .25s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .wm:hover {
+            border-color: var(--border-h);
+            transform: translateY(-1px)
+        }
+
+        .wm::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px
+        }
+
+        .wm.c1::before {
+            background: var(--accent)
+        }
+
+        .wm.c2::before {
+            background: var(--green)
+        }
+
+        .wm.c3::before {
+            background: var(--amber)
+        }
+
+        .wm-icon {
+            font-size: 18px;
+            margin-bottom: 6px
+        }
+
+        .wm-val {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--t1)
+        }
+
+        .wm-lbl {
+            font-size: 10px;
+            color: var(--t3);
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            font-weight: 600
+        }
+
+        .wm-tgt {
+            font-size: 10px;
+            color: var(--t4);
+            margin-top: 2px
+        }
+
+        /* Checklist Items */
+        .ci {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 6px 0;
+            cursor: pointer;
+            user-select: none
+        }
+
+        .ci:hover {
+            opacity: .85
+        }
+
+        .ck {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--t4);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: all .2s;
+            font-size: 11px;
+            color: transparent
+        }
+
+        .ci.done .ck {
+            background: var(--green);
+            border-color: var(--green);
+            color: #fff
+        }
+
+        .ci-text {
+            font-size: 13px;
+            color: var(--t2);
+            line-height: 1.5
+        }
+
+        .ci.done .ci-text {
+            color: var(--t4);
+            text-decoration: line-through;
+            text-decoration-color: rgba(72, 79, 88, .5)
+        }
+
+        .det {
+            margin: 4px 0 8px 28px;
+            padding: 10px 12px;
+            background: rgba(99, 102, 241, .04);
+            border: 1px solid rgba(99, 102, 241, .08);
+            border-radius: 10px;
+            font-size: 12px;
+            color: var(--t2);
+            line-height: 1.7;
+            display: none
+        }
+
+        .det.show {
+            display: block
+        }
+
+        .det strong {
+            color: var(--t1);
+            font-weight: 600
+        }
+
+        .det .dw {
+            color: var(--accent2);
+            font-style: italic
+        }
+
+        /* Quiz inline */
+        .quiz-box {
+            padding: 14px;
+            background: rgba(168, 85, 247, .04);
+            border: 1px solid rgba(168, 85, 247, .1);
+            border-radius: 12px;
+            margin-top: 10px
+        }
+
+        .quiz-box h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--purple);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .qq {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, .25);
+            border-radius: 8px
+        }
+
+        .qq p {
+            font-size: 12px;
+            color: var(--t1);
+            margin-bottom: 6px;
+            font-weight: 500
+        }
+
+        .qo {
+            display: block;
+            padding: 5px 10px;
+            margin: 3px 0;
+            font-size: 12px;
+            color: var(--t2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all .2s;
+            background: transparent
+        }
+
+        .qo:hover {
+            border-color: var(--accent);
+            color: var(--t1)
+        }
+
+        .qo.sel {
+            border-color: var(--accent);
+            background: rgba(99, 102, 241, .12);
+            color: var(--t1)
+        }
+
+        .qo.correct {
+            border-color: var(--green);
+            background: rgba(34, 197, 94, .12);
+            color: var(--green)
+        }
+
+        .qo.wrong {
+            border-color: var(--red);
+            background: rgba(239, 68, 68, .08);
+            color: var(--red)
+        }
+
+        .qscore {
+            text-align: center;
+            padding: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 8px;
+            margin-top: 8px
+        }
+
+        .qscore.good {
+            background: rgba(34, 197, 94, .08);
+            color: var(--green)
+        }
+
+        .qscore.mid {
+            background: rgba(245, 158, 11, .08);
+            color: var(--amber)
+        }
+
+        .qscore.bad {
+            background: rgba(239, 68, 68, .08);
+            color: var(--red)
+        }
+
+        /* Resource links */
+        .res-box {
+            padding: 12px;
+            background: rgba(34, 197, 94, .03);
+            border: 1px solid rgba(34, 197, 94, .1);
+            border-radius: 10px;
+            margin-top: 8px
+        }
+
+        .res-box h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--green);
+            margin-bottom: 6px
+        }
+
+        .res-box a {
+            display: block;
+            color: var(--t2);
+            font-size: 11px;
+            text-decoration: none;
+            padding: 2px 0;
+            transition: color .2s
+        }
+
+        .res-box a:hover {
+            color: var(--accent2)
+        }
+
+        .res-box a::before {
+            content: '→ ';
+            color: var(--green)
+        }
+
+        /* ---- TAB 2: FULL OVERVIEW ---- */
+        /* Skill Depth Tracker */
+        .skill-section {
+            margin-bottom: 16px
+        }
+
+        .skill-section h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .sk {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            transition: border-color .2s
+        }
+
+        .sk:hover {
+            border-color: var(--border-h)
+        }
+
+        .sk-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px
+        }
+
+        .sk-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--t1)
+        }
+
+        .sk-levels {
+            display: flex;
+            gap: 4px
+        }
+
+        .sk-lv {
+            width: 28px;
+            height: 28px;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--t4);
+            cursor: pointer;
+            transition: all .2s;
+            background: transparent
+        }
+
+        .sk-lv:hover {
+            border-color: var(--accent);
+            color: var(--t2)
+        }
+
+        .sk-lv.passed {
+            background: var(--green);
+            border-color: var(--green);
+            color: #fff
+        }
+
+        .sk-lv.active {
+            border-color: var(--accent);
+            background: rgba(99, 102, 241, .15);
+            color: var(--accent2)
+        }
+
+        .sk-lv.failed {
+            border-color: var(--red);
+            background: rgba(239, 68, 68, .08);
+            color: var(--red)
+        }
+
+        .sk-bar {
+            height: 4px;
+            background: rgba(99, 102, 241, .08);
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden
+        }
+
+        .sk-fill {
+            height: 100%;
+            background: var(--grad);
+            border-radius: 4px;
+            transition: width .5s
+        }
+
+        .sk-quiz {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background: rgba(0, 0, 0, .2);
+            border-radius: 10px
+        }
+
+        .sk-quiz.show {
+            display: block
+        }
+
+        /* Portfolio Board */
+        .pf-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background .2s;
+            user-select: none
+        }
+
+        .pf-item:hover {
+            background: rgba(99, 102, 241, .04)
+        }
+
+        .pf-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--t4);
+            flex-shrink: 0
+        }
+
+        .pf-item.done .pf-dot {
+            background: var(--green);
+            border-color: var(--green)
+        }
+
+        .pf-label {
+            font-size: 13px;
+            color: var(--t2);
+            font-weight: 500
+        }
+
+        .pf-item.done .pf-label {
+            color: var(--green)
+        }
+
+        /* Interview Readiness */
+        .ir-gauge {
+            text-align: center;
+            padding: 20px
+        }
+
+        .ir-score {
+            font-size: 48px;
+            font-weight: 900;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .ir-label {
+            font-size: 12px;
+            color: var(--t3);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-top: 4px
+        }
+
+        .ir-bar {
+            height: 8px;
+            background: rgba(99, 102, 241, .08);
+            border-radius: 6px;
+            margin-top: 12px;
+            overflow: hidden
+        }
+
+        .ir-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width .6s
+        }
+
+        .ir-breakdown {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 14px
+        }
+
+        @media(max-width:500px) {
+            .ir-breakdown {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .ir-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--t2);
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(99, 102, 241, .06)
+        }
+
+        .ir-item span:last-child {
+            font-weight: 700;
+            color: var(--t1)
+        }
+
+        /* Decision Logs */
+        .dl-input {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap
+        }
+
+        .dl-input select {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--t2);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            outline: none
+        }
+
+        .dl-input textarea {
+            flex: 1;
+            min-width: 200px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--t1);
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            outline: none;
+            resize: vertical;
+            min-height: 36px
+        }
+
+        .dl-input textarea:focus,
+        .dl-input select:focus {
+            border-color: var(--accent)
+        }
+
+        .dl-btn {
+            background: var(--grad);
+            color: #fff;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer
+        }
+
+        .dl-btn:hover {
+            opacity: .9
+        }
+
+        .dl-entry {
+            padding: 10px 12px;
+            background: rgba(0, 0, 0, .2);
+            border-radius: 8px;
+            margin-bottom: 6px;
+            position: relative
+        }
+
+        .dl-entry .dl-cat {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: .4px
+        }
+
+        .dl-cat.Technical {
+            background: rgba(59, 130, 246, .15);
+            color: var(--blue)
+        }
+
+        .dl-cat.Strategy {
+            background: rgba(168, 85, 247, .15);
+            color: var(--purple)
+        }
+
+        .dl-cat.Trade-off {
+            background: rgba(245, 158, 11, .15);
+            color: var(--amber)
+        }
+
+        .dl-text {
+            font-size: 12px;
+            color: var(--t2);
+            line-height: 1.6
+        }
+
+        .dl-time {
+            font-size: 10px;
+            color: var(--t4);
+            margin-top: 4px
+        }
+
+        .dl-del {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--t4);
+            cursor: pointer;
+            font-size: 14px
+        }
+
+        .dl-del:hover {
+            color: var(--red)
+        }
+
+        /* ---- TAB 3: DASHBOARD ---- */
+        .ov-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px
+        }
+
+        .ov-pct {
+            font-size: 28px;
+            font-weight: 900;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            min-width: 60px
+        }
+
+        .ov-track {
+            flex: 1;
+            height: 10px;
+            background: rgba(99, 102, 241, .08);
+            border-radius: 8px;
+            overflow: hidden
+        }
+
+        .ov-fill {
+            height: 100%;
+            background: var(--grad);
+            border-radius: 8px;
+            transition: width .6s
+        }
+
+        /* Phase cards */
+        .ph-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            margin-bottom: 8px;
+            overflow: hidden;
+            transition: border-color .2s
+        }
+
+        .ph-card:hover {
+            border-color: var(--border-h)
+        }
+
+        .ph-card.current {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(99, 102, 241, .06)
+        }
+
+        .ph-hdr {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            cursor: pointer;
+            user-select: none
+        }
+
+        .ph-num {
+            width: 30px;
+            height: 30px;
+            background: var(--grad);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0
+        }
+
+        .ph-info {
+            flex: 1
+        }
+
+        .ph-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--t1)
+        }
+
+        .ph-weeks {
+            font-size: 11px;
+            color: var(--t3)
+        }
+
+        .ph-pct {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent2);
+            min-width: 36px;
+            text-align: right
+        }
+
+        .ph-chevron {
+            color: var(--t4);
+            transition: transform .3s;
+            font-size: 13px
+        }
+
+        .ph-card.exp .ph-chevron {
+            transform: rotate(90deg)
+        }
+
+        .ph-bar {
+            width: 70px;
+            height: 5px;
+            background: rgba(99, 102, 241, .08);
+            border-radius: 4px;
+            overflow: hidden
+        }
+
+        .ph-fill {
+            height: 100%;
+            background: var(--grad);
+            border-radius: 4px
+        }
+
+        .ph-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s
+        }
+
+        .ph-card.exp .ph-body {
+            max-height: 2000px
+        }
+
+        .ph-inner {
+            padding: 0 16px 14px
+        }
+
+        .wk-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(99, 102, 241, .04)
+        }
+
+        .wk-row:last-child {
+            border-bottom: none
+        }
+
+        .wk-lbl {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--t2);
+            min-width: 55px
+        }
+
+        .wk-focus {
+            font-size: 11px;
+            color: var(--t3);
+            flex: 1
+        }
+
+        .wk-pct {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--t3);
+            min-width: 30px;
+            text-align: right
+        }
+
+        .wk-mini {
+            width: 50px;
+            height: 4px;
+            background: rgba(99, 102, 241, .08);
+            border-radius: 3px;
+            overflow: hidden
+        }
+
+        .wk-mini-fill {
+            height: 100%;
+            background: var(--green);
+            border-radius: 3px
+        }
+
+        /* 24-week grid */
+        .wk-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 6px;
+            margin-bottom: 14px
+        }
+
+        @media(max-width:500px) {
+            .wk-grid {
+                grid-template-columns: repeat(4, 1fr)
+            }
+        }
+
+        .wk-cell {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            border: 1px solid var(--border);
+            transition: all .2s;
+            cursor: default
+        }
+
+        .wk-cell.empty {
+            background: var(--bg2);
+            color: var(--t4)
+        }
+
+        .wk-cell.partial {
+            background: rgba(245, 158, 11, .08);
+            border-color: rgba(245, 158, 11, .2);
+            color: var(--amber)
+        }
+
+        .wk-cell.done {
+            background: rgba(34, 197, 94, .08);
+            border-color: rgba(34, 197, 94, .2);
+            color: var(--green)
+        }
+
+        .wk-cell.cur {
+            border-color: var(--accent);
+            box-shadow: 0 0 8px rgba(99, 102, 241, .15)
+        }
+
+        .wk-cell span {
+            font-size: 9px;
+            font-weight: 500;
+            color: var(--t4);
+            margin-top: 1px
+        }
+
+        /* Summary metrics */
+        .sm-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px
+        }
+
+        @media(max-width:500px) {
+            .sm-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        .sm {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center
+        }
+
+        .sm-val {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--t1)
+        }
+
+        .sm-lbl {
+            font-size: 10px;
+            color: var(--t3);
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            font-weight: 600;
+            margin-top: 2px
+        }
+
+        /* Footer buttons */
+        .footer {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            flex-wrap: wrap
+        }
+
+        .fbtn {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--t2);
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .fbtn:hover {
+            border-color: var(--accent);
+            color: var(--t1)
+        }
+
+        .fbtn.danger:hover {
+            border-color: var(--red);
+            color: var(--red)
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .6);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100
+        }
+
+        .modal.show {
+            display: flex
+        }
+
+        .modal-box {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 320px;
+            width: 90%;
+            text-align: center
+        }
+
+        .modal-box h3 {
+            font-size: 15px;
+            margin-bottom: 6px;
+            color: var(--t1)
+        }
+
+        .modal-box p {
+            font-size: 12px;
+            color: var(--t2);
+            margin-bottom: 16px
+        }
+
+        .modal-box input {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--t1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            outline: none;
+            margin-bottom: 12px
+        }
+
+        .modal-box input:focus {
+            border-color: var(--accent)
+        }
+
+        .mbtns {
+            display: flex;
+            gap: 6px
+        }
+
+        .mbtns button {
+            flex: 1;
+            padding: 8px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none
+        }
+
+        .mbtn-c {
+            background: var(--card);
+            color: var(--t2)
+        }
+
+        .mbtn-s {
+            background: var(--grad);
+            color: #fff
+        }
+
+        .mbtn-d {
+            background: var(--red);
+            color: #fff
+        }
+
+        .mbtns button:hover {
+            opacity: .85
+        }
+
+        .adj-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .adj-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <div class="hdr" style="position:relative">
+            <div style="position:absolute; right:0; top:20px; display:flex; gap:8px;">
+                <button class="fbtn" onclick="exportData()">📥 Export Backup</button>
+                <button class="fbtn" onclick="document.getElementById('impF').click()">📤 Import</button>
+                <input type="file" id="impF" accept=".json" style="display:none" onchange="importData(event)" />
+            </div>
+            <div style="position:absolute; right:0; top:20px; display:flex; align-items:center; gap:12px;">
+                <span id="userGreeting" style="font-size:12px;color:var(--t3)"></span>
+                <button class="fbtn" onclick="handleLogout()" style="font-size:11px;padding:6px 14px">Logout</button>
+            </div>
+            <div class="hdr-badge">24-Week Execution Plan</div>
+            <h1>AI PM Learning System</h1>
+            <p>India 2025–2026 · Placement + Mastery</p>
+        </div>
+        <div class="sd-bar">
+            <label>Start Date:</label>
+            <input type="date" id="startDate" />
+        </div>
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab(0)">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                </svg>
+                Today's Focus
+            </div>
+            <div class="tab" onclick="switchTab(1)">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+                </svg>
+                Full Overview
+            </div>
+            <div class="tab" onclick="switchTab(2)">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                </svg>
+                Dashboard
+            </div>
+            <div class="tab" onclick="switchTab(3)">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+                </svg>
+                Mock Interviews
+            </div>
+            <div class="tab" onclick="switchTab(4)">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                </svg>
+                Case Studies
+            </div>
+        </div>
+        <!-- TAB 0: TODAY'S FOCUS -->
+        <div class="tab-body active" id="tab0"></div>
+        <!-- TAB 1: FULL OVERVIEW -->
+        <div class="tab-body" id="tab1"></div>
+        <!-- TAB 2: DASHBOARD -->
+        <div class="tab-body" id="tab2"></div>
+        <!-- TAB 3: MOCK INTERVIEWS -->
+        <div class="tab-body" id="tab3"></div>
+        <!-- TAB 4: CASE STUDIES -->
+        <div class="tab-body" id="tab4"></div>
+        <div class="footer">
+            <button class="fbtn" onclick="exportData()">📥 Export Backup</button>
+            <button class="fbtn danger" onclick="showModal('resetMo')">🗑 Reset</button>
+        </div>
+    </div>
+    <div class="modal" id="metricMo">
+        <div class="modal-box">
+            <h3 id="mmT">Update</h3>
+            <p id="mmD"></p><input type="number" id="mmI" min="0" />
+            <div class="mbtns"><button class="mbtn-c" onclick="hideModal('metricMo')">Cancel</button><button
+                    class="mbtn-s" onclick="saveMM()">Save</button></div>
+        </div>
+    </div>
+    <div class="modal" id="resetMo">
+        <div class="modal-box">
+            <h3>Reset All?</h3>
+            <p>This clears everything permanently.</p>
+            <div class="mbtns"><button class="mbtn-c" onclick="hideModal('resetMo')">Cancel</button><button
+                    class="mbtn-d" onclick="confirmReset()">Reset</button></div>
+        </div>
+    </div>
+
+    <!-- API-based data loading bridge -->
+    <script>
+        // Global data variables (will be populated from API)
+        var PHASES = [], CORE_SKILLS = [], AI_SKILLS = [], SKILL_QUIZZES = {},
+            SKILL_RESOURCES = {}, MOCK_INTERVIEWS = [], MOCK_CASES = [],
+            INTERVIEW_BANK = [], WEEKLY_METRICS = [], ARTIFACTS = [], K = 'aipm_v2';
+
+        // Debounced save to API
+        let _saveTimer = null;
+        function saveToAPI() {
+            clearTimeout(_saveTimer);
+            _saveTimer = setTimeout(async () => {
+                try {
+                    await fetch('/api/progress', {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(S)
+                    });
+                } catch (e) { console.warn('Auto-save failed:', e); }
+            }, 500);
+        }
+
+        async function handleLogout() {
+            await fetch('/auth/logout', { method: 'POST' });
+            window.location.href = '/';
+        }
+
+        // Bootstrap: load user, content, progress, then init the app
+        (async function boot() {
+            try {
+                // 1. Check auth
+                const meRes = await fetch('/auth/me');
+                if (!meRes.ok) { window.location.href = '/'; return; }
+                const { user } = await meRes.json();
+                document.getElementById('userGreeting').textContent = 'Hi, ' + user.name;
+
+                // 2. Load all content in parallel
+                const [phasesRes, quizzesRes, interviewsRes, casesRes, progressRes] = await Promise.all([
+                    fetch('/api/content/phases'),
+                    fetch('/api/content/quizzes'),
+                    fetch('/api/content/interviews'),
+                    fetch('/api/content/cases'),
+                    fetch('/api/progress')
+                ]);
+
+                const phasesData = await phasesRes.json();
+                PHASES = phasesData.sort((a, b) => a.phaseIndex - b.phaseIndex);
+                SKILL_QUIZZES = await quizzesRes.json();
+                MOCK_INTERVIEWS = await interviewsRes.json();
+                MOCK_CASES = await casesRes.json();
+
+                // 3. Load progress
+                const progressData = await progressRes.json();
+
+                // 4. Now load the app script dynamically
+                const script = document.createElement('script');
+                script.src = 'app.js';
+                script.onload = function () {
+                    // Override the S object with server data
+                    if (progressData && progressData.userId) {
+                        Object.keys(S).forEach(k => {
+                            if (progressData[k] !== undefined && k !== '_id' && k !== 'userId' && k !== '__v') {
+                                S[k] = progressData[k];
+                            }
+                        });
+                    }
+                    if (S.startDate) document.getElementById('startDate').value = S.startDate;
+
+                    // Override save() to also push to API
+                    const _origSave = save;
+                    save = function () {
+                        _origSave();
+                        saveToAPI();
+                    };
+
+                    render();
+                };
+                document.body.appendChild(script);
+
+            } catch (err) {
+                console.error('Boot failed:', err);
+                document.querySelector('.app').innerHTML = '<div style="text-align:center;padding:60px"><h2 style="color:var(--red)">Failed to load</h2><p style="color:var(--t3);margin-top:8px">Please refresh or <a href="/" style="color:var(--accent)">login again</a></p></div>';
+            }
+        })();
+    </script>
+
+    <!-- data.js provides the static constants (CORE_SKILLS, AI_SKILLS, etc.) that are NOT in the DB -->
+    <script src="data.js"></script>
+</body>
+
+</html>

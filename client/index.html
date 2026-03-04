@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI PM Learning System — Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .auth-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 36px;
+            max-width: 420px;
+            width: 100%;
+            backdrop-filter: blur(20px);
+        }
+
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .auth-logo h1 {
+            font-size: 24px;
+            font-weight: 900;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .auth-logo p {
+            font-size: 13px;
+            color: var(--t3);
+            margin-top: 4px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            background: var(--bg3);
+            padding: 4px;
+            border-radius: 10px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--t3);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all .25s;
+        }
+
+        .auth-tab.active {
+            background: var(--grad);
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--t3);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--t1);
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: border-color .2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--accent);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .2s;
+            margin-top: 8px;
+        }
+
+        .auth-btn.primary {
+            background: var(--grad);
+            color: #fff;
+        }
+
+        .auth-btn.primary:hover {
+            opacity: .9;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+            font-size: 11px;
+            color: var(--t4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .google-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--t1);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all .2s;
+        }
+
+        .google-btn:hover {
+            border-color: var(--accent);
+            background: var(--bg2);
+        }
+
+        .google-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .auth-error {
+            background: rgba(239, 68, 68, .1);
+            border: 1px solid rgba(239, 68, 68, .2);
+            color: var(--red);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-bottom: 14px;
+            display: none;
+        }
+
+        .auth-error.show {
+            display: block;
+        }
+
+        #signupForm {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <div
+                    style="display:inline-block;background:var(--grad);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 12px;border-radius:16px;color:#fff;margin-bottom:8px">
+                    Learning Platform</div>
+                <h1>AI PM Learning System</h1>
+                <p>Master AI Product Management in 24 weeks</p>
+            </div>
+
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="showAuthTab('login')">Login</div>
+                <div class="auth-tab" onclick="showAuthTab('signup')">Sign Up</div>
+            </div>
+
+            <div id="authError" class="auth-error"></div>
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="auth-btn primary">Login</button>
+            </form>
+
+            <!-- SIGNUP FORM -->
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signupName" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="signupUsername" placeholder="johndoe" required minlength="3">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signupEmail" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" placeholder="Min 6 characters" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label>Study Role</label>
+                    <select id="signupRole">
+                        <option value="AI PM" selected>AI Product Manager</option>
+                    </select>
+                </div>
+                <button type="submit" class="auth-btn primary">Create Account</button>
+            </form>
+
+            <div class="auth-divider">or continue with</div>
+
+            <button class="google-btn" onclick="googleLogin()">
+                <svg viewBox="0 0 24 24">
+                    <path fill="#4285F4"
+                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
+                    <path fill="#34A853"
+                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                    <path fill="#FBBC05"
+                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                    <path fill="#EA4335"
+                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                </svg>
+                Continue with Google
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Check if already logged in
+        fetch('/auth/me').then(r => r.json()).then(d => {
+            if (d.user) window.location.href = '/dashboard.html';
+        }).catch(() => { });
+
+        function showAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach((t, i) => t.classList.toggle('active', (tab === 'login' ? i === 0 : i === 1)));
+            document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
+            document.getElementById('signupForm').style.display = tab === 'signup' ? 'block' : 'none';
+            hideError();
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('authError');
+            el.textContent = msg;
+            el.classList.add('show');
+        }
+        function hideError() { document.getElementById('authError').classList.remove('show'); }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            hideError();
+            try {
+                const res = await fetch('/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: document.getElementById('loginEmail').value,
+                        password: document.getElementById('loginPassword').value
+                    })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    window.location.href = '/dashboard.html';
+                } else {
+                    showError(data.error || 'Login failed');
+                }
+            } catch (err) {
+                showError('Network error. Please try again.');
+            }
+        }
+
+        async function handleSignup(e) {
+            e.preventDefault();
+            hideError();
+            try {
+                const res = await fetch('/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: document.getElementById('signupName').value,
+                        username: document.getElementById('signupUsername').value,
+                        email: document.getElementById('signupEmail').value,
+                        password: document.getElementById('signupPassword').value,
+                        studyRole: document.getElementById('signupRole').value
+                    })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    window.location.href = '/dashboard.html';
+                } else {
+                    showError(data.error || 'Signup failed');
+                }
+            } catch (err) {
+                showError('Network error. Please try again.');
+            }
+        }
+
+        function googleLogin() {
+            window.location.href = '/auth/google';
+        }
+    </script>
+</body>
+
+</html>

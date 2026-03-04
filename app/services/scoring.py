@@ -1,4 +1,4 @@
-"""
+ """
 app/services/scoring.py — Combined Gemini relevance + credibility scoring
 TDD v2.0 §Core Services (scoring.py)
 PRD v2.0 §FR-02 AI Pre-Filtering & Scoring
