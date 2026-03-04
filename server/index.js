@@ -56,7 +56,13 @@ app.use('/admin', require('./routes/admin'));
 
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, '../client')));
+
+// Catch-all: serve index.html for non-API routes (SPA fallback)
 app.get('*', (req, res) => {
+    // Don't catch API/auth routes — let them 404 naturally
+    if (req.path.startsWith('/auth') || req.path.startsWith('/api') || req.path.startsWith('/admin')) {
+        return res.status(404).json({ error: 'Not found' });
+    }
     res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 

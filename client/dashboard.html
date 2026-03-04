@@ -1388,8 +1388,10 @@
         (async function boot() {
             try {
                 // 1. Check auth
+                console.log('[boot] Checking auth...');
                 const meRes = await fetch('/auth/me');
-                if (!meRes.ok) { window.location.href = '/'; return; }
+                console.log('[boot] /auth/me status:', meRes.status);
+                if (!meRes.ok) { console.log('[boot] Not authenticated, redirecting...'); window.location.href = '/'; return; }
                 const { user } = await meRes.json();
                 document.getElementById('userGreeting').textContent = 'Hi, ' + user.name;
 
