@@ -10,6 +10,11 @@ const passport = require('./config/passport');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Trust Render's reverse proxy (needed for secure cookies)
+if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1);
+}
+
 // Connect to MongoDB
 connectDB();
 
@@ -35,7 +40,7 @@ app.use(session({
         maxAge: 14 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+        sameSite: 'lax'
     }
 }));
 
