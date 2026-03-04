@@ -20,7 +20,7 @@ const CaseStudy = require('../models/CaseStudy');
 // We need to extract the JS constants from data.js
 // data.js uses 'const' declarations, so we need to eval it in a controlled way
 function loadDataFile() {
-    const dataPath = path.join(__dirname, '../../AI PM ROADMAP/tracker/data.js');
+    const dataPath = path.join(__dirname, '../../client/data.js');
     let content = fs.readFileSync(dataPath, 'utf8');
 
     // Replace 'const' with 'var' so they become accessible after eval
