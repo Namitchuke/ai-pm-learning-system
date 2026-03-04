@@ -27,7 +27,7 @@ function getPhaseAndWeekIdx(globalWeek) { let pi = Math.floor((globalWeek - 1) /
 function render() { renderTab0(); renderTab1(); renderTab2(); renderTab3(); renderTab4(); }
 // ++ UI ADJ FNs ++
 function adjWeek(delta) { S.weekOffset = (S.weekOffset || 0) + delta; save(); render(); }
-function adjWM(key, delta) { let cw = getCurWeek(), v = getWM(key) + delta; if (v < 0) v = 0; S.weeklyMetrics[(cw < 1 ? 1 : cw) + '_' + key] = v; save(); render(); }
+function adjWM(key, delta) { let v = getWM(key) + delta; if (v < 0) v = 0; setWM(key, v); render(); }
 function adjOM(key, delta) { let v = (S.overallMetrics[key] || 0) + delta; if (v < 0) v = 0; S.overallMetrics[key] = v; save(); render(); }
 // ---- TAB 0: TODAY'S FOCUS ----
 function renderTab0() {
@@ -62,11 +62,11 @@ function renderTab0() {
     // This week's checklist
     if (week) {
         let wp = calcWeekPct(pi, wi);
-        h += `<div class="card"><div class="card-title">✅ ${week.label} — ${week.focus} <span style="margin-left:auto;font-size:12px;color:var(--accent2)">${wp}%</span></div>`;
+        h += `<div class="card"><div class="card-title">${week.label} — ${week.focus} <span style="margin-left:auto;font-size:12px;color:var(--accent2)">${wp}%</span></div>`;
         h += week.items.map((it, ii) => {
             let k = ik(pi, wi, ii), d = S.items[k] || false;
             return `<div class="ci ${d ? 'done' : ''}" onclick="toggleItem('${k}')"><div class="ck">${d ? '✓' : ''}</div><div class="ci-text">${it.text}</div></div>
-<div class="det ${d ? '' : 'show'}" id="det-${k}"><strong>What this means:</strong> ${it.detail}<br><span class="dw">✅ Done when: ${it.done_when}</span></div>`
+<div class="det ${d ? '' : 'show'}" id="det-${k}"><strong>What this means:</strong> ${it.detail}<br><span class="dw">Done when: ${it.done_when}</span></div>`
         }).join('');
         h += `</div>`;
         // Quiz
@@ -74,7 +74,7 @@ function renderTab0() {
             let answered = 0, correct = 0;
             week.quiz.forEach((q, qi) => { let a = S.quizAnswers[`q${pi}${wi}${qi}`]; if (a !== undefined) { answered++; if (a === q.answer) correct++ } });
             let pct = answered ? Math.round(correct / answered * 100) : 0;
-            h += `<div class="quiz-box"><h4>🧪 Knowledge Check — ${week.label}</h4>`;
+            h += `<div class="quiz-box"><h4>Knowledge Check — ${week.label}</h4>`;
             h += week.quiz.map((q, qi) => {
                 let qk = `q${pi}${wi}${qi}`, ans = S.quizAnswers[qk];
                 return `<div class="qq"><p>${qi + 1}. ${q.q}</p>${q.options.map((o, oi) => { let cls = 'qo'; if (ans !== undefined) { if (oi === q.answer) cls += ' correct'; else if (oi === ans) cls += ' wrong' } return `<span class="${cls}" onclick="answerQ('${qk}',${oi},${q.answer})">${o}</span>` }).join('')}</div>`
@@ -83,7 +83,7 @@ function renderTab0() {
             h += `</div>`;
             // Dynamic Resources mapping to wrong questions
             if (answered > 0 && pct < 100 && week.resources && week.resources.length > 0) {
-                h += `<div class="res-box" style="border-left: 3px solid var(--amber);"><h4>🧠 Study Missing Concepts</h4>`;
+                h += `<div class="res-box" style="border-left: 3px solid var(--amber);"><h4>Study Missing Concepts</h4>`;
                 let showIndices = new Set();
                 week.quiz.forEach((q, qi) => {
                     let a = S.quizAnswers[`q${pi}${wi}${qi}`];
@@ -140,7 +140,7 @@ function renderTab1() {
         let open = !!S.expanded['ib_' + i];
         h += `<div class="pf-item" style="cursor:pointer;flex-direction:column;align-items:flex-start" onclick="toggleIb(${i})">
 <div style="font-weight:600;font-size:14px;display:flex;align-items:center;line-height:1.4"><span class="dl-cat" style="background:var(--bg3);border:1px solid var(--border);margin-right:8px">${ib.cat}</span>${ib.q}</div>
-${open ? `<div style="font-size:13px;color:var(--t3);margin-top:8px;padding-left:12px;border-left:3px solid var(--accent)">💡 <strong>Hint/Structure:</strong> ${ib.hint}</div>` : ''}
+${open ? `<div style="font-size:13px;color:var(--t3);margin-top:8px;padding-left:12px;border-left:3px solid var(--accent)"><strong>Hint/Structure:</strong> ${ib.hint}</div>` : ''}
 </div>`;
     });
     h += `</div>`;
@@ -156,7 +156,7 @@ ${open ? `<div style="font-size:13px;color:var(--t3);margin-top:8px;padding-left
     el.innerHTML = h
 }
 function renderSkillSection(title, prefix, skills) {
-    let h = `<div class="skill-section"><h3>${prefix === 'core' ? '🏗' : '🤖'} ${title}</h3>`;
+    let h = `<div class="skill-section"><h3>${title}</h3>`;
     skills.forEach(sk => {
         let maxPassed = 0; for (let lv = 1; lv <= 5; lv++) { if (S.skillLevels[sk.id + '_' + lv]) maxPassed = lv }
         let pct = maxPassed / 5 * 100;
@@ -231,14 +231,14 @@ function renderTab3() {
     if (!st.status) st.status = 'All';
     if (!S.mocksDone) S.mocksDone = {};
 
-    let companies = ['All', ...new Set(MOCK_INTERVIEWS.map(m => m.co))].sort();
-    let categories = ['All', ...new Set(MOCK_INTERVIEWS.map(m => m.cat))].sort();
+    let companies = ['All', ...[...new Set(MOCK_INTERVIEWS.map(m => m.co))].sort()];
+    let categories = ['All', ...[...new Set(MOCK_INTERVIEWS.map(m => m.cat))].sort()];
     let levels = ['All', 'Easy', 'Medium', 'Hard'];
-    let roles = ['All', ...new Set(MOCK_INTERVIEWS.map(m => m.role))].sort();
+    let roles = ['All', ...[...new Set(MOCK_INTERVIEWS.map(m => m.role))].sort()];
     let selS = 'background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:5px 10px;border-radius:6px;font-size:11px;outline:none;cursor:pointer;font-family:inherit';
 
     let doneCount = Object.values(S.mocksDone).filter(Boolean).length;
-    h += `<div class="card"><div class="card-title">🎙️ Mock Interviews <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} practiced</span></div>
+    h += `<div class="card"><div class="card-title">Mock Interviews <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} practiced</span></div>
             <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
                 <select style="${selS}" onchange="updMockFlt('co', this.value)"><option disabled>Company</option>${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
                 <select style="${selS}" onchange="updMockFlt('cat', this.value)"><option disabled>Category</option>${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
@@ -274,7 +274,7 @@ function renderTab3() {
                             <span style="background:var(--accent);color:#fff;padding:1px 7px;border-radius:10px">${m.cat}</span>
                         </div>
                         <div style="font-weight:600;font-size:13px;line-height:1.4;${isDone ? 'text-decoration:line-through;color:var(--t3)' : ''}">${m.q}</div>
-                        ${open ? `<div style="font-size:12px;color:var(--t2);margin-top:8px;padding:8px 12px;border-left:3px solid var(--accent);background:rgba(31,41,55,0.5);border-radius:4px">💡 <strong>Hints:</strong><br>${m.flow}</div>` : ''}
+                        ${open ? `<div style="font-size:12px;color:var(--t2);margin-top:8px;padding:8px 12px;border-left:3px solid var(--accent);background:rgba(31,41,55,0.5);border-radius:4px"><strong>Hints:</strong><br>${m.flow}</div>` : ''}
                     </div>
                 </div>
                 </div>`;
@@ -292,13 +292,13 @@ function renderTab4() {
     if (!st.status) st.status = 'All';
     if (!S.casesCompleted) S.casesCompleted = {};
 
-    let companies = ['All', ...new Set(MOCK_CASES.map(c => c.co))].sort();
-    let categories = ['All', ...new Set(MOCK_CASES.map(c => c.cat))].sort();
+    let companies = ['All', ...[...new Set(MOCK_CASES.map(c => c.co))].sort()];
+    let categories = ['All', ...[...new Set(MOCK_CASES.map(c => c.cat))].sort()];
     let levels = ['All', 'Easy', 'Medium', 'Hard'];
     let selS = 'background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit';
 
     let doneCount = Object.values(S.casesCompleted).filter(Boolean).length;
-    h += `<div class="card"><div class="card-title">🧠 Case Studies <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} completed</span></div>
+    h += `<div class="card"><div class="card-title">Case Studies <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} completed</span></div>
             <div style="font-size:12px;color:var(--t2);margin-bottom:10px;">Practice on a whiteboard or Google Doc. Treat them as real take-home assignments.</div>
             <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
                 <select style="${selS}" onchange="S.casesState.co=this.value;save();renderTab4()">${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
@@ -324,7 +324,7 @@ function renderTab4() {
                         <div style="display:flex;gap:5px;flex-wrap:wrap;font-size:10px;font-weight:700">
                             <span style="background:${lvColor};color:#fff;padding:1px 7px;border-radius:10px">${c.level}</span>
                             <span style="background:var(--bg3);border:1px solid var(--border);padding:1px 7px;border-radius:10px">${c.cat}</span>
-                            <span style="background:var(--accent);color:#fff;padding:1px 7px;border-radius:10px">${c.co}</span>
+                            <span style="background:var(--blue);color:#fff;padding:1px 7px;border-radius:10px">${c.co}</span>
                         </div>
                         <input type="checkbox" ${isDone ? 'checked' : ''} onchange="toggleCaseDone('${c.title.replace(/'/g, "\\'")}')" style="cursor:pointer;width:16px;height:16px;accent-color:var(--accent)">
                     </div>

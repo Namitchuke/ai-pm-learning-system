@@ -47,7 +47,46 @@
             background: var(--bg);
             color: var(--t1);
             min-height: 100vh;
-            overflow-x: hidden
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse 600px 400px at 10% 20%, rgba(52, 211, 153, .04), transparent),
+                radial-gradient(ellipse 500px 350px at 80% 70%, rgba(96, 165, 250, .03), transparent),
+                radial-gradient(ellipse 400px 300px at 50% 50%, rgba(167, 139, 250, .02), transparent);
+            animation: bgShift 30s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bgShift {
+            0% {
+                opacity: 1;
+                transform: scale(1) translate(0, 0);
+            }
+
+            50% {
+                opacity: .7;
+                transform: scale(1.1) translate(20px, -15px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translate(-10px, 10px);
+            }
+        }
+
+        .app {
+            position: relative;
+            z-index: 1;
         }
 
         .app {
@@ -1417,23 +1456,23 @@
         <div class="sidebar-nav">
             <button class="sidebar-item" onclick="switchTab(0);closeSidebar()"><span class="si-icon">⚡</span> Today's
                 Focus</button>
-            <button class="sidebar-item" onclick="switchTab(1);closeSidebar()"><span class="si-icon">🗺️</span> Full
+            <button class="sidebar-item" onclick="switchTab(1);closeSidebar()"><span class="si-icon">○</span> Full
                 Overview</button>
-            <button class="sidebar-item" onclick="switchTab(2);closeSidebar()"><span class="si-icon">📊</span>
+            <button class="sidebar-item" onclick="switchTab(2);closeSidebar()"><span class="si-icon">■</span>
                 Dashboard</button>
-            <button class="sidebar-item" onclick="switchTab(3);closeSidebar()"><span class="si-icon">🎙️</span> Mock
+            <button class="sidebar-item" onclick="switchTab(3);closeSidebar()"><span class="si-icon">▷</span> Mock
                 Interviews</button>
-            <button class="sidebar-item" onclick="switchTab(4);closeSidebar()"><span class="si-icon">🧠</span> Case
+            <button class="sidebar-item" onclick="switchTab(4);closeSidebar()"><span class="si-icon">◇</span> Case
                 Studies</button>
             <div class="sidebar-sep"></div>
-            <button class="sidebar-item" onclick="exportData();closeSidebar()"><span class="si-icon">📥</span> Export
+            <button class="sidebar-item" onclick="exportData();closeSidebar()"><span class="si-icon">⤓</span> Export
                 Backup</button>
             <button class="sidebar-item" onclick="document.getElementById('impF').click()"><span
-                    class="si-icon">📤</span> Import Data</button>
+                    class="si-icon">⤒</span> Import Data</button>
             <input type="file" id="impF" accept=".json" style="display:none" onchange="importData(event)" />
             <div class="sidebar-sep"></div>
             <button class="sidebar-item" onclick="handleLogout()" style="color:var(--red)"><span
-                    class="si-icon">🚪</span> Logout</button>
+                    class="si-icon">→</span> Logout</button>
         </div>
         <div class="sidebar-footer">AI PM Learning System v2.4</div>
     </div>
@@ -1441,10 +1480,8 @@
     <div class="app">
         <div class="hdr" style="position:relative">
             <button class="hamburger-btn" onclick="toggleSidebar()" title="Menu">☰</button>
-            <span id="userGreeting" style="position:absolute;right:12px;top:20px;font-size:12px;color:var(--t3)"></span>
-            <div class="hdr-badge">24-Week Execution Plan</div>
+            <span id="userGreeting" style="position:absolute;right:12px;top:12px;font-size:11px;color:var(--t3)"></span>
             <h1>AI PM Learning System</h1>
-            <p>India 2025–2026 · Placement + Mastery</p>
         </div>
         <div class="sd-bar">
             <label>Start Date:</label>
@@ -1554,102 +1591,58 @@
             document.getElementById('sidebarDrawer').classList.remove('open');
             document.getElementById('sidebarOverlay').classList.remove('open');
         }
+    </script>
 
-        // Bootstrap: load user, content, progress, then init the app
+    <!-- Load data + app FIRST so render() is available instantly -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+
+    <script>
+        // Bootstrap: render instantly with local data, sync API in background
         (async function boot() {
+            // Render immediately with local data
+            if (S.startDate) document.getElementById('startDate').value = S.startDate;
+            render();
+
+            // Now sync with server in background
             try {
-                // 1. Check auth
-                console.log('[boot] Checking auth...');
                 const meRes = await fetch('/auth/me');
-                console.log('[boot] /auth/me status:', meRes.status);
-                if (!meRes.ok) { console.log('[boot] Not authenticated, redirecting...'); window.location.href = '/'; return; }
+                if (!meRes.ok) { window.location.href = '/'; return; }
                 const { user } = await meRes.json();
                 document.getElementById('userGreeting').textContent = 'Hi, ' + user.name;
 
-                // Populate sidebar profile
                 const initials = (user.name || '?').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
                 document.getElementById('sidebarAvatar').textContent = initials;
                 document.getElementById('sidebarName').textContent = user.name || 'User';
                 document.getElementById('sidebarEmail').textContent = user.email || '';
 
-                // 2. Load all content in parallel
-                console.log('[boot] Loading content...');
                 const [phasesRes, quizzesRes, interviewsRes, casesRes, progressRes] = await Promise.all([
-                    fetch('/api/content/phases'),
-                    fetch('/api/content/quizzes'),
-                    fetch('/api/content/interviews'),
-                    fetch('/api/content/cases'),
-                    fetch('/api/progress')
+                    fetch('/api/content/phases'), fetch('/api/content/quizzes'),
+                    fetch('/api/content/interviews'), fetch('/api/content/cases'), fetch('/api/progress')
                 ]);
 
-                // Only override with API data if the calls succeeded
-                if (phasesRes.ok) {
-                    const phasesData = await phasesRes.json();
-                    if (phasesData && phasesData.length > 0) {
-                        PHASES.length = 0;
-                        phasesData.sort((a, b) => a.phaseIndex - b.phaseIndex).forEach(p => PHASES.push(p));
-                    }
-                }
-                if (quizzesRes.ok) {
-                    const quizzesData = await quizzesRes.json();
-                    if (quizzesData && Object.keys(quizzesData).length > 0) {
-                        Object.keys(SKILL_QUIZZES).forEach(k => delete SKILL_QUIZZES[k]);
-                        Object.assign(SKILL_QUIZZES, quizzesData);
-                    }
-                }
-                if (interviewsRes.ok) {
-                    const interviewsData = await interviewsRes.json();
-                    if (interviewsData && interviewsData.length > 0) {
-                        MOCK_INTERVIEWS.length = 0;
-                        interviewsData.forEach(m => MOCK_INTERVIEWS.push(m));
-                    }
-                }
-                if (casesRes.ok) {
-                    const casesData = await casesRes.json();
-                    if (casesData && casesData.length > 0) {
-                        MOCK_CASES.length = 0;
-                        casesData.forEach(c => MOCK_CASES.push(c));
-                    }
-                }
-                console.log('[boot] Content loaded. PHASES:', PHASES.length, 'Interviews:', MOCK_INTERVIEWS.length, 'Cases:', MOCK_CASES.length);
+                if (phasesRes.ok) { const d = await phasesRes.json(); if (d && d.length > 0) { PHASES.length = 0; d.sort((a, b) => a.phaseIndex - b.phaseIndex).forEach(p => PHASES.push(p)); } }
+                if (quizzesRes.ok) { const d = await quizzesRes.json(); if (d && Object.keys(d).length > 0) { Object.keys(SKILL_QUIZZES).forEach(k => delete SKILL_QUIZZES[k]); Object.assign(SKILL_QUIZZES, d); } }
+                if (interviewsRes.ok) { const d = await interviewsRes.json(); if (d && d.length > 0) { MOCK_INTERVIEWS.length = 0; d.forEach(m => MOCK_INTERVIEWS.push(m)); } }
+                if (casesRes.ok) { const d = await casesRes.json(); if (d && d.length > 0) { MOCK_CASES.length = 0; d.forEach(c => MOCK_CASES.push(c)); } }
 
-                // 3. Load progress
                 const progressData = await progressRes.json();
-
-                // 4. Now load the app script dynamically
-                const script = document.createElement('script');
-                script.src = 'app.js';
-                script.onload = function () {
-                    // Override the S object with server data
-                    if (progressData && progressData.userId) {
-                        Object.keys(S).forEach(k => {
-                            if (progressData[k] !== undefined && k !== '_id' && k !== 'userId' && k !== '__v') {
-                                S[k] = progressData[k];
-                            }
-                        });
-                    }
+                if (progressData && progressData.userId) {
+                    Object.keys(S).forEach(k => {
+                        if (progressData[k] !== undefined && k !== '_id' && k !== 'userId' && k !== '__v') S[k] = progressData[k];
+                    });
                     if (S.startDate) document.getElementById('startDate').value = S.startDate;
+                }
 
-                    // Override save() to also push to API
-                    const _origSave = save;
-                    save = function () {
-                        _origSave();
-                        saveToAPI();
-                    };
+                const _origSave = save;
+                save = function () { _origSave(); saveToAPI(); };
 
-                    render();
-                };
-                document.body.appendChild(script);
-
+                render();
             } catch (err) {
-                console.error('Boot failed:', err);
-                document.querySelector('.app').innerHTML = '<div style="text-align:center;padding:60px"><h2 style="color:var(--red)">Failed to load</h2><p style="color:var(--t3);margin-top:8px">Please refresh or <a href="/" style="color:var(--accent)">login again</a></p></div>';
+                console.warn('[boot] API sync failed, using local data:', err.message);
             }
         })();
     </script>
-
-    <!-- data.js provides the static constants (CORE_SKILLS, AI_SKILLS, etc.) that are NOT in the DB -->
-    <script src="data.js"></script>
 </body>
 
 </html>
