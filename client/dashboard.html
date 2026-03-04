@@ -1356,12 +1356,11 @@
         </div>
     </div>
 
+    <!-- Load static data (getDefault, CORE_SKILLS, AI_SKILLS, SKILL_RESOURCES, etc.) -->
+    <script src="data.js"></script>
+
     <!-- API-based data loading bridge -->
     <script>
-        // Global data variables (will be populated from API)
-        var PHASES = [], CORE_SKILLS = [], AI_SKILLS = [], SKILL_QUIZZES = {},
-            SKILL_RESOURCES = {}, MOCK_INTERVIEWS = [], MOCK_CASES = [],
-            INTERVIEW_BANK = [], WEEKLY_METRICS = [], ARTIFACTS = [], K = 'aipm_v2';
 
         // Debounced save to API
         let _saveTimer = null;
@@ -1395,6 +1394,7 @@
                 document.getElementById('userGreeting').textContent = 'Hi, ' + user.name;
 
                 // 2. Load all content in parallel
+                console.log('[boot] Loading content...');
                 const [phasesRes, quizzesRes, interviewsRes, casesRes, progressRes] = await Promise.all([
                     fetch('/api/content/phases'),
                     fetch('/api/content/quizzes'),
@@ -1403,11 +1403,36 @@
                     fetch('/api/progress')
                 ]);
 
-                const phasesData = await phasesRes.json();
-                PHASES = phasesData.sort((a, b) => a.phaseIndex - b.phaseIndex);
-                SKILL_QUIZZES = await quizzesRes.json();
-                MOCK_INTERVIEWS = await interviewsRes.json();
-                MOCK_CASES = await casesRes.json();
+                // Only override with API data if the calls succeeded
+                if (phasesRes.ok) {
+                    const phasesData = await phasesRes.json();
+                    if (phasesData && phasesData.length > 0) {
+                        PHASES.length = 0;
+                        phasesData.sort((a, b) => a.phaseIndex - b.phaseIndex).forEach(p => PHASES.push(p));
+                    }
+                }
+                if (quizzesRes.ok) {
+                    const quizzesData = await quizzesRes.json();
+                    if (quizzesData && Object.keys(quizzesData).length > 0) {
+                        Object.keys(SKILL_QUIZZES).forEach(k => delete SKILL_QUIZZES[k]);
+                        Object.assign(SKILL_QUIZZES, quizzesData);
+                    }
+                }
+                if (interviewsRes.ok) {
+                    const interviewsData = await interviewsRes.json();
+                    if (interviewsData && interviewsData.length > 0) {
+                        MOCK_INTERVIEWS.length = 0;
+                        interviewsData.forEach(m => MOCK_INTERVIEWS.push(m));
+                    }
+                }
+                if (casesRes.ok) {
+                    const casesData = await casesRes.json();
+                    if (casesData && casesData.length > 0) {
+                        MOCK_CASES.length = 0;
+                        casesData.forEach(c => MOCK_CASES.push(c));
+                    }
+                }
+                console.log('[boot] Content loaded. PHASES:', PHASES.length, 'Interviews:', MOCK_INTERVIEWS.length, 'Cases:', MOCK_CASES.length);
 
                 // 3. Load progress
                 const progressData = await progressRes.json();
