@@ -1440,6 +1440,265 @@
             background: var(--bg3);
             color: var(--t1);
         }
+
+        /* ---- LIGHT MODE ---- */
+        body.light-mode {
+            --bg: #f8fafc;
+            --bg2: #ffffff;
+            --bg3: #f1f5f9;
+            --card: #ffffff;
+            --card2: #f8fafc;
+            --border: #e2e8f0;
+            --border-h: #cbd5e1;
+            --t1: #1e293b;
+            --t2: #475569;
+            --t3: #94a3b8;
+            --t4: #cbd5e1;
+            --accent: #059669;
+            --accent2: #10b981;
+            --grad: linear-gradient(135deg, #059669, #0d9488);
+        }
+
+        body.light-mode::before {
+            opacity: 0;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            right: 42px;
+            top: 12px;
+            z-index: 10;
+            background: none;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            color: var(--t2);
+            font-size: 14px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            transition: all .2s;
+            font-family: inherit;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg3);
+            color: var(--t1);
+        }
+
+        /* ---- ONBOARDING OVERLAY ---- */
+        .onboard-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, .75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s ease;
+        }
+
+        .onboard-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .onboard-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 520px;
+            width: 90%;
+            position: relative;
+        }
+
+        .onboard-step {
+            display: none;
+        }
+
+        .onboard-step.active {
+            display: block;
+        }
+
+        .onboard-step h2 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--t1);
+        }
+
+        .onboard-step h3 {
+            font-size: 14px;
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .onboard-step p {
+            font-size: 13px;
+            color: var(--t2);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .onboard-step ul {
+            font-size: 12px;
+            color: var(--t3);
+            line-height: 1.7;
+            padding-left: 18px;
+            margin-bottom: 12px;
+        }
+
+        .onboard-dots {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin: 16px 0;
+        }
+
+        .onboard-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: background .2s;
+        }
+
+        .onboard-dots span.active {
+            background: var(--accent);
+        }
+
+        .onboard-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: space-between;
+        }
+
+        .onboard-btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: inherit;
+            transition: all .2s;
+        }
+
+        .onboard-btn.primary {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .onboard-btn.primary:hover {
+            opacity: .85;
+        }
+
+        .onboard-btn.ghost {
+            background: none;
+            color: var(--t3);
+            border: 1px solid var(--border);
+        }
+
+        .onboard-btn.ghost:hover {
+            background: var(--bg3);
+            color: var(--t2);
+        }
+
+        .onboard-progress {
+            font-size: 11px;
+            color: var(--t4);
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        /* ---- MOBILE RESPONSIVE ---- */
+        @media (max-width: 768px) {
+            .app {
+                padding: 0 8px !important;
+            }
+
+            .hdr h1 {
+                font-size: 16px !important;
+            }
+
+            .tabs {
+                gap: 0 !important;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                flex-wrap: nowrap !important;
+            }
+
+            .tab {
+                flex: 0 0 auto;
+                font-size: 10px !important;
+                padding: 6px 10px !important;
+                white-space: nowrap;
+            }
+
+            .tab svg {
+                width: 14px;
+                height: 14px;
+            }
+
+            .sd-bar {
+                flex-wrap: wrap;
+            }
+
+            .card {
+                padding: 12px !important;
+            }
+
+            .card-title {
+                font-size: 13px !important;
+            }
+
+            .focus-header {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+
+            .fh-card {
+                min-width: auto !important;
+                flex: 1 !important;
+            }
+
+            .wm-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
+            }
+
+            .wk-grid {
+                grid-template-columns: repeat(6, 1fr) !important;
+                gap: 4px !important;
+            }
+
+            .sm-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            .ph-card {
+                font-size: 12px;
+            }
+
+            .onboard-card {
+                padding: 20px;
+            }
+
+            .onboard-step h2 {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wk-grid {
+                grid-template-columns: repeat(4, 1fr) !important;
+            }
+
+            .tab {
+                font-size: 9px !important;
+                padding: 5px 8px !important;
+            }
+        }
     </style>
 </head>
 
@@ -1479,8 +1738,10 @@
 
     <div class="app">
         <div class="hdr" style="position:relative">
-            <button class="hamburger-btn" onclick="toggleSidebar()" title="Menu">☰</button>
-            <span id="userGreeting" style="position:absolute;right:12px;top:12px;font-size:11px;color:var(--t3)"></span>
+            <button class="hamburger-btn" onclick="toggleSidebar()" title="Menu">&#9776;</button>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"
+                title="Toggle light/dark mode">&#9788;</button>
+            <span id="userGreeting" style="position:absolute;right:80px;top:12px;font-size:11px;color:var(--t3)"></span>
             <h1>AI PM Learning System</h1>
         </div>
         <div class="sd-bar">
@@ -1556,6 +1817,87 @@
         </div>
     </div>
 
+    <!-- ONBOARDING OVERLAY -->
+    <div class="onboard-overlay" id="onboardOverlay">
+        <div class="onboard-card">
+            <div class="onboard-step active" data-step="0">
+                <h2>Welcome to AI PM Learning System</h2>
+                <h3>Your 24-week roadmap to becoming a Product Manager</h3>
+                <p>This system is your personal study companion. It tracks your progress across 6 phases, tests your
+                    knowledge, and prepares you for PM interviews.</p>
+                <p>Let's take a quick tour of what each section does.</p>
+            </div>
+            <div class="onboard-step" data-step="1">
+                <h2>Today's Focus</h2>
+                <h3>Your daily study hub</h3>
+                <p>Shows your current week, day, and phase at a glance. This is where you'll spend most of your time.
+                </p>
+                <ul>
+                    <li><strong>Weekly Checklist</strong> &#8212; Track items for the current week. Each has a "What
+                        this means" explainer and a "Done when" criteria.</li>
+                    <li><strong>Weekly Metrics</strong> &#8212; Use +/- buttons to log cases solved, chapters read, and
+                        mock interviews done. Click the number to set it directly.</li>
+                    <li><strong>Knowledge Quizzes</strong> &#8212; Test yourself on each week's concepts. Wrong answers
+                        trigger targeted study resources.</li>
+                </ul>
+            </div>
+            <div class="onboard-step" data-step="2">
+                <h2>Full Overview</h2>
+                <h3>See the big picture</h3>
+                <p>A comprehensive view of your entire 24-week journey.</p>
+                <ul>
+                    <li><strong>Roadmap Progress</strong> &#8212; Overall completion percentage across all phases and
+                        weeks.</li>
+                    <li><strong>Skill Depth Tracker</strong> &#8212; Take quizzes at 5 levels (Intern to Expert) for
+                        each core PM and AI skill.</li>
+                    <li><strong>Interview Bank</strong> &#8212; 20 curated behavioral questions with hints to practice.
+                    </li>
+                    <li><strong>Decision Logs</strong> &#8212; Record your PM decisions from case studies to build a
+                        thinking portfolio.</li>
+                </ul>
+            </div>
+            <div class="onboard-step" data-step="3">
+                <h2>Dashboard</h2>
+                <h3>Track and celebrate progress</h3>
+                <p>Your stats at a glance with visual progress tracking.</p>
+                <ul>
+                    <li><strong>Achievements</strong> &#8212; 8 badges that unlock as you hit milestones (first case,
+                        first mock, phase completion, etc.)</li>
+                    <li><strong>Weekly Grid</strong> &#8212; See completion % for all 24 weeks in a visual grid.</li>
+                    <li><strong>Phase Cards</strong> &#8212; Expand each phase to see week-by-week breakdown.</li>
+                    <li><strong>Lifetime Metrics</strong> &#8212; Total cases, applications, and mock interviews
+                        tracked.</li>
+                </ul>
+            </div>
+            <div class="onboard-step" data-step="4">
+                <h2>Mock Interviews & Case Studies</h2>
+                <h3>Practice for real interviews</h3>
+                <p>151 mock interview questions and 20+ case studies from top companies.</p>
+                <ul>
+                    <li><strong>Filter</strong> by company, category, difficulty, role, and completion status.</li>
+                    <li><strong>Checkboxes</strong> to mark questions as practiced &#8212; tracked in your progress.
+                    </li>
+                    <li><strong>Hints</strong> &#8212; Click any question to reveal a structured approach.</li>
+                    <li><strong>Books section</strong> &#8212; 12 recommended PM resources with links at the bottom of
+                        Case Studies.</li>
+                </ul>
+                <p style="margin-top:8px;color:var(--accent);font-weight:600">Tip: Use the sidebar (&#9776; menu) for
+                    navigation, export/import, and logout.</p>
+            </div>
+            <div class="onboard-dots" id="onboardDots">
+                <span class="active"></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="onboard-actions">
+                <button class="onboard-btn ghost" id="obSkip" onclick="closeOnboard()">Skip</button>
+                <div style="display:flex;gap:8px">
+                    <button class="onboard-btn ghost" id="obPrev" onclick="obNav(-1)" style="display:none">Back</button>
+                    <button class="onboard-btn primary" id="obNext" onclick="obNav(1)">Next</button>
+                </div>
+            </div>
+            <div class="onboard-progress" id="obProgress">Step 1 of 5</div>
+        </div>
+    </div>
+
     <!-- Load static data (getDefault, CORE_SKILLS, AI_SKILLS, SKILL_RESOURCES, etc.) -->
     <script src="data.js"></script>
 
@@ -1591,6 +1933,50 @@
             document.getElementById('sidebarDrawer').classList.remove('open');
             document.getElementById('sidebarOverlay').classList.remove('open');
         }
+
+        /* ---- LIGHT MODE LOGIC ---- */
+        let isLightMode = localStorage.getItem('aipm_light_mode') === 'true';
+        if (isLightMode) document.body.classList.add('light-mode');
+        function toggleTheme() {
+            isLightMode = !isLightMode;
+            document.body.classList.toggle('light-mode', isLightMode);
+            localStorage.setItem('aipm_light_mode', isLightMode);
+        }
+
+        /* ---- ONBOARDING LOGIC ---- */
+        let obStep = 0;
+        const totalSteps = 5;
+        function showOnboard() {
+            if (localStorage.getItem('aipm_onboarded')) return;
+            document.getElementById('onboardOverlay').classList.add('show');
+            updateObUI();
+        }
+        function closeOnboard() {
+            document.getElementById('onboardOverlay').classList.remove('show');
+            localStorage.setItem('aipm_onboarded', 'true');
+        }
+        function obNav(dir) {
+            obStep += dir;
+            if (obStep < 0) obStep = 0;
+            if (obStep >= totalSteps) { closeOnboard(); return; }
+            updateObUI();
+        }
+        function updateObUI() {
+            const steps = document.querySelectorAll('.onboard-step');
+            steps.forEach((el, i) => {
+                el.classList.toggle('active', i === obStep);
+            });
+            const dots = document.querySelectorAll('.onboard-dots span');
+            dots.forEach((el, i) => {
+                el.classList.toggle('active', i === obStep);
+            });
+            document.getElementById('obPrev').style.display = obStep === 0 ? 'none' : 'block';
+            document.getElementById('obNext').textContent = obStep === totalSteps - 1 ? 'Get Started' : 'Next';
+            document.getElementById('obProgress').textContent = `Step ${obStep + 1} of ${totalSteps}`;
+        }
+
+        // Show onboarding once DOM loads
+        document.addEventListener('DOMContentLoaded', () => { setTimeout(showOnboard, 1000); });
     </script>
 
     <!-- Load data + app FIRST so render() is available instantly -->

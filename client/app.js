@@ -145,7 +145,8 @@ ${open ? `<div style="font-size:13px;color:var(--t3);margin-top:8px;padding-left
     });
     h += `</div>`;
     // Decision Logs
-    h += `<div class="card"><div class="card-title">📝 Decision Logs</div>
+    h += `<div class="card"><div class="card-title">Decision Logs</div>
+<div style="font-size:12px;color:var(--t2);margin-bottom:12px;line-height:1.4">Record key product decisions from your case studies here to build a portfolio of structured thinking.</div>
 <div class="dl-input">
 <select id="dlCat"><option>Technical</option><option>Strategy</option><option>Trade-off</option></select>
 <textarea id="dlText" placeholder="Log a decision..."></textarea>
