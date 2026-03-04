@@ -1,5 +1,5 @@
 let S = load();
-function load() { try { let r = localStorage.getItem(K); if (r) { let p = JSON.parse(r); if (!p.skillLevels) p.skillLevels = {}; if (!p.skillQuizAnswers) p.skillQuizAnswers = {}; if (!p.decisionLogs) p.decisionLogs = []; if (!p.weeklyMetrics) p.weeklyMetrics = {}; if (!p.overallMetrics) p.overallMetrics = { cases: 0, apps: 0, mocks: 0 }; return p } } catch (e) { } return getDefault() }
+function load() { try { let r = localStorage.getItem(K); if (r) { let p = JSON.parse(r); if (!p.skillLevels) p.skillLevels = {}; if (!p.skillQuizAnswers) p.skillQuizAnswers = {}; if (!p.decisionLogs) p.decisionLogs = []; if (!p.weeklyMetrics) p.weeklyMetrics = {}; if (!p.overallMetrics) p.overallMetrics = { cases: 0, apps: 0, mocks: 0 }; if (!p.mocksDone) p.mocksDone = {}; if (!p.casesCompleted) p.casesCompleted = {}; return p } } catch (e) { } return getDefault() }
 function save() { localStorage.setItem(K, JSON.stringify(S)) }
 function ik(p, w, i) { return `p${p}w${w}i${i}` }
 function getCurWeek() { if (!S.startDate) return -1; let d = Math.floor((new Date() - new Date(S.startDate)) / (7 * 864e5)); return Math.max(1, Math.min(24, d + 1 + (S.weekOffset || 0))) }
@@ -226,51 +226,57 @@ function renderTab2() {
 // ---- TAB 3: MOCK INTERVIEWS ----
 function renderTab3() {
     let el = document.getElementById('tab3'), h = '';
-    let st = S.mockInterviewsState || { co: 'All', cat: 'All', lv: 'All', role: 'All' };
+    if (!S.mockInterviewsState) S.mockInterviewsState = { co: 'All', cat: 'All', lv: 'All', role: 'All', status: 'All' };
+    let st = S.mockInterviewsState;
+    if (!st.status) st.status = 'All';
+    if (!S.mocksDone) S.mocksDone = {};
 
-    // Filters
     let companies = ['All', ...new Set(MOCK_INTERVIEWS.map(m => m.co))].sort();
     let categories = ['All', ...new Set(MOCK_INTERVIEWS.map(m => m.cat))].sort();
     let levels = ['All', 'Easy', 'Medium', 'Hard'];
     let roles = ['All', ...new Set(MOCK_INTERVIEWS.map(m => m.role))].sort();
+    let selS = 'background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:5px 10px;border-radius:6px;font-size:11px;outline:none;cursor:pointer;font-family:inherit';
 
-    h += `<div class="card"><div class="card-title">🎙️ Mock Interviews Database</div>
-            <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
-                <select style="background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:6px 10px;border-radius:6px;font-size:12px;outline:none;cursor:pointer" onchange="updMockFlt('co', this.value)">
-                    <option disabled>Company</option>
-                    ${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}
-                </select>
-                <select style="background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:6px 10px;border-radius:6px;font-size:12px;outline:none;cursor:pointer" onchange="updMockFlt('cat', this.value)">
-                    <option disabled>Category</option>
-                    ${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}
-                </select>
-                <select style="background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:6px 10px;border-radius:6px;font-size:12px;outline:none;cursor:pointer" onchange="updMockFlt('lv', this.value)">
-                    <option disabled>Difficulty</option>
-                    ${levels.map(c => `<option ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}
-                </select>
-                <select style="background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:6px 10px;border-radius:6px;font-size:12px;outline:none;cursor:pointer" onchange="updMockFlt('role', this.value)">
-                    <option disabled>Role</option>
-                    ${roles.map(c => `<option ${st.role === c ? 'selected' : ''}>${c}</option>`).join('')}
-                </select>
+    let doneCount = Object.values(S.mocksDone).filter(Boolean).length;
+    h += `<div class="card"><div class="card-title">🎙️ Mock Interviews <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} practiced</span></div>
+            <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
+                <select style="${selS}" onchange="updMockFlt('co', this.value)"><option disabled>Company</option>${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
+                <select style="${selS}" onchange="updMockFlt('cat', this.value)"><option disabled>Category</option>${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
+                <select style="${selS}" onchange="updMockFlt('lv', this.value)"><option disabled>Difficulty</option>${levels.map(c => `<option ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
+                <select style="${selS}" onchange="updMockFlt('role', this.value)"><option disabled>Role</option>${roles.map(c => `<option ${st.role === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
+                <select style="${selS};border-color:var(--accent)" onchange="updMockFlt('status', this.value)"><option ${st.status === 'All' ? 'selected' : ''}>All</option><option ${st.status === 'Done' ? 'selected' : ''}>Done</option><option ${st.status === 'Not Done' ? 'selected' : ''}>Not Done</option></select>
             </div>`;
 
     let filtered = MOCK_INTERVIEWS.filter(m => (st.co === 'All' || m.co === st.co) && (st.cat === 'All' || m.cat === st.cat) && (st.lv === 'All' || m.level === st.lv) && (st.role === 'All' || m.role === st.role));
+    // status filter
+    let mockKey = m => 'mock_' + m.q.substring(0, 40).replace(/[^a-zA-Z0-9]/g, '_');
+    if (st.status === 'Done') filtered = filtered.filter(m => S.mocksDone[mockKey(m)]);
+    if (st.status === 'Not Done') filtered = filtered.filter(m => !S.mocksDone[mockKey(m)]);
 
-    h += `<div style="font-size:12px;color:var(--t3);margin-bottom:16px;font-weight:600">Showing ${filtered.length} questions</div>`;
+    h += `<div style="font-size:11px;color:var(--t3);margin-bottom:10px;font-weight:600">Showing ${filtered.length} questions</div>`;
 
+    let accentColors = ['var(--accent)', 'var(--cyan)', 'var(--green)', 'var(--amber)', 'var(--pink)'];
     filtered.forEach((m, i) => {
         let mId = 'mki_' + i + '_' + m.co.substring(0, 2);
+        let mk = mockKey(m);
+        let isDone = !!S.mocksDone[mk];
         let open = !!S.expanded[mId];
         let lvColor = m.level === 'Easy' ? 'var(--green)' : m.level === 'Medium' ? 'var(--amber)' : 'var(--red)';
-        h += `<div class="pf-item" style="cursor:pointer;flex-direction:column;align-items:flex-start" onclick="toggleMki('${mId}')">
-                <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;font-size:11px;font-weight:700">
-                    <span style="background:${lvColor};color:#fff;padding:2px 8px;border-radius:12px">${m.level}</span>
-                    <span style="background:var(--bg3);border:1px solid var(--border);color:var(--t1);padding:2px 8px;border-radius:12px">${m.co}</span>
-                    <span style="background:var(--bg3);border:1px solid var(--border);color:var(--t1);padding:2px 8px;border-radius:12px">${m.role}</span>
-                    <span style="background:var(--accent);color:#fff;padding:2px 8px;border-radius:12px">${m.cat}</span>
+        let leftColor = accentColors[i % accentColors.length];
+        h += `<div style="background:var(--bg2);border:1px solid ${isDone ? 'var(--green)' : 'var(--border)'};border-left:3px solid ${isDone ? 'var(--green)' : leftColor};border-radius:8px;padding:12px 14px;margin-bottom:8px;transition:all .2s;${isDone ? 'opacity:.7;' : ''}">
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                    <input type="checkbox" ${isDone ? 'checked' : ''} onclick="event.stopPropagation();toggleMockDone('${mk}')" style="cursor:pointer;width:16px;height:16px;accent-color:var(--accent);margin-top:2px;flex-shrink:0">
+                    <div style="flex:1;cursor:pointer" onclick="toggleMki('${mId}')">
+                        <div style="display:flex;gap:5px;margin-bottom:6px;flex-wrap:wrap;font-size:10px;font-weight:700">
+                            <span style="background:${lvColor};color:#fff;padding:1px 7px;border-radius:10px">${m.level}</span>
+                            <span style="background:var(--bg3);border:1px solid var(--border);color:var(--t1);padding:1px 7px;border-radius:10px">${m.co}</span>
+                            <span style="background:var(--bg3);border:1px solid var(--border);color:var(--t1);padding:1px 7px;border-radius:10px">${m.role}</span>
+                            <span style="background:var(--accent);color:#fff;padding:1px 7px;border-radius:10px">${m.cat}</span>
+                        </div>
+                        <div style="font-weight:600;font-size:13px;line-height:1.4;${isDone ? 'text-decoration:line-through;color:var(--t3)' : ''}">${m.q}</div>
+                        ${open ? `<div style="font-size:12px;color:var(--t2);margin-top:8px;padding:8px 12px;border-left:3px solid var(--accent);background:rgba(20,184,166,0.04);border-radius:4px">💡 <strong>Hints:</strong><br>${m.flow}</div>` : ''}
+                    </div>
                 </div>
-                <div style="font-weight:600;font-size:14px;line-height:1.4">${m.q}</div>
-                ${open ? `<div style="font-size:13px;color:var(--t2);margin-top:12px;padding-left:12px;border-left:3px solid var(--accent);background:rgba(255,255,255,0.03);padding-top:8px;padding-bottom:8px;border-radius:4px">💡 <strong>Suggested Flow / Hints:</strong><br>${m.flow}</div>` : ''}
                 </div>`;
     });
     h += `</div>`;
@@ -281,57 +287,58 @@ function renderTab3() {
 function renderTab4() {
     let el = document.getElementById('tab4'), h = '';
 
-    // Filters state
-    if (!S.casesState) S.casesState = { co: 'All', cat: 'All', lv: 'All' };
+    if (!S.casesState) S.casesState = { co: 'All', cat: 'All', lv: 'All', status: 'All' };
     let st = S.casesState;
+    if (!st.status) st.status = 'All';
+    if (!S.casesCompleted) S.casesCompleted = {};
 
     let companies = ['All', ...new Set(MOCK_CASES.map(c => c.co))].sort();
     let categories = ['All', ...new Set(MOCK_CASES.map(c => c.cat))].sort();
     let levels = ['All', 'Easy', 'Medium', 'Hard'];
+    let selS = 'background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit';
 
-    h += `<div class="card"><div class="card-title">🧠 Case Studies (100+)</div>
-            <div style="font-size:13px;color:var(--t2);margin-bottom:16px;">Practice these critical thinking prompts on a whiteboard or a Google Doc. Treat them as real take-home assignments or live interview rounds.</div>
-            <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
-                <select style="background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:6px 10px;border-radius:6px;font-size:12px;cursor:pointer" onchange="S.casesState.co=this.value;save();renderTab4()">
-                    ${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}
-                </select>
-                <select style="background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:6px 10px;border-radius:6px;font-size:12px;cursor:pointer" onchange="S.casesState.cat=this.value;save();renderTab4()">
-                    ${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}
-                </select>
-                <select style="background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:6px 10px;border-radius:6px;font-size:12px;cursor:pointer" onchange="S.casesState.lv=this.value;save();renderTab4()">
-                    ${levels.map(c => `<option ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}
-                </select>
+    let doneCount = Object.values(S.casesCompleted).filter(Boolean).length;
+    h += `<div class="card"><div class="card-title">🧠 Case Studies <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} completed</span></div>
+            <div style="font-size:12px;color:var(--t2);margin-bottom:10px;">Practice on a whiteboard or Google Doc. Treat them as real take-home assignments.</div>
+            <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
+                <select style="${selS}" onchange="S.casesState.co=this.value;save();renderTab4()">${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
+                <select style="${selS}" onchange="S.casesState.cat=this.value;save();renderTab4()">${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
+                <select style="${selS}" onchange="S.casesState.lv=this.value;save();renderTab4()">${levels.map(c => `<option ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}</select>
+                <select style="${selS};border-color:var(--accent)" onchange="S.casesState.status=this.value;save();renderTab4()"><option ${st.status === 'All' ? 'selected' : ''}>All</option><option ${st.status === 'Done' ? 'selected' : ''}>Done</option><option ${st.status === 'Not Done' ? 'selected' : ''}>Not Done</option></select>
             </div>`;
 
     let filtered = MOCK_CASES.filter(c => (st.co === 'All' || c.co === st.co) && (st.cat === 'All' || c.cat === st.cat) && (st.lv === 'All' || c.level === st.lv));
+    // status filter
+    if (st.status === 'Done') filtered = filtered.filter(c => S.casesCompleted['case_' + c.title]);
+    if (st.status === 'Not Done') filtered = filtered.filter(c => !S.casesCompleted['case_' + c.title]);
 
-    h += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px">`;
+    h += `<div style="font-size:11px;color:var(--t3);margin-bottom:10px;font-weight:600">Showing ${filtered.length} cases</div>`;
+    h += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">`;
     filtered.forEach((c, i) => {
         let lvColor = c.level === 'Easy' ? 'var(--green)' : c.level === 'Medium' ? 'var(--amber)' : 'var(--red)';
         let isDone = S.casesCompleted && S.casesCompleted['case_' + c.title];
 
         h += `
-                <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;flex-direction:column;position:relative">
-                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-                        <div style="display:flex;gap:6px;flex-wrap:wrap;font-size:10px;font-weight:700">
-                            <span style="background:${lvColor};color:#fff;padding:2px 8px;border-radius:12px">${c.level}</span>
-                            <span style="background:var(--bg3);border:1px solid var(--border);padding:2px 8px;border-radius:12px">${c.cat}</span>
-                            <span style="background:var(--accent);color:#fff;padding:2px 8px;border-radius:12px">${c.co}</span>
+                <div style="background:var(--bg2);border:1px solid ${isDone ? 'var(--green)' : 'var(--border)'};border-radius:8px;padding:14px;display:flex;flex-direction:column;position:relative;transition:all .2s;${isDone ? 'opacity:.7;' : ''}">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+                        <div style="display:flex;gap:5px;flex-wrap:wrap;font-size:10px;font-weight:700">
+                            <span style="background:${lvColor};color:#fff;padding:1px 7px;border-radius:10px">${c.level}</span>
+                            <span style="background:var(--bg3);border:1px solid var(--border);padding:1px 7px;border-radius:10px">${c.cat}</span>
+                            <span style="background:var(--accent);color:#fff;padding:1px 7px;border-radius:10px">${c.co}</span>
                         </div>
-                        <input type="checkbox" ${isDone ? 'checked' : ''} onchange="toggleCaseDone('${c.title.replace(/'/g, "\\'")}')" style="cursor:pointer;width:18px;height:18px;accent-color:var(--accent)">
+                        <input type="checkbox" ${isDone ? 'checked' : ''} onchange="toggleCaseDone('${c.title.replace(/'/g, "\\'")}')" style="cursor:pointer;width:16px;height:16px;accent-color:var(--accent)">
                     </div>
-                    <div style="font-weight:700;font-size:14px;color:var(--t1);margin-bottom:8px;line-height:1.4">${c.title}</div>
-                    <div style="font-size:13px;color:var(--t2);line-height:1.5;flex-grow:1">${c.desc}</div>
+                    <div style="font-weight:700;font-size:13px;color:${isDone ? 'var(--t3)' : 'var(--t1)'};margin-bottom:6px;line-height:1.4;${isDone ? 'text-decoration:line-through;' : ''}">${c.title}</div>
+                    <div style="font-size:12px;color:var(--t2);line-height:1.5;flex-grow:1">${c.desc}</div>
                 </div>`;
     });
     h += `</div></div>`;
 
-    // Optional: Ext. links
-    h += `<div class="card" style="margin-top:24px"><div class="card-title">🔗 External Case Study Libraries</div>
-            <div style="display:flex;flex-direction:column;gap:12px">
-                <a href="https://growth.design/case-studies" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none">1. Growth.Design (Interactive UX/Psychology Cases) ↗</a>
-                <a href="https://www.theproductfolks.com/teardowns" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none">2. The Product Folks - Indian Startup Teardowns ↗</a>
-                <a href="https://www.tryexponent.com/questions" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none">3. Exponent PM Interview Database ↗</a>
+    h += `<div class="card" style="margin-top:16px"><div class="card-title">🔗 External Case Study Libraries</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+                <a href="https://growth.design/case-studies" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:12px">1. Growth.Design (Interactive UX/Psychology Cases) ↗</a>
+                <a href="https://www.theproductfolks.com/teardowns" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:12px">2. The Product Folks - Indian Startup Teardowns ↗</a>
+                <a href="https://www.tryexponent.com/questions" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:12px">3. Exponent PM Interview Database ↗</a>
             </div></div>`;
 
     el.innerHTML = h;
@@ -353,8 +360,9 @@ function toggleCaseDone(tit) {
 
 function calcOverallQuizPct() { let t = 0, c = 0; PHASES.forEach((ph, pi) => ph.weeks.forEach((wk, wi) => { if (wk.quiz) wk.quiz.forEach((q, qi) => { t++; if (S.quizAnswers[`q${pi}${wi}${qi}`] === q.answer) c++ }) })); return t ? Math.round(c / t * 100) : 0 }
 // ---- INTERACTIONS ----
-function updMockFlt(k, v) { if (!S.mockInterviewsState) S.mockInterviewsState = { co: 'All', cat: 'All', lv: 'All', role: 'All' }; S.mockInterviewsState[k] = v; save(); renderTab3(); }
+function updMockFlt(k, v) { if (!S.mockInterviewsState) S.mockInterviewsState = { co: 'All', cat: 'All', lv: 'All', role: 'All', status: 'All' }; S.mockInterviewsState[k] = v; save(); renderTab3(); }
 function toggleMki(mId) { S.expanded[mId] = !S.expanded[mId]; save(); renderTab3(); }
+function toggleMockDone(mk) { if (!S.mocksDone) S.mocksDone = {}; S.mocksDone[mk] = !S.mocksDone[mk]; if (S.mocksDone[mk]) { S.overallMetrics.mocks = (S.overallMetrics.mocks || 0) + 1; } else { S.overallMetrics.mocks = Math.max(0, (S.overallMetrics.mocks || 0) - 1); } save(); renderTab3(); }
 
 function toggleItem(k) { S.items[k] = !S.items[k]; save(); render() }
 function toggleArt(k) { S.artifacts[k] = !S.artifacts[k]; save(); render() }
