@@ -39,13 +39,13 @@ function renderTab0() {
 <div class="fh-card">
     <div style="display:flex;align-items:center;justify-content:center;gap:12px">
         ${cw > 0 ? `<button class="adj-btn" style="background:var(--bg3);border:1px solid var(--border);" onclick="adjWeek(-1)">-</button>` : ''}
-        <div class="fh-big">${cw > 0 ? cw : '—'}</div>
+        <div class="fh-big">${cw > 0 ? cw : '-'}</div>
         ${cw > 0 ? `<button class="adj-btn" style="background:var(--bg3);border:1px solid var(--border);" onclick="adjWeek(1)">+</button>` : ''}
     </div>
     <div class="fh-label">Week</div><div class="fh-sub">of 24 (Manual Adjust)</div>
 </div>
-<div class="fh-card"><div class="fh-big">${dayOfWeek || '—'}</div><div class="fh-label">Day</div><div class="fh-sub">of 7</div></div>
-<div class="fh-card"><div class="fh-big" style="font-size:16px;padding-top:6px">${phase ? phase.name : '—'}</div><div class="fh-label">Current Phase</div><div class="fh-sub">Phase ${pi + 1}</div></div>
+<div class="fh-card"><div class="fh-big">${dayOfWeek || '-'}</div><div class="fh-label">Day</div><div class="fh-sub">of 7</div></div>
+<div class="fh-card"><div class="fh-big" style="font-size:16px;padding-top:6px">${phase ? phase.name : '-'}</div><div class="fh-label">Current Phase</div><div class="fh-sub">Phase ${pi + 1}</div></div>
 </div>`;
     // Weekly Metrics
     h += `<div class="wm-grid">${WEEKLY_METRICS.map(m => `
@@ -62,7 +62,7 @@ function renderTab0() {
     // This week's checklist
     if (week) {
         let wp = calcWeekPct(pi, wi);
-        h += `<div class="card"><div class="card-title">${week.label} — ${week.focus} <span style="margin-left:auto;font-size:12px;color:var(--accent2)">${wp}%</span></div>`;
+        h += `<div class="card"><div class="card-title">${week.label} - ${week.focus} <span style="margin-left:auto;font-size:12px;color:var(--accent2)">${wp}%</span></div>`;
         h += week.items.map((it, ii) => {
             let k = ik(pi, wi, ii), d = S.items[k] || false;
             return `<div class="ci ${d ? 'done' : ''}" onclick="toggleItem('${k}')"><div class="ck">${d ? '✓' : ''}</div><div class="ci-text">${it.text}</div></div>
@@ -74,7 +74,7 @@ function renderTab0() {
             let answered = 0, correct = 0;
             week.quiz.forEach((q, qi) => { let a = S.quizAnswers[`q${pi}${wi}${qi}`]; if (a !== undefined) { answered++; if (a === q.answer) correct++ } });
             let pct = answered ? Math.round(correct / answered * 100) : 0;
-            h += `<div class="quiz-box"><h4>Knowledge Check — ${week.label}</h4>`;
+            h += `<div class="quiz-box"><h4>Knowledge Check - ${week.label}</h4>`;
             h += week.quiz.map((q, qi) => {
                 let qk = `q${pi}${wi}${qi}`, ans = S.quizAnswers[qk];
                 return `<div class="qq"><p>${qi + 1}. ${q.q}</p>${q.options.map((o, oi) => { let cls = 'qo'; if (ans !== undefined) { if (oi === q.answer) cls += ' correct'; else if (oi === ans) cls += ' wrong' } return `<span class="${cls}" onclick="answerQ('${qk}',${oi},${q.answer})">${o}</span>` }).join('')}</div>`
@@ -261,17 +261,37 @@ function renderTab3() {
     let categories = ['All', ...[...new Set(MOCK_INTERVIEWS.map(m => m.cat))].sort()];
     let levels = ['All', 'Easy', 'Medium', 'Hard'];
     let roles = ['All', ...[...new Set(MOCK_INTERVIEWS.map(m => m.role))].sort()];
-    let selS = 'background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:5px 10px;border-radius:6px;font-size:11px;outline:none;cursor:pointer;font-family:inherit';
+    let selS = 'background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:8px 12px;border-radius:8px;font-size:12px;outline:none;cursor:pointer;font-family:inherit;min-width:120px;-webkit-appearance:none;';
 
     let doneCount = Object.values(S.mocksDone).filter(Boolean).length;
-    let lblS = 'font-size:10px;color:var(--t3);text-transform:uppercase;font-weight:600;margin-bottom:4px';
     h += `<div class="card"><div class="card-title">Mock Interviews <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} practiced</span></div>
-            <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap">
-                <div style="display:flex;flex-direction:column"><label style="${lblS}">Company</label><select style="${selS}" onchange="updMockFlt('co', this.value)">${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
-                <div style="display:flex;flex-direction:column"><label style="${lblS}">Category</label><select style="${selS}" onchange="updMockFlt('cat', this.value)">${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
-                <div style="display:flex;flex-direction:column"><label style="${lblS}">Difficulty</label><select style="${selS}" onchange="updMockFlt('lv', this.value)">${levels.map(c => `<option ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
-                <div style="display:flex;flex-direction:column"><label style="${lblS}">Role</label><select style="${selS}" onchange="updMockFlt('role', this.value)">${roles.map(c => `<option ${st.role === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
-                <div style="display:flex;flex-direction:column"><label style="${lblS}">Status</label><select style="${selS};border-color:var(--accent)" onchange="updMockFlt('status', this.value)"><option ${st.status === 'All' ? 'selected' : ''}>All</option><option ${st.status === 'Done' ? 'selected' : ''}>Done</option><option ${st.status === 'Not Done' ? 'selected' : ''}>Not Done</option></select></div>
+            <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+                <select style="${selS}" onchange="updMockFlt('co', this.value)">
+                    <option value="" disabled ${st.co === 'All' ? 'selected' : ''}>📍 Company</option>
+                    <option value="All">All Companies</option>
+                    ${companies.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}
+                </select>
+                <select style="${selS}" onchange="updMockFlt('cat', this.value)">
+                    <option value="" disabled ${st.cat === 'All' ? 'selected' : ''}>📂 Category</option>
+                    <option value="All">All Categories</option>
+                    ${categories.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}
+                </select>
+                <select style="${selS}" onchange="updMockFlt('lv', this.value)">
+                    <option value="" disabled ${st.lv === 'All' ? 'selected' : ''}>⚡ Difficulty</option>
+                    <option value="All">All Difficulties</option>
+                    ${levels.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}
+                </select>
+                <select style="${selS}" onchange="updMockFlt('role', this.value)">
+                    <option value="" disabled ${st.role === 'All' ? 'selected' : ''}>💼 Role</option>
+                    <option value="All">All Roles</option>
+                    ${roles.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.role === c ? 'selected' : ''}>${c}</option>`).join('')}
+                </select>
+                <select style="${selS};border-color:var(--accent)" onchange="updMockFlt('status', this.value)">
+                    <option value="" disabled ${st.status === 'All' ? 'selected' : ''}>✔️ Status</option>
+                    <option value="All">All Statuses</option>
+                    <option value="Done" ${st.status === 'Done' ? 'selected' : ''}>Done</option>
+                    <option value="Not Done" ${st.status === 'Not Done' ? 'selected' : ''}>Not Done</option>
+                </select>
             </div>`;
 
     let filtered = MOCK_INTERVIEWS.filter(m => (st.co === 'All' || m.co === st.co) && (st.cat === 'All' || m.cat === st.cat) && (st.lv === 'All' || m.level === st.lv) && (st.role === 'All' || m.role === st.role));
