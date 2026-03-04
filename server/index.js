@@ -49,16 +49,11 @@ app.use('/api/progress', require('./routes/progress'));
 app.use('/api/content', require('./routes/content'));
 app.use('/admin', require('./routes/admin'));
 
-// Serve static frontend files in production
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-    });
-} else {
-    // In dev, serve from client/ directly for quick iteration
-    app.use(express.static(path.join(__dirname, '../client')));
-}
+// Serve static frontend files
+app.use(express.static(path.join(__dirname, '../client')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/index.html'));
+});
 
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
