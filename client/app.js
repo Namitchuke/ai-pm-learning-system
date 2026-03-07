@@ -261,32 +261,31 @@ function renderTab3() {
     let categories = ['All', ...[...new Set(MOCK_INTERVIEWS.map(m => m.cat))].sort()];
     let levels = ['All', 'Easy', 'Medium', 'Hard'];
     let roles = ['All', ...[...new Set(MOCK_INTERVIEWS.map(m => m.role))].sort()];
-    let selS = 'background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:8px 12px;border-radius:8px;font-size:12px;outline:none;cursor:pointer;font-family:inherit;min-width:120px;-webkit-appearance:none;';
 
     let doneCount = Object.values(S.mocksDone).filter(Boolean).length;
     h += `<div class="card"><div class="card-title">Mock Interviews <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} practiced</span></div>
-            <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
-                <select style="${selS}" onchange="updMockFlt('co', this.value)">
+            <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+                <select class="modern-select" onchange="updMockFlt('co', this.value)">
                     <option value="" disabled ${st.co === 'All' ? 'selected' : ''}>📍 Company</option>
                     <option value="All">All Companies</option>
                     ${companies.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}
                 </select>
-                <select style="${selS}" onchange="updMockFlt('cat', this.value)">
+                <select class="modern-select" onchange="updMockFlt('cat', this.value)">
                     <option value="" disabled ${st.cat === 'All' ? 'selected' : ''}>📂 Category</option>
                     <option value="All">All Categories</option>
                     ${categories.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}
                 </select>
-                <select style="${selS}" onchange="updMockFlt('lv', this.value)">
+                <select class="modern-select" onchange="updMockFlt('lv', this.value)">
                     <option value="" disabled ${st.lv === 'All' ? 'selected' : ''}>⚡ Difficulty</option>
                     <option value="All">All Difficulties</option>
                     ${levels.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}
                 </select>
-                <select style="${selS}" onchange="updMockFlt('role', this.value)">
+                <select class="modern-select" onchange="updMockFlt('role', this.value)">
                     <option value="" disabled ${st.role === 'All' ? 'selected' : ''}>💼 Role</option>
                     <option value="All">All Roles</option>
                     ${roles.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.role === c ? 'selected' : ''}>${c}</option>`).join('')}
                 </select>
-                <select style="${selS};border-color:var(--accent)" onchange="updMockFlt('status', this.value)">
+                <select class="modern-select" style="border-color:var(--accent)" onchange="updMockFlt('status', this.value)">
                     <option value="" disabled ${st.status === 'All' ? 'selected' : ''}>✔️ Status</option>
                     <option value="All">All Statuses</option>
                     <option value="Done" ${st.status === 'Done' ? 'selected' : ''}>Done</option>
@@ -299,6 +298,15 @@ function renderTab3() {
     let mockKey = m => 'mock_' + m.q.substring(0, 40).replace(/[^a-zA-Z0-9]/g, '_');
     if (st.status === 'Done') filtered = filtered.filter(m => S.mocksDone[mockKey(m)]);
     if (st.status === 'Not Done') filtered = filtered.filter(m => !S.mocksDone[mockKey(m)]);
+
+    const roleOrder = { 'APM': 1, 'Product Analyst': 2, 'PM': 3, 'Senior PM': 4, 'Director': 5 };
+    const levelOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 };
+    filtered.sort((a, b) => {
+        let rA = roleOrder[a.role] || 99, rB = roleOrder[b.role] || 99;
+        if (rA !== rB) return rA - rB;
+        let lA = levelOrder[a.level] || 99, lB = levelOrder[b.level] || 99;
+        return lA - lB;
+    });
 
     h += `<div style="font-size:11px;color:var(--t3);margin-bottom:10px;font-weight:600">Showing ${filtered.length} questions</div>`;
 
@@ -342,17 +350,16 @@ function renderTab4() {
     let companies = ['All', ...[...new Set(MOCK_CASES.map(c => c.co))].sort()];
     let categories = ['All', ...[...new Set(MOCK_CASES.map(c => c.cat))].sort()];
     let levels = ['All', 'Easy', 'Medium', 'Hard'];
-    let selS = 'background:var(--bg3);color:var(--t1);border:1px solid var(--border);padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit';
 
-    let lblS = 'font-size:10px;color:var(--t3);text-transform:uppercase;font-weight:600;margin-bottom:4px';
+    let lblS = 'font-size:10px;color:var(--t3);text-transform:uppercase;font-weight:600;margin-bottom:4px;display:block;padding-left:4px';
     let doneCount = Object.values(S.casesCompleted).filter(Boolean).length;
     h += `<div class="card"><div class="card-title">Case Studies <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} completed</span></div>
-            <div style="font-size:12px;color:var(--t2);margin-bottom:10px;">Practice on a whiteboard or Google Doc. Treat them as real take-home assignments.</div>
-            <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap">
-                <div style="display:flex;flex-direction:column"><label style="${lblS}">Company</label><select style="${selS}" onchange="S.casesState.co=this.value;save();renderTab4()">${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
-                <div style="display:flex;flex-direction:column"><label style="${lblS}">Category</label><select style="${selS}" onchange="S.casesState.cat=this.value;save();renderTab4()">${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
-                <div style="display:flex;flex-direction:column"><label style="${lblS}">Difficulty</label><select style="${selS}" onchange="S.casesState.lv=this.value;save();renderTab4()">${levels.map(c => `<option ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
-                <div style="display:flex;flex-direction:column"><label style="${lblS}">Status</label><select style="${selS};border-color:var(--accent)" onchange="S.casesState.status=this.value;save();renderTab4()"><option ${st.status === 'All' ? 'selected' : ''}>All</option><option ${st.status === 'Done' ? 'selected' : ''}>Done</option><option ${st.status === 'Not Done' ? 'selected' : ''}>Not Done</option></select></div>
+            <div style="font-size:12px;color:var(--t2);margin-bottom:16px;">Practice on a whiteboard or Google Doc. Treat them as real take-home assignments.</div>
+            <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+                <div style="display:flex;flex-direction:column;min-width:140px"><label style="${lblS}">Company</label><select class="modern-select" onchange="S.casesState.co=this.value;save();renderTab4()">${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
+                <div style="display:flex;flex-direction:column;min-width:140px"><label style="${lblS}">Category</label><select class="modern-select" onchange="S.casesState.cat=this.value;save();renderTab4()">${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
+                <div style="display:flex;flex-direction:column;min-width:140px"><label style="${lblS}">Difficulty</label><select class="modern-select" onchange="S.casesState.lv=this.value;save();renderTab4()">${levels.map(c => `<option ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
+                <div style="display:flex;flex-direction:column;min-width:140px"><label style="${lblS}">Status</label><select class="modern-select" style="border-color:var(--accent)" onchange="S.casesState.status=this.value;save();renderTab4()"><option ${st.status === 'All' ? 'selected' : ''}>All</option><option ${st.status === 'Done' ? 'selected' : ''}>Done</option><option ${st.status === 'Not Done' ? 'selected' : ''}>Not Done</option></select></div>
             </div>`;
 
     let filtered = MOCK_CASES.filter(c => (st.co === 'All' || c.co === st.co) && (st.cat === 'All' || c.cat === st.cat) && (st.lv === 'All' || c.level === st.lv));
@@ -361,14 +368,13 @@ function renderTab4() {
     if (st.status === 'Not Done') filtered = filtered.filter(c => !S.casesCompleted['case_' + c.title]);
 
     h += `<div style="font-size:11px;color:var(--t3);margin-bottom:10px;font-weight:600">Showing ${filtered.length} cases</div>`;
-    h += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">`;
-    filtered.forEach((c, i) => {
-        let lvColor = c.level === 'Easy' ? 'var(--green)' : c.level === 'Medium' ? 'var(--amber)' : 'var(--red)';
-        let isDone = S.casesCompleted && S.casesCompleted['case_' + c.title];
 
-        h += `
-                <div style="background:var(--bg2);border:1px solid ${isDone ? 'var(--green)' : 'var(--border)'};border-radius:8px;padding:14px;display:flex;flex-direction:column;position:relative;transition:all .2s;${isDone ? 'opacity:.7;' : ''}">
-                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+    h += `<div style="display:flex;flex-direction:column;gap:10px">`;
+    filtered.forEach(c => {
+        let isDone = !!S.casesCompleted['case_' + c.title];
+        let lvColor = c.level === 'Easy' ? 'var(--green)' : c.level === 'Medium' ? 'var(--amber)' : 'var(--red)';
+        h += `<div style="background:var(--bg2);border:1px solid ${isDone ? 'var(--green)' : 'var(--border)'};border-radius:8px;padding:14px;display:flex;flex-direction:column;transition:all .2s;${isDone ? 'opacity:.7' : ''}">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
                         <div style="display:flex;gap:5px;flex-wrap:wrap;font-size:10px;font-weight:700">
                             <span style="background:${lvColor};color:#fff;padding:1px 7px;border-radius:10px">${c.level}</span>
                             <span style="background:var(--bg3);border:1px solid var(--border);padding:1px 7px;border-radius:10px">${c.cat}</span>
@@ -382,22 +388,36 @@ function renderTab4() {
     });
     h += `</div></div>`;
 
-    h += `<div class="card" style="margin-top:16px"><div class="card-title">External Case Study Libraries</div>
-            <div style="display:flex;flex-direction:column;gap:8px">
-                <a href="https://growth.design/case-studies" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:14px">1. Growth.Design (Interactive UX/Psychology Cases) &#8599;</a>
-                <a href="https://www.theproductfolks.com/teardowns" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:14px">2. The Product Folks - Indian Startup Teardowns &#8599;</a>
-                <a href="https://www.tryexponent.com/questions" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:14px">3. Exponent PM Interview Database &#8599;</a>
+    el.innerHTML = h;
+}
+
+function renderTab5() {
+    let el = document.getElementById('tab5'), h = '';
+
+    h += `<div class="card"><div class="card-title">External Case Study Libraries</div>
+            <div style="font-size:12px;color:var(--t2);margin-bottom:16px;">The best publicly available teardowns and case study archives. Excellent for building product sense.</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+                <a href="https://growth.design/case-studies" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:14px;display:flex;align-items:center;gap:6px">
+                    <span style="background:var(--box-bg);padding:4px 8px;border-radius:4px;border:1px solid var(--box-border)">1.</span> Growth.Design (Interactive UX/Psychology Cases) &#8599;
+                </a>
+                <a href="https://www.theproductfolks.com/teardowns" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:14px;display:flex;align-items:center;gap:6px">
+                    <span style="background:var(--box-bg);padding:4px 8px;border-radius:4px;border:1px solid var(--box-border)">2.</span> The Product Folks - Indian Startup Teardowns &#8599;
+                </a>
+                <a href="https://www.tryexponent.com/questions" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;font-size:14px;display:flex;align-items:center;gap:6px">
+                    <span style="background:var(--box-bg);padding:4px 8px;border-radius:4px;border:1px solid var(--box-border)">3.</span> Exponent PM Interview Database &#8599;
+                </a>
             </div></div>`;
 
-    // Recommended Books
+    // Recommended Books & Channels
     if (typeof RECOMMENDED_BOOKS !== 'undefined' && RECOMMENDED_BOOKS.length > 0) {
-        h += `<div class="card" style="margin-top:16px"><div class="card-title">Recommended Books & Resources</div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">`;
+        h += `<div class="card" style="margin-top:16px"><div class="card-title">Books & YouTube Channels</div>
+        <div style="font-size:12px;color:var(--t2);margin-bottom:16px;">Core resources spanning technical architecture, behavioral PM theory, and in-depth tech teardowns.</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">`;
         RECOMMENDED_BOOKS.forEach(b => {
-            h += `<a href="${b.url}" target="_blank" style="text-decoration:none;display:block;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;transition:border-color .2s">
-                <div style="font-weight:600;font-size:13px;color:var(--t1);margin-bottom:4px">${b.title}</div>
-                <div style="font-size:11px;color:var(--accent2);margin-bottom:4px">${b.author}</div>
-                <div style="font-size:11px;color:var(--t3);line-height:1.4">${b.desc}</div>
+            h += `<a href="${b.url}" target="_blank" style="text-decoration:none;display:block;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;transition:all .2s;box-shadow:0 2px 4px rgba(0,0,0,0.05)">
+                <div style="font-weight:700;font-size:13px;color:var(--t1);margin-bottom:6px">${b.title}</div>
+                <div style="font-size:11px;color:var(--accent2);margin-bottom:8px;font-family:monospace;letter-spacing:0.5px">${b.author}</div>
+                <div style="font-size:12px;color:var(--t3);line-height:1.5">${b.desc}</div>
             </a>`;
         });
         h += `</div></div>`;

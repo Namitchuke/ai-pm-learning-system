@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI PM Learning System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <style>
         *,
@@ -17,35 +18,35 @@
         }
 
         :root {
-            --bg: #0B0F14;
-            --bg2: #111827;
-            --bg3: #1F2937;
-            --card: #111827;
-            --card2: #1a2332;
-            --border: #1F2937;
-            --border-h: #374151;
-            --t1: #E5E7EB;
-            --t2: #9CA3AF;
-            --t3: #6B7280;
-            --t4: #4B5563;
-            --accent: #34D399;
-            --accent2: #6EE7B7;
-            --grad: linear-gradient(135deg, #34D399, #2DD4BF);
-            --grad2: linear-gradient(135deg, #60A5FA, #34D399);
-            --green: #22c55e;
-            --amber: #f59e0b;
-            --red: #ef4444;
+            --bg: #07070d;
+            --bg2: #0f0f1a;
+            --bg3: #161626;
+            --card: #0f0f1a;
+            --card2: #161626;
+            --border: rgba(255, 255, 255, .055);
+            --border-h: rgba(255, 255, 255, .1);
+            --t1: #eaeaf6;
+            --t2: #8080a8;
+            --t3: #3c3c5a;
+            --t4: #26263a;
+            --accent: #00d4ff;
+            --accent2: #26dcff;
+            --grad: linear-gradient(135deg, #00d4ff, #00b4d8);
+            --grad2: linear-gradient(135deg, #00d4ff, #00e676);
+            --green: #00e676;
+            --amber: #ffb300;
+            --red: #ff5252;
             --blue: #60A5FA;
-            --purple: #a78bfa;
-            --cyan: #22d3ee;
+            --purple: #b47fff;
+            --cyan: #00d4ff;
             --pink: #f472b6;
-            --box-bg: rgba(52, 211, 153, 0.04);
-            --box-border: rgba(52, 211, 153, 0.15);
-            --r: 12px
+            --box-bg: rgba(0, 212, 255, 0.04);
+            --box-border: rgba(0, 212, 255, 0.15);
+            --r: 14px
         }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'DM Sans', 'Inter', -apple-system, sans-serif;
             background-color: var(--bg);
             color: var(--t1);
             margin: 0;
@@ -64,11 +65,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background:
-                radial-gradient(ellipse 600px 400px at 10% 20%, rgba(52, 211, 153, .04), transparent),
-                radial-gradient(ellipse 500px 350px at 80% 70%, rgba(96, 165, 250, .03), transparent),
-                radial-gradient(ellipse 400px 300px at 50% 50%, rgba(167, 139, 250, .02), transparent);
-            animation: bgShift 30s ease-in-out infinite alternate;
+            background-image: linear-gradient(rgba(0, 212, 255, .013) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 212, 255, .013) 1px, transparent 1px);
+            background-size: 44px 44px;
             pointer-events: none;
             z-index: 0;
         }
@@ -121,8 +119,9 @@
         }
 
         .hdr h1 {
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 20px;
-            font-weight: 900;
+            font-weight: 700;
             background: var(--grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -165,14 +164,13 @@
             border-color: var(--accent)
         }
 
-        /* Tabs */
         .tabs {
             display: flex;
             gap: 3px;
             margin-bottom: 10px;
             background: var(--bg2);
-            padding: 3px;
-            border-radius: 10px;
+            padding: 4px;
+            border-radius: 11px;
             border: 1px solid var(--border)
         }
 
@@ -203,8 +201,9 @@
         }
 
         .tab.active {
-            background: var(--grad);
-            color: #fff
+            background: var(--bg3);
+            color: var(--accent);
+            box-shadow: 0 0 14px rgba(0, 212, 255, .12)
         }
 
         .tab-body {
@@ -225,8 +224,9 @@
         }
 
         .card-title {
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 14px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--t1);
             margin-bottom: 8px;
             display: flex;
@@ -257,12 +257,12 @@
         }
 
         .fh-big {
-            font-size: 22px;
-            font-weight: 900;
-            background: var(--grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -.03em;
+            line-height: 1
         }
 
         .fh-label {
@@ -949,6 +949,34 @@
 
         .dl-del:hover {
             color: var(--red)
+        }
+
+        .modern-select {
+            appearance: none;
+            -webkit-appearance: none;
+            background: var(--card) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236B7280" viewBox="0 0 16 16"><path d="M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"/></svg>') no-repeat right 12px center;
+            border: 1px solid var(--border);
+            color: var(--t1);
+            padding: 8px 36px 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            min-width: 140px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .modern-select:hover {
+            border-color: var(--t3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .modern-select:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.2);
         }
 
         /* ---- TAB 3: DASHBOARD ---- */
@@ -1799,27 +1827,43 @@
             <div class="sidebar-email" id="sidebarEmail"></div>
         </div>
         <div class="sidebar-nav">
-            <button class="sidebar-item" onclick="switchTab(0);closeSidebar()"><span class="si-icon">⚡</span> Today's
-                Focus</button>
-            <button class="sidebar-item" onclick="switchTab(1);closeSidebar()"><span class="si-icon">○</span> Full
-                Overview</button>
-            <button class="sidebar-item" onclick="switchTab(2);closeSidebar()"><span class="si-icon">■</span>
-                Dashboard</button>
-            <button class="sidebar-item" onclick="switchTab(3);closeSidebar()"><span class="si-icon">▷</span> Mock
-                Interviews</button>
-            <button class="sidebar-item" onclick="switchTab(4);closeSidebar()"><span class="si-icon">◇</span> Case
-                Studies</button>
-            <div class="sidebar-sep"></div>
-            <button class="sidebar-item" onclick="exportData();closeSidebar()"><span class="si-icon">⤓</span> Export
-                Backup</button>
-            <button class="sidebar-item" onclick="document.getElementById('impF').click()"><span
-                    class="si-icon">⤒</span> Import Data</button>
-            <input type="file" id="impF" accept=".json" style="display:none" onchange="importData(event)" />
-            <div class="sidebar-sep"></div>
-            <button class="sidebar-item" onclick="handleLogout()" style="color:var(--red)"><span
-                    class="si-icon">→</span> Logout</button>
+            <button class="sidebar-item" onclick="switchTab(0); closeSidebar()">
+                <div class="si-icon">🎯</div>
+                Today's Focus
+            </button>
+            <button class="sidebar-item" onclick="switchTab(1); closeSidebar()">
+                <div class="si-icon">📚</div>
+                Full Overview
+            </button>
+            <button class="sidebar-item" onclick="switchTab(2); closeSidebar()">
+                <div class="si-icon">📊</div>
+                Dashboard
+            </button>
+            <button class="sidebar-item" onclick="switchTab(3); closeSidebar()">
+                <div class="si-icon">🎤</div>
+                Mock Interviews
+            </button>
+            <button class="sidebar-item" onclick="switchTab(4); closeSidebar()">
+                <div class="si-icon">📝</div>
+                Case Studies
+            </button>
+            <button class="sidebar-item" onclick="switchTab(5); closeSidebar()">
+                <div class="si-icon">📖</div>
+                Libraries & Resources
+            </button>
         </div>
-        <div class="sidebar-footer">AI PM Learning System v2.4</div>
+
+        <div class="sidebar-sep"></div>
+        <button class="sidebar-item" onclick="exportData();closeSidebar()"><span class="si-icon">⤓</span> Export
+            Backup</button>
+        <button class="sidebar-item" onclick="document.getElementById('impF').click()"><span class="si-icon">⤒</span>
+            Import Data</button>
+        <input type="file" id="impF" accept=".json" style="display:none" onchange="importData(event)" />
+        <div class="sidebar-sep"></div>
+        <button class="sidebar-item" onclick="handleLogout()" style="color:var(--red)"><span class="si-icon">→</span>
+            Logout</button>
+    </div>
+    <div class="sidebar-footer">AI PM Learning System v2.4</div>
     </div>
 
     <div class="app">
@@ -1870,6 +1914,13 @@
                 </svg>
                 Case Studies
             </div>
+            <div class="tab" onclick="switchTab(5)">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                </svg>
+                Libraries
+            </div>
         </div>
         <!-- TAB 0: TODAY'S FOCUS -->
         <div class="tab-body active" id="tab0"></div>
@@ -1881,6 +1932,8 @@
         <div class="tab-body" id="tab3"></div>
         <!-- TAB 4: CASE STUDIES -->
         <div class="tab-body" id="tab4"></div>
+        <!-- TAB 5: LIBRARIES & RESOURCES -->
+        <div class="tab-body" id="tab5"></div>
         <div class="footer" style="padding:6px 0">
             <button class="fbtn danger" onclick="showModal('resetMo')" style="font-size:11px;padding:4px 12px">🗑
                 Reset</button>
@@ -2066,8 +2119,8 @@
     </script>
 
     <!-- Load data + app FIRST so render() is available instantly -->
-    <script src="data.js"></script>
-    <script src="app.js"></script>
+    <script src="data.js" charset="UTF-8"></script>
+    <script src="app.js" charset="UTF-8"></script>
 
     <script>
         // Bootstrap: render instantly with local data, sync API in background
@@ -2081,6 +2134,10 @@
                 const meRes = await fetch('/auth/me');
                 if (!meRes.ok) { window.location.href = '/'; return; }
                 const { user } = await meRes.json();
+                if (user.role === 'admin') {
+                    window.location.href = '/admin.html';
+                    return;
+                }
                 document.getElementById('userGreeting').textContent = 'Hi, ' + user.name;
 
                 const initials = (user.name || '?').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);

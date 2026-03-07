@@ -35,6 +35,7 @@ passport.use(new GoogleStrategy({
             if (!user.avatar && profile.photos && profile.photos[0]) {
                 user.avatar = profile.photos[0].value;
             }
+            user.lastLoginAt = new Date();
             await user.save();
             return done(null, user);
         }
@@ -67,6 +68,8 @@ passport.use(new LocalStrategy({
         const isMatch = await bcrypt.compare(password, user.passwordHash);
         if (!isMatch) return done(null, false, { message: 'Incorrect password' });
 
+        user.lastLoginAt = new Date();
+        await user.save();
         done(null, user);
     } catch (err) {
         done(err);

@@ -74,7 +74,12 @@ router.get('/google/callback',
         if (!existing) {
             await Progress.create({ userId: req.user._id });
         }
-        res.redirect('/dashboard.html');
+
+        if (req.user.role === 'admin') {
+            res.redirect('/admin.html');
+        } else {
+            res.redirect('/dashboard.html');
+        }
     }
 );
 

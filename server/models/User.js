@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     role: { type: String, enum: ['learner', 'admin'], default: 'learner' },
     studyRole: { type: String, enum: ['AI PM', 'Data Analyst', 'SD'], default: 'AI PM' },
     avatar: { type: String, default: '' },
+    lastLoginAt: { type: Date },
     createdAt: { type: Date, default: Date.now }
 });
 

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI PM System - Admin Panel</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #07070d;
+            --surface: #0f0f1a;
+            --s2: #161626;
+            --s3: #1e1e30;
+            --acc: #00d4ff;
+            --acc-s: rgba(0, 212, 255, .12);
+            --acc-g: rgba(0, 212, 255, .28);
+            --txt: #eaeaf6;
+            --txt2: #8080a8;
+            --txt3: #3c3c5a;
+            --ok: #00e676;
+            --ok-s: rgba(0, 230, 118, .12);
+            --warn: #ffb300;
+            --warn-s: rgba(255, 179, 0, .12);
+            --bdr: rgba(255, 255, 255, .055);
+            --r: 14px;
+            --rs: 9px;
+
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(0, 212, 255, .013) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 212, 255, .013) 1px, transparent 1px);
+            background-size: 44px 44px;
+        }
+
+        h1,
+        h2,
+        h3,
+        .logo-text,
+        .stat-val {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Nav */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            height: 64px;
+            background: rgba(7, 7, 13, .92);
+            border-bottom: 1px solid var(--bdr);
+            backdrop-filter: blur(18px);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-text {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: .02em;
+        }
+
+        .logo-text span {
+            color: var(--acc);
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--acc);
+            box-shadow: 0 0 8px var(--acc), 0 0 20px rgba(0, 212, 255, .4);
+            animation: pulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: .5;
+                transform: scale(.75)
+            }
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-name {
+            font-size: 13px;
+            color: var(--txt2);
+        }
+
+        .btn-logout {
+            padding: 6px 14px;
+            border-radius: 6px;
+            border: 1px solid var(--bdr);
+            background: transparent;
+            color: var(--txt2);
+            font-family: inherit;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .btn-logout:hover {
+            color: #ff5252;
+            border-color: rgba(255, 82, 82, .3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--bdr);
+            border-radius: var(--rs);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .2s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--acc-g);
+        }
+
+        .stat-lbl {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--txt3);
+            margin-bottom: 8px;
+        }
+
+        .stat-val {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--acc);
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+
+        .stat-sub {
+            font-size: 12px;
+            color: var(--txt2);
+        }
+
+        /* Toolbar */
+        .toolbar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            background: var(--surface);
+            border: 1px solid var(--bdr);
+            border-radius: var(--rs);
+            padding: 10px 14px;
+            color: var(--txt);
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: border-color .2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--acc);
+        }
+
+        /* Table */
+        .table-wrap {
+            background: var(--surface);
+            border: 1px solid var(--bdr);
+            border-radius: var(--r);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--bdr);
+        }
+
+        th {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--txt3);
+            background: var(--s2);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: var(--s2);
+        }
+
+        .u-name {
+            font-weight: 500;
+            color: var(--txt);
+            font-size: 14px;
+        }
+
+        .u-email {
+            font-size: 12px;
+            color: var(--txt2);
+        }
+
+        .u-role {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: .05em;
+            background: var(--s3);
+            color: var(--txt2);
+        }
+
+        .u-date {
+            font-size: 12px;
+            color: var(--txt3);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .role-admin {
+            background: var(--acc-s);
+            color: var(--acc);
+            border: 1px solid var(--acc-g);
+        }
+
+        /* Loading/Empty state */
+        .state-msg {
+            padding: 3rem;
+            text-align: center;
+            color: var(--txt3);
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav">
+        <div class="nav-logo">
+            <div class="nav-dot"></div>
+            <div class="logo-text">AI PM <span>Admin</span></div>
+        </div>
+        <div class="nav-user">
+            <div class="user-name" id="adminName">Loading...</div>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-lbl">Total Users</div>
+                <div class="stat-val" id="statTotal">-</div>
+                <div class="stat-sub">Registered across all roles</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-lbl">Active Users</div>
+                <div class="stat-val" id="statActive" style="color: var(--ok)">-</div>
+                <div class="stat-sub">Updated progress in last 7 days</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-lbl">Avg Engagement</div>
+                <div class="stat-val" id="statAvg" style="color: var(--warn)">-</div>
+                <div class="stat-sub">Avg items completed per active user</div>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search users by name or email..."
+                onkeyup="filterTable()">
+        </div>
+
+        <div class="table-wrap">
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Role / Study</th>
+                        <th>Signup</th>
+                        <th>Last Login</th>
+                        <th>Last Active</th>
+                        <th style="text-align:center">Items</th>
+                        <th style="text-align:center">Cases</th>
+                        <th style="text-align:center">Mocks</th>
+                        <th>Auth</th>
+                    </tr>
+                </thead>
+                <tbody id="usersBody">
+                    <tr>
+                        <td colspan="9" class="state-msg">Loading user data...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let allUsers = [];
+
+        async function init() {
+            // Check auth
+            try {
+                const meRes = await fetch('/auth/me');
+                if (!meRes.ok) { window.location.href = '/'; return; }
+                const { user } = await meRes.json();
+
+                if (user.role !== 'admin') {
+                    window.location.href = '/dashboard.html';
+                    return;
+                }
+                document.getElementById('adminName').textContent = user.name + ' (Admin)';
+
+                fetchStats();
+                fetchUsers();
+            } catch (e) {
+                console.error("Auth check failed", e);
+                window.location.href = '/';
+            }
+        }
+
+        async function fetchStats() {
+            try {
+                const res = await fetch('/admin/stats');
+                if (res.ok) {
+                    const stats = await res.json();
+                    document.getElementById('statTotal').textContent = stats.totalUsers;
+                    document.getElementById('statActive').textContent = stats.activeThisWeek;
+                    document.getElementById('statAvg').textContent = stats.avgItemsDone;
+                }
+            } catch (e) { console.error("Stats fail", e); }
+        }
+
+        async function fetchUsers() {
+            try {
+                const res = await fetch('/admin/users');
+                if (res.ok) {
+                    allUsers = await res.json();
+                    renderTable(allUsers);
+                } else {
+                    document.getElementById('usersBody').innerHTML = `<tr><td colspan="9" class="state-msg">Failed to load users. Are you admin?</td></tr>`;
+                }
+            } catch (e) {
+                document.getElementById('usersBody').innerHTML = `<tr><td colspan="9" class="state-msg">Error loading users.</td></tr>`;
+            }
+        }
+
+        function renderTable(users) {
+            const tbody = document.getElementById('usersBody');
+            if (users.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="9" class="state-msg">No users found</td></tr>`;
+                return;
+            }
+
+            // Sort by latest created first
+            users.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+            tbody.innerHTML = users.map(u => {
+                const p = u.progress || {};
+                const itemsDone = p.itemsDone || 0;
+                const cases = p.cases || 0;
+                const mocks = p.mocks || 0;
+
+                const fmt = (d) => d ? new Date(d).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '-';
+                const roleClass = u.role === 'admin' ? 'role-admin' : '';
+                const authMethod = u.googleId ? 'Google' : 'Email';
+
+                return `
+                    <tr>
+                        <td>
+                            <div class="u-name">${escapeHTML(u.name || 'Unknown')}</div>
+                            <div class="u-email">${escapeHTML(u.email || '@' + (u.username || ''))}</div>
+                        </td>
+                        <td>
+                            <span class="u-role ${roleClass}">${(u.role || 'learner').toUpperCase()}</span>
+                            <span class="u-role" style="margin-left:4px">${u.studyRole || 'N/A'}</span>
+                        </td>
+                        <td class="u-date">${fmt(u.createdAt)}</td>
+                        <td class="u-date">${fmt(u.lastLoginAt)}</td>
+                        <td class="u-date">${fmt(p.lastActive)}</td>
+                        <td style="text-align:center;color:var(--acc);font-weight:600">${itemsDone}</td>
+                        <td style="text-align:center;color:var(--ok);font-weight:600">${cases}</td>
+                        <td style="text-align:center;color:var(--warn);font-weight:600">${mocks}</td>
+                        <td class="u-date">${authMethod}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function filterTable() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allUsers.filter(u =>
+                (u.name || '').toLowerCase().includes(term) ||
+                (u.email || '').toLowerCase().includes(term) ||
+                (u.username || '').toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        }
+
+        async function logout() {
+            await fetch('/auth/logout', { method: 'POST' });
+            window.location.href = '/';
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g,
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag])
+            );
+        }
+
+        init();
+    </script>
+</body>
+
+</html>

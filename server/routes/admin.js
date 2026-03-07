@@ -34,6 +34,39 @@ router.get('/users', isAdmin, async (req, res) => {
     }
 });
 
+// Get admin dashboard stats
+router.get('/stats', isAdmin, async (req, res) => {
+    try {
+        const users = await User.find();
+        const progress = await Progress.find();
+
+        const totalUsers = users.length;
+
+        // Active this week (last 7 days)
+        const ONE_WEEK = 7 * 24 * 60 * 60 * 1000;
+        const now = new Date();
+        const activeThisWeek = progress.filter(p => {
+            return p.updatedAt && (now - new Date(p.updatedAt)) < ONE_WEEK;
+        }).length;
+
+        // Average items done
+        let totalItemsDone = 0;
+        let progressWithItems = 0;
+        progress.forEach(p => {
+            const items = Object.values(p.items || {}).filter(Boolean).length;
+            if (items > 0) {
+                totalItemsDone += items;
+                progressWithItems++;
+            }
+        });
+        const avgItemsDone = progressWithItems > 0 ? Math.round(totalItemsDone / progressWithItems) : 0;
+
+        res.json({ totalUsers, activeThisWeek, avgItemsDone });
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch stats' });
+    }
+});
+
 // Model map for generic CRUD
 const models = {
     interviews: MockInterview,

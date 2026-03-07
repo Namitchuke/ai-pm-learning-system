@@ -1,16 +1,16 @@
-﻿const K = 'aipm_v2';
+const K = 'aipm_v2';
 const WEEKLY_METRICS = [
     { key: 'cases', icon: '&#9670;', label: 'Cases Solved', target: 5, color: 'c1' },
     { key: 'reading', icon: '&#9671;', label: 'Chapters Read', target: 3, color: 'c2' },
     { key: 'mocks', icon: '&#9655;', label: 'Mock Interviews', target: 1, color: 'c3' }
 ];
 const ARTIFACTS = [
-    { key: 'ship', label: 'AI Resume Optimizer â€” Shipped' },
+    { key: 'ship', label: 'AI Resume Optimizer - Shipped' },
     { key: 'prd', label: 'AI Feature PRD (Indian Product)' },
     { key: 'rag', label: 'RAG Domain Assistant' },
-    { key: 'tear', label: 'Analytical Teardown â€” Published' },
-    { key: 'resume', label: 'Resume â€” Finalized' },
-    { key: 'linkedin', label: 'LinkedIn â€” Optimized' }
+    { key: 'tear', label: 'Analytical Teardown - Published' },
+    { key: 'resume', label: 'Resume - Finalized' },
+    { key: 'linkedin', label: 'LinkedIn - Optimized' }
 ];
 const CORE_SKILLS = [
     { id: 'jtbd', name: 'Jobs-to-be-Done (JTBD)' },
@@ -38,18 +38,18 @@ const PHASES = [
             {
                 label: 'Week 1', focus: 'Product Thinking Fundamentals', items: [
                     { text: 'Complete "Inspired" Chapters 1-20', detail: 'Inspired by Marty Cagan covers how top tech companies build products. Focus on: product discovery vs delivery, the role of PM vs project manager, empowered teams vs feature teams.', done_when: 'You can explain product discovery, the difference between output vs outcome, and why empowered teams matter.' },
-                    { text: 'Write JTBD analysis for an Indian app (CRED/PhonePe/Swiggy)', detail: 'Jobs-to-be-Done framework: users "hire" products to get a job done. For example, users don\'t hire CRED for credit card payments â€” they hire it for "feeling financially smart." Identify the functional, emotional, and social jobs.', done_when: 'A written 1-page JTBD analysis covering: functional job, emotional job, social job, and current alternatives users hire.' },
-                    { text: 'Solve 3 product cases from Decode and Conquer', detail: 'Start with "improve product X" type cases. Use a structured framework: clarify â†’ user segments â†’ pain points â†’ solutions â†’ prioritize â†’ metrics. Practice writing, not just thinking.', done_when: '3 cases solved with written structures. Each case has: user segments identified, 3+ solutions, prioritization rationale, and success metrics.' },
+                    { text: 'Write JTBD analysis for an Indian app (CRED/PhonePe/Swiggy)', detail: 'Jobs-to-be-Done framework: users "hire" products to get a job done. For example, users don\'t hire CRED for credit card payments - they hire it for "feeling financially smart." Identify the functional, emotional, and social jobs.', done_when: 'A written 1-page JTBD analysis covering: functional job, emotional job, social job, and current alternatives users hire.' },
+                    { text: 'Solve 3 product cases from Decode and Conquer', detail: 'Start with "improve product X" type cases. Use a structured framework: clarify → user segments → pain points → solutions → prioritize → metrics. Practice writing, not just thinking.', done_when: '3 cases solved with written structures. Each case has: user segments identified, 3+ solutions, prioritization rationale, and success metrics.' },
                     { text: 'Create GitHub portfolio repository', detail: 'Create a public GitHub repo called "ai-pm-portfolio" or similar. Add a README with sections: About Me, Projects, Case Studies, Skills. This becomes your living portfolio throughout the 24 weeks.', done_when: 'Public GitHub repo created with structured README and at least one initial commit.' }
                 ], resources: [
-                    { title: 'Inspired by Marty Cagan â€” Summary & Key Ideas', url: 'https://www.productplan.com/glossary/inspired/' },
-                    { title: 'JTBD Framework Explained â€” HBS', url: 'https://hbswk.hbs.edu/item/what-is-jobs-to-be-done' },
-                    { title: 'CRED Product Teardown â€” The Product Folks', url: 'https://medium.com/@theproductfolks/cred-product-teardown' },
-                    { title: 'Decode and Conquer â€” Lewis Lin (Book)', url: 'https://www.lewis-lin.com/decode-and-conquer' },
+                    { title: 'Inspired by Marty Cagan - Summary & Key Ideas', url: 'https://www.productplan.com/glossary/inspired/' },
+                    { title: 'JTBD Framework Explained - HBS', url: 'https://hbswk.hbs.edu/item/what-is-jobs-to-be-done' },
+                    { title: 'CRED Product Teardown - The Product Folks', url: 'https://medium.com/@theproductfolks/cred-product-teardown' },
+                    { title: 'Decode and Conquer - Lewis Lin (Book)', url: 'https://www.lewis-lin.com/decode-and-conquer' },
                     { title: 'Product Manager Portfolio Examples', url: 'https://www.lennysnewsletter.com/p/how-to-build-a-pm-portfolio' },
-                    { title: 'GitHub for Non-Engineers â€” Guide', url: 'https://product-craft.com/github-for-product-managers/' },
+                    { title: 'GitHub for Non-Engineers - Guide', url: 'https://product-craft.com/github-for-product-managers/' },
                     { title: 'PhonePe UX Case Study', url: 'https://bootcamp.uxdesign.cc/phonepe-case-study' },
-                    { title: 'PM Case Interview Practice â€” Product School', url: 'https://productschool.com/blog/product-management/case-study-interview' }
+                    { title: 'PM Case Interview Practice - Product School', url: 'https://productschool.com/blog/product-management/case-study-interview' }
                 ], quiz: [
                     { q: 'What is the core idea of Jobs-to-be-Done?', options: ['Users buy features', 'Users hire products to make progress on a specific job in their life', 'Users want the cheapest option', 'Users follow trends'], answer: 1 },
                     { q: 'In "Inspired," what is the key difference between empowered teams and feature teams?', options: ['Empowered teams are bigger', 'Empowered teams solve problems; feature teams just build requested features', 'Feature teams are faster', 'No difference'], answer: 1 },
@@ -61,17 +61,17 @@ const PHASES = [
             {
                 label: 'Week 2', focus: 'Metrics + Problem Framing', items: [
                     { text: 'Learn North Star, OMTM, Input/Output metrics framework', detail: 'North Star Metric = the ONE metric that best captures the value your product delivers. OMTM (One Metric That Matters) focuses the team. Input metrics are things you control (e.g., emails sent); Output metrics are results (e.g., signups).', done_when: 'You can identify the North Star metric for 3 Indian products and explain why, plus list 2 input and 2 output metrics for each.' },
-                    { text: 'Write one-pager: IC â†’ Problem â†’ Flow â†’ Metric for an Indian product', detail: 'IC = Ideal Customer. Pick a real Indian product. Write: Who is the IC? What is their #1 problem? What is the user flow to solve it? What metric proves it\'s solved? This is the PM thinking loop.', done_when: 'A structured one-pager with all 4 sections filled. Specific enough that an engineer could understand the problem.' },
-                    { text: 'Solve 3 more product cases (metrics-focused)', detail: 'Focus on "metrics decline" cases: "DAU dropped 10% â€” what happened?" Use a diagnostic framework: check data quality â†’ segment by user type â†’ check funnel stages â†’ external factors â†’ hypothesize â†’ validate.', done_when: '3 metrics cases solved with written diagnostic trees. Each shows structured thinking, not random guessing.' },
-                    { text: 'Map the product development lifecycle end-to-end', detail: 'Understand: Discovery â†’ Definition â†’ Design â†’ Development â†’ Testing â†’ Launch â†’ Measure â†’ Iterate. Know what a PM does at each stage and what artifacts they produce (PRD, spec, user stories, etc.).', done_when: 'A written or diagrammed product lifecycle with PM activities at each stage.' }
+                    { text: 'Write one-pager: IC → Problem → Flow → Metric for an Indian product', detail: 'IC = Ideal Customer. Pick a real Indian product. Write: Who is the IC? What is their #1 problem? What is the user flow to solve it? What metric proves it\'s solved? This is the PM thinking loop.', done_when: 'A structured one-pager with all 4 sections filled. Specific enough that an engineer could understand the problem.' },
+                    { text: 'Solve 3 more product cases (metrics-focused)', detail: 'Focus on "metrics decline" cases: "DAU dropped 10% - what happened?" Use a diagnostic framework: check data quality → segment by user type → check funnel stages → external factors → hypothesize → validate.', done_when: '3 metrics cases solved with written diagnostic trees. Each shows structured thinking, not random guessing.' },
+                    { text: 'Map the product development lifecycle end-to-end', detail: 'Understand: Discovery → Definition → Design → Development → Testing → Launch → Measure → Iterate. Know what a PM does at each stage and what artifacts they produce (PRD, spec, user stories, etc.).', done_when: 'A written or diagrammed product lifecycle with PM activities at each stage.' }
                 ], resources: [
-                    { title: 'North Star Metric â€” Amplitude Guide', url: 'https://amplitude.com/blog/north-star-metric' },
-                    { title: 'OMTM Explained â€” Lean Analytics', url: 'https://leananalyticsbook.com/one-metric-that-matters/' },
+                    { title: 'North Star Metric - Amplitude Guide', url: 'https://amplitude.com/blog/north-star-metric' },
+                    { title: 'OMTM Explained - Lean Analytics', url: 'https://leananalyticsbook.com/one-metric-that-matters/' },
                     { title: 'Input vs Output Metrics for PMs', url: 'https://www.reforge.com/blog/input-output-metrics' },
-                    { title: 'Product Metrics That Matter â€” Lenny\'s Newsletter', url: 'https://www.lennysnewsletter.com/p/what-is-a-north-star-metric' },
+                    { title: 'Product Metrics That Matter - Lenny\'s Newsletter', url: 'https://www.lennysnewsletter.com/p/what-is-a-north-star-metric' },
                     { title: 'Swiggy Metrics Deep Dive', url: 'https://bytes.swiggy.com/' },
-                    { title: 'How to Diagnose a Metrics Drop â€” Exponent', url: 'https://www.tryexponent.com/courses/pm/metrics-decline' },
-                    { title: 'Product Development Lifecycle â€” Mind the Product', url: 'https://www.mindtheproduct.com/product-development-lifecycle/' },
+                    { title: 'How to Diagnose a Metrics Drop - Exponent', url: 'https://www.tryexponent.com/courses/pm/metrics-decline' },
+                    { title: 'Product Development Lifecycle - Mind the Product', url: 'https://www.mindtheproduct.com/product-development-lifecycle/' },
                     { title: 'Flipkart Product Strategy Analysis', url: 'https://medium.com/swlh/product-teardown-flipkart' }
                 ], quiz: [
                     { q: 'What is a North Star Metric?', options: ['Revenue', 'The single metric that best captures the core value your product delivers to users', 'Daily Active Users', 'App downloads'], answer: 1 },
@@ -81,21 +81,23 @@ const PHASES = [
             },
             {
                 label: 'Week 3', focus: 'AI Literacy Sprint', items: [
-                    { text: 'Complete Andrew Ng\'s "AI for Everyone" (Coursera)', detail: 'This 6-hour course covers: what AI can and cannot do, how to spot AI opportunities, how to work with AI teams, and AI strategy. It is NOT a coding course â€” it is designed for business/product people.', done_when: 'Course completed with certificate. You can explain supervised learning, what training data is, and why AI projects fail.' },
-                    { text: 'Understand LLM basics: tokens, context windows, inference, fine-tuning', detail: 'Tokens = word pieces (1 token â‰ˆ 0.75 words). Context window = how much text the model can "see" at once (GPT-4: 128K tokens). Inference = running the model to get output. Fine-tuning = customizing a model on your data.', done_when: 'You can explain tokens, context windows, temperature, and the difference between prompting vs fine-tuning to a non-technical person.' },
+                    { text: 'Complete Andrew Ng\'s "AI for Everyone" (Coursera)', detail: 'This 6-hour course covers: what AI can and cannot do, how to spot AI opportunities, how to work with AI teams, and AI strategy. It is NOT a coding course - it is designed for business/product people.', done_when: 'Course completed with certificate. You can explain supervised learning, what training data is, and why AI projects fail.' },
+                    { text: 'Understand LLM basics: tokens, context windows, inference, fine-tuning', detail: 'Tokens = word pieces (1 token ≈ 0.75 words). Context window = how much text the model can "see" at once (GPT-4: 128K tokens). Inference = running the model to get output. Fine-tuning = customizing a model on your data.', done_when: 'You can explain tokens, context windows, temperature, and the difference between prompting vs fine-tuning to a non-technical person.' },
                     { text: 'Write concept notes on: supervised vs unsupervised, transformers, embeddings', detail: 'Supervised = labeled data (spam/not spam). Unsupervised = finding patterns (clustering). Transformers = the architecture behind GPT/BERT (attention mechanism). Embeddings = converting text to numbers for comparison.', done_when: 'Written notes (1 page) covering each concept with a real-world example for each.' },
-                    { text: 'Experiment with ChatGPT/Claude for 5 different product tasks', detail: 'Try: (1) writing a PRD, (2) analyzing user feedback, (3) generating SQL queries, (4) summarizing competitor research, (5) brainstorming feature ideas. Document what worked well and what didn\'t.', done_when: '5 experiments documented with prompts used, outputs received, and your assessment of quality.' }
+                    { text: 'Experiment with ChatGPT/Claude for 5 different product tasks', detail: 'Try: (1) writing a PRD, (2) analyzing user feedback, (3) generating SQL queries, (4) summarizing competitor research, (5) brainstorming feature ideas. Document what worked well and what didn\'t.', done_when: '5 experiments documented with prompts used, outputs received, and your assessment of quality.' },
+                    { text: 'Reasoning vs Non-Reasoning Models', detail: 'Reasoning models (OpenAI o1/o3, Claude 3.5 with thinking) spend extra compute "thinking" before answering. Non-reasoning (GPT-4o, Claude Instant) are faster and cheaper but less accurate on complex logic. Know when each is appropriate: reasoning for math, code review, multi-step analysis; non-reasoning for summarisation, classification, chat.', done_when: 'You can explain the trade-off between reasoning and non-reasoning models and recommend the right one for 3 different PM use cases.' },
+                    { text: 'Open-Source vs Closed-Source LLMs & Major Stakeholders', detail: 'Closed-source: OpenAI (GPT-4o, o1), Anthropic (Claude 3.5), Google (Gemini). Benefits: best performance, managed infrastructure, enterprise support. Open-source: Meta (Llama 3), Mistral, Stability AI. Benefits: data privacy (runs on your servers), no vendor lock-in, customisable. Know the trade-offs: cost, latency, compliance, fine-tunability.', done_when: 'You can create a comparison table of 5 major LLM providers listing model name, open/closed, key strengths, and ideal use case.' }
                 ], resources: [
-                    { title: 'AI for Everyone â€” Andrew Ng (Coursera)', url: 'https://www.coursera.org/learn/ai-for-everyone' },
-                    { title: 'What Are LLM Tokens? â€” OpenAI Tokenizer', url: 'https://platform.openai.com/tokenizer' },
-                    { title: 'Transformers Explained Simply â€” 3Blue1Brown', url: 'https://www.youtube.com/watch?v=wjZofJX0v4M' },
-                    { title: 'Embeddings Guide â€” OpenAI Docs', url: 'https://platform.openai.com/docs/guides/embeddings' },
+                    { title: 'AI for Everyone - Andrew Ng (Coursera)', url: 'https://www.coursera.org/learn/ai-for-everyone' },
+                    { title: 'What Are LLM Tokens? - OpenAI Tokenizer', url: 'https://platform.openai.com/tokenizer' },
+                    { title: 'Transformers Explained Simply - 3Blue1Brown', url: 'https://www.youtube.com/watch?v=wjZofJX0v4M' },
+                    { title: 'Embeddings Guide - OpenAI Docs', url: 'https://platform.openai.com/docs/guides/embeddings' },
                     { title: 'LLM Basics for Product Managers', url: 'https://www.lennysnewsletter.com/p/ai-for-product-managers' },
-                    { title: 'Fine-tuning vs Prompting â€” When to Use What', url: 'https://platform.openai.com/docs/guides/fine-tuning' },
-                    { title: 'AI Product Management â€” Reforge', url: 'https://www.reforge.com/blog/ai-product-management' },
-                    { title: 'Supervised vs Unsupervised Learning â€” Google', url: 'https://developers.google.com/machine-learning/crash-course' }
+                    { title: 'Fine-tuning vs Prompting - When to Use What', url: 'https://platform.openai.com/docs/guides/fine-tuning' },
+                    { title: 'AI Product Management - Reforge', url: 'https://www.reforge.com/blog/ai-product-management' },
+                    { title: 'Supervised vs Unsupervised Learning - Google', url: 'https://developers.google.com/machine-learning/crash-course' }
                 ], quiz: [
-                    { q: 'What is a "token" in the context of LLMs?', options: ['A cryptocurrency', 'A sub-word unit that the model processes â€” roughly 0.75 words', 'A login credential', 'A type of API key'], answer: 1 },
+                    { q: 'What is a "token" in the context of LLMs?', options: ['A cryptocurrency', 'A sub-word unit that the model processes - roughly 0.75 words', 'A login credential', 'A type of API key'], answer: 1 },
                     { q: 'The "context window" of an LLM refers to:', options: ['The app\'s UI window', 'The maximum amount of text the model can process in a single request', 'The training dataset size', 'The number of users'], answer: 1 },
                     { q: 'When should you fine-tune a model vs just prompt it?', options: ['Always fine-tune', 'Fine-tune when you need consistent domain-specific behavior; prompt when the task is general or exploratory', 'Never fine-tune', 'Fine-tune is cheaper'], answer: 1 },
                     { q: 'Embeddings are useful because:', options: ['They make text colorful', 'They convert text into numerical vectors, enabling semantic search and similarity comparison', 'They encrypt data', 'They compress files'], answer: 1 }
@@ -105,20 +107,20 @@ const PHASES = [
                 label: 'Week 4', focus: 'SQL + RAG Foundations', items: [
                     { text: 'Complete SQL fundamentals: JOINs, GROUP BY, window functions, CTEs', detail: 'PM-critical SQL: JOINs (combining tables), GROUP BY (aggregating), window functions (ROW_NUMBER, LAG for comparing rows), CTEs (WITH clauses for readable complex queries). Practice on real datasets, not toy examples.', done_when: 'You can write a cohort retention query, a funnel analysis query, and a revenue-by-segment query from scratch.' },
                     { text: 'Write 10 product-grade SQL queries', detail: 'Product-grade = answers real business questions. Examples: "7-day retention by signup cohort," "conversion rate by referral source," "average order value trend by week," "power users vs casual users by activity frequency."', done_when: '10 queries written in a GitHub notebook/file, each with the business question it answers and sample output description.' },
-                    { text: 'Understand RAG architecture: embeddings â†’ vector store â†’ retrieval â†’ generation', detail: 'RAG = Retrieval-Augmented Generation. Instead of the LLM making things up, you: (1) convert documents to embeddings, (2) store in a vector database, (3) when user asks a question, find relevant chunks, (4) pass chunks + question to LLM for a grounded answer.', done_when: 'You can draw the RAG pipeline on a whiteboard and explain each component\'s role.' },
-                    { text: 'Set up a simple RAG prototype with LangChain + Chroma', detail: 'Use LangChain to load a PDF/text file â†’ split into chunks â†’ embed with OpenAI â†’ store in Chroma (local vector DB) â†’ query it. Start simple: use your own resume or a product document as the knowledge base.', done_when: 'A working Python script that can answer questions about a document using RAG. Code in your portfolio repo.' }
+                    { text: 'Understand RAG architecture: embeddings → vector store → retrieval → generation', detail: 'RAG = Retrieval-Augmented Generation. Instead of the LLM making things up, you: (1) convert documents to embeddings, (2) store in a vector database, (3) when user asks a question, find relevant chunks, (4) pass chunks + question to LLM for a grounded answer.', done_when: 'You can draw the RAG pipeline on a whiteboard and explain each component\'s role.' },
+                    { text: 'Set up a simple RAG prototype with LangChain + Chroma', detail: 'Use LangChain to load a PDF/text file → split into chunks → embed with OpenAI → store in Chroma (local vector DB) → query it. Start simple: use your own resume or a product document as the knowledge base.', done_when: 'A working Python script that can answer questions about a document using RAG. Code in your portfolio repo.' }
                 ], resources: [
-                    { title: 'SQL for Data Analysis â€” Mode Analytics Tutorial', url: 'https://mode.com/sql-tutorial/' },
-                    { title: 'Window Functions Explained â€” PostgreSQL Docs', url: 'https://www.postgresql.org/docs/current/tutorial-window.html' },
+                    { title: 'SQL for Data Analysis - Mode Analytics Tutorial', url: 'https://mode.com/sql-tutorial/' },
+                    { title: 'Window Functions Explained - PostgreSQL Docs', url: 'https://www.postgresql.org/docs/current/tutorial-window.html' },
                     { title: 'LeetCode SQL Practice Problems', url: 'https://leetcode.com/problemset/database/' },
-                    { title: 'RAG Explained â€” Pinecone Guide', url: 'https://www.pinecone.io/learn/retrieval-augmented-generation/' },
+                    { title: 'RAG Explained - Pinecone Guide', url: 'https://www.pinecone.io/learn/retrieval-augmented-generation/' },
                     { title: 'LangChain RAG Tutorial', url: 'https://python.langchain.com/docs/tutorials/rag/' },
-                    { title: 'Chroma Vector Database â€” Getting Started', url: 'https://docs.trychroma.com/getting-started' },
-                    { title: 'SQL for Product Managers â€” Sisense', url: 'https://www.sisense.com/blog/sql-for-product-managers/' },
+                    { title: 'Chroma Vector Database - Getting Started', url: 'https://docs.trychroma.com/getting-started' },
+                    { title: 'SQL for Product Managers - Sisense', url: 'https://www.sisense.com/blog/sql-for-product-managers/' },
                     { title: 'OpenAI Embeddings API Guide', url: 'https://platform.openai.com/docs/guides/embeddings' },
-                    { title: 'DataLemur â€” SQL Interview Questions', url: 'https://datalemur.com/questions' }
+                    { title: 'DataLemur - SQL Interview Questions', url: 'https://datalemur.com/questions' }
                 ], quiz: [
-                    { q: 'What does RAG stand for and why is it useful?', options: ['Random Access Generation â€” for speed', 'Retrieval-Augmented Generation â€” it grounds LLM responses in real data, reducing hallucinations', 'Rapid AI Growth â€” for scaling', 'Real-time API Gateway â€” for performance'], answer: 1 },
+                    { q: 'What does RAG stand for and why is it useful?', options: ['Random Access Generation - for speed', 'Retrieval-Augmented Generation - it grounds LLM responses in real data, reducing hallucinations', 'Rapid AI Growth - for scaling', 'Real-time API Gateway - for performance'], answer: 1 },
                     { q: 'A window function differs from GROUP BY because:', options: ['It is faster', 'It performs calculations across rows without collapsing them into groups', 'It only works on windows OS', 'There is no difference'], answer: 1 },
                     { q: 'In a RAG pipeline, what is stored in the vector database?', options: ['Raw text files', 'Numerical embeddings (vectors) that represent chunks of text', 'SQL queries', 'User passwords'], answer: 1 },
                     { q: 'Which SQL concept would you use to calculate "7-day retention by signup cohort"?', options: ['Simple SELECT', 'JOIN between users table and activity table with date-based filtering and GROUP BY cohort', 'DELETE statement', 'ALTER TABLE'], answer: 1 }
@@ -135,13 +137,13 @@ const PHASES = [
                     { text: 'Create product analytics SQL notebook', detail: 'Build a notebook with 15+ queries organized by category: user acquisition, activation, retention, revenue, referral (pirate metrics). Each query should have a comment explaining the business question.', done_when: 'A structured SQL notebook in your GitHub repo with 15+ queries across all pirate metric categories.' },
                     { text: 'Study 3 competitor AI features', detail: 'Pick 3 AI features in Indian apps (e.g., Swiggy voice search, CRED financial insights, PhonePe smart suggestions). Document: what it does, likely architecture, strengths, weaknesses, how you\'d improve it.', done_when: 'Written analysis of 3 AI features with architecture guesses and improvement suggestions.' }
                 ], resources: [
-                    { title: 'CTE Tutorial â€” SQLBolt', url: 'https://sqlbolt.com/lesson/select_queries_with_ctes' },
-                    { title: 'How to Write a PRD â€” Lenny\'s Newsletter', url: 'https://www.lennysnewsletter.com/p/how-to-write-a-great-prd' },
-                    { title: 'AI PRD Template â€” Reforge', url: 'https://www.reforge.com/blog/ai-product-prd-template' },
+                    { title: 'CTE Tutorial - SQLBolt', url: 'https://sqlbolt.com/lesson/select_queries_with_ctes' },
+                    { title: 'How to Write a PRD - Lenny\'s Newsletter', url: 'https://www.lennysnewsletter.com/p/how-to-write-a-great-prd' },
+                    { title: 'AI PRD Template - Reforge', url: 'https://www.reforge.com/blog/ai-product-prd-template' },
                     { title: 'Pirate Metrics (AARRR) Framework', url: 'https://www.productplan.com/glossary/aarrr-framework/' },
-                    { title: 'Cohort Analysis with SQL â€” Mode', url: 'https://mode.com/sql-tutorial/sql-cohort-analysis/' },
+                    { title: 'Cohort Analysis with SQL - Mode', url: 'https://mode.com/sql-tutorial/sql-cohort-analysis/' },
                     { title: 'CRED AI Features Analysis', url: 'https://medium.com/@theproductfolks/cred-product-teardown' },
-                    { title: 'DataLemur â€” SQL Interview Practice', url: 'https://datalemur.com/questions' }
+                    { title: 'DataLemur - SQL Interview Practice', url: 'https://datalemur.com/questions' }
                 ], quiz: [
                     { q: 'What makes a PRD "AI-native"?', options: ['It mentions AI', 'It includes model selection, eval criteria, latency/cost constraints, fallback behavior, and bias considerations', 'It is written by AI', 'It has more pages'], answer: 1 },
                     { q: 'The pirate metrics framework (AARRR) stands for:', options: ['Acquisition, Activation, Retention, Revenue, Referral', 'Awareness, Action, Results, Repeat, Reward', 'Analysis, Architecture, Research, Review, Release', 'None of the above'], answer: 0 },
@@ -155,34 +157,34 @@ const PHASES = [
                     { text: 'Complete prompt engineering fundamentals', detail: 'Key techniques: (1) System prompts for consistent behavior, (2) Few-shot examples, (3) Chain-of-thought reasoning, (4) Output formatting (JSON, markdown), (5) Temperature control, (6) Guardrails to prevent harmful outputs.', done_when: 'You can write system prompts that consistently produce structured, high-quality outputs for a specific use case.' },
                     { text: 'Build prompt library for 5 PM tasks', detail: 'Create reusable prompts for: (1) User interview synthesis, (2) PRD drafting, (3) Competitive analysis, (4) SQL query generation, (5) Bug report triage. Each prompt should have system prompt + example input/output.', done_when: '5 production-quality prompts saved in your GitHub repo, each with system prompt and example outputs.' }
                 ], resources: [
-                    { title: 'A/B Testing Guide â€” Optimizely', url: 'https://www.optimizely.com/optimization-glossary/ab-testing/' },
-                    { title: 'Sample Size Calculator â€” Evan Miller', url: 'https://www.evanmiller.org/ab-testing/sample-size.html' },
-                    { title: 'Prompt Engineering Guide â€” OpenAI', url: 'https://platform.openai.com/docs/guides/prompt-engineering' },
-                    { title: 'Prompt Engineering Course â€” DeepLearning.AI', url: 'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/' },
-                    { title: 'A/B Testing at Scale â€” Flipkart Engineering', url: 'https://tech.flipkart.com/' },
-                    { title: 'Chain-of-Thought Prompting â€” Research Paper', url: 'https://arxiv.org/abs/2201.11903' },
+                    { title: 'A/B Testing Guide - Optimizely', url: 'https://www.optimizely.com/optimization-glossary/ab-testing/' },
+                    { title: 'Sample Size Calculator - Evan Miller', url: 'https://www.evanmiller.org/ab-testing/sample-size.html' },
+                    { title: 'Prompt Engineering Guide - OpenAI', url: 'https://platform.openai.com/docs/guides/prompt-engineering' },
+                    { title: 'Prompt Engineering Course - DeepLearning.AI', url: 'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/' },
+                    { title: 'A/B Testing at Scale - Flipkart Engineering', url: 'https://tech.flipkart.com/' },
+                    { title: 'Chain-of-Thought Prompting - Research Paper', url: 'https://arxiv.org/abs/2201.11903' },
                     { title: 'Guardrail Metrics in A/B Testing', url: 'https://www.statsig.com/blog/guardrail-metrics' }
                 ], quiz: [
                     { q: 'A guardrail metric in an A/B test is:', options: ['The primary metric you are optimizing', 'A metric that must NOT degrade even if the primary metric improves', 'An optional metric', 'The sample size'], answer: 1 },
                     { q: 'Chain-of-thought prompting improves LLM output by:', options: ['Making it faster', 'Asking the model to show its reasoning step-by-step before giving a final answer', 'Using more tokens', 'Reducing cost'], answer: 1 },
-                    { q: 'Your A/B test shows +3% conversion but -5% retention. What do you do?', options: ['Ship it, conversion is up', 'Do NOT ship â€” the guardrail metric (retention) degraded. Investigate why.', 'Run it longer', 'Ignore retention'], answer: 1 }
+                    { q: 'Your A/B test shows +3% conversion but -5% retention. What do you do?', options: ['Ship it, conversion is up', 'Do NOT ship - the guardrail metric (retention) degraded. Investigate why.', 'Run it longer', 'Ignore retention'], answer: 1 }
                 ]
             },
             {
                 label: 'Week 7', focus: 'Flagship Project Start', items: [
-                    { text: 'Define AI Resume Optimizer: problem, users, architecture', detail: 'The flagship project: an AI tool that takes a user\'s resume + target job description and provides specific, actionable improvement suggestions. Architecture: Streamlit frontend â†’ OpenAI API (system prompt with PM expertise) â†’ structured output.', done_when: 'Written project definition with: target user, core problem, solution approach, tech stack, and MVP scope.' },
+                    { text: 'Define AI Resume Optimizer: problem, users, architecture', detail: 'The flagship project: an AI tool that takes a user\'s resume + target job description and provides specific, actionable improvement suggestions. Architecture: Streamlit frontend → OpenAI API (system prompt with PM expertise) → structured output.', done_when: 'Written project definition with: target user, core problem, solution approach, tech stack, and MVP scope.' },
                     { text: 'Build MVP: Streamlit + OpenAI API integration', detail: 'Streamlit makes it easy to create a web UI in Python. Connect to OpenAI API with a carefully crafted system prompt. Input: paste resume text + job description. Output: structured suggestions (what to change, why, example rewrite).', done_when: 'A working Streamlit app that accepts resume + JD and returns AI-powered suggestions. Deployed locally.' },
                     { text: 'Craft system prompt with PM feedback expertise', detail: 'The system prompt is everything. It should: (1) define the AI\'s role as a senior PM resume reviewer, (2) specify output format (sections, bullet points), (3) include examples of good vs bad resume bullets, (4) handle edge cases.', done_when: 'A refined system prompt that consistently produces high-quality, specific resume feedback across different inputs.' },
                     { text: 'Test with 5 different resumes, iterate on quality', detail: 'Get 5 diverse resumes (different experience levels, different industries). Run each through your tool. Evaluate: are suggestions specific? actionable? accurate? Iterate on the system prompt based on failures.', done_when: '5 test runs documented with quality assessment and at least 3 prompt iterations to improve output.' }
                 ], resources: [
-                    { title: 'Streamlit â€” Getting Started', url: 'https://docs.streamlit.io/get-started' },
+                    { title: 'Streamlit - Getting Started', url: 'https://docs.streamlit.io/get-started' },
                     { title: 'OpenAI API Quickstart', url: 'https://platform.openai.com/docs/quickstart' },
-                    { title: 'Build a Streamlit + OpenAI App â€” Tutorial', url: 'https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps' },
-                    { title: 'System Prompt Best Practices â€” Anthropic', url: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts' },
+                    { title: 'Build a Streamlit + OpenAI App - Tutorial', url: 'https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps' },
+                    { title: 'System Prompt Best Practices - Anthropic', url: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts' },
                     { title: 'Resume Writing Best Practices for PMs', url: 'https://www.lewis-lin.com/blog/pm-resume' },
-                    { title: 'Streamlit Deploy to Cloud â€” Free', url: 'https://streamlit.io/cloud' }
+                    { title: 'Streamlit Deploy to Cloud - Free', url: 'https://streamlit.io/cloud' }
                 ], quiz: [
-                    { q: 'Why Streamlit for the MVP?', options: ['It is the fastest framework', 'It allows rapid prototyping of data/AI apps with minimal frontend code â€” perfect for PM-builders', 'It is the only option', 'It scales to millions of users'], answer: 1 },
+                    { q: 'Why Streamlit for the MVP?', options: ['It is the fastest framework', 'It allows rapid prototyping of data/AI apps with minimal frontend code - perfect for PM-builders', 'It is the only option', 'It scales to millions of users'], answer: 1 },
                     { q: 'What makes a system prompt effective?', options: ['Making it very long', 'Clear role definition, specific output format, examples of good/bad outputs, and edge case handling', 'Using technical jargon', 'Keeping it to one line'], answer: 1 },
                     { q: 'Testing with 5 diverse resumes helps because:', options: ['More data is always better', 'It reveals edge cases and prompt weaknesses you would not find with a single test', 'It impresses employers', 'It is required by OpenAI'], answer: 1 }
                 ]
@@ -192,17 +194,19 @@ const PHASES = [
                     { text: 'Learn evaluation approaches: deterministic + LLM-as-judge', detail: 'Deterministic evals: exact match, contains keyword, format validation (JSON parseable?). LLM-as-judge: use a second LLM to rate output quality on criteria (relevance, specificity, actionability). Both are needed.', done_when: 'You can explain 3 deterministic eval methods and design an LLM-as-judge rubric for your resume tool.' },
                     { text: 'Build eval pipeline for Resume Optimizer', detail: 'Create a test suite: 10 resume+JD pairs with expected output criteria. Run your tool, then automatically evaluate: (1) are suggestions specific? (2) do they reference the JD? (3) are they actionable? Score 1-5 on each dimension.', done_when: 'A Python script that runs your tool on 10 test cases and produces a quality scorecard.' },
                     { text: 'Integrate LangSmith or Langfuse for observability', detail: 'LangSmith/Langfuse track every LLM call: input, output, latency, cost, feedback scores. Essential for understanding what\'s working and what\'s failing in production.', done_when: 'Your Streamlit app connected to LangSmith/Langfuse with traces visible in the dashboard.' },
-                    { text: 'Write case study draft with metrics', detail: 'Start your portfolio case study: Problem â†’ Solution â†’ Architecture â†’ Results. Even at MVP stage, document: number of test runs, average quality score, latency, cost per request, user feedback themes.', done_when: 'A 1-2 page case study draft in your GitHub repo covering problem, solution, architecture, and early metrics.' }
+                    { text: 'Write case study draft with metrics', detail: 'Start your portfolio case study: Problem → Solution → Architecture → Results. Even at MVP stage, document: number of test runs, average quality score, latency, cost per request, user feedback themes.', done_when: 'A 1-2 page case study draft in your GitHub repo covering problem, solution, architecture, and early metrics.' },
+                    { text: 'Understand Hallucinations & Biases in LLMs', detail: 'Hallucinations = the model confidently outputs false information. Biases = systematic unfairness from training data (gender, racial, cultural). As a PM, learn detection strategies: (1) fact-checking pipelines, (2) grounding with RAG, (3) confidence scoring, (4) bias audits on model outputs across demographics.', done_when: 'You can explain 3 techniques to reduce hallucinations and design a bias audit checklist for an AI feature.' },
+                    { text: 'Define Metrics for Data Coverage & Quality', detail: 'Critical PM skill: measuring whether your training/eval data is good enough. Key metrics: coverage (% of use cases represented), freshness (last updated), label accuracy (inter-annotator agreement), distribution balance (are minority cases represented?), completeness (missing fields ratio).', done_when: 'A data quality scorecard template with 5+ metrics that you could use to evaluate any AI project\'s dataset.' }
                 ], resources: [
-                    { title: 'LangSmith â€” LLM Observability Platform', url: 'https://smith.langchain.com' },
-                    { title: 'Langfuse â€” Open Source LLM Observability', url: 'https://langfuse.com' },
-                    { title: 'LLM Evaluation Best Practices â€” Hugging Face', url: 'https://huggingface.co/docs/evaluate/' },
-                    { title: 'How to Evaluate LLM Outputs â€” Anthropic', url: 'https://docs.anthropic.com/en/docs/build-with-claude/develop-tests' },
-                    { title: 'Building Eval Pipelines â€” DeepLearning.AI', url: 'https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/' },
+                    { title: 'LangSmith - LLM Observability Platform', url: 'https://smith.langchain.com' },
+                    { title: 'Langfuse - Open Source LLM Observability', url: 'https://langfuse.com' },
+                    { title: 'LLM Evaluation Best Practices - Hugging Face', url: 'https://huggingface.co/docs/evaluate/' },
+                    { title: 'How to Evaluate LLM Outputs - Anthropic', url: 'https://docs.anthropic.com/en/docs/build-with-claude/develop-tests' },
+                    { title: 'Building Eval Pipelines - DeepLearning.AI', url: 'https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/' },
                     { title: 'PM Case Study Writing Guide', url: 'https://www.lennysnewsletter.com/p/how-to-build-a-pm-portfolio' }
                 ], quiz: [
                     { q: 'Why use both deterministic evals AND LLM-as-judge?', options: ['Overkill', 'Deterministic catches format/structure issues; LLM-as-judge evaluates subjective quality. Together they give complete coverage.', 'Only one is needed', 'LLM-as-judge is always better'], answer: 1 },
-                    { q: 'LangSmith/Langfuse help PMs because:', options: ['They write code', 'They provide visibility into every LLM call â€” input, output, cost, latency â€” so you can debug quality issues and track improvements', 'They replace the product', 'They are free'], answer: 1 },
+                    { q: 'LangSmith/Langfuse help PMs because:', options: ['They write code', 'They provide visibility into every LLM call - input, output, cost, latency - so you can debug quality issues and track improvements', 'They replace the product', 'They are free'], answer: 1 },
                     { q: 'Your eval shows the tool scores 3/5 on "actionability." What do you do?', options: ['Ship it anyway', 'Analyze low-scoring outputs, identify patterns, and iterate on the system prompt to improve actionability', 'Rebuild from scratch', 'Ignore the eval'], answer: 1 }
                 ]
             }
@@ -217,14 +221,14 @@ const PHASES = [
                     { text: 'Add metadata filtering and hybrid search', detail: 'Metadata filtering: tag chunks with source, date, category. Then filter at query time (e.g., "only search RBI circulars from 2024"). Hybrid search: combine vector similarity with keyword matching (BM25) for better results.', done_when: 'Your RAG assistant supports metadata filtering and hybrid search. Documented improvement in retrieval quality.' },
                     { text: 'Document architecture decisions', detail: 'Write up: why this domain, chunking choice, embedding model, vector DB, retrieval strategy, generation prompt. Include what didn\'t work and why. This is your PM-builder artifact.', done_when: 'Architecture document in your GitHub repo covering all design decisions with rationale.' }
                 ], resources: [
-                    { title: 'RAG Best Practices â€” LangChain Docs', url: 'https://python.langchain.com/docs/tutorials/rag/' },
-                    { title: 'Chunking Strategies Compared â€” Pinecone', url: 'https://www.pinecone.io/learn/chunking-strategies/' },
-                    { title: 'Hybrid Search Explained â€” Weaviate', url: 'https://weaviate.io/blog/hybrid-search-explained' },
+                    { title: 'RAG Best Practices - LangChain Docs', url: 'https://python.langchain.com/docs/tutorials/rag/' },
+                    { title: 'Chunking Strategies Compared - Pinecone', url: 'https://www.pinecone.io/learn/chunking-strategies/' },
+                    { title: 'Hybrid Search Explained - Weaviate', url: 'https://weaviate.io/blog/hybrid-search-explained' },
                     { title: 'Text Splitting in LangChain', url: 'https://python.langchain.com/docs/how_to/recursive_text_splitter/' },
-                    { title: 'RBI Regulations Database â€” For Fintech RAG', url: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx' },
-                    { title: 'FAISS vs Chroma vs Pinecone â€” Comparison', url: 'https://www.pinecone.io/learn/vector-database/' }
+                    { title: 'RBI Regulations Database - For Fintech RAG', url: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx' },
+                    { title: 'FAISS vs Chroma vs Pinecone - Comparison', url: 'https://www.pinecone.io/learn/vector-database/' }
                 ], quiz: [
-                    { q: 'Why does chunking strategy matter in RAG?', options: ['It does not matter', 'Chunk size and method directly affect retrieval quality â€” too large and irrelevant text dilutes the answer; too small and context is lost', 'Bigger chunks are always better', 'Smaller chunks are always better'], answer: 1 },
+                    { q: 'Why does chunking strategy matter in RAG?', options: ['It does not matter', 'Chunk size and method directly affect retrieval quality - too large and irrelevant text dilutes the answer; too small and context is lost', 'Bigger chunks are always better', 'Smaller chunks are always better'], answer: 1 },
                     { q: 'Hybrid search combines:', options: ['Two LLMs', 'Vector similarity (semantic) + keyword matching (BM25) for more robust retrieval', 'Two databases', 'Two APIs'], answer: 1 },
                     { q: 'Your RAG returns irrelevant chunks. What do you investigate?', options: ['The LLM model', 'Chunking strategy, embedding quality, and whether metadata filtering could help narrow results', 'The UI design', 'The user\'s question is wrong'], answer: 1 }
                 ]
@@ -234,17 +238,17 @@ const PHASES = [
                     { text: 'Deploy flagship to Streamlit Cloud or Vercel', detail: 'Streamlit Cloud is free for public apps. Push your code to GitHub, connect to Streamlit Cloud, and deploy. Now anyone can use your tool via a URL. This is the "shipped" milestone for your resume.', done_when: 'Your AI Resume Optimizer is live at a public URL that anyone can access.' },
                     { text: 'Add structured feedback collection', detail: 'Add a simple feedback mechanism: after each suggestion, users can rate it (helpful/not helpful) or leave a text comment. Store feedback in a simple backend (Google Sheets API, Supabase, or even a JSON file).', done_when: 'Users can submit feedback on suggestions, and you can view aggregated feedback data.' },
                     { text: 'Push to 10+ real users', detail: 'Share with friends, college groups, PM communities. Ask them to actually use it for their resumes. Track: how many used it, completion rate, feedback scores.', done_when: '10+ real users have used the tool. Usage data and feedback collected.' },
-                    { text: 'Iterate based on feedback', detail: 'Review all feedback. Identify top 3 issues. Fix them. This iteration cycle (ship â†’ feedback â†’ improve) is exactly what PMs do. Document the before/after.', done_when: 'At least 3 improvements made based on real user feedback, documented with before/after examples.' }
+                    { text: 'Iterate based on feedback', detail: 'Review all feedback. Identify top 3 issues. Fix them. This iteration cycle (ship → feedback → improve) is exactly what PMs do. Document the before/after.', done_when: 'At least 3 improvements made based on real user feedback, documented with before/after examples.' }
                 ], resources: [
-                    { title: 'Streamlit Cloud â€” Free Deployment', url: 'https://streamlit.io/cloud' },
-                    { title: 'Vercel â€” Free Hosting for Web Apps', url: 'https://vercel.com' },
-                    { title: 'Google Sheets as a Database â€” Tutorial', url: 'https://developers.google.com/sheets/api/quickstart/python' },
-                    { title: 'Supabase â€” Free Tier Backend', url: 'https://supabase.com' },
+                    { title: 'Streamlit Cloud - Free Deployment', url: 'https://streamlit.io/cloud' },
+                    { title: 'Vercel - Free Hosting for Web Apps', url: 'https://vercel.com' },
+                    { title: 'Google Sheets as a Database - Tutorial', url: 'https://developers.google.com/sheets/api/quickstart/python' },
+                    { title: 'Supabase - Free Tier Backend', url: 'https://supabase.com' },
                     { title: 'How to Get Your First 10 Users', url: 'https://www.indiehackers.com/post/how-to-get-your-first-users' },
                     { title: 'User Feedback Collection Best Practices', url: 'https://www.hotjar.com/blog/user-feedback/' }
                 ], quiz: [
                     { q: 'Why deploy to a public URL instead of just running locally?', options: ['It is required', 'A live URL proves you can ship. It transforms "I built something" into "I shipped something real people use."', 'It is easier', 'Local is fine'], answer: 1 },
-                    { q: 'Your first 10 users give mixed feedback. This is:', options: ['A failure', 'Normal and valuable â€” mixed feedback reveals exactly what to improve', 'A sign to start over', 'Proof the tool is bad'], answer: 1 }
+                    { q: 'Your first 10 users give mixed feedback. This is:', options: ['A failure', 'Normal and valuable - mixed feedback reveals exactly what to improve', 'A sign to start over', 'Proof the tool is bad'], answer: 1 }
                 ]
             },
             {
@@ -252,29 +256,29 @@ const PHASES = [
                     { text: 'Study advanced techniques: function calling, structured outputs, multi-turn', detail: 'Function calling: the LLM can call predefined functions (e.g., search_database, send_email). Structured outputs: force JSON schema compliance. Multi-turn: managing conversation history and context.', done_when: 'You can implement function calling in your tool and get consistently structured JSON outputs.' },
                     { text: 'Build custom eval rubric for your flagship', detail: 'Create a detailed rubric: (1) Relevance to JD (1-5), (2) Specificity of suggestions (1-5), (3) Actionability (1-5), (4) Tone appropriateness (1-5), (5) Format compliance (pass/fail). Run on 20+ test cases.', done_when: 'A formal eval rubric with 5+ dimensions, tested on 20+ cases, with aggregate scores calculated.' },
                     { text: 'Compare model outputs: GPT-4 vs GPT-4o-mini vs Claude', detail: 'Run the same 10 test cases across different models. Compare: quality scores, latency, cost. Create a comparison matrix. This data becomes a powerful interview talking point.', done_when: 'A model comparison document with quality, latency, and cost data across 3+ models.' },
-                    { text: 'Document cost and latency analysis', detail: 'Calculate: cost per request (tokens Ã- price), average latency, monthly cost at different user volumes (100, 1000, 10000 users/day). This shows engineering-aware PM thinking.', done_when: 'A cost/latency analysis document with projections at different scales. Included in your case study.' }
+                    { text: 'Document cost and latency analysis', detail: 'Calculate: cost per request (tokens × price), average latency, monthly cost at different user volumes (100, 1000, 10000 users/day). This shows engineering-aware PM thinking.', done_when: 'A cost/latency analysis document with projections at different scales. Included in your case study.' }
                 ], resources: [
                     { title: 'OpenAI Function Calling Guide', url: 'https://platform.openai.com/docs/guides/function-calling' },
-                    { title: 'Structured Outputs â€” OpenAI', url: 'https://platform.openai.com/docs/guides/structured-outputs' },
+                    { title: 'Structured Outputs - OpenAI', url: 'https://platform.openai.com/docs/guides/structured-outputs' },
                     { title: 'OpenAI Pricing Calculator', url: 'https://openai.com/api/pricing/' },
                     { title: 'Anthropic Claude API Docs', url: 'https://docs.anthropic.com/en/docs' },
-                    { title: 'LLM Evaluation Framework â€” DeepEval', url: 'https://docs.confident-ai.com/' },
+                    { title: 'LLM Evaluation Framework - DeepEval', url: 'https://docs.confident-ai.com/' },
                     { title: 'Model Comparison Best Practices', url: 'https://www.anyscale.com/blog/comparing-llms' }
                 ], quiz: [
                     { q: 'Function calling in LLMs allows:', options: ['The model to execute code', 'The model to invoke predefined functions with structured parameters, enabling tool use', 'The model to call phone numbers', 'Nothing useful'], answer: 1 },
-                    { q: 'Your eval shows GPT-4 scores 4.2/5 and GPT-4o-mini scores 3.8/5, but GPT-4 costs 10x more. What do you recommend?', options: ['Always use GPT-4', 'It depends on the use case â€” for a free tool, 3.8/5 at 10x less cost may be acceptable. Present the trade-off with data.', 'Always use the cheapest', 'Neither'], answer: 1 }
+                    { q: 'Your eval shows GPT-4 scores 4.2/5 and GPT-4o-mini scores 3.8/5, but GPT-4 costs 10x more. What do you recommend?', options: ['Always use GPT-4', 'It depends on the use case - for a free tool, 3.8/5 at 10x less cost may be acceptable. Present the trade-off with data.', 'Always use the cheapest', 'Neither'], answer: 1 }
                 ]
             },
             {
                 label: 'Week 12', focus: 'Portfolio Assembly', items: [
                     { text: 'Finalize case study with quantified impact', detail: 'Update your case study with final metrics: total users, satisfaction scores, improvement iterations, cost analysis, model comparison results. Frame every number as a business impact.', done_when: 'Complete case study published in your GitHub repo with all metrics updated to latest numbers.' },
-                    { text: 'Record 2-minute demo walkthrough', detail: 'Record: (1) paste a resume, (2) paste a JD, (3) get AI suggestions, (4) show the quality. Use Loom or OBS. Practice narrating the demo â€” what you built, why, and the results.', done_when: 'A polished 2-minute demo video uploaded and shareable via link.' },
+                    { text: 'Record 2-minute demo walkthrough', detail: 'Record: (1) paste a resume, (2) paste a JD, (3) get AI suggestions, (4) show the quality. Use Loom or OBS. Practice narrating the demo - what you built, why, and the results.', done_when: 'A polished 2-minute demo video uploaded and shareable via link.' },
                     { text: 'Ensure GitHub repo is clean and documented', detail: 'README should cover: what it is, how to use it, architecture, key decisions, results. Code should be clean with comments. Remove any API keys or secrets.', done_when: 'GitHub repo has a comprehensive README, clean code, no secrets, and is publicly accessible.' },
-                    { text: 'Practice presenting the project in 5 minutes', detail: 'Simulate an interview: "Tell me about a product you built." Structure: Problem â†’ Solution â†’ How I Built It â†’ What I Learned â†’ Results. Practice 5 times until it flows naturally.', done_when: 'You can present your project confidently in under 5 minutes without reading notes.' }
+                    { text: 'Practice presenting the project in 5 minutes', detail: 'Simulate an interview: "Tell me about a product you built." Structure: Problem → Solution → How I Built It → What I Learned → Results. Practice 5 times until it flows naturally.', done_when: 'You can present your project confidently in under 5 minutes without reading notes.' }
                 ], resources: [
-                    { title: 'Loom â€” Free Screen Recording', url: 'https://www.loom.com' },
-                    { title: 'OBS Studio â€” Free Open Source Screen Recorder', url: 'https://obsproject.com' },
-                    { title: 'README Writing Guide â€” Make a README', url: 'https://www.makeareadme.com' },
+                    { title: 'Loom - Free Screen Recording', url: 'https://www.loom.com' },
+                    { title: 'OBS Studio - Free Open Source Screen Recorder', url: 'https://obsproject.com' },
+                    { title: 'README Writing Guide - Make a README', url: 'https://www.makeareadme.com' },
                     { title: 'How to Present Projects in PM Interviews', url: 'https://www.tryexponent.com/courses/pm/project-deep-dive' },
                     { title: 'GitHub Profile README Ideas', url: 'https://github.com/abhisheknaiidu/awesome-github-profile-readme' },
                     { title: 'Case Study Writing for PM Portfolios', url: 'https://www.lennysnewsletter.com/p/how-to-build-a-pm-portfolio' }
@@ -291,17 +295,17 @@ const PHASES = [
                 label: 'Week 13', focus: 'Agentic Workflow Study', items: [
                     { text: 'Understand multi-step reasoning, tool use, API orchestration', detail: 'Agentic AI = systems where the LLM plans, takes actions, uses tools, and iterates. Key concepts: planning, tool calling, memory, loops.', done_when: 'You can explain the difference between a chatbot and an AI agent with 3 real-world use cases.' },
                     { text: 'Learn Agent Graphs and orchestration patterns', detail: 'LangGraph models agents as state machines: nodes (actions), edges (transitions), conditional routing. Patterns: sequential, parallel, conditional.', done_when: 'You can draw an agent graph for a research assistant use case.' },
-                    { text: 'Build a simple agent with LangGraph or n8n', detail: 'Build a minimal agent: user question â†’ decide if web search needed â†’ search â†’ summarize â†’ return answer.', done_when: 'Working agent code saved in your repo.' },
+                    { text: 'Build a simple agent with LangGraph or n8n', detail: 'Build a minimal agent: user question → decide if web search needed → search → summarize → return answer.', done_when: 'Working agent code saved in your repo.' },
                     { text: 'Document agent prototype with architecture', detail: 'README with: what it does, architecture diagram, tools used, when it loops vs stops.', done_when: 'Agent code + README with architecture diagram in portfolio repo.' }
                 ], resources: [
-                    { title: 'Agentic AI â€” IBM Explainer', url: 'https://www.ibm.com/think/topics/agentic-ai' },
-                    { title: 'LangGraph Tutorial â€” Medium', url: 'https://medium.com/@kbdeshpande/langgraph-tutorial-beginners-2025' },
+                    { title: 'Agentic AI - IBM Explainer', url: 'https://www.ibm.com/think/topics/agentic-ai' },
+                    { title: 'LangGraph Tutorial - Medium', url: 'https://medium.com/@kbdeshpande/langgraph-tutorial-beginners-2025' },
                     { title: 'LangGraph Official Docs', url: 'https://langchain-ai.github.io/langgraph/' },
-                    { title: 'Build AI Agents â€” FreeCodeCamp', url: 'https://www.freecodecamp.org/news/build-ai-agents-with-langgraph/' },
-                    { title: 'n8n â€” Visual Workflow Automation', url: 'https://n8n.io' },
-                    { title: 'Agentic RAG â€” Towards AI', url: 'https://towardsai.net/p/agentic-rag' },
+                    { title: 'Build AI Agents - FreeCodeCamp', url: 'https://www.freecodecamp.org/news/build-ai-agents-with-langgraph/' },
+                    { title: 'n8n - Visual Workflow Automation', url: 'https://n8n.io' },
+                    { title: 'Agentic RAG - Towards AI', url: 'https://towardsai.net/p/agentic-rag' },
                     { title: 'LangGraph Quickstart (YouTube)', url: 'https://www.youtube.com/results?search_query=langgraph+tutorial+beginner+2025' },
-                    { title: 'Getzep â€” LangGraph Memory Guide', url: 'https://python.langchain.com/docs/how_to/memory/' }
+                    { title: 'Getzep - LangGraph Memory Guide', url: 'https://python.langchain.com/docs/how_to/memory/' }
                 ], quiz: [
                     { q: 'What makes an AI system "agentic"?', options: ['It answers questions', 'It can plan, take actions, use tools, and iterate toward a goal', 'It uses GPT-4', 'It has a nice UI'], answer: 1 },
                     { q: 'In LangGraph, conditional edges:', options: ['Always run', 'Route to different nodes based on state or output', 'Delete data', 'Connect databases'], answer: 1 },
@@ -310,41 +314,40 @@ const PHASES = [
                 ]
             },
             {
-                label: 'Week 14', focus: 'Analytical Teardown', items: [
-                    { text: 'Pick friction in Swiggy Instamart / Zepto / Zomato', detail: 'Use the product 10+ times. Document friction points. Pick the ONE with highest user impact and revenue effect.', done_when: 'Specific friction identified backed by your usage data.' },
-                    { text: 'Propose AI-driven solution with PRD, architecture, eval, metrics, cost', detail: 'Mini-PRD: Problem â†’ AI Solution â†’ Architecture â†’ Eval criteria â†’ Metrics â†’ Cost estimate.', done_when: '2-3 page analytical teardown with all 6 sections.' },
-                    { text: 'Publish teardown on LinkedIn/Medium', detail: 'LinkedIn: 1500-word post. Medium: full teardown. Use visuals. Tag relevant people.', done_when: 'Published publicly with 10+ meaningful engagements.' },
-                    { text: 'Get substantive engagement', detail: 'Engage with comments. Share in PM communities. Goal: prove deep product thinking.', done_when: '3+ substantive comments from product/tech people.' }
+                label: 'Week 14', focus: 'Generative Models & Multi-Modality', items: [
+                    { text: 'Understand Diffusion Models, GANs, and Video Gen', detail: 'Text-to-text is just one modality. Learn how Diffusion models work (gradually adding/removing noise from images) vs GANs (generator vs discriminator). Understand current SOTA for video and audio generation.', done_when: 'You can explain the difference between a Transformer and a Diffusion model to a designer.' },
+                    { text: 'Design a Multi-Modal feature for an Indian App', detail: 'Multi-modal means accepting/generating text, images, and audio natively. Example: A Swiggy feature where users upload a photo of their fridge and get a recipe + Instamart cart of missing items.', done_when: 'Written mini-PRD for a multi-modal feature including user flow, required models (e.g., GPT-4V), and latency constraints.' },
+                    { text: 'Build a prototype using a Vision or Audio API', detail: 'Use OpenAI Vision API or Whisper (audio-to-text) to build a prototype. Example: A script that takes a wireframe image and generates HTML/CSS.', done_when: 'A working prototype that processes images or audio, with code saved to your portfolio repo.' },
+                    { text: 'Analyze cost and latency for multi-modal generation', detail: 'Image and video generation are drastically more expensive and slower than text. Calculate the unit economics of your multi-modal feature prototype at scale.', done_when: 'Unit economics table added to your PRD (Cost per 1k images, Time to First Token vs Time to Return Image).' }
                 ], resources: [
-                    { title: 'Swiggy Teardown â€” The Product Folks', url: 'https://medium.com/@preeya.kirani/ui-ux-teardown-swiggy' },
-                    { title: 'Zepto Case Study â€” NextLeap', url: 'https://nextleap.app/next-leap-blog/zepto-product-teardown' },
-                    { title: 'Quick Commerce India 2025', url: 'https://stockgro.club/learn/quick-commerce-india/' },
-                    { title: 'How to Write a Product Teardown', url: 'https://blog.gitconnected.com/product-teardown-guide' },
-                    { title: 'Swiggy Engineering Blog', url: 'https://bytes.swiggy.com/' },
-                    { title: 'LinkedIn Post Tips for PMs', url: 'https://taplio.com/linkedin-post-templates' },
-                    { title: 'Medium Publishing Guide', url: 'https://medium.com/creators' }
+                    { title: 'How Diffusion Models Work - Computerphile', url: 'https://www.youtube.com/watch?v=1CIpzeNxIhU' },
+                    { title: 'OpenAI Vision API Guide', url: 'https://platform.openai.com/docs/guides/vision' },
+                    { title: 'Whisper Audio Model', url: 'https://openai.com/research/whisper' },
+                    { title: 'Multi-Modality in AI Products', url: 'https://a16z.com/multi-modal-ai/' },
+                    { title: 'Stable Diffusion Explained', url: 'https://jalammar.github.io/illustrated-stable-diffusion/' },
+                    { title: 'Generative AI Pricing Calculator', url: 'https://artificialanalysis.ai/' }
                 ], quiz: [
-                    { q: 'Best analytical teardown starts with:', options: ['Suggesting features', 'Deep personal usage to identify real friction', 'Reading reviews', 'Copying competitors'], answer: 1 },
-                    { q: 'What makes an AI solution teardown credible?', options: ['Mentions AI', 'Includes architecture, eval, metrics, and cost analysis', 'Is long', 'Uses jargon'], answer: 1 },
-                    { q: '100 likes but no comments â€” good?', options: ['Great engagement', 'Not ideal â€” substantive comments from PMs matter more', 'Perfect', 'Post more'], answer: 1 }
+                    { q: 'How does a Diffusion model generally create an image?', options: ['It searches Google Images', 'It starts with pure random noise and gradually predicts and removes the noise to form an image', 'It uses SQL', 'It combines shapes together'], answer: 1 },
+                    { q: 'What is a "multi-modal" AI system?', options: ['An AI that runs on multiple servers', 'An AI that natively processes and/or generates different data types (e.g., text, images, audio)', 'An app with dark/light mode', 'An AI built by multiple companies'], answer: 1 },
+                    { q: 'When designing multi-modal features, what is the biggest PM constraint?', options: ['Text parsing', 'Image and video generation have drastically higher latency and cost per request than text', 'Choosing colors', 'Mobile screen size'], answer: 1 }
                 ]
             },
             {
-                label: 'Week 15', focus: 'Scale Flagship', items: [
-                    { text: 'Push flagship to 40+ users', detail: 'Promote in college groups, PM communities, LinkedIn. Ask users to share.', done_when: '40+ unique users confirmed.' },
-                    { text: 'Run before/after survey', detail: 'Survey: "Did you update your resume? Get more callbacks?"', done_when: 'Survey sent, 10+ responses collected.' },
-                    { text: 'Document quantitative impact', detail: 'Calculate: users, satisfaction, completion rate, % who took action.', done_when: 'Metrics summary formatted for resume/interview use.' },
-                    { text: 'Prepare demo recording', detail: '2-minute screen recording: paste resume, get AI suggestions, show quality.', done_when: 'Polished demo video uploaded and shareable.' }
+                label: 'Week 15', focus: 'Safety, Guardrails & HITL', items: [
+                    { text: 'Learn AI Safety, PII Handling, and Jailbreaks', detail: 'Understand Prompt Injection (users manipulating the AI), jailbreaks, and PII (Personally Identifiable Information) leakage. Learn how to scrub PII before sending data to external APIs.', done_when: 'You can define prompt injection and write a strategy for handling PII in a healthcare/fintech AI app.' },
+                    { text: 'Design a Guardrail System', detail: 'Guardrails intercept inputs and outputs. Input guardrail: "Is this query trying to hack the system?" Output guardrail: "Does this response contain hate speech or competitors\' names?"', done_when: 'Designed a 2-layer guardrail architecture for a customer support bot.' },
+                    { text: 'Define a Human-in-the-Loop (HITL) Workflow', detail: 'AI is rarely 100% accurate. HITL means a human reviews the AI output before it impacts the user. Determine the threshold: e.g., if AI confidence < 80%, route to human agent.', done_when: 'Process flow diagram showing when the AI acts autonomously vs when a human must approve.' },
+                    { text: 'Implement an open-source guardrail', detail: 'Use libraries like NeMo Guardrails or Llama Guard to add an input protection layer to your existing prototypes.', done_when: 'Working Python script demonstrating an input successfully blocked by an AI guardrail.' }
                 ], resources: [
-                    { title: 'Loom â€” Free Screen Recording', url: 'https://www.loom.com' },
-                    { title: 'OBS Studio', url: 'https://obsproject.com' },
-                    { title: 'How to Get First Users â€” IndieHackers', url: 'https://www.indiehackers.com/post/how-to-get-your-first-users' },
-                    { title: 'Product Hunt', url: 'https://www.producthunt.com' },
-                    { title: 'Google Forms', url: 'https://forms.google.com' },
-                    { title: 'Product Metrics â€” Amplitude', url: 'https://amplitude.com/blog/product-metrics' }
+                    { title: 'OWASP Top 10 for LLMs', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/' },
+                    { title: 'Human-in-the-Loop (HITL) AI Systems', url: 'https://www.reforge.com/blog/human-in-the-loop-ai' },
+                    { title: 'Nvidia NeMo Guardrails', url: 'https://github.com/NVIDIA/NeMo-Guardrails' },
+                    { title: 'Llama Guard - Meta', url: 'https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/' },
+                    { title: 'PII Scrubbing with Presidio', url: 'https://microsoft.github.io/presidio/' }
                 ], quiz: [
-                    { q: '100 users once vs 30 with feedback?', options: ['100', '30 with feedback â€” quality data drives iteration', 'Equal', 'Neither'], answer: 1 },
-                    { q: 'Which resume bullet is stronger?', options: ['"Built AI tool"', '"Shipped AI Resume Optimizer to 40+ users, 4.2/5 satisfaction, 65% updated resume"', '"Used OpenAI"', '"Learned AI"'], answer: 1 }
+                    { q: 'What is Prompt Injection?', options: ['Adding extra data to a prompt', 'A vulnerability where a user provides malicious input that tricks the LLM into ignoring its original instructions', 'A feature for faster processing', 'Injecting code into the database'], answer: 1 },
+                    { q: 'Why implement Human-in-the-Loop (HITL)?', options: ['To slow down the system intentionally', 'To provide a quality safety net for high-risk applications where AI cannot be trusted 100% autonomously', 'To satisfy HR requirements', 'Because AI is too expensive'], answer: 1 },
+                    { q: 'If your AI app processes user financial data via the OpenAI API, you must:', options: ['Email it to OpenAI securely', 'Implement PII scrubbing to mask account numbers and names before the data leaves your servers', 'Print the data first', 'Do nothing, OpenAI is secure'], answer: 1 }
                 ]
             },
             {
@@ -354,13 +357,13 @@ const PHASES = [
                     { text: 'Tag relevant Indian tech leaders', detail: 'Tag heads of product at Swiggy/Zomato/CRED, PM influencers. Genuinely relevant.', done_when: 'Posts with relevant tags, 1+ tagged person engaged.' },
                     { text: 'Get meaningful engagement', detail: 'Respond to every comment. Cross-post in PM communities.', done_when: '20+ engagements, 3+ from product/tech roles.' }
                 ], resources: [
-                    { title: 'Building in Public â€” IndieHackers', url: 'https://www.indiehackers.com/post/building-in-public' },
+                    { title: 'Building in Public - IndieHackers', url: 'https://www.indiehackers.com/post/building-in-public' },
                     { title: 'LinkedIn Content Strategy', url: 'https://taplio.com/linkedin-strategy' },
                     { title: 'Product Leaders Forum India', url: 'https://productleadersforum.org' },
                     { title: 'GrowthX Community', url: 'https://growthx.club' },
                     { title: 'How to Write Technical Posts', url: 'https://www.freecodecamp.org/news/how-to-write-a-great-technical-blog-post/' }
                 ], quiz: [
-                    { q: '"Built AI tool" vs "GPT-4 cost $0.03 but only 5% better than mini for resumes." Which shows PM thinking?', options: ['First', 'Second â€” data-driven cost/quality trade-off', 'Equal', 'Neither'], answer: 1 },
+                    { q: '"Built AI tool" vs "GPT-4 cost $0.03 but only 5% better than mini for resumes." Which shows PM thinking?', options: ['First', 'Second - data-driven cost/quality trade-off', 'Equal', 'Neither'], answer: 1 },
                     { q: 'Why build in public?', options: ['Gets likes', 'Demonstrates execution, technical literacy, and communication simultaneously', 'Replaces resume', 'Guarantees job'], answer: 1 }
                 ]
             }
@@ -370,21 +373,21 @@ const PHASES = [
         name: 'Resume Engineering + Interviews', weeks: [
             {
                 label: 'Week 17', focus: 'Resume Overhaul', items: [
-                    { text: 'Parse-proof, reverse-chronological format', detail: 'ATS-friendly: no tables, no columns. Sections: Contact â†’ Skills â†’ Experience â†’ Projects â†’ Education.', done_when: 'Resume passes ATS parsing test (jobscan.co).' },
+                    { text: 'Parse-proof, reverse-chronological format', detail: 'ATS-friendly: no tables, no columns. Sections: Contact → Skills → Experience → Projects → Education.', done_when: 'Resume passes ATS parsing test (jobscan.co).' },
                     { text: 'Core Skills block: Python, SQL, RAG, Prompt Eng, A/B Testing, Evals', detail: 'Only list skills you can defend in an interview.', done_when: 'Skills section with verified, demonstrable skills.' },
                     { text: 'Every bullet: Action + Tool + Quantified Outcome', detail: 'Wrong: "Built resume tool." Right: "Shipped AI Resume Optimizer (Streamlit+OpenAI) to 50+ users, 4.2/5 satisfaction."', done_when: 'Every bullet follows Action + Tool + Impact format.' },
                     { text: 'Get resume reviewed by 1 PM/mentor', detail: 'Someone who has hired PMs, not a friend.', done_when: 'Resume reviewed, 2+ changes made based on feedback.' }
                 ], resources: [
-                    { title: 'Jobscan â€” ATS Checker', url: 'https://www.jobscan.co' },
-                    { title: 'APM Resume Tips â€” HelloPM', url: 'https://hellopm.co/pm-resume-tips' },
-                    { title: 'PM Resume Bullets â€” Lewis Lin', url: 'https://www.lewis-lin.com/blog/pm-resume' },
-                    { title: 'Google APM Guide â€” igotanoffer', url: 'https://igotanoffer.com/blogs/product-manager/google-apm-program' },
-                    { title: 'Novoresume â€” ATS Templates', url: 'https://novoresume.com' },
+                    { title: 'Jobscan - ATS Checker', url: 'https://www.jobscan.co' },
+                    { title: 'APM Resume Tips - HelloPM', url: 'https://hellopm.co/pm-resume-tips' },
+                    { title: 'PM Resume Bullets - Lewis Lin', url: 'https://www.lewis-lin.com/blog/pm-resume' },
+                    { title: 'Google APM Guide - igotanoffer', url: 'https://igotanoffer.com/blogs/product-manager/google-apm-program' },
+                    { title: 'Novoresume - ATS Templates', url: 'https://novoresume.com' },
                     { title: 'Decode and Conquer', url: 'https://www.lewis-lin.com/decode-and-conquer' },
                     { title: 'Resume Worded', url: 'https://resumeworded.com' }
                 ], quiz: [
                     { q: 'Best PM resume bullet?', options: ['"Used Python"', '"Shipped AI Resume Optimizer (Streamlit+OpenAI) to 50+ users, 30% quality improvement"', '"Interested in PM"', '"Completed course"'], answer: 1 },
-                    { q: 'ATS compatibility matters because:', options: ['Looks better', 'Most companies filter with ATS â€” bad format = rejected before human sees it', 'Optional', 'Big companies only'], answer: 1 }
+                    { q: 'ATS compatibility matters because:', options: ['Looks better', 'Most companies filter with ATS - bad format = rejected before human sees it', 'Optional', 'Big companies only'], answer: 1 }
                 ]
             },
             {
@@ -397,86 +400,85 @@ const PHASES = [
                     { title: 'LinkedIn Optimization for PMs', url: 'https://www.lennysnewsletter.com/p/linkedin-tips-for-pms' },
                     { title: 'LinkedIn Featured Section', url: 'https://www.linkedin.com/help/linkedin/answer/a726960' },
                     { title: 'LinkedIn SEO', url: 'https://buffer.com/resources/linkedin-seo/' },
-                    { title: 'Headline Formula â€” Jobscan', url: 'https://www.jobscan.co/blog/linkedin-headline-examples/' }
+                    { title: 'Headline Formula - Jobscan', url: 'https://www.jobscan.co/blog/linkedin-headline-examples/' }
                 ], quiz: [
                     { q: 'Effective LinkedIn headline combines:', options: ['Length', 'Aspiration + proof of shipping + key skills in one line', 'Mentions AI', 'Emojis'], answer: 1 }
                 ]
             },
             {
-                label: 'Week 19', focus: 'Interview Sim â€” Product Sense', items: [
+                label: 'Week 19', focus: 'Interview Sim - Product Sense', items: [
                     { text: 'Practice AI-specific scenarios', detail: '"AI code generator gets 40% thumbs-down. 2 months, 5 engineers. What do you do?" Practice constraint curveballs.', done_when: '5+ AI-specific cases practiced, can handle curveballs.' },
                     { text: 'Master constraint curveballs', detail: 'Interviewers change constraints mid-answer. Practice adapting on the fly.', done_when: 'Can adjust solutions smoothly when constraints change.' },
                     { text: 'Complete 5+ mock interviews', detail: 'Use Exponent, Pramp, or peers. Write self-feedback after each.', done_when: '5+ mocks with written feedback.' },
                     { text: 'Case notebook at 25+ solved', detail: 'Organize by type: improve product, design feature, metrics decline, strategy.', done_when: '25+ cases organized by type.' }
                 ], resources: [
-                    { title: 'Exponent â€” PM Interviews', url: 'https://www.tryexponent.com/courses/pm' },
+                    { title: 'Exponent - PM Interviews', url: 'https://www.tryexponent.com/courses/pm' },
                     { title: 'Decode and Conquer', url: 'https://www.lewis-lin.com/decode-and-conquer' },
-                    { title: 'Product Sense â€” Aakash Gupta', url: 'https://www.aakashg.com/product-sense' },
+                    { title: 'Product Sense - Aakash Gupta', url: 'https://www.aakashg.com/product-sense' },
                     { title: 'Google APM Guide', url: 'https://igotanoffer.com/blogs/product-manager/google-apm-program' },
-                    { title: 'Pramp â€” Free Mock Interviews', url: 'https://www.pramp.com' },
+                    { title: 'Pramp - Free Mock Interviews', url: 'https://www.pramp.com' },
                     { title: 'PM Exercises', url: 'https://www.productmanagementexercises.com' },
                     { title: 'LiftoffPM (YouTube)', url: 'https://www.youtube.com/@LiftoffPM' }
                 ], quiz: [
-                    { q: 'AI feature gets 40% thumbs-down. First step?', options: ['Rebuild model', 'Analyze WHAT users thumbs-down â€” accuracy, relevance, formatting, or latency?', 'Add features', 'Ignore, 60% good'], answer: 1 },
+                    { q: 'AI feature gets 40% thumbs-down. First step?', options: ['Rebuild model', 'Analyze WHAT users thumbs-down - accuracy, relevance, formatting, or latency?', 'Add features', 'Ignore, 60% good'], answer: 1 },
                     { q: 'Interviewer halves budget. Best response?', options: ['Panic', 'Reprioritize: highest-impact feature, cheaper model, smaller rollout', 'Impossible', 'Ask more budget'], answer: 1 }
                 ]
             },
             {
                 label: 'Week 20', focus: 'Guesstimates + Behavioral', items: [
-                    { text: 'Indian-context guesstimates', detail: '"How many ATMs in India?" "Bengaluru daily food delivery volume?" Top-down: population â†’ segment â†’ frequency.', done_when: 'Can solve any guesstimate in 3-4 minutes with clear structure.' },
+                    { text: 'Indian-context guesstimates', detail: '"How many ATMs in India?" "Bengaluru daily food delivery volume?" Top-down: population → segment → frequency.', done_when: 'Can solve any guesstimate in 3-4 minutes with clear structure.' },
                     { text: 'Write 4-6 STAR stories anchored in AI projects', detail: 'STAR for: shipping, technical challenge, user feedback iteration, trade-off, constraints, failure+recovery.', done_when: '6 written STAR stories, 150-200 words each.' },
                     { text: 'Practice out-loud mathematical reasoning', detail: 'Narrate every step. Interviewers care about HOW you think.', done_when: 'Can perform guesstimates aloud without long silences.' },
-                    { text: 'Complete 5+ guesstimates with written structures', detail: 'Question â†’ Approach â†’ Assumptions â†’ Calculation â†’ Sanity Check â†’ Answer.', done_when: '5+ written guesstimates in prep notebook.' }
+                    { text: 'Complete 5+ guesstimates with written structures', detail: 'Question → Approach → Assumptions → Calculation → Sanity Check → Answer.', done_when: '5+ written guesstimates in prep notebook.' }
                 ], resources: [
-                    { title: 'Guesstimate Questions â€” Product School', url: 'https://productschool.com/blog/product-management/guesstimate-questions' },
-                    { title: 'Top 40 Guesstimates â€” NextLeap', url: 'https://nextleap.app/next-leap-blog/guesstimates' },
-                    { title: 'STAR Method â€” The Muse', url: 'https://www.themuse.com/advice/star-interview-method' },
-                    { title: 'Behavioral Questions â€” Exponent', url: 'https://www.tryexponent.com/courses/behavioral' },
+                    { title: 'Guesstimate Questions - Product School', url: 'https://productschool.com/blog/product-management/guesstimate-questions' },
+                    { title: 'Top 40 Guesstimates - NextLeap', url: 'https://nextleap.app/next-leap-blog/guesstimates' },
+                    { title: 'STAR Method - The Muse', url: 'https://www.themuse.com/advice/star-interview-method' },
+                    { title: 'Behavioral Questions - Exponent', url: 'https://www.tryexponent.com/courses/behavioral' },
                     { title: 'Indian Market Sizing', url: 'https://jobuai.com/guesstimate' },
                     { title: 'Mock Guesstimates (YouTube)', url: 'https://www.youtube.com/results?search_query=guesstimate+practice+india+pm' }
                 ], quiz: [
-                    { q: 'Correct approach for "How many ATMs in India?"', options: ['Google it', 'Top-down: Population â†’ Urban% â†’ Banked% â†’ ATMs per capita', 'Bottom-up from city', 'Random guess'], answer: 1 },
-                    { q: 'Most important part of a STAR story?', options: ['Situation', 'Result â€” quantified impact of YOUR actions', 'Task', 'All equal'], answer: 1 }
+                    { q: 'Correct approach for "How many ATMs in India?"', options: ['Google it', 'Top-down: Population → Urban% → Banked% → ATMs per capita', 'Bottom-up from city', 'Random guess'], answer: 1 },
+                    { q: 'Most important part of a STAR story?', options: ['Situation', 'Result - quantified impact of YOUR actions', 'Task', 'All equal'], answer: 1 }
                 ]
             }
         ]
     },
     {
-        name: 'Ecosystem Penetration + Applications', weeks: [
+        name: 'Enterprise AI & Ecosystem Penetration', weeks: [
             {
-                label: 'Week 21', focus: 'Community Integration', items: [
-                    { text: 'Attend offline meetups: HelloPM, ProductTank Bengaluru, eChai', detail: 'In-person networking is 10x more effective. Goal: relationships, not job pitches.', done_when: '2+ events attended, 5+ new LinkedIn connections.' },
-                    { text: 'Join TPF WhatsApp/Discord groups', detail: 'Engage in discussions. Be helpful first. Visibility leads to referrals.', done_when: 'Active in 2+ channels with 3+ substantive contributions.' },
-                    { text: 'Seek portfolio feedback at events', detail: '"I built [project]. Would you mind a quick look?" More effective than asking for jobs.', done_when: 'Portfolio shown to 3+ people, actionable feedback received.' },
-                    { text: '5+ meaningful conversations with PMs/founders', detail: 'Genuine exchange. Follow up within 24 hours.', done_when: '5 new connections with follow-up messages sent.' }
+                label: 'Week 21', focus: 'Knowledge Agents & Personalization', items: [
+                    { text: 'Design an Enterprise Knowledge Management Agent', detail: 'Knowledge management limits many enterprises. Design an internal RAG-based agent that securely indexes company Jira/Confluence/Slack, answers engineering/product queries, and respects employee access roles.', done_when: 'A secure architecture diagram combining RAG, role-based access control (RBAC), and source tracing.' },
+                    { text: 'Understand AI Personalization & Recommender Systems', detail: 'Personalization is key to retention. Learn how collaborative filtering differs from content-based filtering, and how LLMs can extract user preferences dynamically from chat histories to build persistent user profiles.', done_when: 'You can explain the architecture of a personalized AI feed like TikTok or Spotify.' },
+                    { text: 'Network at Physical Product/AI Meetups', detail: 'Attend offline meetups like ProductTank Bengaluru or eChai. Goal is genuine relationship building with other builders.', done_when: 'Attend 2+ physical events and connect with 5+ founders/PMs on LinkedIn.' },
+                    { text: 'Seek feedback on your Enterprise Agent design', detail: 'Show your Knowledge Agent architecture to someone at a meetup. "I designed this for parsing Confluence, what would break in production?"', done_when: 'Received actionable feedback from an industry professional.' }
                 ], resources: [
-                    { title: 'ProductTank Bengaluru', url: 'https://www.meetup.com/ProductTank-Bangalore/' },
-                    { title: 'The Product Folks', url: 'https://theproductfolks.com' },
-                    { title: 'Product Leaders Forum', url: 'https://productleadersforum.org' },
-                    { title: 'HelloPM', url: 'https://hellopm.co' },
-                    { title: 'eChai Ventures', url: 'https://echai.in' },
-                    { title: 'GrowthX', url: 'https://growthx.club' },
-                    { title: 'Networking Guide â€” First Round', url: 'https://firstround.com/review/how-to-become-insanely-well-connected/' }
+                    { title: 'Enterprise RAG Best Practices - Pinecone', url: 'https://www.pinecone.io/learn/enterprise-rag/' },
+                    { title: 'Recommender Systems Basics - Google', url: 'https://developers.google.com/machine-learning/recommendation' },
+                    { title: 'Building Persistent Memory in Agents', url: 'https://python.langchain.com/docs/how_to/memory/' },
+                    { title: 'The Product Folks (Community)', url: 'https://theproductfolks.com' },
+                    { title: 'eChai Ventures', url: 'https://echai.in' }
                 ], quiz: [
-                    { q: 'Best opening at a PM meetup?', options: ['"Are you hiring?"', '"What are you working on? I built [project] â€” would love your thoughts"', '"Can you refer me?"', '"Here\'s my resume"'], answer: 1 },
-                    { q: 'Why follow up within 24 hours?', options: ['Polite', 'People forget quickly â€” prompt follow-up converts event connection to real relationship', 'Required', 'To send resume'], answer: 1 }
+                    { q: 'What is the biggest challenge when building enterprise Knowledge Agents on top of internal documents?', options: ['LLMs are too slow', 'Respecting Role-Based Access Control (RBAC) so the AI does not leak executive documents to junior employees', 'Storing the documents', 'UI design'], answer: 1 },
+                    { q: 'How do LLMs improve traditional Recommender Systems?', options: ['They make it cheaper', 'They can extract rich semantic preferences from unstructured text (like reviews or chat) rather than just relying on clicks', 'They replace the database', 'They look nice'], answer: 1 }
                 ]
             },
             {
-                label: 'Week 22', focus: 'Target List + Outreach', items: [
-                    { text: 'Create tracker: 15-20 Big Tech + 15-20 AI startups + 10 enterprises', detail: 'Spreadsheet: Company, Role, Hiring Manager, URL, Status, Referral Contact.', done_when: '40+ companies tracked with links and contacts.' },
-                    { text: 'Identify hiring managers on LinkedIn', detail: 'Find Head of Product/PM lead. Note their recent content. Personalize outreach.', done_when: '15+ hiring manager names identified.' },
-                    { text: 'Prepare personalized cold outreach', detail: '"Hi [Name], I saw your post about [topic]. I shipped [project] to [X users]..."', done_when: '5+ personalized messages drafted.' },
-                    { text: 'Push flagship to 50+ users', detail: 'Final push. 50+ = resume milestone signaling real traction.', done_when: '50+ unique users confirmed.' }
+                label: 'Week 22', focus: 'Synthetic Data & Prioritization', items: [
+                    { text: 'Learn when and how to use Synthetic Data', detail: 'Data starvation is a real AI PM problem. Learn how to use stronger models (like GPT-4) to generate synthetic training datasets or evaluation test cases to fine-tune smaller, cheaper models (like Llama 3).', done_when: 'Wrote a script that generates 100 synthetic customer support tickets and their ideal resolutions.' },
+                    { text: 'Apply AI Opportunity Prioritization Frameworks', detail: 'Not all AI features are worth building. Use a framework like RICE but adapted for AI: Impact, Confidence, Effort, plus Data Availability and Model Risk.', done_when: 'Prioritized 5 potential AI features for an Indian app using an adapted RICE framework.' },
+                    { text: 'Conduct an AI Opportunity Assessment', detail: 'Before proposing any AI feature, systematically assess: (1) Is the problem repetitive enough for AI? (2) Is sufficient data available? (3) What is the cost of getting it wrong (risk)? (4) Can a simpler rules-based system solve it? (5) What is the competitive moat? Use a structured scoring matrix.', done_when: 'A completed AI Opportunity Assessment matrix for 3 potential features, with scoring across all 5 dimensions, and a recommendation.' },
+                    { text: 'Create target tracking list: Tech + Startups', detail: 'Spreadsheet: 15-20 Big Tech, 15-20 AI Startups, hiring managers, status. You are preparing your final sprint.', done_when: '40+ companies tracked.' },
+                    { text: 'Prepare personalized cold outreach based on your portfolio', detail: '"Hi [Name], I noticed your team is building X. I recently shipped Y (multi-modal AI tool) and wrote a teardown on Z..."', done_when: '5+ personalized outreach messages sent.' }
                 ], resources: [
-                    { title: 'Indian AI Startups 2025 â€” YourStory', url: 'https://yourstory.com/2025/ai-startups-india' },
-                    { title: 'Cold Outreach Templates', url: 'https://www.themuse.com/advice/cold-outreach-email-templates' },
-                    { title: 'Google APM Guide', url: 'https://igotanoffer.com/blogs/product-manager/google-apm-program' },
-                    { title: 'Glassdoor India', url: 'https://www.glassdoor.co.in' },
-                    { title: 'Wellfound (AngelList)', url: 'https://wellfound.com' }
+                    { title: 'Synthetic Data in AI - IBM', url: 'https://www.ibm.com/topics/synthetic-data' },
+                    { title: 'Prioritizing AI Products - Reforge', url: 'https://www.reforge.com/blog/prioritizing-ai-products' },
+                    { title: 'Data Availability vs Model Complexity', url: 'https://a16z.com/2023/06/20/emerging-architectures-for-llm-applications/' },
+                    { title: 'Cold Outreach Templates for PMs', url: 'https://www.themuse.com/advice/cold-outreach-email-templates' },
+                    { title: 'Indian AI Startups 2025', url: 'https://yourstory.com/2025/ai-startups-india' }
                 ], quiz: [
-                    { q: 'Why personalize outreach?', options: ['Takes more time', 'Personalized messages get 3-5x higher response rates', 'Optional', 'Generic works fine'], answer: 1 },
-                    { q: 'Why aim for 50+ users?', options: ['Nice number', 'Signals real traction â€” rare among APM candidates', '100 better', 'Users irrelevant'], answer: 1 }
+                    { q: 'Why do AI teams use Synthetic Data?', options: ['It is fun', 'To bootstrap training or evaluation sets when real human data is scarce, expensive, or restricted by privacy laws', 'Because real data is too accurate', 'To slow down training'], answer: 1 },
+                    { q: 'When prioritizing an AI feature, what is a critical new dimension compared to traditional software?', options: ['Button color', 'Data Availability - if you don\'t have the proprietary data to ground the model, the feature will likely fail or hallucinate', 'Number of screens', 'Cloud provider'], answer: 1 }
                 ]
             },
             {
@@ -486,7 +488,7 @@ const PHASES = [
                     { text: 'Continue 2-3 cases/week', detail: 'Don\'t stop practice during application season.', done_when: 'Case notebook at 30+.' },
                     { text: 'Polish all portfolio artifacts', detail: 'Final review of everything. Fix broken links, update metrics, proofread.', done_when: 'All artifacts reviewed and updated.' }
                 ], resources: [
-                    { title: 'Cover Notes for PMs â€” Lenny', url: 'https://www.lennysnewsletter.com/p/how-to-write-cover-letters' },
+                    { title: 'Cover Notes for PMs - Lenny', url: 'https://www.lennysnewsletter.com/p/how-to-write-cover-letters' },
                     { title: 'How to Ask for Referrals', url: 'https://www.themuse.com/advice/how-to-ask-for-a-referral' },
                     { title: 'Naukri', url: 'https://www.naukri.com' },
                     { title: 'LinkedIn Jobs', url: 'https://www.linkedin.com/jobs/' },
@@ -501,17 +503,17 @@ const PHASES = [
                 label: 'Week 24', focus: 'Final Push', items: [
                     { text: 'Another 15-20 targeted applications', detail: 'Second wave. Check new postings at previous companies too.', done_when: 'Total 30-40+ applications tracked.' },
                     { text: 'Final mock interviews', detail: '3+ final mocks covering all types. Ask for brutal feedback.', done_when: '3+ final mocks with documented feedback.' },
-                    { text: 'Small improvements only â€” no new projects', detail: 'Resist new projects. Deepen existing work. Depth > breadth.', done_when: 'Portfolio refined, no new projects started.' },
+                    { text: 'Small improvements only - no new projects', detail: 'Resist new projects. Deepen existing work. Depth > breadth.', done_when: 'Portfolio refined, no new projects started.' },
                     { text: 'Check totals: 30-40+ apps, 10+ referrals, 30+ cases', detail: 'Full tracker documentation of your journey.', done_when: 'All targets met. Interview-ready.' }
                 ], resources: [
                     { title: 'PM Interview Prep Checklist', url: 'https://www.tryexponent.com/blog/pm-interview-prep' },
-                    { title: 'Negotiate Your Offer â€” Lenny', url: 'https://www.lennysnewsletter.com/p/how-to-negotiate-compensation' },
+                    { title: 'Negotiate Your Offer - Lenny', url: 'https://www.lennysnewsletter.com/p/how-to-negotiate-compensation' },
                     { title: 'Glassdoor Interview Reviews', url: 'https://www.glassdoor.co.in/Interview/' },
                     { title: 'Handling Rejection', url: 'https://www.themuse.com/advice/job-rejection' },
                     { title: 'PM Career Growth', url: 'https://productschool.com/blog/product-management/career-growth' }
                 ], quiz: [
-                    { q: 'Final week: idea for "better" project. You should:', options: ['Build it', 'Resist â€” deepen existing work, don\'t start new late', 'Start both', 'Cancel interviews'], answer: 1 },
-                    { q: '35 apps, 3 interview calls. Normal?', options: ['Very wrong', 'Yes â€” 10-15% response rate is typical. Focus on interview prep', 'Stop applying', 'Need 100 more'], answer: 1 },
+                    { q: 'Final week: idea for "better" project. You should:', options: ['Build it', 'Resist - deepen existing work, don\'t start new late', 'Start both', 'Cancel interviews'], answer: 1 },
+                    { q: '35 apps, 3 interview calls. Normal?', options: ['Very wrong', 'Yes - 10-15% response rate is typical. Focus on interview prep', 'Stop applying', 'Need 100 more'], answer: 1 },
                     { q: 'Most important asset by Week 24?', options: ['Certificate', 'Shipped AI product with real users, iterations, and quantified impact', 'Long resume', '10 courses'], answer: 1 }
                 ]
             }
@@ -519,22 +521,22 @@ const PHASES = [
     }
 ];
 const SKILL_RESOURCES = {
-    jtbd: [{ title: 'JTBD Framework â€” HBS', url: 'https://hbswk.hbs.edu/item/what-is-jobs-to-be-done' }, { title: 'Intercom on JTBD', url: 'https://www.intercom.com/resources/books/intercom-on-jobs-to-be-done' }],
-    prd: [{ title: 'How to Write a PRD â€” Lenny', url: 'https://www.lennysnewsletter.com/p/how-to-write-a-great-prd' }, { title: 'PRD Template â€” Notion', url: 'https://www.notion.com/templates/product-requirements-document-prd' }],
-    northstar: [{ title: 'North Star Metric Guide â€” Amplitude', url: 'https://amplitude.com/blog/north-star-metric' }, { title: 'Guardrail Metrics â€” Statsig', url: 'https://www.statsig.com/blog/guardrail-metrics' }],
-    abtesting: [{ title: 'A/B Testing Guide â€” Optimizely', url: 'https://www.optimizely.com/optimization-glossary/ab-testing/' }, { title: 'Sample Size Calculator', url: 'https://www.evanmiller.org/ab-testing/sample-size.html' }],
-    design: [{ title: 'Design Thinking â€” IDEO', url: 'https://designthinking.ideo.com/' }, { title: 'Laws of UX', url: 'https://lawsofux.com/' }],
-    sql: [{ title: 'SQL Tutorial â€” Mode', url: 'https://mode.com/sql-tutorial/' }, { title: 'DataLemur SQL Practice', url: 'https://datalemur.com/questions' }],
-    cohort: [{ title: 'Cohort Analysis Guide â€” Amplitude', url: 'https://amplitude.com/blog/cohort-analysis' }, { title: 'SQL Cohort Analysis â€” Mode', url: 'https://mode.com/sql-tutorial/sql-cohort-analysis/' }],
-    prioritize: [{ title: 'RICE Scoring â€” Intercom', url: 'https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/' }, { title: 'Prioritization Frameworks Compared', url: 'https://www.productplan.com/glossary/prioritization-frameworks/' }],
-    rag: [{ title: 'RAG Explained â€” Pinecone', url: 'https://www.pinecone.io/learn/retrieval-augmented-generation/' }, { title: 'LangChain RAG Tutorial', url: 'https://python.langchain.com/docs/tutorials/rag/' }],
-    aillm: [{ title: 'AI for Everyone â€” Andrew Ng', url: 'https://www.coursera.org/learn/ai-for-everyone' }, { title: 'LLM Basics for PMs', url: 'https://www.lennysnewsletter.com/p/ai-for-product-managers' }],
-    eval: [{ title: 'LLM Eval Best Practices', url: 'https://docs.confident-ai.com/' }, { title: 'Building Eval Pipelines â€” DeepLearning.AI', url: 'https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/' }],
-    prompt: [{ title: 'Prompt Engineering â€” OpenAI', url: 'https://platform.openai.com/docs/guides/prompt-engineering' }, { title: 'Prompt Engineering Course â€” DeepLearning.AI', url: 'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/' }],
-    agentic: [{ title: 'Agentic AI â€” IBM', url: 'https://www.ibm.com/think/topics/agentic-ai' }, { title: 'LangGraph Docs', url: 'https://langchain-ai.github.io/langgraph/' }],
-    responsible: [{ title: 'Responsible AI â€” Google', url: 'https://ai.google/responsibility/principles/' }, { title: 'AI Ethics Guide â€” UNESCO', url: 'https://www.unesco.org/en/artificial-intelligence/recommendation-ethics' }],
-    mlops: [{ title: 'MLOps Explained â€” Google', url: 'https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning' }, { title: 'MLOps for PMs', url: 'https://neptune.ai/blog/mlops-for-product-managers' }],
-    aicost: [{ title: 'OpenAI Pricing', url: 'https://openai.com/api/pricing/' }, { title: 'LLM Cost Optimization â€” Anyscale', url: 'https://www.anyscale.com/blog/comparing-llms' }]
+    jtbd: [{ title: 'JTBD Framework - HBS', url: 'https://hbswk.hbs.edu/item/what-is-jobs-to-be-done' }, { title: 'Intercom on JTBD', url: 'https://www.intercom.com/resources/books/intercom-on-jobs-to-be-done' }],
+    prd: [{ title: 'How to Write a PRD - Lenny', url: 'https://www.lennysnewsletter.com/p/how-to-write-a-great-prd' }, { title: 'PRD Template - Notion', url: 'https://www.notion.com/templates/product-requirements-document-prd' }],
+    northstar: [{ title: 'North Star Metric Guide - Amplitude', url: 'https://amplitude.com/blog/north-star-metric' }, { title: 'Guardrail Metrics - Statsig', url: 'https://www.statsig.com/blog/guardrail-metrics' }],
+    abtesting: [{ title: 'A/B Testing Guide - Optimizely', url: 'https://www.optimizely.com/optimization-glossary/ab-testing/' }, { title: 'Sample Size Calculator', url: 'https://www.evanmiller.org/ab-testing/sample-size.html' }],
+    design: [{ title: 'Design Thinking - IDEO', url: 'https://designthinking.ideo.com/' }, { title: 'Laws of UX', url: 'https://lawsofux.com/' }],
+    sql: [{ title: 'SQL Tutorial - Mode', url: 'https://mode.com/sql-tutorial/' }, { title: 'DataLemur SQL Practice', url: 'https://datalemur.com/questions' }],
+    cohort: [{ title: 'Cohort Analysis Guide - Amplitude', url: 'https://amplitude.com/blog/cohort-analysis' }, { title: 'SQL Cohort Analysis - Mode', url: 'https://mode.com/sql-tutorial/sql-cohort-analysis/' }],
+    prioritize: [{ title: 'RICE Scoring - Intercom', url: 'https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/' }, { title: 'Prioritization Frameworks Compared', url: 'https://www.productplan.com/glossary/prioritization-frameworks/' }],
+    rag: [{ title: 'RAG Explained - Pinecone', url: 'https://www.pinecone.io/learn/retrieval-augmented-generation/' }, { title: 'LangChain RAG Tutorial', url: 'https://python.langchain.com/docs/tutorials/rag/' }],
+    aillm: [{ title: 'AI for Everyone - Andrew Ng', url: 'https://www.coursera.org/learn/ai-for-everyone' }, { title: 'LLM Basics for PMs', url: 'https://www.lennysnewsletter.com/p/ai-for-product-managers' }],
+    eval: [{ title: 'LLM Eval Best Practices', url: 'https://docs.confident-ai.com/' }, { title: 'Building Eval Pipelines - DeepLearning.AI', url: 'https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/' }],
+    prompt: [{ title: 'Prompt Engineering - OpenAI', url: 'https://platform.openai.com/docs/guides/prompt-engineering' }, { title: 'Prompt Engineering Course - DeepLearning.AI', url: 'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/' }],
+    agentic: [{ title: 'Agentic AI - IBM', url: 'https://www.ibm.com/think/topics/agentic-ai' }, { title: 'LangGraph Docs', url: 'https://langchain-ai.github.io/langgraph/' }],
+    responsible: [{ title: 'Responsible AI - Google', url: 'https://ai.google/responsibility/principles/' }, { title: 'AI Ethics Guide - UNESCO', url: 'https://www.unesco.org/en/artificial-intelligence/recommendation-ethics' }],
+    mlops: [{ title: 'MLOps Explained - Google', url: 'https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning' }, { title: 'MLOps for PMs', url: 'https://neptune.ai/blog/mlops-for-product-managers' }],
+    aicost: [{ title: 'OpenAI Pricing', url: 'https://openai.com/api/pricing/' }, { title: 'LLM Cost Optimization - Anyscale', url: 'https://www.anyscale.com/blog/comparing-llms' }]
 };
 const MOCK_INTERVIEWS = [
     { co: 'Google', role: 'APM', level: 'Easy', cat: 'Product Sense', q: 'How would you improve Google Maps for a blind person?', flow: '1. Goals/Users. 2. Identify pain points (audio clutter). 3. Solutions (haptic feedback, bone conduction).' },
@@ -578,10 +580,10 @@ const MOCK_INTERVIEWS = [
     { co: 'Flipkart', role: 'PM', level: 'Medium', cat: 'Product Sense', q: 'Design a feature to reduce apparel returns.', flow: 'Size issue is #1. Add AR sizing via camera. Standardize sizing across brands by gathering user fit data.' },
     { co: 'Swiggy', role: 'APM', level: 'Medium', cat: 'Execution', q: 'Customer support tickets related to food spillage increased. Action?', flow: 'Identify restaurant (packaging issue) vs driver (driving issue). Introduce mandatory seal packaging for top offenders.' },
     { co: 'Swiggy', role: 'PM', level: 'Hard', cat: 'Strategy', q: 'Between Instamart and Dineout, where should Swiggy allocate 70% of its budget?', flow: 'Analyze TAM, frequency of use, unit economics. Instamart has higher frequency, Dineout has higher AOV and margins.' },
-    { co: 'Zepto', role: 'APM', level: 'Easy', cat: 'Product Sense', q: 'How to increase Zepto Pass subscriptions?', flow: 'Trial periods. Bundle with partner OTTs. Show "You would have saved â‚¹X if you had Pass" at checkout.' },
+    { co: 'Zepto', role: 'APM', level: 'Easy', cat: 'Product Sense', q: 'How to increase Zepto Pass subscriptions?', flow: 'Trial periods. Bundle with partner OTTs. Show "You would have saved ₹X if you had Pass" at checkout.' },
     { co: 'Zepto', role: 'PM', level: 'Medium', cat: 'Technical', q: 'How would you architect the inventory management for a dark store?', flow: 'Real-time sync between POS and app. Safety stock algorithms. Expiry tracking using barcode scanning at inbound.' },
     { co: 'Paytm', role: 'APM', level: 'Easy', cat: 'Execution', q: 'Paytm Soundbox activations dropped in rural areas. Why?', flow: 'Network connectivity issues. Language barriers in UI. Pricing compared to PhonePe box.' },
-    { co: 'Paytm', role: 'PM', level: 'Medium', cat: 'Product Sense', q: 'Design an investment feature for Paytm users with low income.', flow: 'Sachet investing (â‚¹10 mutual funds), rounding up card spare change, simple educational nudges.' },
+    { co: 'Paytm', role: 'PM', level: 'Medium', cat: 'Product Sense', q: 'Design an investment feature for Paytm users with low income.', flow: 'Sachet investing (₹10 mutual funds), rounding up card spare change, simple educational nudges.' },
     { co: 'Atlassian', role: 'PM', level: 'Hard', cat: 'Strategy', q: 'How does Confluence compete with Notion?', flow: 'Notion wins on aesthetics/speed. Confluence wins on deep Jira integration and enterprise permissions. Lean into the ecosystem.' },
     { co: 'Atlassian', role: 'APM', level: 'Medium', cat: 'Execution', q: 'Trello board creation is down 15%. How to investigate?', flow: 'Are signups down? Or just creation? Maybe the onboarding is broken. Did we change the "Create" button position?' },
     { co: 'Microsoft', role: 'APM', level: 'Easy', cat: 'Product Sense', q: 'Improve Microsoft Teams for university students.', flow: 'Integrate canvas/blackboard. Add deeply integrated study rooms with Spotify. Focus on mobile experience.' },
@@ -690,12 +692,12 @@ const RECOMMENDED_BOOKS = [
     { title: '[Free] Google People + AI Guidebook', author: 'Google PAIR', url: 'https://pair.withgoogle.com/guidebook', desc: 'Free, comprehensive guide on designing human-centered AI products.' },
     { title: '[Free] Growth.Design Case Studies', author: 'Growth.Design', url: 'https://growth.design/case-studies', desc: 'Interactive, comic-book style case studies on UX, psychology, and product growth.' },
     { title: '[Free] The Product Folks Teardowns', author: 'The Product Folks', url: 'https://www.theproductfolks.com/teardowns', desc: 'In-depth teardowns of Indian startups and global products. Excellent for product sense.' },
+    { title: '[Free] Product School (YouTube)', author: 'Product School', url: 'https://www.youtube.com/@ProductSchoolSanFrancisco', desc: 'Hundreds of free talks and lectures from top PMs at FAANG and major startups.' },
+    { title: '[Free] Lenny\'s Podcast (YouTube)', author: 'Lenny Rachitsky', url: 'https://www.youtube.com/@LennysPodcast', desc: 'In-depth interviews with world-class product leaders and growth experts.' },
     { title: '[Free] Shape Up', author: 'Ryan Singer (Basecamp)', url: 'https://basecamp.com/shapeup', desc: 'Free online book on Basecamp\'s product development methodology (6-week cycles).' },
     { title: '[Free] PM Exercises', author: 'Community', url: 'https://www.productmanagementexercises.com/', desc: 'Free community-driven collection of PM interview questions and frameworks.' },
     { title: '[Free] Lenny\'s Newsletter Archive', author: 'Lenny Rachitsky', url: 'https://www.lennysnewsletter.com/', desc: 'Wealth of free articles on growth, metrics, and strategy frameworks.' },
-    { title: '[Free] Reforge Blog', author: 'Reforge', url: 'https://www.reforge.com/blog', desc: 'High-quality, in-depth articles on retention, engagement, and monetization loops.' },
-    { title: '[Free] Exponent PM Interview Database', author: 'Exponent', url: 'https://www.tryexponent.com/questions', desc: 'Database of recent PM interview questions asked at top tech companies.' },
-    { title: '[Free] Stripe Documentation', author: 'Stripe', url: 'https://stripe.com/docs', desc: 'The gold standard for API and technical product documentation. Great for technical PMs to study.' },
+    { title: '[Free] TryExponent (YouTube)', author: 'Exponent', url: 'https://www.youtube.com/@TryExponent', desc: 'Excellent mock interview recordings for product management rounds.' },
     { title: '[Free] Untools', author: 'Untools', url: 'https://untools.co/', desc: 'A free collection of thinking tools and frameworks to help you solve problems and make decisions.' }
 ];
 
@@ -730,96 +732,44 @@ const MOCK_CASES = [
     { co: 'TikTok', cat: 'Product Sense', level: 'Medium', title: 'TikTok shop conversion', desc: 'Users watch product videos but exit to buy on Amazon. Design an in-app checkout flow that prevents drop-off.' },
     { co: 'Bumble', cat: 'Strategy', level: 'Hard', title: 'Bumble male user engagement', desc: 'Male users are churning because they don\'t receive opening messages. How do you balance the \'women speak first\' core mechanic with male retention?' },
     { co: 'DoorDash', cat: 'Critical Thinking', level: 'Medium', title: 'DoorDash driver tipping', desc: 'If you prompt for tips before delivery, service suffers. If you prompt after, tip rates drop 40%. What is the optimal tipping UX?' },
-    { co: 'Zerodha', cat: 'Critical Thinking', level: 'Easy', title: 'Bumble feature for Gen Z', desc: 'Redesign the concept of bumble male user engagement specifically for Gen Z. Assume you are the lead PM at Zerodha. Focus on the immediate tradeoffs.' },
-    { co: 'Meesho', cat: 'Critical Thinking', level: 'Medium', title: 'Paytm feature for power users', desc: 'Redesign the concept of paytm soundbox v2 specifically for power users. Assume you are the lead PM at Meesho. Focus on the immediate tradeoffs.' },
-    { co: 'Zepto', cat: 'Guesstimate', level: 'Easy', title: 'LinkedIn feature for power users', desc: 'Redesign the concept of linkedin feed pollution specifically for power users. Assume you are the lead PM at Zepto. Focus on the immediate tradeoffs.' },
-    { co: 'Nykaa', cat: 'Strategy', level: 'Medium', title: 'Swiggy feature for enterprise clients', desc: 'Redesign the concept of swiggy instamart dark store placement specifically for enterprise clients. Assume you are the lead PM at Nykaa. Focus on the immediate tradeoffs.' },
-    { co: 'Zerodha', cat: 'Critical Thinking', level: 'Easy', title: 'Swiggy feature for power users', desc: 'Redesign the concept of swiggy instamart dark store placement specifically for power users. Assume you are the lead PM at Zerodha. Focus on the immediate tradeoffs.' },
-    { co: 'Zerodha', cat: 'Guesstimate', level: 'Hard', title: 'Apple feature for enterprise clients', desc: 'Redesign the concept of apple watch for the elderly specifically for enterprise clients. Assume you are the lead PM at Zerodha. Focus on the immediate tradeoffs.' },
-    { co: 'Myntra', cat: 'Strategy', level: 'Easy', title: 'Spotify feature for enterprise clients', desc: 'Redesign the concept of spotify podcasts vs music specifically for enterprise clients. Assume you are the lead PM at Myntra. Focus on the immediate tradeoffs.' },
-    { co: 'Licious', cat: 'Strategy', level: 'Medium', title: 'Google feature for Gen Z', desc: 'Redesign the concept of google maps offline monetization specifically for Gen Z. Assume you are the lead PM at Licious. Focus on the immediate tradeoffs.' },
-    { co: 'Groww', cat: 'Critical Thinking', level: 'Easy', title: 'DoorDash feature in a low bandwidth environment', desc: 'Redesign the concept of doordash driver tipping specifically in a low bandwidth environment. Assume you are the lead PM at Groww. Focus on the immediate tradeoffs.' },
-    { co: 'Meesho', cat: 'Strategy', level: 'Medium', title: 'Zomato feature for rural India', desc: 'Redesign the concept of zomato gold cannibalization specifically for rural India. Assume you are the lead PM at Meesho. Focus on the immediate tradeoffs.' },
-    { co: 'MakeMyTrip', cat: 'Critical Thinking', level: 'Easy', title: 'WhatsApp feature for rural India', desc: 'Redesign the concept of whatsapp business spam specifically for rural India. Assume you are the lead PM at MakeMyTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Zerodha', cat: 'Product Sense', level: 'Medium', title: 'Discord feature for enterprise clients', desc: 'Redesign the concept of discord onboarding for non-gamers specifically for enterprise clients. Assume you are the lead PM at Zerodha. Focus on the immediate tradeoffs.' },
-    { co: 'Blinkit', cat: 'Guesstimate', level: 'Hard', title: 'Notion feature for power users', desc: 'Redesign the concept of notion offline mode specifically for power users. Assume you are the lead PM at Blinkit. Focus on the immediate tradeoffs.' },
-    { co: 'Zepto', cat: 'Execution', level: 'Easy', title: 'Canva feature for enterprise clients', desc: 'Redesign the concept of canva collaborative video specifically for enterprise clients. Assume you are the lead PM at Zepto. Focus on the immediate tradeoffs.' },
-    { co: 'Nykaa', cat: 'Product Sense', level: 'Medium', title: 'Slack feature for Gen Z', desc: 'Redesign the concept of slack alert fatigue specifically for Gen Z. Assume you are the lead PM at Nykaa. Focus on the immediate tradeoffs.' },
-    { co: 'Groww', cat: 'Guesstimate', level: 'Hard', title: 'Paytm feature for rural India', desc: 'Redesign the concept of paytm soundbox v2 specifically for rural India. Assume you are the lead PM at Groww. Focus on the immediate tradeoffs.' },
-    { co: 'Ola', cat: 'Critical Thinking', level: 'Medium', title: 'Stripe feature for rural India', desc: 'Redesign the concept of stripe crypto payouts specifically for rural India. Assume you are the lead PM at Ola. Focus on the immediate tradeoffs.' },
-    { co: 'Meesho', cat: 'Product Sense', level: 'Easy', title: 'Airbnb feature in a low bandwidth environment', desc: 'Redesign the concept of airbnb host acquisition specifically in a low bandwidth environment. Assume you are the lead PM at Meesho. Focus on the immediate tradeoffs.' },
-    { co: 'ClearTrip', cat: 'Critical Thinking', level: 'Medium', title: 'TikTok feature for rural India', desc: 'Redesign the concept of tiktok shop conversion specifically for rural India. Assume you are the lead PM at ClearTrip. Focus on the immediate tradeoffs.' },
-    { co: 'MakeMyTrip', cat: 'Execution', level: 'Medium', title: 'Tinder feature for power users', desc: 'Redesign the concept of tinder for professional networking specifically for power users. Assume you are the lead PM at MakeMyTrip. Focus on the immediate tradeoffs.' },
-    { co: 'ClearTrip', cat: 'Guesstimate', level: 'Medium', title: 'Swiggy feature for enterprise clients', desc: 'Redesign the concept of swiggy instamart dark store placement specifically for enterprise clients. Assume you are the lead PM at ClearTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Zerodha', cat: 'Strategy', level: 'Hard', title: 'Amazon feature for power users', desc: 'Redesign the concept of amazon returns optimization specifically for power users. Assume you are the lead PM at Zerodha. Focus on the immediate tradeoffs.' },
-    { co: 'Zepto', cat: 'Product Sense', level: 'Medium', title: 'Amazon feature for enterprise clients', desc: 'Redesign the concept of amazon returns optimization specifically for enterprise clients. Assume you are the lead PM at Zepto. Focus on the immediate tradeoffs.' },
-    { co: 'Ola', cat: 'Strategy', level: 'Hard', title: 'Paytm feature for power users', desc: 'Redesign the concept of paytm soundbox v2 specifically for power users. Assume you are the lead PM at Ola. Focus on the immediate tradeoffs.' },
-    { co: 'Ola', cat: 'Critical Thinking', level: 'Easy', title: 'Slack feature for rural India', desc: 'Redesign the concept of slack alert fatigue specifically for rural India. Assume you are the lead PM at Ola. Focus on the immediate tradeoffs.' },
-    { co: 'ClearTrip', cat: 'Product Sense', level: 'Hard', title: 'DoorDash feature for visually impaired users', desc: 'Redesign the concept of doordash driver tipping specifically for visually impaired users. Assume you are the lead PM at ClearTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Meesho', cat: 'Critical Thinking', level: 'Medium', title: 'PhonePe feature in a low bandwidth environment', desc: 'Redesign the concept of phonepe insurance cross-sell specifically in a low bandwidth environment. Assume you are the lead PM at Meesho. Focus on the immediate tradeoffs.' },
-    { co: 'UrbanCompany', cat: 'Guesstimate', level: 'Hard', title: 'Zomato feature in a low bandwidth environment', desc: 'Redesign the concept of zomato gold cannibalization specifically in a low bandwidth environment. Assume you are the lead PM at UrbanCompany. Focus on the immediate tradeoffs.' },
-    { co: 'UrbanCompany', cat: 'Product Sense', level: 'Hard', title: 'Notion feature for rural India', desc: 'Redesign the concept of notion offline mode specifically for rural India. Assume you are the lead PM at UrbanCompany. Focus on the immediate tradeoffs.' },
-    { co: 'Ola', cat: 'Strategy', level: 'Easy', title: 'Swiggy feature for Gen Z', desc: 'Redesign the concept of swiggy instamart dark store placement specifically for Gen Z. Assume you are the lead PM at Ola. Focus on the immediate tradeoffs.' },
-    { co: 'MakeMyTrip', cat: 'Product Sense', level: 'Medium', title: 'WhatsApp feature for visually impaired users', desc: 'Redesign the concept of whatsapp business spam specifically for visually impaired users. Assume you are the lead PM at MakeMyTrip. Focus on the immediate tradeoffs.' },
-    { co: 'MakeMyTrip', cat: 'Strategy', level: 'Medium', title: 'Slack feature for rural India', desc: 'Redesign the concept of slack alert fatigue specifically for rural India. Assume you are the lead PM at MakeMyTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Blinkit', cat: 'Critical Thinking', level: 'Easy', title: 'Google feature in a low bandwidth environment', desc: 'Redesign the concept of google maps offline monetization specifically in a low bandwidth environment. Assume you are the lead PM at Blinkit. Focus on the immediate tradeoffs.' },
-    { co: 'Myntra', cat: 'Strategy', level: 'Hard', title: 'Discord feature for enterprise clients', desc: 'Redesign the concept of discord onboarding for non-gamers specifically for enterprise clients. Assume you are the lead PM at Myntra. Focus on the immediate tradeoffs.' },
-    { co: 'Zepto', cat: 'Execution', level: 'Easy', title: 'Canva feature for rural India', desc: 'Redesign the concept of canva collaborative video specifically for rural India. Assume you are the lead PM at Zepto. Focus on the immediate tradeoffs.' },
-    { co: 'Rapido', cat: 'Execution', level: 'Medium', title: 'Figma feature for rural India', desc: 'Redesign the concept of figma design to code specifically for rural India. Assume you are the lead PM at Rapido. Focus on the immediate tradeoffs.' },
-    { co: 'Licious', cat: 'Critical Thinking', level: 'Easy', title: 'Airbnb feature for rural India', desc: 'Redesign the concept of airbnb host acquisition specifically for rural India. Assume you are the lead PM at Licious. Focus on the immediate tradeoffs.' },
-    { co: 'Rapido', cat: 'Critical Thinking', level: 'Easy', title: 'Spotify feature in a low bandwidth environment', desc: 'Redesign the concept of spotify podcasts vs music specifically in a low bandwidth environment. Assume you are the lead PM at Rapido. Focus on the immediate tradeoffs.' },
-    { co: 'Licious', cat: 'Strategy', level: 'Easy', title: 'WhatsApp feature for rural India', desc: 'Redesign the concept of whatsapp business spam specifically for rural India. Assume you are the lead PM at Licious. Focus on the immediate tradeoffs.' },
-    { co: 'Myntra', cat: 'Product Sense', level: 'Easy', title: 'PhonePe feature in a low bandwidth environment', desc: 'Redesign the concept of phonepe insurance cross-sell specifically in a low bandwidth environment. Assume you are the lead PM at Myntra. Focus on the immediate tradeoffs.' },
-    { co: 'Rapido', cat: 'Product Sense', level: 'Hard', title: 'Figma feature in a low bandwidth environment', desc: 'Redesign the concept of figma design to code specifically in a low bandwidth environment. Assume you are the lead PM at Rapido. Focus on the immediate tradeoffs.' },
-    { co: 'Meesho', cat: 'Critical Thinking', level: 'Medium', title: 'Duolingo feature for power users', desc: 'Redesign the concept of duolingo monetization specifically for power users. Assume you are the lead PM at Meesho. Focus on the immediate tradeoffs.' },
-    { co: 'Myntra', cat: 'Product Sense', level: 'Medium', title: 'Amazon feature for enterprise clients', desc: 'Redesign the concept of amazon returns optimization specifically for enterprise clients. Assume you are the lead PM at Myntra. Focus on the immediate tradeoffs.' },
-    { co: 'Nykaa', cat: 'Execution', level: 'Easy', title: 'Netflix feature for enterprise clients', desc: 'Redesign the concept of netflix shared accounts restriction specifically for enterprise clients. Assume you are the lead PM at Nykaa. Focus on the immediate tradeoffs.' },
-    { co: 'Groww', cat: 'Product Sense', level: 'Medium', title: 'Amazon feature for visually impaired users', desc: 'Redesign the concept of amazon returns optimization specifically for visually impaired users. Assume you are the lead PM at Groww. Focus on the immediate tradeoffs.' },
-    { co: 'Licious', cat: 'Strategy', level: 'Easy', title: 'Twitch feature in a low bandwidth environment', desc: 'Redesign the concept of twitch creator burnout specifically in a low bandwidth environment. Assume you are the lead PM at Licious. Focus on the immediate tradeoffs.' },
-    { co: 'Groww', cat: 'Strategy', level: 'Hard', title: 'LinkedIn feature in a low bandwidth environment', desc: 'Redesign the concept of linkedin feed pollution specifically in a low bandwidth environment. Assume you are the lead PM at Groww. Focus on the immediate tradeoffs.' },
-    { co: 'ClearTrip', cat: 'Guesstimate', level: 'Easy', title: 'Bumble feature for enterprise clients', desc: 'Redesign the concept of bumble male user engagement specifically for enterprise clients. Assume you are the lead PM at ClearTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Meesho', cat: 'Critical Thinking', level: 'Easy', title: 'Duolingo feature for rural India', desc: 'Redesign the concept of duolingo monetization specifically for rural India. Assume you are the lead PM at Meesho. Focus on the immediate tradeoffs.' },
-    { co: 'Zerodha', cat: 'Guesstimate', level: 'Medium', title: 'Cred feature for visually impaired users', desc: 'Redesign the concept of cred monetization beyond credit cards specifically for visually impaired users. Assume you are the lead PM at Zerodha. Focus on the immediate tradeoffs.' },
-    { co: 'Myntra', cat: 'Product Sense', level: 'Hard', title: 'Twitch feature for visually impaired users', desc: 'Redesign the concept of twitch creator burnout specifically for visually impaired users. Assume you are the lead PM at Myntra. Focus on the immediate tradeoffs.' },
-    { co: 'ClearTrip', cat: 'Execution', level: 'Easy', title: 'Apple feature for rural India', desc: 'Redesign the concept of apple watch for the elderly specifically for rural India. Assume you are the lead PM at ClearTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Groww', cat: 'Execution', level: 'Easy', title: 'Apple feature for power users', desc: 'Redesign the concept of apple watch for the elderly specifically for power users. Assume you are the lead PM at Groww. Focus on the immediate tradeoffs.' },
-    { co: 'Groww', cat: 'Strategy', level: 'Easy', title: 'TikTok feature for Gen Z', desc: 'Redesign the concept of tiktok shop conversion specifically for Gen Z. Assume you are the lead PM at Groww. Focus on the immediate tradeoffs.' },
-    { co: 'Groww', cat: 'Guesstimate', level: 'Hard', title: 'Discord feature for power users', desc: 'Redesign the concept of discord onboarding for non-gamers specifically for power users. Assume you are the lead PM at Groww. Focus on the immediate tradeoffs.' },
-    { co: 'Ola', cat: 'Strategy', level: 'Medium', title: 'Stripe feature for power users', desc: 'Redesign the concept of stripe crypto payouts specifically for power users. Assume you are the lead PM at Ola. Focus on the immediate tradeoffs.' },
-    { co: 'Licious', cat: 'Product Sense', level: 'Medium', title: 'Cred feature for enterprise clients', desc: 'Redesign the concept of cred monetization beyond credit cards specifically for enterprise clients. Assume you are the lead PM at Licious. Focus on the immediate tradeoffs.' },
-    { co: 'ClearTrip', cat: 'Product Sense', level: 'Medium', title: 'Canva feature for power users', desc: 'Redesign the concept of canva collaborative video specifically for power users. Assume you are the lead PM at ClearTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Myntra', cat: 'Critical Thinking', level: 'Easy', title: 'Bumble feature for power users', desc: 'Redesign the concept of bumble male user engagement specifically for power users. Assume you are the lead PM at Myntra. Focus on the immediate tradeoffs.' },
-    { co: 'Meesho', cat: 'Product Sense', level: 'Easy', title: 'Roblox feature in a low bandwidth environment', desc: 'Redesign the concept of roblox virtual economy inflation specifically in a low bandwidth environment. Assume you are the lead PM at Meesho. Focus on the immediate tradeoffs.' },
-    { co: 'MakeMyTrip', cat: 'Guesstimate', level: 'Hard', title: 'Amazon feature for enterprise clients', desc: 'Redesign the concept of amazon returns optimization specifically for enterprise clients. Assume you are the lead PM at MakeMyTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Rapido', cat: 'Product Sense', level: 'Medium', title: 'Amazon feature in a low bandwidth environment', desc: 'Redesign the concept of amazon returns optimization specifically in a low bandwidth environment. Assume you are the lead PM at Rapido. Focus on the immediate tradeoffs.' },
-    { co: 'MakeMyTrip', cat: 'Critical Thinking', level: 'Easy', title: 'Uber feature for power users', desc: 'Redesign the concept of uber driver retention in tier 2 specifically for power users. Assume you are the lead PM at MakeMyTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Blinkit', cat: 'Guesstimate', level: 'Medium', title: 'Instagram feature for enterprise clients', desc: 'Redesign the concept of instagram feed algorithm shift specifically for enterprise clients. Assume you are the lead PM at Blinkit. Focus on the immediate tradeoffs.' },
-    { co: 'Myntra', cat: 'Strategy', level: 'Hard', title: 'Tinder feature for Gen Z', desc: 'Redesign the concept of tinder for professional networking specifically for Gen Z. Assume you are the lead PM at Myntra. Focus on the immediate tradeoffs.' },
-    { co: 'Groww', cat: 'Critical Thinking', level: 'Easy', title: 'DoorDash feature for enterprise clients', desc: 'Redesign the concept of doordash driver tipping specifically for enterprise clients. Assume you are the lead PM at Groww. Focus on the immediate tradeoffs.' },
-    { co: 'Myntra', cat: 'Product Sense', level: 'Medium', title: 'TikTok feature for visually impaired users', desc: 'Redesign the concept of tiktok shop conversion specifically for visually impaired users. Assume you are the lead PM at Myntra. Focus on the immediate tradeoffs.' },
-    { co: 'UrbanCompany', cat: 'Execution', level: 'Medium', title: 'Cred feature for enterprise clients', desc: 'Redesign the concept of cred monetization beyond credit cards specifically for enterprise clients. Assume you are the lead PM at UrbanCompany. Focus on the immediate tradeoffs.' },
-    { co: 'Rapido', cat: 'Execution', level: 'Easy', title: 'LinkedIn feature for Gen Z', desc: 'Redesign the concept of linkedin feed pollution specifically for Gen Z. Assume you are the lead PM at Rapido. Focus on the immediate tradeoffs.' },
-    { co: 'ClearTrip', cat: 'Execution', level: 'Hard', title: 'Paytm feature in a low bandwidth environment', desc: 'Redesign the concept of paytm soundbox v2 specifically in a low bandwidth environment. Assume you are the lead PM at ClearTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Licious', cat: 'Guesstimate', level: 'Hard', title: 'Notion feature for power users', desc: 'Redesign the concept of notion offline mode specifically for power users. Assume you are the lead PM at Licious. Focus on the immediate tradeoffs.' },
-    { co: 'Nykaa', cat: 'Guesstimate', level: 'Easy', title: 'Canva feature for Gen Z', desc: 'Redesign the concept of canva collaborative video specifically for Gen Z. Assume you are the lead PM at Nykaa. Focus on the immediate tradeoffs.' },
-    { co: 'UrbanCompany', cat: 'Execution', level: 'Medium', title: 'Apple feature for power users', desc: 'Redesign the concept of apple watch for the elderly specifically for power users. Assume you are the lead PM at UrbanCompany. Focus on the immediate tradeoffs.' },
-    { co: 'Rapido', cat: 'Execution', level: 'Medium', title: 'Apple feature for Gen Z', desc: 'Redesign the concept of apple watch for the elderly specifically for Gen Z. Assume you are the lead PM at Rapido. Focus on the immediate tradeoffs.' },
-    { co: 'Groww', cat: 'Critical Thinking', level: 'Medium', title: 'Slack feature for enterprise clients', desc: 'Redesign the concept of slack alert fatigue specifically for enterprise clients. Assume you are the lead PM at Groww. Focus on the immediate tradeoffs.' },
-    { co: 'Licious', cat: 'Execution', level: 'Easy', title: 'Zoom feature for rural India', desc: 'Redesign the concept of zoom post-pandemic growth specifically for rural India. Assume you are the lead PM at Licious. Focus on the immediate tradeoffs.' },
-    { co: 'ClearTrip', cat: 'Strategy', level: 'Hard', title: 'Canva feature for visually impaired users', desc: 'Redesign the concept of canva collaborative video specifically for visually impaired users. Assume you are the lead PM at ClearTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Groww', cat: 'Product Sense', level: 'Hard', title: 'Instagram feature in a low bandwidth environment', desc: 'Redesign the concept of instagram feed algorithm shift specifically in a low bandwidth environment. Assume you are the lead PM at Groww. Focus on the immediate tradeoffs.' },
-    { co: 'Zepto', cat: 'Strategy', level: 'Hard', title: 'LinkedIn feature for rural India', desc: 'Redesign the concept of linkedin feed pollution specifically for rural India. Assume you are the lead PM at Zepto. Focus on the immediate tradeoffs.' },
-    { co: 'Meesho', cat: 'Guesstimate', level: 'Medium', title: 'Airbnb feature for power users', desc: 'Redesign the concept of airbnb host acquisition specifically for power users. Assume you are the lead PM at Meesho. Focus on the immediate tradeoffs.' },
-    { co: 'Nykaa', cat: 'Execution', level: 'Hard', title: 'Discord feature for power users', desc: 'Redesign the concept of discord onboarding for non-gamers specifically for power users. Assume you are the lead PM at Nykaa. Focus on the immediate tradeoffs.' },
-    { co: 'Ola', cat: 'Guesstimate', level: 'Easy', title: 'Apple feature for enterprise clients', desc: 'Redesign the concept of apple watch for the elderly specifically for enterprise clients. Assume you are the lead PM at Ola. Focus on the immediate tradeoffs.' },
-    { co: 'Groww', cat: 'Critical Thinking', level: 'Medium', title: 'Amazon feature for power users', desc: 'Redesign the concept of amazon returns optimization specifically for power users. Assume you are the lead PM at Groww. Focus on the immediate tradeoffs.' },
-    { co: 'MakeMyTrip', cat: 'Product Sense', level: 'Easy', title: 'Notion feature for power users', desc: 'Redesign the concept of notion offline mode specifically for power users. Assume you are the lead PM at MakeMyTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Meesho', cat: 'Execution', level: 'Medium', title: 'Paytm feature in a low bandwidth environment', desc: 'Redesign the concept of paytm soundbox v2 specifically in a low bandwidth environment. Assume you are the lead PM at Meesho. Focus on the immediate tradeoffs.' },
-    { co: 'Ola', cat: 'Strategy', level: 'Medium', title: 'Figma feature for Gen Z', desc: 'Redesign the concept of figma design to code specifically for Gen Z. Assume you are the lead PM at Ola. Focus on the immediate tradeoffs.' },
-    { co: 'Meesho', cat: 'Strategy', level: 'Hard', title: 'Cred feature for Gen Z', desc: 'Redesign the concept of cred monetization beyond credit cards specifically for Gen Z. Assume you are the lead PM at Meesho. Focus on the immediate tradeoffs.' },
-    { co: 'Meesho', cat: 'Critical Thinking', level: 'Easy', title: 'Duolingo feature for Gen Z', desc: 'Redesign the concept of duolingo monetization specifically for Gen Z. Assume you are the lead PM at Meesho. Focus on the immediate tradeoffs.' },
-    { co: 'ClearTrip', cat: 'Execution', level: 'Hard', title: 'Discord feature for Gen Z', desc: 'Redesign the concept of discord onboarding for non-gamers specifically for Gen Z. Assume you are the lead PM at ClearTrip. Focus on the immediate tradeoffs.' },
-    { co: 'Nykaa', cat: 'Guesstimate', level: 'Hard', title: 'WhatsApp feature for power users', desc: 'Redesign the concept of whatsapp business spam specifically for power users. Assume you are the lead PM at Nykaa. Focus on the immediate tradeoffs.' },
+    { co: 'Zerodha', cat: 'Product Sense', level: 'Medium', title: 'Fractional investing in India', desc: 'Design a fractional investing feature for US stocks on Zerodha that complies with LRS (Liberalised Remittance Scheme) guidelines.' },
+    { co: 'Meesho', cat: 'Strategy', level: 'Hard', title: 'Meesho logistics', desc: 'Meesho currently relies heavily on third-party logistics (3PL). Should they build their own logistics arm like Flipkart (eKart) or Amazon (ATS)?' },
+    { co: 'Zepto', cat: 'Guesstimate', level: 'Medium', title: 'Zepto Cafe scaling', desc: 'Estimate the daily revenue from Zepto Cafe across all operational dark stores in India.' },
+    { co: 'Nykaa', cat: 'Strategy', level: 'Medium', title: 'Nykaa B2B expansion', desc: 'Should Nykaa build a B2B wholesale platform (like Udaan) for unorganized offline beauty retailers?' },
+    { co: 'MakeMyTrip', cat: 'Product Sense', level: 'Easy', title: 'Group travel feature', desc: 'Design a shared itinerary planning and split-payment feature for group vacations on MakeMyTrip.' },
+    { co: 'Licious', cat: 'Strategy', level: 'Hard', title: 'Licious plant-based meat', desc: 'Should Licious, a premium meat delivery brand, launch a line of plant-based meat alternatives?' },
+    { co: 'Groww', cat: 'Critical Thinking', level: 'Medium', title: 'Groww Gen Z acquisition', desc: 'Gen Z users are investing via crypto apps rather than traditional mutual funds. How does Groww acquire this demographic without offering crypto?' },
+    { co: 'Spotify', cat: 'Product Sense', level: 'Medium', title: 'Spotify concert discovery', desc: 'Design a feature on Spotify to increase ticket sales for local, independent artists.' },
+    { co: 'YouTube', cat: 'Strategy', level: 'Hard', title: 'YouTube Shorts monetization', desc: 'YouTube Shorts views are exploding, but ad revenue per minute is lower than long-form. How do you close the gap without ruining the UX?' },
+    { co: 'Oyo', cat: 'Execution', level: 'Hard', title: 'Oyo quality control', desc: 'Customer complaints about hygiene in Oyo Townhouses have spiked by 20% in the last month. How do you investigate and solve this?' },
+    { co: 'Blinkit', cat: 'Product Sense', level: 'Easy', title: 'Blinkit print service', desc: 'Blinkit recently launched a 10-minute printout delivery service. How would you iterate on this feature for college students?' },
+    { co: 'Cred', cat: 'Critical Thinking', level: 'Hard', title: 'Cred coin inflation', desc: 'Users complain that Cred coins are useless because rewards cost too much and are always sold out. How do you fix the economy?' },
+    { co: 'Netflix', cat: 'Strategy', level: 'Medium', title: 'Netflix sports streaming', desc: 'Should Netflix aggressively bid for live sports broadcasting rights (like IPL or Premier League)?' },
+    { co: 'Google Pay', cat: 'Product Sense', level: 'Medium', title: 'Google Pay split expenses', desc: 'Design an improved expense splitting feature for Google Pay tailored for roommates.' },
+    { co: 'Apple', cat: 'Strategy', level: 'Hard', title: 'Apple Services bundle', desc: 'If Apple wanted to create an "Apple Prime" bundle that includes hardware upgrades, how should they price and structure it?' },
+    { co: 'MakeMyTrip', cat: 'Execution', level: 'Medium', title: 'MakeMyTrip flight cancellations', desc: 'During peak fog season in Delhi, flight cancellations surge. Build a proactive communication and rebooking flow for affected users.' },
+    { co: 'LinkedIn', cat: 'Product Sense', level: 'Hard', title: 'LinkedIn creator mode', desc: 'Design a feature to help B2B "finfluencers" monetize their audience directly on LinkedIn.' },
+    { co: 'Paytm', cat: 'Critical Thinking', level: 'Hard', title: 'Paytm wallet vs UPI', desc: 'With the dominance of UPI, the Paytm Wallet sees declining usage. Do you kill the wallet feature? If not, how do you pivot it?' },
+    { co: 'Zepto', cat: 'Strategy', level: 'Medium', title: 'Zepto white-label products', desc: 'Should Zepto launch its own private label (white-label) FMCG products to improve margins?' },
+    { co: 'Myntra', cat: 'Product Sense', level: 'Medium', title: 'Myntra virtual try-on', desc: 'Design an AR-based virtual try-on feature for sneakers on Myntra.' },
+    { co: 'Duolingo', cat: 'Execution', level: 'Easy', title: 'Duolingo streak loss', desc: 'When users lose a 100+ day streak, churn probability spikes to 80%. Design an intervention to retain them without undermining the streak mechanic.' },
+    { co: 'Razorpay', cat: 'Strategy', level: 'Hard', title: 'Razorpay offline POS', desc: 'Should Razorpay enter the offline Point-of-Sale (POS) terminal market to compete with Pine Labs?' },
+    { co: 'Swiggy', cat: 'Product Sense', level: 'Hard', title: 'Swiggy Genie optimization', desc: 'Design a feature for Swiggy Genie to handle complex, multi-stop errands efficiently.' },
+    { co: 'Amazon', cat: 'Critical Thinking', level: 'Medium', title: 'Amazon Prime delivery speed', desc: 'Is it worth investing billions to move Prime delivery from 2-day to 1-day, or do users care more about selection and price at this point?' },
+    { co: 'ClearTrip', cat: 'Guesstimate', level: 'Medium', title: 'ClearTrip corporate bookings', desc: 'Estimate the total value of domestic corporate flight bookings handled by ClearTrip annually.' },
+    { co: 'Discord', cat: 'Product Sense', level: 'Medium', title: 'Discord server discovery', desc: 'Design a better discovery mechanism for users to find niche, high-quality Discord servers.' },
+    { co: 'Tinder', cat: 'Critical Thinking', level: 'Hard', title: 'Tinder algorithm transparency', desc: 'Users suspect they are "shadowbanned." Should Tinder expose the ELO (attractiveness) score to users to increase transparency?' },
+    { co: 'Notion', cat: 'Strategy', level: 'Medium', title: 'Notion enterprise sales', desc: 'How should Notion transition from a bottoms-up PLG (Product-Led Growth) motion to an enterprise top-down sales motion in India?' },
+    { co: 'WhatsApp', cat: 'Product Sense', level: 'Easy', title: 'WhatsApp event planning', desc: 'Design a native event planning and RSVP feature inside WhatsApp groups.' },
+    { co: 'Ola', cat: 'Execution', level: 'Hard', title: 'Ola driver cancellations', desc: 'Drivers are cancelling rides if the destination is inconvenient, leading to poor rider UX. How do you solve this systemically?' },
+    { co: 'Flipkart', cat: 'Strategy', level: 'Medium', title: 'Flipkart quick commerce', desc: 'Should Flipkart build its own 10-minute delivery network from scratch or acquire an existing player (like Dunzo)?' },
+    { co: 'Licious', cat: 'Critical Thinking', level: 'Medium', title: 'Licious subscription model', desc: 'Licious introduced a "Meatopia" subscription offering free delivery. Is this driving true incremental LTV, or just cannibalizing delivery fees from power users?' },
+    { co: 'Canva', cat: 'Product Sense', level: 'Medium', title: 'Canva AI presentation builder', desc: 'Design a prompt-to-presentation feature for Canva.' },
+    { co: 'Slack', cat: 'Execution', level: 'Hard', title: 'Slack search degradation', desc: 'Search latency on Slack has increased from 200ms to 2s for large enterprise workspaces. Walk me through your triage.' },
+    { co: 'Uber', cat: 'Strategy', level: 'Hard', title: 'Uber intercity expansion', desc: 'How should Uber approach the intercity bus ticketing market in India?' },
+    { co: 'Twitch', cat: 'Critical Thinking', level: 'Medium', title: 'Twitch exclusive contracts', desc: 'Are multi-million dollar exclusive contracts for top streamers positive ROI for Twitch?' },
+    { co: 'UrbanCompany', cat: 'Product Sense', level: 'Medium', title: 'UrbanCompany beauty services', desc: 'Design a subscription package for UrbanCompany salon-at-home services targeting working professionals.' },
+    { co: 'Bumble', cat: 'Strategy', level: 'Medium', title: 'Bumble BFF expansion', desc: 'How should Bumble monetize its "BFF" (friend-finding) tier, given users are less willing to pay to find friends than romantic partners?' }
 ];
 
 const INTERVIEW_BANK = [
