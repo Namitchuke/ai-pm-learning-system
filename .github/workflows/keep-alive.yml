@@ -1,0 +1,45 @@
+name: Keep site awake
+
+# Render's free tier spins a service down after ~15 min of no traffic, so the
+# next visitor waits ~1 min for a cold start (and looks like the site is "down").
+# This pings the health endpoints every 10 min to keep them warm.
+#
+# Setup (repo Settings > Secrets and variables > Actions > Variables):
+#   SITE_URL      e.g. https://ai-pm-learning-app.onrender.com   (Node website)
+#   PIPELINE_URL  e.g. https://ai-pm-learning.onrender.com       (Python RSS/email service, optional)
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ping services
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          PIPELINE_URL: ${{ vars.PIPELINE_URL }}
+        run: |
+          if [ -z "$SITE_URL" ] && [ -z "$PIPELINE_URL" ]; then
+            echo "::error::Set the SITE_URL (and optionally PIPELINE_URL) repository variable."
+            exit 1
+          fi
+          fail=0
+          for base in $SITE_URL $PIPELINE_URL; do
+            base="${base%/}"
+            ok=0
+            # Cold starts can take ~60s, so allow generous retries.
+            for i in 1 2 3 4; do
+              code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 70 "$base/api/ping" || true)
+              echo "$base/api/ping -> $code (try $i)"
+              [ "$code" = "200" ] && ok=1 && break
+              sleep 10
+            done
+            [ "$ok" = "1" ] || { echo "::error::$base did not come up"; fail=1; }
+          done
+          exit $fail

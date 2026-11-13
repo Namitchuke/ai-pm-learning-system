@@ -39,8 +39,8 @@ def test_url_not_reprocessed_after_mark(empty_cache):
 
 def test_arxiv_filter_passes_relevant():
     assert passes_arxiv_filter(
-        "LLM Reasoning with Chain-of-Thought",
-        "We study how large language models reason step-by-step using chain-of-thought prompting."
+        "Efficient LLM Inference in Production",
+        "We study serving and deployment of large language models at scale."
     )
 
 

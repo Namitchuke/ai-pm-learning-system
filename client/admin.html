@@ -360,7 +360,8 @@
             // Check auth
             try {
                 const meRes = await fetch('/auth/me');
-                if (!meRes.ok) { window.location.href = '/'; return; }
+                if (meRes.status === 401) { window.location.href = '/'; return; }
+                if (!meRes.ok) throw new Error('server unavailable (' + meRes.status + ')');
                 const { user } = await meRes.json();
 
                 if (user.role !== 'admin') {
@@ -373,7 +374,8 @@
                 fetchUsers();
             } catch (e) {
                 console.error("Auth check failed", e);
-                window.location.href = '/';
+                document.body.insertAdjacentHTML('afterbegin', '<p style="padding:16px;color:#f87171">Server is waking up or unreachable. Retrying in 5s...</p>');
+                setTimeout(() => window.location.reload(), 5000);
             }
         }
 

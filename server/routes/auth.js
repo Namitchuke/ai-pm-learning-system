@@ -62,7 +62,10 @@ router.post('/login', (req, res, next) => {
 });
 
 // Google OAuth
-router.get('/google', passport.authenticate('google', {
+router.get('/google', (req, res, next) => {
+    if (!passport.googleEnabled) return res.redirect('/?error=google_not_configured');
+    next();
+}, passport.authenticate('google', {
     scope: ['profile', 'email']
 }));
 

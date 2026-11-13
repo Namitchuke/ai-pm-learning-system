@@ -44,7 +44,13 @@ Visit: `http://localhost:8000/dashboard` (use your `DASHBOARD_USER`/`DASHBOARD_P
 4. Add all environment variables from `.env.example` in Render's dashboard
 5. Deploy
 
-### 5. Configure cron-job.org (4 jobs)
+### 4b. Website (Node) + keep-alive
+
+The learner/admin website is the Node app (`server/` + `client/`): `npm install && npm start`.
+Env: `MONGODB_URI`, `SESSION_SECRET` (required); `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` (optional, enables Google login). `GET /api/ping` is a DB-independent health check.
+Render's free tier sleeps after ~15 min idle, so `.github/workflows/keep-alive.yml` pings every 10 min. Set repo Actions variables `SITE_URL` (and optionally `PIPELINE_URL`).
+
+### 5. Pipeline cron (GitHub Actions: `.github/workflows/pipeline-cron.yml`; set `PIPELINE_URL` variable + `CRON_SECRET` secret). Or configure cron-job.org manually:
 
 | Job | URL | Schedule (IST) |
 |-----|-----|----------------|
