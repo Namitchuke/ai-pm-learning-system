@@ -4,6 +4,28 @@
 # ============================================================
 
 services:
+  # ---- Website (Node/Express + MongoDB): learner dashboard + admin ----
+  - type: web
+    name: ai-pm-learning-app
+    env: node
+    plan: free
+    region: singapore
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/ping
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+
+  # ---- RSS / email pipeline (Python/FastAPI) ----
   - type: web
     name: ai-pm-learning
     env: python

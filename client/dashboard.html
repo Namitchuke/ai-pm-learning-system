@@ -2132,7 +2132,8 @@
             // Now sync with server in background
             try {
                 const meRes = await fetch('/auth/me');
-                if (!meRes.ok) { window.location.href = '/'; return; }
+                if (meRes.status === 401) { window.location.href = '/'; return; }
+                if (!meRes.ok) throw new Error('server unavailable (' + meRes.status + ')');
                 const { user } = await meRes.json();
                 if (user.role === 'admin') {
                     window.location.href = '/admin.html';

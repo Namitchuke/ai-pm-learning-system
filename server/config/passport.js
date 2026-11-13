@@ -17,8 +17,11 @@ passport.deserializeUser(async (id, done) => {
     }
 });
 
-// Google OAuth Strategy
-passport.use(new GoogleStrategy({
+// Google OAuth Strategy (only registered when credentials are configured, so a
+// missing env var disables Google login instead of crashing the whole server)
+const googleEnabled = !!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
+if (!googleEnabled) console.warn('GOOGLE_CLIENT_ID/SECRET not set; Google login disabled.');
+if (googleEnabled) passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: '/auth/google/callback',
@@ -76,4 +79,5 @@ passport.use(new LocalStrategy({
     }
 }));
 
+passport.googleEnabled = googleEnabled;
 module.exports = passport;
