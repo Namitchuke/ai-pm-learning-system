@@ -1,3 +1,6 @@
 node_modules/
 .env
 client/dist/
+__pycache__/
+*.pyc
+debug*.json

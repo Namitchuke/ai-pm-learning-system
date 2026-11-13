@@ -50,7 +50,7 @@ The learner/admin website is the Node app (`server/` + `client/`): `npm install 
 Env: `MONGODB_URI`, `SESSION_SECRET` (required); `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` (optional, enables Google login). `GET /api/ping` is a DB-independent health check.
 Render's free tier sleeps after ~15 min idle, so `.github/workflows/keep-alive.yml` pings every 10 min. Set repo Actions variables `SITE_URL` (and optionally `PIPELINE_URL`).
 
-### 5. Configure cron-job.org (4 jobs)
+### 5. Pipeline cron (GitHub Actions: `.github/workflows/pipeline-cron.yml`; set `PIPELINE_URL` variable + `CRON_SECRET` secret). Or configure cron-job.org manually:
 
 | Job | URL | Schedule (IST) |
 |-----|-----|----------------|

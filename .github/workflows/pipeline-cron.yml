@@ -1,0 +1,47 @@
+name: Pipeline cron
+
+# Replaces the cron-job.org jobs from the README. Cron times are UTC.
+# Needs repo variable PIPELINE_URL (https://<python-service>.onrender.com)
+# and repo secret CRON_SECRET (same value as the service's CRON_SECRET).
+
+on:
+  schedule:
+    - cron: "25 2 * * *"   # 07:55 IST  RSS morning
+    - cron: "25 6 * * *"   # 11:55 IST  RSS midday
+    - cron: "25 11 * * *"  # 16:55 IST  RSS evening
+    - cron: "0 3 * * *"    # 08:30 IST  email digest
+  workflow_dispatch:
+    inputs:
+      endpoint:
+        description: "rss or email"
+        default: rss
+
+permissions: {}
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Call trigger endpoint
+        env:
+          PIPELINE_URL: ${{ vars.PIPELINE_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT: ${{ github.event.inputs.endpoint }}
+        run: |
+          if [ -z "$PIPELINE_URL" ] || [ -z "$CRON_SECRET" ]; then
+            echo "::error::Set PIPELINE_URL variable and CRON_SECRET secret."; exit 1
+          fi
+          if [ "$SCHEDULE" = "0 3 * * *" ] || [ "$INPUT" = "email" ]; then ep=email; else ep=rss; fi
+          base="${PIPELINE_URL%/}"
+          # Wake the service first (free tier cold start), then trigger.
+          curl -s -o /dev/null --max-time 90 "$base/api/ping" || true
+          for i in 1 2 3; do
+            code=$(curl -s -o /tmp/out -w '%{http_code}' --max-time 600 -X POST \
+              -H "X-Cron-Secret: $CRON_SECRET" "$base/trigger/$ep" || true)
+            echo "POST /trigger/$ep -> $code (try $i)"; cat /tmp/out; echo
+            [ "$code" = "200" ] && exit 0
+            sleep 30
+          done
+          exit 1

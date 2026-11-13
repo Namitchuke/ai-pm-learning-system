@@ -106,7 +106,8 @@ async function seed() {
         // Create admin user (you!)
         const existingAdmin = await User.findOne({ role: 'admin' });
         if (!existingAdmin) {
-            const passwordHash = await bcrypt.hash('admin123', 12);
+            const adminPassword = process.env.ADMIN_PASSWORD || require('crypto').randomBytes(9).toString('base64url');
+            const passwordHash = await bcrypt.hash(adminPassword, 12);
             await User.create({
                 username: 'admin',
                 name: 'Admin',
@@ -115,8 +116,8 @@ async function seed() {
                 role: 'admin',
                 studyRole: 'AI PM'
             });
-            console.log('✅ Created admin user (email: admin@aipm.app, password: admin123)');
-            console.log('   ⚠️  CHANGE THIS PASSWORD IMMEDIATELY IN PRODUCTION!');
+            console.log('✅ Created admin user (email: admin@aipm.app)');
+            console.log(process.env.ADMIN_PASSWORD ? '   Password taken from ADMIN_PASSWORD.' : `   Generated password (shown once): ${adminPassword}`);
         } else {
             console.log('ℹ️  Admin user already exists, skipping');
         }
