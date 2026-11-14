@@ -71,7 +71,7 @@
 
     {% if topic.source_url %}
     <div style="font-size:0.8rem;color:#64748b;">
-        Source: <a href="{{ topic.source_url }}" target="_blank">{{ topic.source_title or topic.source_url }}</a>
+        Source: {% if topic.source_url and (topic.source_url.startswith('https://') or topic.source_url.startswith('http://')) %}<a href="{{ topic.source_url }}" target="_blank" rel="noopener noreferrer">{{ topic.source_title or topic.source_url }}</a>{% else %}{{ topic.source_title or topic.source_url }}{% endif %}
     </div>
     {% endif %}
 </div>
@@ -118,6 +118,7 @@
             });
             const data = await resp.json();
 
+            const esc = (v) => String(v == null ? "" : v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
             const resultDiv = document.getElementById("grade-result");
             resultDiv.style.display = "block";
 
@@ -126,7 +127,7 @@
                 resultDiv.style.border = "1px solid #7f1d1d";
                 resultDiv.style.borderRadius = "0.5rem";
                 resultDiv.style.padding = "1rem";
-                resultDiv.innerHTML = `<strong style="color:#f87171;">Error:</strong> ${data.detail || "Grading failed"}`;
+                resultDiv.innerHTML = `<strong style="color:#f87171;">Error:</strong> ${esc(data.detail || "Grading failed")}`;
             } else {
                 const decisionColors = { "advance": "#16a34a", "retry": "#f59e0b", "reteach": "#dc2626" };
                 const color = decisionColors[data.decision] || "#818cf8";
@@ -136,13 +137,13 @@
                 resultDiv.style.padding = "1rem";
                 resultDiv.innerHTML = `
                 <div style="font-size:1.1rem;font-weight:700;color:${color};margin-bottom:0.5rem;">
-                    Score: ${Math.round(data.score)} / 100 — ${data.decision.toUpperCase()}
+                    Score: ${Math.round(data.score)} / 100 — ${esc(String(data.decision).toUpperCase())}
                     ${data.cached ? '<span style="font-size:0.75rem;color:#475569;"> (cached)</span>' : ''}
                 </div>
-                <p style="color:#94a3b8;margin-bottom:0.5rem;">${data.feedback}</p>
-                ${data.new_depth !== data.depth ? `<p style="color:#4ade80;">Depth advanced: ${data.depth} → ${data.new_depth}</p>` : ''}
-                ${data.quality_warning ? `<p style="color:#f59e0b;font-size:0.8rem;">⚠ ${data.quality_warning}</p>` : ''}
-                ${data.message ? `<p style="color:#64748b;font-size:0.8rem;margin-top:0.25rem;">${data.message}</p>` : ''}
+                <p style="color:#94a3b8;margin-bottom:0.5rem;">${esc(data.feedback)}</p>
+                ${data.new_depth !== data.depth ? `<p style="color:#4ade80;">Depth advanced: ${esc(data.depth)} → ${esc(data.new_depth)}</p>` : ''}
+                ${data.quality_warning ? `<p style="color:#f59e0b;font-size:0.8rem;">⚠ ${esc(data.quality_warning)}</p>` : ''}
+                ${data.message ? `<p style="color:#64748b;font-size:0.8rem;margin-top:0.25rem;">${esc(data.message)}</p>` : ''}
             `;
             }
         } catch (err) {

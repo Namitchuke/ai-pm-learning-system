@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI PM Learning System</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap"
         rel="stylesheet">
     <style>
         *,
@@ -18,35 +18,38 @@
         }
 
         :root {
-            --bg: #07070d;
-            --bg2: #0f0f1a;
-            --bg3: #161626;
-            --card: #0f0f1a;
-            --card2: #161626;
-            --border: rgba(255, 255, 255, .055);
-            --border-h: rgba(255, 255, 255, .1);
-            --t1: #eaeaf6;
-            --t2: #8080a8;
-            --t3: #3c3c5a;
-            --t4: #26263a;
-            --accent: #00d4ff;
-            --accent2: #26dcff;
-            --grad: linear-gradient(135deg, #00d4ff, #00b4d8);
-            --grad2: linear-gradient(135deg, #00d4ff, #00e676);
-            --green: #00e676;
-            --amber: #ffb300;
-            --red: #ff5252;
-            --blue: #60A5FA;
-            --purple: #b47fff;
-            --cyan: #00d4ff;
-            --pink: #f472b6;
-            --box-bg: rgba(0, 212, 255, 0.04);
-            --box-border: rgba(0, 212, 255, 0.15);
-            --r: 14px
+            --bg: #171614;
+            --bg2: #1e1d1a;
+            --bg3: #282623;
+            --card: #1e1d1a;
+            --card2: #242320;
+            --border: #33312c;
+            --border-h: #4a473f;
+            --t1: #efece5;
+            --t2: #bdb8ad;
+            --t3: #918c81;
+            --t4: #6b675f;
+            --accent: #8fc7b2;
+            --accent2: #a9d6c4;
+            --btn: #3b7462;
+            --grad: linear-gradient(var(--btn), var(--btn));
+            --grad2: linear-gradient(var(--btn), var(--btn));
+            --green: #86c79a;
+            --amber: #e2ae55;
+            --red: #e8857a;
+            --blue: #8db4e8;
+            --purple: #b6a3e0;
+            --cyan: #7fc4cc;
+            --pink: #e39ab9;
+            --box-bg: color-mix(in srgb, var(--accent) 6%, transparent);
+            --box-border: color-mix(in srgb, var(--accent) 22%, transparent);
+            --shadow: 0 1px 2px rgba(0, 0, 0, .3);
+            --display: 'Newsreader', Georgia, 'Times New Roman', serif;
+            --r: 10px
         }
 
         body {
-            font-family: 'DM Sans', 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
             background-color: var(--bg);
             color: var(--t1);
             margin: 0;
@@ -65,7 +68,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: linear-gradient(rgba(0, 212, 255, .013) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 212, 255, .013) 1px, transparent 1px);
+            background-image: linear-gradient(color-mix(in srgb, var(--accent) 4%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--accent) 4%, transparent) 1px, transparent 1px);
             background-size: 44px 44px;
             pointer-events: none;
             z-index: 0;
@@ -119,7 +122,7 @@
         }
 
         .hdr h1 {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--display);
             font-size: 20px;
             font-weight: 700;
             background: var(--grad);
@@ -203,7 +206,7 @@
         .tab.active {
             background: var(--bg3);
             color: var(--accent);
-            box-shadow: 0 0 14px rgba(0, 212, 255, .12)
+            box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 14%, transparent)
         }
 
         .tab-body {
@@ -224,7 +227,7 @@
         }
 
         .card-title {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--display);
             font-size: 14px;
             font-weight: 600;
             color: var(--t1);
@@ -257,7 +260,7 @@
         }
 
         .fh-big {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--display);
             font-size: 28px;
             font-weight: 700;
             color: var(--accent);
@@ -486,19 +489,19 @@
 
         .qo.sel {
             border-color: var(--accent);
-            background: rgba(99, 102, 241, .12);
+            background: color-mix(in srgb, var(--accent) 14%, transparent);
             color: var(--t1)
         }
 
         .qo.correct {
             border-color: var(--green);
-            background: rgba(34, 197, 94, .12);
+            background: color-mix(in srgb, var(--green) 14%, transparent);
             color: var(--green)
         }
 
         .qo.wrong {
             border-color: var(--red);
-            background: rgba(239, 68, 68, .08);
+            background: color-mix(in srgb, var(--red) 9%, transparent);
             color: var(--red)
         }
 
@@ -512,17 +515,17 @@
         }
 
         .qscore.good {
-            background: rgba(34, 197, 94, .08);
+            background: color-mix(in srgb, var(--green) 9%, transparent);
             color: var(--green)
         }
 
         .qscore.mid {
-            background: rgba(245, 158, 11, .08);
+            background: color-mix(in srgb, var(--amber) 9%, transparent);
             color: var(--amber)
         }
 
         .qscore.bad {
-            background: rgba(239, 68, 68, .08);
+            background: color-mix(in srgb, var(--red) 9%, transparent);
             color: var(--red)
         }
 
@@ -671,19 +674,19 @@
 
         .sk-lv.active {
             border-color: var(--accent);
-            background: rgba(99, 102, 241, .15);
+            background: color-mix(in srgb, var(--accent) 17%, transparent);
             color: var(--accent2)
         }
 
         .sk-lv.failed {
             border-color: var(--red);
-            background: rgba(239, 68, 68, .08);
+            background: color-mix(in srgb, var(--red) 9%, transparent);
             color: var(--red)
         }
 
         .sk-bar {
             height: 4px;
-            background: rgba(99, 102, 241, .08);
+            background: color-mix(in srgb, var(--accent) 9%, transparent);
             border-radius: 4px;
             margin-top: 8px;
             overflow: hidden
@@ -700,7 +703,7 @@
             display: none;
             margin-top: 10px;
             padding: 12px;
-            background: rgba(0, 0, 0, .2);
+            background: var(--card2);
             border-radius: 10px
         }
 
@@ -721,7 +724,7 @@
         }
 
         .pf-item:hover {
-            background: rgba(99, 102, 241, .04)
+            background: color-mix(in srgb, var(--accent) 5%, transparent)
         }
 
         .pf-dot {
@@ -773,7 +776,7 @@
 
         .ir-bar {
             height: 8px;
-            background: rgba(99, 102, 241, .08);
+            background: color-mix(in srgb, var(--accent) 9%, transparent);
             border-radius: 6px;
             margin-top: 12px;
             overflow: hidden
@@ -804,7 +807,7 @@
             font-size: 12px;
             color: var(--t2);
             padding: 4px 0;
-            border-bottom: 1px solid rgba(99, 102, 241, .06)
+            border-bottom: 1px solid color-mix(in srgb, var(--accent) 7%, transparent)
         }
 
         .ir-item span:last-child {
@@ -869,7 +872,7 @@
 
         .dl-entry {
             padding: 10px 12px;
-            background: rgba(0, 0, 0, .2);
+            background: var(--card2);
             border-radius: 8px;
             margin-bottom: 6px;
             position: relative
@@ -887,17 +890,17 @@
         }
 
         .dl-cat.Technical {
-            background: rgba(59, 130, 246, .15);
+            background: color-mix(in srgb, var(--blue) 17%, transparent);
             color: var(--blue)
         }
 
         .dl-cat.Strategy {
-            background: rgba(168, 85, 247, .15);
+            background: color-mix(in srgb, var(--purple) 17%, transparent);
             color: var(--purple)
         }
 
         .dl-cat.Trade-off {
-            background: rgba(245, 158, 11, .15);
+            background: color-mix(in srgb, var(--amber) 17%, transparent);
             color: var(--amber)
         }
 
@@ -976,7 +979,7 @@
         .modern-select:focus {
             border-color: var(--accent);
             outline: none;
-            box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.2);
+            box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 23%, transparent);
         }
 
         /* ---- TAB 3: DASHBOARD ---- */
@@ -1000,7 +1003,7 @@
         .ov-track {
             flex: 1;
             height: 10px;
-            background: rgba(99, 102, 241, .08);
+            background: color-mix(in srgb, var(--accent) 9%, transparent);
             border-radius: 8px;
             overflow: hidden
         }
@@ -1028,7 +1031,7 @@
 
         .ph-card.current {
             border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(99, 102, 241, .06)
+            box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 7%, transparent)
         }
 
         .ph-hdr {
@@ -1090,7 +1093,7 @@
         .ph-bar {
             width: 70px;
             height: 5px;
-            background: rgba(99, 102, 241, .08);
+            background: color-mix(in srgb, var(--accent) 9%, transparent);
             border-radius: 4px;
             overflow: hidden
         }
@@ -1120,7 +1123,7 @@
             align-items: center;
             gap: 8px;
             padding: 6px 0;
-            border-bottom: 1px solid rgba(99, 102, 241, .04)
+            border-bottom: 1px solid color-mix(in srgb, var(--accent) 5%, transparent)
         }
 
         .wk-row:last-child {
@@ -1151,7 +1154,7 @@
         .wk-mini {
             width: 50px;
             height: 4px;
-            background: rgba(99, 102, 241, .08);
+            background: color-mix(in srgb, var(--accent) 9%, transparent);
             border-radius: 3px;
             overflow: hidden
         }
@@ -1196,20 +1199,20 @@
         }
 
         .wk-cell.partial {
-            background: rgba(245, 158, 11, .08);
-            border-color: rgba(245, 158, 11, .2);
+            background: color-mix(in srgb, var(--amber) 9%, transparent);
+            border-color: color-mix(in srgb, var(--amber) 23%, transparent);
             color: var(--amber)
         }
 
         .wk-cell.done {
-            background: rgba(34, 197, 94, .08);
-            border-color: rgba(34, 197, 94, .2);
+            background: color-mix(in srgb, var(--green) 9%, transparent);
+            border-color: color-mix(in srgb, var(--green) 23%, transparent);
             color: var(--green)
         }
 
         .wk-cell.cur {
             border-color: var(--accent);
-            box-shadow: 0 0 8px rgba(99, 102, 241, .15)
+            box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 17%, transparent)
         }
 
         .wk-cell span {
@@ -1538,22 +1541,32 @@
 
         /* ---- LIGHT MODE ---- */
         body.light-mode {
-            --bg: #f8fafc;
-            --bg2: #ffffff;
-            --bg3: #f1f5f9;
-            --card: #ffffff;
-            --card2: #f8fafc;
-            --border: #e2e8f0;
-            --border-h: #cbd5e1;
-            --t1: #1e293b;
-            --t2: #475569;
-            --t3: #94a3b8;
-            --t4: #cbd5e1;
-            --accent: #059669;
-            --accent2: #10b981;
-            --grad: linear-gradient(135deg, #059669, #0d9488);
-            --box-bg: rgba(5, 150, 105, 0.05);
-            --box-border: rgba(5, 150, 105, 0.15);
+            --bg: #f6f4ee;
+            --bg2: #fffefb;
+            --bg3: #efece3;
+            --card: #fffefb;
+            --card2: #faf8f2;
+            --border: #e3ded2;
+            --border-h: #cbc4b4;
+            --t1: #1f1d1a;
+            --t2: #4d4942;
+            --t3: #767168;
+            --t4: #a39d91;
+            --accent: #2f5d50;
+            --accent2: #3e7566;
+            --btn: #2f5d50;
+            --green: #2e7d4f;
+            --amber: #a9690f;
+            --red: #b4402f;
+            --blue: #2f5e9e;
+            --purple: #64499a;
+            --cyan: #1f7a85;
+            --pink: #a8437a;
+            --shadow: 0 1px 2px rgba(60, 50, 30, .06);
+            --grad: linear-gradient(var(--btn), var(--btn));
+            --grad2: linear-gradient(var(--btn), var(--btn));
+            --box-bg: color-mix(in srgb, var(--accent) 5%, transparent);
+            --box-border: color-mix(in srgb, var(--accent) 20%, transparent);
         }
 
         body.light-mode::before {
@@ -1710,113 +1723,205 @@
         }
 
         /* ---- MOBILE RESPONSIVE ---- */
+        /* ============ Visual refresh: calm paper/ink theme ============ */
+        html { font-size: 15px; }
+
+        body {
+            font-size: 14px;
+            line-height: 1.55;
+            font-feature-settings: 'cv11', 'ss01';
+        }
+
+        body::before { display: none; }
+
+        ::selection { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        .app { max-width: 1120px; padding: 0 24px 48px; }
+
+        /* Header: left-aligned title, no gradient text */
+        .hdr {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+            padding: 18px 0 14px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 14px;
+        }
+
+        .hdr h1,
+        .ir-score,
+        .ov-pct,
+        .hdr-badge {
+            background: none;
+            -webkit-text-fill-color: currentColor;
+            color: var(--t1);
+        }
+
+        .hdr h1 {
+            font-family: var(--display);
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -.01em;
+            flex: 1;
+            order: 1;
+        }
+
+        .ir-score, .ov-pct { color: var(--accent); font-family: var(--display); font-weight: 600; }
+
+        .hamburger-btn, .theme-toggle, #userGreeting {
+            position: static !important;
+        }
+
+        .hamburger-btn { order: 0; font-size: 18px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--t2); }
+        #userGreeting { order: 2; font-size: 13px; color: var(--t2); }
+        .theme-toggle { order: 3; font-size: 15px; padding: 4px 10px; border-radius: 8px; background: var(--card); }
+
+        .sd-bar { justify-content: flex-start; margin-bottom: 14px; }
+        .sd-bar label { font-size: 13px; color: var(--t2); }
+        .sd-bar input[type=date] { background: var(--card); font-size: 13px; padding: 6px 10px; }
+
+        /* Tabs: underline style instead of a pill tray */
+        .tabs {
+            background: none;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            border-radius: 0;
+            padding: 0;
+            gap: 4px;
+            margin-bottom: 18px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .tabs::-webkit-scrollbar { display: none; }
+
+        .tab {
+            flex: 0 0 auto;
+            padding: 10px 14px;
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--t3);
+            border-radius: 0;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            white-space: nowrap;
+        }
+
+        .tab svg { width: 16px; height: 16px; }
+        .tab:hover { color: var(--t1); }
+
+        .tab.active {
+            background: none;
+            box-shadow: none;
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Surfaces */
+        .card, .fh-card, .wm, .sk, .qq {
+            box-shadow: var(--shadow);
+        }
+
+        .card { padding: 18px 20px; margin-bottom: 14px; }
+        .card-title { font-size: 17px; font-weight: 600; margin-bottom: 12px; letter-spacing: -.005em; }
+        .fh-card { padding: 16px 14px; }
+        .focus-header, .wm-grid { gap: 12px; margin-bottom: 12px; }
+        .fh-big { font-size: 32px; font-weight: 600; letter-spacing: -.01em; }
+        .fh-label, .wm-lbl, .ir-label, .sm-lbl { font-size: 11px; letter-spacing: .06em; color: var(--t3); }
+        .fh-sub, .wm-tgt { font-size: 12px; color: var(--t3); }
+        .wm { padding: 14px; }
+        .wm:hover { transform: none; }
+        .wm::before { height: 2px; }
+        .wm-val { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+        .adj-btn, .adj-btn[style] {
+            background: var(--bg3) !important;
+            border: 1px solid var(--border) !important;
+            color: var(--t1);
+            font-weight: 500;
+        }
+
+        .adj-btn:hover { background: var(--border) !important; }
+
+        /* Checklist + explainers: readable sizes */
+        .ci { padding: 8px 0; }
+        .ci-text { font-size: 14.5px; color: var(--t1); }
+        .ck { border-width: 1.5px; border-color: var(--border-h); border-radius: 5px; }
+        .det { font-size: 13px; border-left-width: 2px; border-radius: 6px; padding: 10px 14px; }
+        .det .dw { color: var(--accent); }
+        .quiz-box h4, .res-box h4 { font-size: 13.5px; color: var(--t1); }
+        .qq p { font-size: 13.5px; }
+        .qo { font-size: 13.5px; padding: 8px 12px; margin: 5px 0; }
+        .res-box a { font-size: 13px; padding: 3px 0; }
+
+        .ph-card.current, .wk-cell.cur, .modern-select:hover { box-shadow: none; }
+
+        .modern-select { box-shadow: none; }
+
+        /* Buttons on the solid accent */
+        .dl-btn, .mbtn-s, .onboard-btn.primary, .ph-num { color: #fff; }
+
+        .onboard-btn.primary { background: var(--btn); }
+
+        .onboard-card h2 { font-family: var(--display); font-weight: 600; }
+
+        .modal, .onboard-overlay { backdrop-filter: none; }
+
+        .sidebar-footer { margin-top: auto; }
+
+        :root { color-scheme: dark; accent-color: var(--accent); }
+        body.light-mode { color-scheme: light; }
+
+        .wk-cell { aspect-ratio: auto; padding: 14px 4px; font-size: 12px; }
+
+        .si-icon { color: var(--t3); display: inline-flex; }
+        .si-icon svg { width: 18px; height: 18px; }
+
         @media (max-width: 768px) {
-            .app {
-                padding: 0 8px !important;
-            }
-
-            .hdr {
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                padding-top: 8px !important;
-                gap: 6px !important;
-            }
-
-            .hdr h1 {
-                font-size: 16px !important;
-                margin: 0 !important;
-                text-align: center;
-                margin-top: 8px !important;
-            }
-
-            #userGreeting {
-                position: static !important;
-                right: auto !important;
-                top: auto !important;
-            }
-
-            .tabs {
-                gap: 0 !important;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                flex-wrap: nowrap !important;
-            }
-
-            .tab {
-                flex: 0 0 auto;
-                font-size: 10px !important;
-                padding: 6px 10px !important;
-                white-space: nowrap;
-            }
-
-            .tab svg {
-                width: 14px;
-                height: 14px;
-            }
-
-            .sd-bar {
-                flex-wrap: wrap;
-            }
-
-            .card {
-                padding: 12px !important;
-            }
-
-            .card-title {
-                font-size: 13px !important;
-            }
-
-            .focus-header {
-                flex-direction: column !important;
-                gap: 8px !important;
-            }
-
-            .fh-card {
-                min-width: auto !important;
-                flex: 1 !important;
-            }
-
-            .wm-grid {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
-            }
-
-            .wk-grid {
-                grid-template-columns: repeat(6, 1fr) !important;
-                gap: 4px !important;
-            }
-
-            .sm-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-
-            .ph-card {
-                font-size: 12px;
-            }
-
-            .onboard-card {
-                padding: 20px;
-            }
-
-            .onboard-step h2 {
-                font-size: 16px;
-            }
+            .app { padding: 0 14px 40px; }
+            .hdr { padding: 12px 0 10px; gap: 10px; }
+            .hdr h1 { font-size: 19px; }
+            #userGreeting { display: none; }
+            .tab { padding: 9px 11px; font-size: 13px; }
+            .sd-bar { flex-wrap: wrap; }
+            .card { padding: 14px; }
+            .card-title { font-size: 16px; }
+            .focus-header { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .fh-card { padding: 12px 6px; }
+            .fh-big { font-size: 24px; }
+            .fh-big[style] { font-size: 13px !important; padding-top: 0 !important; line-height: 1.25; }
+            .fh-sub { display: none; }
+            .wm-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .wm { padding: 10px 8px; }
+            .wm-val { gap: 6px !important; font-size: 18px; }
+            .wm-tgt { font-size: 11px; }
+            .wk-grid { grid-template-columns: repeat(6, 1fr) !important; gap: 4px !important; }
+            .sm-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .onboard-card { padding: 20px; }
+            .det { margin-left: 0; }
         }
 
         @media (max-width: 480px) {
-            .wk-grid {
-                grid-template-columns: repeat(4, 1fr) !important;
-            }
+            .wk-grid { grid-template-columns: repeat(4, 1fr) !important; }
+            .adj-btn { width: 24px; height: 24px; font-size: 14px; }
+        }
 
-            .tab {
-                font-size: 9px !important;
-                padding: 5px 8px !important;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
         }
     </style>
 </head>
 
-<body>
+<body class="light-mode">
+    <script>try { if (localStorage.getItem('aipm_light_mode') === 'false') document.body.classList.remove('light-mode'); } catch (e) { }</script>
     <!-- SIDEBAR OVERLAY -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
     <!-- SIDEBAR DRAWER -->
@@ -1828,42 +1933,41 @@
         </div>
         <div class="sidebar-nav">
             <button class="sidebar-item" onclick="switchTab(0); closeSidebar()">
-                <div class="si-icon">🎯</div>
+                <div class="si-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg></div>
                 Today's Focus
             </button>
             <button class="sidebar-item" onclick="switchTab(1); closeSidebar()">
-                <div class="si-icon">📚</div>
+                <div class="si-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6.75V15m6-6v8.25M3 6.7v12.5l5.5-2.5 7 3 5.5-2.5V4.7l-5.5 2.5-7-3L3 6.7z"/></svg></div>
                 Full Overview
             </button>
             <button class="sidebar-item" onclick="switchTab(2); closeSidebar()">
-                <div class="si-icon">📊</div>
+                <div class="si-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V12m6 8V6m6 14V9m4 11H2"/></svg></div>
                 Dashboard
             </button>
             <button class="sidebar-item" onclick="switchTab(3); closeSidebar()">
-                <div class="si-icon">🎤</div>
+                <div class="si-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v7a3 3 0 0 0 3 3zm6-4v1a6 6 0 0 1-12 0v-1m6 7v3"/></svg></div>
                 Mock Interviews
             </button>
             <button class="sidebar-item" onclick="switchTab(4); closeSidebar()">
-                <div class="si-icon">📝</div>
+                <div class="si-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6a9 9 0 0 0-9-1.5v14A9 9 0 0 1 12 20m0-14a9 9 0 0 1 9-1.5v14A9 9 0 0 0 12 20m0-14v14"/></svg></div>
                 Case Studies
             </button>
             <button class="sidebar-item" onclick="switchTab(5); closeSidebar()">
-                <div class="si-icon">📖</div>
+                <div class="si-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10m14 11V10M9 21v-7m6 7v-7M3 9l9-6 9 6"/></svg></div>
                 Libraries & Resources
             </button>
         </div>
 
         <div class="sidebar-sep"></div>
-        <button class="sidebar-item" onclick="exportData();closeSidebar()"><span class="si-icon">⤓</span> Export
+        <button class="sidebar-item" onclick="exportData();closeSidebar()"><span class="si-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg></span> Export
             Backup</button>
-        <button class="sidebar-item" onclick="document.getElementById('impF').click()"><span class="si-icon">⤒</span>
+        <button class="sidebar-item" onclick="document.getElementById('impF').click()"><span class="si-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V9m0 0l-4 4m4-4l4 4M5 4h14"/></svg></span>
             Import Data</button>
         <input type="file" id="impF" accept=".json" style="display:none" onchange="importData(event)" />
         <div class="sidebar-sep"></div>
-        <button class="sidebar-item" onclick="handleLogout()" style="color:var(--red)"><span class="si-icon">→</span>
+        <button class="sidebar-item" onclick="handleLogout()" style="color:var(--red)"><span class="si-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h4v16h-4M10 8l4 4-4 4m4-4H4"/></svg></span>
             Logout</button>
-    </div>
-    <div class="sidebar-footer">AI PM Learning System v2.4</div>
+        <div class="sidebar-footer">AI PM Learning System</div>
     </div>
 
     <div class="app">
@@ -1871,7 +1975,7 @@
             <button class="hamburger-btn" onclick="toggleSidebar()" title="Menu">&#9776;</button>
             <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"
                 title="Toggle light/dark mode">&#9788;</button>
-            <span id="userGreeting" style="position:absolute;right:80px;top:12px;font-size:11px;color:var(--t3)"></span>
+            <span id="userGreeting"></span>
             <h1>AI PM Learning System</h1>
         </div>
         <div class="sd-bar">
@@ -1935,8 +2039,7 @@
         <!-- TAB 5: LIBRARIES & RESOURCES -->
         <div class="tab-body" id="tab5"></div>
         <div class="footer" style="padding:6px 0">
-            <button class="fbtn danger" onclick="showModal('resetMo')" style="font-size:11px;padding:4px 12px">🗑
-                Reset</button>
+            <button class="fbtn danger" onclick="showModal('resetMo')" style="font-size:11px;padding:4px 12px">Reset all progress</button>
         </div>
     </div>
     <div class="modal" id="metricMo">
@@ -2037,9 +2140,6 @@
         </div>
     </div>
 
-    <!-- Load static data (getDefault, CORE_SKILLS, AI_SKILLS, SKILL_RESOURCES, etc.) -->
-    <script src="data.js"></script>
-
     <!-- API-based data loading bridge -->
     <script>
 
@@ -2059,7 +2159,9 @@
         }
 
         async function handleLogout() {
-            await fetch('/auth/logout', { method: 'POST' });
+            try { await fetch('/auth/logout', { method: 'POST' }); } catch (e) { }
+            // Don't leave this user's progress behind for the next person on this browser
+            try { localStorage.removeItem(K); } catch (e) { }
             window.location.href = '/';
         }
 
@@ -2074,8 +2176,8 @@
         }
 
         /* ---- LIGHT MODE LOGIC ---- */
-        let isLightMode = localStorage.getItem('aipm_light_mode') === 'true';
-        if (isLightMode) document.body.classList.add('light-mode');
+        let isLightMode = localStorage.getItem('aipm_light_mode') !== 'false';
+        document.body.classList.toggle('light-mode', isLightMode);
         function toggleTheme() {
             isLightMode = !isLightMode;
             document.body.classList.toggle('light-mode', isLightMode);
@@ -2139,6 +2241,15 @@
                     window.location.href = '/admin.html';
                     return;
                 }
+                // Different account on this browser: drop the previous user's cached progress
+                try {
+                    const prevUid = localStorage.getItem('aipm_uid');
+                    if (prevUid && prevUid !== String(user.id)) {
+                        localStorage.removeItem(K);
+                        S = load();
+                    }
+                    localStorage.setItem('aipm_uid', String(user.id));
+                } catch (e) { }
                 document.getElementById('userGreeting').textContent = 'Hi, ' + user.name;
 
                 const initials = (user.name || '?').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
@@ -2158,9 +2269,11 @@
 
                 const progressData = await progressRes.json();
                 if (progressData && progressData.userId) {
-                    Object.keys(S).forEach(k => {
-                        if (progressData[k] !== undefined && k !== '_id' && k !== 'userId' && k !== '__v') S[k] = progressData[k];
-                    });
+                    ['startDate', 'weekOffset', 'items', 'artifacts', 'quizAnswers', 'skillLevels', 'skillQuizAnswers',
+                        'weeklyMetrics', 'overallMetrics', 'decisionLogs', 'expanded', 'casesCompleted', 'mocksDone',
+                        'casesState', 'mockInterviewsState'].forEach(k => {
+                            if (progressData[k] !== undefined && progressData[k] !== null) S[k] = progressData[k];
+                        });
                     if (S.startDate) document.getElementById('startDate').value = S.startDate;
                 }
 

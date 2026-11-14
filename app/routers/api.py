@@ -166,7 +166,7 @@ async def health_check(request: Request) -> dict[str, Any]:
             healthy = False
     except Exception as exc:
         checks["google_oauth"] = False
-        checks["google_oauth_error"] = str(exc)
+        logger.warning(f"Health: OAuth check failed: {exc}")  # details stay in logs, not the public response
         healthy = False
 
     # Drive connectivity: can we list the folder?
@@ -177,7 +177,7 @@ async def health_check(request: Request) -> dict[str, Any]:
             healthy = False
     except Exception as exc:
         checks["drive_connected"] = False
-        checks["drive_error"] = str(exc)
+        logger.warning(f"Health: Drive check failed: {exc}")
         healthy = False
 
     # Gemini API key present?

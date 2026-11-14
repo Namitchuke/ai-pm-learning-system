@@ -5,19 +5,32 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const Progress = require('../models/Progress');
 
+const STUDY_ROLES = ['AI PM', 'Data Analyst', 'SD'];
+
 // Signup (email/password)
 router.post('/signup', async (req, res) => {
     try {
-        const { username, name, email, password, studyRole } = req.body;
+        let { username, name, email, password, studyRole } = req.body || {};
 
-        if (!username || !name || !email || !password) {
+        if (![username, name, email, password].every(v => typeof v === 'string' && v.trim())) {
             return res.status(400).json({ error: 'All fields are required' });
         }
-        if (password.length < 6) {
-            return res.status(400).json({ error: 'Password must be at least 6 characters' });
+        username = username.trim();
+        name = name.trim();
+        email = email.trim().toLowerCase();
+        if (!/^[A-Za-z0-9_.-]{3,30}$/.test(username)) {
+            return res.status(400).json({ error: 'Username must be 3-30 characters: letters, numbers, _ . -' });
         }
+        if (name.length > 80) return res.status(400).json({ error: 'Name is too long' });
+        if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return res.status(400).json({ error: 'Enter a valid email address' });
+        }
+        if (password.length < 8 || password.length > 128) {
+            return res.status(400).json({ error: 'Password must be 8-128 characters' });
+        }
+        if (!STUDY_ROLES.includes(studyRole)) studyRole = 'AI PM';
 
-        const existingEmail = await User.findOne({ email: email.toLowerCase() });
+        const existingEmail = await User.findOne({ email });
         if (existingEmail) return res.status(400).json({ error: 'Email already registered' });
 
         const existingUsername = await User.findOne({ username });
@@ -28,10 +41,10 @@ router.post('/signup', async (req, res) => {
         const user = await User.create({
             username,
             name,
-            email: email.toLowerCase(),
+            email,
             passwordHash,
             role: 'learner',
-            studyRole: studyRole || 'AI PM'
+            studyRole
         });
 
         // Create empty progress for new user
@@ -50,6 +63,10 @@ router.post('/signup', async (req, res) => {
 
 // Login (email/password)
 router.post('/login', (req, res, next) => {
+    const { email, password } = req.body || {};
+    if (typeof email !== 'string' || typeof password !== 'string' || !email || !password || password.length > 128) {
+        return res.status(400).json({ error: 'Email and password are required' });
+    }
     passport.authenticate('local', (err, user, info) => {
         if (err) return res.status(500).json({ error: 'Server error' });
         if (!user) return res.status(401).json({ error: info?.message || 'Invalid credentials' });
@@ -73,9 +90,13 @@ router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/?error=google_auth_failed' }),
     async (req, res) => {
         // Ensure progress record exists for Google users too
-        const existing = await Progress.findOne({ userId: req.user._id });
-        if (!existing) {
-            await Progress.create({ userId: req.user._id });
+        try {
+            const existing = await Progress.findOne({ userId: req.user._id });
+            if (!existing) {
+                await Progress.create({ userId: req.user._id });
+            }
+        } catch (err) {
+            console.error('Google callback progress error:', err.message);
         }
 
         if (req.user.role === 'admin') {
@@ -90,7 +111,11 @@ router.get('/google/callback',
 router.post('/logout', (req, res) => {
     req.logout((err) => {
         if (err) return res.status(500).json({ error: 'Logout failed' });
-        res.json({ message: 'Logged out' });
+        // Destroy the server-side session and drop the cookie, not just the user
+        req.session.destroy(() => {
+            res.clearCookie('aipm.sid');
+            res.json({ message: 'Logged out' });
+        });
     });
 });
 

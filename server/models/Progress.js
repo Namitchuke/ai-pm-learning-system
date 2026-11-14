@@ -17,10 +17,11 @@ const progressSchema = new mongoose.Schema({
     decisionLogs: { type: Array, default: [] },
     expanded: { type: mongoose.Schema.Types.Mixed, default: {} },
     casesCompleted: { type: mongoose.Schema.Types.Mixed, default: {} },
+    mocksDone: { type: mongoose.Schema.Types.Mixed, default: {} },
     casesState: { type: mongoose.Schema.Types.Mixed, default: { co: 'All', cat: 'All', lv: 'All' } },
     mockInterviewsState: { type: mongoose.Schema.Types.Mixed, default: { co: 'All', cat: 'All', lv: 'All', role: 'All' } },
     updatedAt: { type: Date, default: Date.now }
-});
+}, { minimize: false });
 
 progressSchema.pre('save', function (next) {
     this.updatedAt = new Date();

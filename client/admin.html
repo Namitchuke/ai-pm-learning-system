@@ -6,29 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI PM System - Admin Panel</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --bg: #07070d;
-            --surface: #0f0f1a;
-            --s2: #161626;
-            --s3: #1e1e30;
-            --acc: #00d4ff;
-            --acc-s: rgba(0, 212, 255, .12);
-            --acc-g: rgba(0, 212, 255, .28);
-            --txt: #eaeaf6;
-            --txt2: #8080a8;
-            --txt3: #3c3c5a;
-            --ok: #00e676;
-            --ok-s: rgba(0, 230, 118, .12);
-            --warn: #ffb300;
-            --warn-s: rgba(255, 179, 0, .12);
-            --bdr: rgba(255, 255, 255, .055);
-            --r: 14px;
-            --rs: 9px;
-
-            font-family: 'DM Sans', -apple-system, sans-serif;
+            --bg: #f6f4ee;
+            --surface: #fffefb;
+            --s2: #faf8f2;
+            --s3: #efece3;
+            --acc: #2f5d50;
+            --acc-s: rgba(47, 93, 80, .1);
+            --acc-g: rgba(47, 93, 80, .35);
+            --txt: #1f1d1a;
+            --txt2: #4d4942;
+            --txt3: #767168;
+            --ok: #2e7d4f;
+            --ok-s: rgba(46, 125, 79, .12);
+            --warn: #a9690f;
+            --warn-s: rgba(169, 105, 15, .12);
+            --bdr: #e3ded2;
+            --r: 10px;
+            --rs: 8px;
+            font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
             background: var(--bg);
             color: var(--txt);
             margin: 0;
@@ -51,7 +51,8 @@
         h3,
         .logo-text,
         .stat-val {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Newsreader', Georgia, serif;
+            font-weight: 600;
         }
 
         /* Nav */
@@ -64,9 +65,9 @@
             justify-content: space-between;
             padding: 0 2rem;
             height: 64px;
-            background: rgba(7, 7, 13, .92);
+            background: var(--surface);
             border-bottom: 1px solid var(--bdr);
-            backdrop-filter: blur(18px);
+            
         }
 
         .nav-logo {
@@ -132,8 +133,8 @@
         }
 
         .btn-logout:hover {
-            color: #ff5252;
-            border-color: rgba(255, 82, 82, .3);
+            color: #b4402f;
+            border-color: rgba(180, 64, 47, .4);
         }
 
         /* Container */
@@ -289,6 +290,29 @@
             color: var(--txt3);
             font-size: 14px;
         }
+
+        body::before { display: none; }
+        body { margin: 0; }
+        .nav-dot { display: none; }
+        .logo-text { font-size: 18px; letter-spacing: 0; }
+        .logo-text span { color: var(--txt3); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; margin-left: 4px; }
+        .stat-card { box-shadow: 0 1px 2px rgba(60, 50, 30, .06); }
+        .stat-card:hover { border-color: var(--bdr); }
+        .stat-val { font-size: 36px; font-weight: 500; color: var(--txt); font-variant-numeric: tabular-nums; }
+        .stat-lbl { font-size: 12px; letter-spacing: .05em; }
+        .stat-sub { font-size: 13px; color: var(--txt3); }
+        .search-input { font-size: 14px; }
+        .search-input:focus { box-shadow: 0 0 0 3px var(--acc-s); }
+        th { font-size: 12px; letter-spacing: .04em; }
+        .u-email, .u-date { font-size: 13px; }
+        .u-role { font-size: 11px; }
+        td[style*="text-align:center"] { color: var(--txt) !important; font-variant-numeric: tabular-nums; }
+        :focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+        @media (max-width: 760px) {
+            .container { padding: 1rem; }
+            .nav { padding: 0 1rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 
@@ -314,12 +338,12 @@
             </div>
             <div class="stat-card">
                 <div class="stat-lbl">Active Users</div>
-                <div class="stat-val" id="statActive" style="color: var(--ok)">-</div>
+                <div class="stat-val" id="statActive" >-</div>
                 <div class="stat-sub">Updated progress in last 7 days</div>
             </div>
             <div class="stat-card">
                 <div class="stat-lbl">Avg Engagement</div>
-                <div class="stat-val" id="statAvg" style="color: var(--warn)">-</div>
+                <div class="stat-val" id="statAvg" >-</div>
                 <div class="stat-sub">Avg items completed per active user</div>
             </div>
         </div>
@@ -432,8 +456,8 @@
                             <div class="u-email">${escapeHTML(u.email || '@' + (u.username || ''))}</div>
                         </td>
                         <td>
-                            <span class="u-role ${roleClass}">${(u.role || 'learner').toUpperCase()}</span>
-                            <span class="u-role" style="margin-left:4px">${u.studyRole || 'N/A'}</span>
+                            <span class="u-role ${roleClass}">${escapeHTML((u.role || 'learner').toUpperCase())}</span>
+                            <span class="u-role" style="margin-left:4px">${escapeHTML(u.studyRole || 'N/A')}</span>
                         </td>
                         <td class="u-date">${fmt(u.createdAt)}</td>
                         <td class="u-date">${fmt(u.lastLoginAt)}</td>
@@ -463,7 +487,7 @@
         }
 
         function escapeHTML(str) {
-            return str.replace(/[&<>'"]/g,
+            return String(str == null ? '' : str).replace(/[&<>'"]/g,
                 tag => ({
                     '&': '&amp;',
                     '<': '&lt;',

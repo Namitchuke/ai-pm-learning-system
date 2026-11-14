@@ -1,4 +1,4 @@
-/* Shared CSS for AI PM Learning System — Soft Dark Theme */
+/* Shared base for the AI PM Learning System: warm paper theme */
 *,
 *::before,
 *::after {
@@ -8,35 +8,33 @@
 }
 
 :root {
-    --bg: #0B0F14;
-    --bg2: #111827;
-    --bg3: #1F2937;
-    --card: #111827;
-    --card2: #1a2332;
-    --border: #1F2937;
-    --border-h: #374151;
-    --t1: #E5E7EB;
-    --t2: #9CA3AF;
-    --t3: #6B7280;
-    --t4: #4B5563;
-    --accent: #34D399;
-    --accent2: #6EE7B7;
-    --grad: linear-gradient(135deg, #34D399, #2DD4BF);
-    --grad2: linear-gradient(135deg, #60A5FA, #34D399);
-    --green: #22c55e;
-    --amber: #f59e0b;
-    --red: #ef4444;
-    --blue: #60A5FA;
-    --purple: #a78bfa;
-    --cyan: #22d3ee;
-    --pink: #f472b6;
-    --r: 12px
+    --bg: #f6f4ee;
+    --bg2: #fffefb;
+    --bg3: #efece3;
+    --card: #fffefb;
+    --card2: #faf8f2;
+    --border: #e3ded2;
+    --border-h: #cbc4b4;
+    --t1: #1f1d1a;
+    --t2: #4d4942;
+    --t3: #767168;
+    --t4: #a39d91;
+    --accent: #2f5d50;
+    --accent2: #3e7566;
+    --green: #2e7d4f;
+    --amber: #a9690f;
+    --red: #b4402f;
+    --blue: #2f5e9e;
+    --display: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --r: 10px
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
     background: var(--bg);
     color: var(--t1);
     min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
     overflow-x: hidden
 }

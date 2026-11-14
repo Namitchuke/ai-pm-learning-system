@@ -4,6 +4,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
+const DUMMY_HASH = bcrypt.hashSync('not-a-real-password', 12);
+
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
@@ -31,9 +33,15 @@ if (googleEnabled) passport.use(new GoogleStrategy({
         let user = await User.findOne({ googleId: profile.id });
         if (user) return done(null, user);
 
-        // Check if email already exists (signed up with password first)
-        user = await User.findOne({ email: profile.emails[0].value });
+        const gEmail = profile.emails && profile.emails[0];
+        if (!gEmail || !gEmail.value) return done(null, false);
+        const verified = gEmail.verified !== false && (!profile._json || profile._json.email_verified !== false);
+
+        // Check if email already exists (signed up with password first).
+        // Only link accounts when Google confirms the email is verified.
+        user = await User.findOne({ email: gEmail.value.toLowerCase() });
         if (user) {
+            if (!verified) return done(null, false);
             user.googleId = profile.id;
             if (!user.avatar && profile.photos && profile.photos[0]) {
                 user.avatar = profile.photos[0].value;
@@ -64,12 +72,13 @@ passport.use(new LocalStrategy({
     usernameField: 'email'
 }, async (email, password, done) => {
     try {
-        const user = await User.findOne({ email: email.toLowerCase() });
-        if (!user) return done(null, false, { message: 'No account with that email' });
-        if (!user.passwordHash) return done(null, false, { message: 'Please login with Google' });
-
-        const isMatch = await bcrypt.compare(password, user.passwordHash);
-        if (!isMatch) return done(null, false, { message: 'Incorrect password' });
+        // One generic message for every failure, and a hash comparison even when the
+        // account is missing, so responses don't reveal which emails are registered.
+        const INVALID = { message: 'Incorrect email or password' };
+        const user = await User.findOne({ email: String(email).trim().toLowerCase() });
+        const hash = (user && user.passwordHash) || DUMMY_HASH;
+        const isMatch = await bcrypt.compare(String(password), hash);
+        if (!user || !user.passwordHash || !isMatch) return done(null, false, INVALID);
 
         user.lastLoginAt = new Date();
         await user.save();
