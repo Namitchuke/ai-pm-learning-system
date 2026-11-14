@@ -1,3 +1,5 @@
+// Escape user-entered text before it goes into innerHTML
+function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])) }
 let S = load();
 function load() { try { let r = localStorage.getItem(K); if (r) { let p = JSON.parse(r); if (!p.skillLevels) p.skillLevels = {}; if (!p.skillQuizAnswers) p.skillQuizAnswers = {}; if (!p.decisionLogs) p.decisionLogs = []; if (!p.weeklyMetrics) p.weeklyMetrics = {}; if (!p.overallMetrics) p.overallMetrics = { cases: 0, apps: 0, mocks: 0 }; if (!p.mocksDone) p.mocksDone = {}; if (!p.casesCompleted) p.casesCompleted = {}; return p } } catch (e) { } return getDefault() }
 function save() { localStorage.setItem(K, JSON.stringify(S)) }
@@ -152,7 +154,7 @@ ${open ? `<div style="font-size:13px;color:var(--t3);margin-top:8px;padding-left
 <textarea id="dlText" placeholder="Log a decision..."></textarea>
 <button class="dl-btn" onclick="addLog()">Add</button>
 </div>`;
-    h += (S.decisionLogs || []).slice().reverse().map((l, i) => { let ri = S.decisionLogs.length - 1 - i; return `<div class="dl-entry"><span class="dl-cat ${l.cat}">${l.cat}</span><button class="dl-del" onclick="delLog(${ri})">×</button><div class="dl-text">${l.text}</div><div class="dl-time">${l.time}</div></div>` }).join('');
+    h += (S.decisionLogs || []).slice().reverse().map((l, i) => { let ri = S.decisionLogs.length - 1 - i; let cat = ['Technical', 'Strategy', 'Trade-off'].includes(l.cat) ? l.cat : 'Technical'; return `<div class="dl-entry"><span class="dl-cat ${cat}">${cat}</span><button class="dl-del" onclick="delLog(${ri})">×</button><div class="dl-text">${esc(l.text)}</div><div class="dl-time">${esc(l.time)}</div></div>` }).join('');
     h += `</div>`;
     el.innerHTML = h
 }
@@ -210,7 +212,7 @@ function renderTab2() {
     achievements.forEach(a => {
         let unlocked = false;
         try { unlocked = a.check(); } catch (e) { }
-        h += `<div style="text-align:center;padding:12px 8px;border-radius:8px;border:1px solid ${unlocked ? 'var(--accent)' : 'var(--border)'};background:${unlocked ? 'rgba(52,211,153,.08)' : 'var(--bg2)'};opacity:${unlocked ? '1' : '.5'};transition:all .2s">
+        h += `<div style="text-align:center;padding:12px 8px;border-radius:8px;border:1px solid ${unlocked ? 'var(--accent)' : 'var(--border)'};background:${unlocked ? 'color-mix(in srgb, var(--accent) 9%, transparent)' : 'var(--bg2)'};opacity:${unlocked ? '1' : '.5'};transition:all .2s">
             <div style="font-size:20px;margin-bottom:4px;${unlocked ? '' : 'filter:grayscale(1)'}">${a.icon}</div>
             <div style="font-size:11px;font-weight:600;color:${unlocked ? 'var(--t1)' : 'var(--t3)'}">${a.label}</div>
             <div style="font-size:9px;color:var(--t4);margin-top:2px">${a.desc}</div>
@@ -266,27 +268,27 @@ function renderTab3() {
     h += `<div class="card"><div class="card-title">Mock Interviews <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} practiced</span></div>
             <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
                 <select class="modern-select" onchange="updMockFlt('co', this.value)">
-                    <option value="" disabled ${st.co === 'All' ? 'selected' : ''}>📍 Company</option>
+                    <option value="" disabled ${st.co === 'All' ? 'selected' : ''}>Company</option>
                     <option value="All">All Companies</option>
                     ${companies.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}
                 </select>
                 <select class="modern-select" onchange="updMockFlt('cat', this.value)">
-                    <option value="" disabled ${st.cat === 'All' ? 'selected' : ''}>📂 Category</option>
+                    <option value="" disabled ${st.cat === 'All' ? 'selected' : ''}>Category</option>
                     <option value="All">All Categories</option>
                     ${categories.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}
                 </select>
                 <select class="modern-select" onchange="updMockFlt('lv', this.value)">
-                    <option value="" disabled ${st.lv === 'All' ? 'selected' : ''}>⚡ Difficulty</option>
+                    <option value="" disabled ${st.lv === 'All' ? 'selected' : ''}>Difficulty</option>
                     <option value="All">All Difficulties</option>
                     ${levels.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}
                 </select>
                 <select class="modern-select" onchange="updMockFlt('role', this.value)">
-                    <option value="" disabled ${st.role === 'All' ? 'selected' : ''}>💼 Role</option>
+                    <option value="" disabled ${st.role === 'All' ? 'selected' : ''}>Role</option>
                     <option value="All">All Roles</option>
                     ${roles.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.role === c ? 'selected' : ''}>${c}</option>`).join('')}
                 </select>
                 <select class="modern-select" style="border-color:var(--accent)" onchange="updMockFlt('status', this.value)">
-                    <option value="" disabled ${st.status === 'All' ? 'selected' : ''}>✔️ Status</option>
+                    <option value="" disabled ${st.status === 'All' ? 'selected' : ''}>Status</option>
                     <option value="All">All Statuses</option>
                     <option value="Done" ${st.status === 'Done' ? 'selected' : ''}>Done</option>
                     <option value="Not Done" ${st.status === 'Not Done' ? 'selected' : ''}>Not Done</option>
@@ -326,7 +328,7 @@ function renderTab3() {
                             <span style="background:${lvColor};color:#fff;padding:1px 7px;border-radius:10px">${m.level}</span>
                             <span style="background:var(--bg3);border:1px solid var(--border);color:var(--t1);padding:1px 7px;border-radius:10px">${m.co}</span>
                             <span style="background:var(--bg3);border:1px solid var(--border);color:var(--t1);padding:1px 7px;border-radius:10px">${m.role}</span>
-                            <span style="background:var(--accent);color:#fff;padding:1px 7px;border-radius:10px">${m.cat}</span>
+                            <span style="background:var(--btn);color:#fff;padding:1px 7px;border-radius:10px">${m.cat}</span>
                         </div>
                         <div style="font-weight:600;font-size:13px;line-height:1.4;${isDone ? 'text-decoration:line-through;color:var(--t3)' : ''}">${m.q}</div>
                         ${open ? `<div style="font-size:12px;color:var(--t2);margin-top:8px;padding:8px 12px;border-left:3px solid var(--accent);background:var(--box-bg);border:1px solid var(--box-border);border-radius:4px"><strong>Hints:</strong><br>${m.flow}</div>` : ''}

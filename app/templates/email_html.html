@@ -189,7 +189,7 @@
             </ul>
             {% endif %}
 
-            {% if topic.source_url %}
+            {% if topic.source_url and (topic.source_url.startswith("https://") or topic.source_url.startswith("http://")) %}
             <div style="margin-top:10px;font-size:0.78rem;color:#475569;">
                 Source: <a href="{{ topic.source_url }}" style="color:#818cf8;">{{ topic.source_title or
                     topic.source_url }}</a>

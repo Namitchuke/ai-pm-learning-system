@@ -13,7 +13,8 @@ import threading
 import time
 from typing import AsyncIterator
 
-from fastapi import FastAPI, Request, Response
+from fastapi import Depends, FastAPI, Request, Response
+from app.core.auth import verify_cron_secret
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -205,7 +206,7 @@ async def ping():
 
 
 
-@app.get("/api/debug-clear", tags=["health"])
+@app.post("/api/debug-clear", tags=["health"], dependencies=[Depends(verify_cron_secret)])
 async def debug_clear():
     import traceback
     try:
@@ -219,7 +220,7 @@ async def debug_clear():
         return {"error": str(e), "traceback": traceback.format_exc()}
 
 
-@app.get("/api/debug-reset-state", tags=["health"])
+@app.post("/api/debug-reset-state", tags=["health"], dependencies=[Depends(verify_cron_secret)])
 async def debug_reset_state():
     """Directly write a fresh PipelineState for today to Drive (bypasses pipeline)."""
     import traceback
@@ -236,7 +237,7 @@ async def debug_reset_state():
 
 
 
-@app.get("/api/debug", tags=["health"])
+@app.get("/api/debug", tags=["health"], dependencies=[Depends(verify_cron_secret)])
 async def debug_state():
     import traceback
     try:
@@ -269,7 +270,7 @@ async def debug_state():
         return {"error": str(e), "traceback": traceback.format_exc()}
 
 
-@app.get("/api/debug-pipeline-run", tags=["health"])
+@app.post("/api/debug-pipeline-run", tags=["health"], dependencies=[Depends(verify_cron_secret)])
 async def debug_pipeline_run():
     """Step-by-step synchronous pipeline run to pinpoint where it fails."""
     import traceback as tb_mod

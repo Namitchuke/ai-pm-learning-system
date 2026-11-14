@@ -4,403 +4,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI PM Learning System — Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    <title>AI PM Learning System</title>
+    <meta name="description" content="A 24-week, self-paced roadmap for becoming an AI product manager.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <style>
         .auth-page {
             min-height: 100vh;
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+        }
+
+        /* Left: what this is */
+        .pitch {
+            background: var(--accent);
+            color: #f3f1ea;
+            padding: 56px 64px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .brand {
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: .01em;
+        }
+
+        .pitch h1 {
+            font-family: var(--display);
+            font-weight: 500;
+            font-size: clamp(34px, 3.6vw, 52px);
+            line-height: 1.08;
+            letter-spacing: -.015em;
+            max-width: 14em;
+        }
+
+        .pitch p.lede {
+            margin-top: 18px;
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 34em;
+            color: rgba(243, 241, 234, .82);
+        }
+
+        .facts {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px 32px;
+            max-width: 30em;
+            border-top: 1px solid rgba(243, 241, 234, .22);
+            padding-top: 26px;
+        }
+
+        .fact b {
+            display: block;
+            font-family: var(--display);
+            font-weight: 500;
+            font-size: 30px;
+            line-height: 1.1;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .fact span {
+            font-size: 13.5px;
+            color: rgba(243, 241, 234, .78);
+        }
+
+        /* Right: the form */
+        .form-side {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
-            position: relative;
-            overflow: hidden;
+            padding: 48px 24px;
         }
 
-        /* --- ANIMATED BACKGROUND --- */
-        .bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(90px);
-            opacity: .22;
-            animation: float 18s ease-in-out infinite alternate;
-        }
-
-        .orb-1 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #34D399, transparent 65%);
-            top: -120px;
-            left: -150px;
-            animation-duration: 14s;
-        }
-
-        .orb-2 {
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, #60A5FA, transparent 65%);
-            bottom: -100px;
-            right: -120px;
-            animation-duration: 16s;
-            animation-delay: -3s;
-        }
-
-        .orb-3 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #a78bfa, transparent 65%);
-            top: 30%;
-            left: 55%;
-            animation-duration: 20s;
-            animation-delay: -7s;
-            opacity: .18;
-        }
-
-        .orb-4 {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, #f472b6, transparent 70%);
-            top: 60%;
-            left: -5%;
-            animation-duration: 18s;
-            animation-delay: -10s;
-            opacity: .12;
-        }
-
-        .orb-5 {
-            width: 280px;
-            height: 280px;
-            background: radial-gradient(circle, #22d3ee, transparent 70%);
-            top: -10%;
-            right: 20%;
-            animation-duration: 22s;
-            animation-delay: -5s;
-            opacity: .1;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) scale(1) rotate(0deg);
-            }
-
-            20% {
-                transform: translate(60px, -50px) scale(1.06) rotate(2deg);
-            }
-
-            40% {
-                transform: translate(-40px, 70px) scale(.94) rotate(-1deg);
-            }
-
-            60% {
-                transform: translate(80px, 30px) scale(1.08) rotate(3deg);
-            }
-
-            80% {
-                transform: translate(-60px, -40px) scale(.97) rotate(-2deg);
-            }
-
-            100% {
-                transform: translate(30px, -60px) scale(1.03) rotate(1deg);
-            }
-        }
-
-        /* Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0;
-        }
-
-        .particle.dot {
-            background: var(--accent);
-            animation: sparkle-up 5s ease-in-out infinite;
-        }
-
-        .particle.line {
-            width: 1px !important;
-            height: 20px !important;
-            background: linear-gradient(to bottom, transparent, rgba(96, 165, 250, .4), transparent);
-            border-radius: 0;
-            animation: drift-down 8s linear infinite;
-        }
-
-        .particle.glow {
-            background: rgba(167, 139, 250, .3);
-            filter: blur(2px);
-            animation: sparkle-float 7s ease-in-out infinite;
-        }
-
-        @keyframes sparkle-up {
-
-            0%,
-            100% {
-                opacity: 0;
-                transform: translateY(0) scale(0.4);
-            }
-
-            40% {
-                opacity: .5;
-            }
-
-            50% {
-                opacity: .6;
-                transform: translateY(-80px) scale(1);
-            }
-
-            90% {
-                opacity: .1;
-            }
-        }
-
-        @keyframes drift-down {
-            0% {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-
-            15% {
-                opacity: .4;
-            }
-
-            85% {
-                opacity: .3;
-            }
-
-            100% {
-                opacity: 0;
-                transform: translateY(100vh);
-            }
-        }
-
-        @keyframes sparkle-float {
-
-            0%,
-            100% {
-                opacity: 0;
-                transform: translate(0, 0) scale(0.5);
-            }
-
-            30% {
-                opacity: .3;
-                transform: translate(15px, -30px) scale(1);
-            }
-
-            60% {
-                opacity: .4;
-                transform: translate(-20px, -50px) scale(1.2);
-            }
-
-            90% {
-                opacity: .1;
-                transform: translate(10px, -70px) scale(0.8);
-            }
-        }
-
-        /* Grid lines bg */
-        .grid-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background-image:
-                linear-gradient(rgba(31, 41, 55, .4) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(31, 41, 55, .4) 1px, transparent 1px);
-            background-size: 60px 60px;
-            mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 70%);
-            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 70%);
-        }
-
-        /* --- AUTH CARD --- */
         .auth-card {
-            background: #111827;
-            border: 1px solid #1F2937;
-            border-radius: 20px;
-            padding: 40px 36px;
-            max-width: 420px;
             width: 100%;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, .4);
-            animation: cardEntry .7s cubic-bezier(.4, 0, .2, 1);
+            max-width: 380px;
         }
 
-        @keyframes cardEntry {
-            from {
-                opacity: 0;
-                transform: translateY(20px) scale(.97);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        .auth-card h2 {
+            font-family: var(--display);
+            font-weight: 500;
+            font-size: 28px;
+            letter-spacing: -.01em;
         }
 
-        .auth-logo {
-            text-align: center;
-            margin-bottom: 28px;
-        }
-
-        .auth-logo-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
-            background: var(--grad);
-            margin-bottom: 14px;
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
-
-        .auth-logo-icon svg {
-            width: 28px;
-            height: 28px;
-            fill: #fff;
-        }
-
-        @keyframes pulse-glow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 15px rgba(52, 211, 153, .15);
-            }
-
-            50% {
-                box-shadow: 0 0 25px rgba(52, 211, 153, .3);
-            }
-        }
-
-        .auth-logo h1 {
-            font-size: 24px;
-            font-weight: 900;
-            background: var(--grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .auth-logo p {
-            font-size: 13px;
+        .auth-card .sub {
             color: var(--t3);
-            margin-top: 4px;
+            font-size: 14px;
+            margin: 6px 0 24px;
         }
 
         .auth-tabs {
             display: flex;
-            gap: 4px;
-            margin-bottom: 24px;
-            background: var(--bg3);
-            padding: 4px;
-            border-radius: 10px;
+            gap: 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 22px;
         }
 
         .auth-tab {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 600;
+            background: none;
+            border: none;
+            font: inherit;
+            font-size: 14.5px;
+            font-weight: 500;
             color: var(--t3);
+            padding: 0 0 10px;
+            margin-bottom: -1px;
+            border-bottom: 2px solid transparent;
             cursor: pointer;
-            border-radius: 8px;
-            transition: all .25s;
         }
+
+        .auth-tab:hover { color: var(--t1); }
 
         .auth-tab.active {
-            background: var(--grad);
-            color: #fff;
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+            font-weight: 600;
         }
 
-        .form-group {
-            margin-bottom: 14px;
-        }
+        .form-group { margin-bottom: 16px; }
 
         .form-group label {
             display: block;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--t3);
-            text-transform: uppercase;
-            letter-spacing: .5px;
-            margin-bottom: 5px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--t2);
+            margin-bottom: 6px;
         }
 
         .form-group input,
         .form-group select {
             width: 100%;
-            background: var(--bg3);
-            border: 1px solid var(--border);
+            padding: 11px 12px;
+            background: var(--bg2);
+            border: 1px solid var(--border-h);
+            border-radius: 8px;
             color: var(--t1);
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 13px;
-            outline: none;
-            transition: border-color .2s;
+            font: inherit;
+            font-size: 15px;
+            transition: border-color .15s, box-shadow .15s;
         }
+
+        .form-group input::placeholder { color: var(--t4); }
 
         .form-group input:focus,
         .form-group select:focus {
+            outline: none;
             border-color: var(--accent);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
         }
 
-        .auth-btn {
+        .hint {
+            font-size: 12.5px;
+            color: var(--t3);
+            margin-top: 5px;
+        }
+
+        .auth-btn,
+        .google-btn {
             width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 700;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font: inherit;
+            font-size: 15px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all .2s;
-            margin-top: 8px;
+            transition: background .15s, border-color .15s;
         }
 
         .auth-btn.primary {
-            background: var(--grad);
+            background: var(--accent);
+            border: 1px solid var(--accent);
             color: #fff;
+            margin-top: 4px;
         }
 
-        .auth-btn.primary:hover {
-            opacity: .9;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+        .auth-btn.primary:hover { background: var(--accent2); border-color: var(--accent2); }
+
+        .auth-btn[disabled] { opacity: .65; cursor: progress; }
+
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--bg2);
+            border: 1px solid var(--border-h);
+            color: var(--t1);
+            font-weight: 500;
         }
+
+        .google-btn:hover { background: var(--bg3); }
+
+        .google-btn svg { width: 18px; height: 18px; }
 
         .auth-divider {
             display: flex;
             align-items: center;
             gap: 12px;
             margin: 20px 0;
-            font-size: 11px;
-            color: var(--t4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: var(--t3);
+            font-size: 13px;
         }
 
         .auth-divider::before,
@@ -411,236 +223,142 @@
             background: var(--border);
         }
 
-        .google-btn {
-            width: 100%;
-            padding: 12px;
-            background: var(--bg3);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--t1);
-            font-family: inherit;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all .2s;
-        }
-
-        .google-btn:hover {
-            border-color: var(--accent);
-            background: var(--bg2);
-            transform: translateY(-1px);
-        }
-
-        .google-btn svg {
-            width: 18px;
-            height: 18px;
-        }
-
         .auth-error {
-            background: rgba(239, 68, 68, .1);
-            border: 1px solid rgba(239, 68, 68, .2);
+            display: none;
+            background: color-mix(in srgb, var(--red) 8%, transparent);
+            border: 1px solid color-mix(in srgb, var(--red) 35%, transparent);
             color: var(--red);
-            padding: 10px 14px;
+            padding: 10px 12px;
             border-radius: 8px;
-            font-size: 12px;
-            margin-bottom: 14px;
-            display: none;
+            font-size: 14px;
+            margin-bottom: 16px;
         }
 
-        .auth-error.show {
-            display: block;
+        .auth-error.show { display: block; }
+
+        #signupForm { display: none; }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
         }
 
-        #signupForm {
-            display: none;
-        }
-
-        /* Feature highlights */
-        .auth-features {
-            display: flex;
-            gap: 8px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .auth-feat {
-            font-size: 10px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            background: rgba(31, 41, 55, .6);
-            border: 1px solid #374151;
-            color: var(--t2);
-            font-weight: 500;
-            animation: feat-in .5s ease backwards;
-        }
-
-        .auth-feat:nth-child(1) {
-            animation-delay: .4s;
-        }
-
-        .auth-feat:nth-child(2) {
-            animation-delay: .5s;
-        }
-
-        .auth-feat:nth-child(3) {
-            animation-delay: .6s;
-        }
-
-        .auth-feat:nth-child(4) {
-            animation-delay: .7s;
-        }
-
-        @keyframes feat-in {
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @media (max-width: 860px) {
+            .auth-page { grid-template-columns: 1fr; }
+            .pitch { padding: 32px 24px; gap: 24px; }
+            .pitch p.lede { font-size: 15px; }
+            .facts { padding-top: 20px; gap: 16px 24px; }
+            .fact b { font-size: 24px; }
+            .form-side { padding: 32px 24px 48px; align-items: flex-start; }
         }
     </style>
 </head>
 
 <body>
-    <!-- Animated Background -->
-    <div class="bg-canvas">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="orb orb-4"></div>
-        <div class="orb orb-5"></div>
-    </div>
-    <div class="grid-bg"></div>
-    <div class="particles" id="particles"></div>
-
     <div class="auth-page">
-        <div class="auth-card">
-            <div class="auth-logo">
-                <div class="auth-logo-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        <section class="pitch">
+            <div class="brand">AI PM Learning System</div>
+            <div>
+                <h1>Become an AI product manager, one week at a time.</h1>
+                <p class="lede">A structured 24-week plan with weekly checklists, quizzes that point you back to
+                    what you missed, and interview practice drawn from real company questions.</p>
+            </div>
+            <div class="facts">
+                <div class="fact"><b>24</b><span>weeks across 6 phases</span></div>
+                <div class="fact"><b>144</b><span>mock interview questions</span></div>
+                <div class="fact"><b>68</b><span>case studies</span></div>
+                <div class="fact"><b>16</b><span>skills, tested at 5 levels</span></div>
+            </div>
+        </section>
+
+        <main class="form-side">
+            <div class="auth-card">
+                <h2 id="authTitle">Welcome back</h2>
+                <p class="sub" id="authSub">Log in to pick up where you left off.</p>
+
+                <div class="auth-tabs" role="tablist">
+                    <button type="button" class="auth-tab active" role="tab" aria-selected="true"
+                        onclick="showAuthTab('login')">Log in</button>
+                    <button type="button" class="auth-tab" role="tab" aria-selected="false"
+                        onclick="showAuthTab('signup')">Create account</button>
+                </div>
+
+                <div id="authError" class="auth-error" role="alert"></div>
+
+                <!-- LOGIN FORM -->
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" autocomplete="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" autocomplete="current-password" required>
+                    </div>
+                    <button type="submit" class="auth-btn primary">Log in</button>
+                </form>
+
+                <!-- SIGNUP FORM -->
+                <form id="signupForm" onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label for="signupName">Full name</label>
+                        <input type="text" id="signupName" autocomplete="name" maxlength="80" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupUsername">Username</label>
+                        <input type="text" id="signupUsername" autocomplete="username" required minlength="3"
+                            maxlength="30" pattern="[A-Za-z0-9_.\-]{3,30}">
+                        <div class="hint">3 to 30 characters: letters, numbers, dot, dash or underscore.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" autocomplete="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" autocomplete="new-password" required minlength="8"
+                            maxlength="128">
+                        <div class="hint">At least 8 characters.</div>
+                    </div>
+                    <input type="hidden" id="signupRole" value="AI PM">
+                    <button type="submit" class="auth-btn primary">Create account</button>
+                </form>
+
+                <div class="auth-divider">or</div>
+
+                <button type="button" class="google-btn" onclick="googleLogin()">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#4285F4"
+                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
+                        <path fill="#34A853"
+                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                        <path fill="#FBBC05"
+                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                        <path fill="#EA4335"
+                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                     </svg>
-                </div>
-                <h1>AI PM Learning System</h1>
-                <p>Master AI Product Management in 24 weeks</p>
+                    Continue with Google
+                </button>
             </div>
-
-            <div class="auth-tabs">
-                <div class="auth-tab active" onclick="showAuthTab('login')">Login</div>
-                <div class="auth-tab" onclick="showAuthTab('signup')">Sign Up</div>
-            </div>
-
-            <div id="authError" class="auth-error"></div>
-
-            <!-- LOGIN FORM -->
-            <form id="loginForm" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="loginEmail" placeholder="you@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="loginPassword" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="auth-btn primary">Login</button>
-            </form>
-
-            <!-- SIGNUP FORM -->
-            <form id="signupForm" onsubmit="handleSignup(event)">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" id="signupName" placeholder="John Doe" required>
-                </div>
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" id="signupUsername" placeholder="johndoe" required minlength="3">
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="signupEmail" placeholder="you@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="signupPassword" placeholder="Min 6 characters" required minlength="6">
-                </div>
-                <div class="form-group">
-                    <label>Study Role</label>
-                    <select id="signupRole">
-                        <option value="AI PM" selected>AI Product Manager</option>
-                    </select>
-                </div>
-                <button type="submit" class="auth-btn primary">Create Account</button>
-            </form>
-
-            <div class="auth-divider">or continue with</div>
-
-            <button class="google-btn" onclick="googleLogin()">
-                <svg viewBox="0 0 24 24">
-                    <path fill="#4285F4"
-                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
-                    <path fill="#34A853"
-                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                    <path fill="#FBBC05"
-                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                    <path fill="#EA4335"
-                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                </svg>
-                Continue with Google
-            </button>
-
-            <div class="auth-features">
-                <span class="auth-feat">📚 24-Week Roadmap</span>
-                <span class="auth-feat">🎙️ 80+ Mock Interviews</span>
-                <span class="auth-feat">🧠 100+ Case Studies</span>
-                <span class="auth-feat">📊 Skill Tracker</span>
-            </div>
-        </div>
+        </main>
     </div>
 
     <script>
-        // Generate floating particles
-        (function () {
-            const container = document.getElementById('particles');
-            const types = ['dot', 'dot', 'line', 'glow'];
-            for (let i = 0; i < 70; i++) {
-                const p = document.createElement('div');
-                const type = types[i % types.length];
-                p.className = 'particle ' + type;
-                p.style.left = Math.random() * 100 + '%';
-                p.style.top = Math.random() * 100 + '%';
-                p.style.animationDelay = (Math.random() * 8) + 's';
-                if (type === 'dot') {
-                    p.style.animationDuration = (3 + Math.random() * 4) + 's';
-                    const s = 1.5 + Math.random() * 3;
-                    p.style.width = s + 'px'; p.style.height = s + 'px';
-                } else if (type === 'line') {
-                    p.style.animationDuration = (6 + Math.random() * 6) + 's';
-                } else {
-                    p.style.animationDuration = (5 + Math.random() * 5) + 's';
-                    const s = 4 + Math.random() * 8;
-                    p.style.width = s + 'px'; p.style.height = s + 'px';
-                }
-                container.appendChild(p);
-            }
-        })();
-
         // Check if already logged in
         fetch('/auth/me').then(r => r.json()).then(d => {
             if (d.user) window.location.href = '/dashboard.html';
         }).catch(() => { });
 
         function showAuthTab(tab) {
-            document.querySelectorAll('.auth-tab').forEach((t, i) => t.classList.toggle('active', (tab === 'login' ? i === 0 : i === 1)));
+            document.querySelectorAll('.auth-tab').forEach((t, i) => {
+                const on = tab === 'login' ? i === 0 : i === 1;
+                t.classList.toggle('active', on);
+                t.setAttribute('aria-selected', on);
+            });
             document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
             document.getElementById('signupForm').style.display = tab === 'signup' ? 'block' : 'none';
+            document.getElementById('authTitle').textContent = tab === 'login' ? 'Welcome back' : 'Create your account';
+            document.getElementById('authSub').textContent = tab === 'login' ? 'Log in to pick up where you left off.' : 'Free. Your progress is saved to your account.';
             hideError();
         }
 
@@ -707,6 +425,14 @@
                 showError('Network error. Please try again.');
             }
         }
+
+        // Surface a failed/unavailable Google sign-in instead of failing silently
+        (function () {
+            const err = new URLSearchParams(location.search).get('error');
+            if (err === 'google_not_configured') showError('Google sign-in is not available right now. Use email and password.');
+            else if (err) showError('Google sign-in did not complete. Please try again.');
+            if (err) history.replaceState(null, '', '/');
+        })();
 
         function googleLogin() {
             window.location.href = '/auth/google';
