@@ -1,0 +1,1072 @@
+{
+ "mock": {
+  "How would you improve Google Maps for a blind person?": {
+   "hint": "Start with who the blind user is and what they struggle with: knowing direction, sensing obstacles, and crossing roads safely.",
+   "solution": "1. Users: blind and low-vision pedestrians and commuters, including first-time visitors to a new area.\n2. Pain points: no reliable sense of direction, obstacles not announced, unsafe street crossings, and too much audio clutter.\n3. Solutions: turn-by-turn audio with bone-conduction or haptic cues; a 'walk mode' that announces landmarks and intersections; crossing guidance from the camera and signal data; a simple 'where am I' button.\n4. Prioritise: start with the walking-directions core and the crossing alerts, which carry the most safety value.\n5. Metrics: completed walks without assistance, trip-abandon rate, and safety incidents reported.\n6. Trade-offs: camera use drains battery and raises privacy questions. Co-design with blind users from the start, and test with them, not just for them."
+  },
+  "YouTube watch time dropped by 5%. What do you do?": {
+   "hint": "Clarify the metric and time window before guessing. Then split the drop into internal causes (what we changed) and external causes (what the world did).",
+   "solution": "1. Clarify: is it total watch time or watch time per user? Which countries and platforms? Is the 5% a sudden step or a slow trend? Over what period?\n2. Check data first: confirm the drop is real, not a logging or dashboard change.\n3. Internal causes: a recent release or bug, a change to recommendations, more ads (which can lower watch time), or a change in how watch time is counted.\n4. External causes: seasonality (exams, holidays), a competitor launch, a news event, or a change in the content supply.\n5. Segment: by platform, country, new vs returning users, and content type. A drop concentrated in one segment points to a cause.\n6. Separate reach from engagement: check daily users and watch time per user. If users are flat and watch time per user fell, it is an engagement problem.\n7. Act: roll back if a release is the cause; monitor and adjust if it is seasonal."
+  },
+  "Design an AI feature for Swiggy Instamart.": {
+   "hint": "Pick one specific user problem first. Instamart users shop often and in a hurry, so think about repeat purchases and forgotten items.",
+   "solution": "1. Problem: repeat shoppers rebuild the same cart every week and forget staples.\n2. Feature: a 'smart refill' cart that predicts when each staple runs out based on past purchase cycles, and offers a one-tap reorder.\n3. MVP: start rule-based (reorder the last basket if 7 days have passed) before adding ML. Test with a small group first.\n4. Metrics: repeat-order rate, time to checkout, basket size, and reorder acceptance.\n5. Risks: over-suggesting annoys users, and predictions can be wrong for irregular buyers. Give users an easy way to turn it off, and use clear data-consent language.\n6. Success: a clear lift in weekly repeat orders for the test group without a drop in basket margin."
+  },
+  "Estimate the number of daily active delivery partners for Swiggy in Bengaluru.": {
+   "hint": "Build the estimate from drivers you can state: population, share of people who use delivery, orders per person, and how many orders one partner handles.",
+   "solution": "Assumptions (state these in the interview; the numbers are illustrative):\n1. Bengaluru daily Swiggy orders: assume about 1,000,000.\n2. Average orders per active delivery partner per day: assume about 15 across shifts.\n3. Partners needed per day: 1,000,000 / 15 ≈ 67,000 partner-shifts.\n4. Active partners: a partner works about one shift a day, so roughly 60,000 to 70,000 active partners.\n5. Sanity check: partners also run on other apps, and many work part-time, so the number of registered partners is much larger than the number active at once.\n6. Key point: an interviewer cares more about the method (drivers, assumptions, sanity check) than the exact figure."
+  },
+  "Zepto wants to expand into Tier 2 cities. Should they?": {
+   "hint": "Decide with criteria: market size, unit economics in smaller cities, and whether operations can work there. Then recommend a pilot rather than a full launch.",
+   "solution": "1. Recommendation: do not expand everywhere now. Run a small, time-boxed pilot in 2 or 3 Tier 2 cities and decide with data.\n2. Why not go all in: lower average order value, longer distances, thinner rider supply, and weaker brand awareness.\n3. Criteria for go: contribution margin per order turns positive within a set period, a dark-store density that keeps delivery times under the promise, and repeat-order rates close to metro levels.\n4. Pilot design: pick cities with different profiles, set kill criteria in advance, and limit the assortment to what sells well locally.\n5. Risks: pricing pressure from local grocers and cash-on-delivery habits that complicate payments.\n6. Metrics: orders per store per day, margin per order, repeat rate, and time to deliver."
+  },
+  "Our 10-minute delivery promise is failing 20% of the time. How to debug?": {
+   "hint": "Break the 10-minute promise into stages (order, pick, pack, rider assigned, travel, handover). Find which stage causes most of the misses.",
+   "solution": "1. Define failure: late delivery, cancelled order, or both. Track each.\n2. Segment: by dark store, hour of day, locality, and order size. Failures concentrated in one store or hour point to a local cause.\n3. Stage breakdown: time from order to pick, pick to pack, rider wait, and travel time. The stage with the largest overrun is the target.\n4. Likely causes: rider supply at peak, batching too many orders, stock-outs that force a slow substitution, or a poor store layout.\n5. Quick fixes: adjust rider incentives at peak hours, cap batching, and reduce the assortment at stores that frequently run out.\n6. Structural fix: set promise zones by distance and open more stores where demand is dense."
+  },
+  "Explain how a recommendation engine works to a 5-year-old.": {
+   "hint": "Use an everyday analogy: a shopkeeper who remembers what you liked and what people like you bought.",
+   "solution": "1. Simple version: the app notices what you buy, click, and rate, and finds people or products that look similar.\n2. Step by step: collect signals (views, purchases, searches), turn them into a profile of your taste, compare against other users and items, rank the matches, and show the top few.\n3. Feedback loop: when you ignore or buy a suggestion, the system learns and adjusts.\n4. Example for a child: if you liked a red bicycle and your friends liked a red scooter, the shop suggests a red helmet.\n5. Check: the explanation should be short, accurate, and free of jargon like 'vectors' unless you explain them."
+  },
+  "How do we counter Amazon Prime stickiness in India?": {
+   "hint": "Start by asking why Prime is sticky (the bundle, delivery speed, switching cost). Then look for wedges that Amazon does not serve well in India.",
+   "solution": "1. Diagnose: Prime bundles fast delivery, video, and music, so churn is low. Find out which benefit keeps users and which they barely use.\n2. Our levers: a membership with a bundle users value (for example, fast delivery in local categories, loyalty points, and member-only deals).\n3. Wedges: regional languages, value-focused products, and categories like groceries and fresh produce where delivery speed matters.\n4. Economics: membership fees must cover delivery costs. Model the breakeven before launch.\n5. Metrics: membership retention at 3 and 6 months, orders per member, and contribution margin.\n6. Risk: a costly bundle can be copied. Compete on the parts of the experience that are hard to copy, like local supply and trust."
+  },
+  "Design a physical wallet for a teenager.": {
+   "hint": "A teenager's wallet has two users: the teen who wants freedom and the parent who wants control. Design for both.",
+   "solution": "1. Users: teenagers (spending their own money) and parents (who fund and worry).\n2. Teen needs: spend money independently, look cool, and avoid awkward moments.\n3. Parent needs: set limits, see where money goes, and stop risky spending.\n4. Features: a physical card with spending limits set by the parent, category locks (no gambling or delivery apps), notifications for each spend, and a simple savings goal.\n5. Design: a bright, low-key form factor that does not look like a kids' toy.\n6. Metrics: weekly active use by teens, parent satisfaction, and savings goals reached.\n7. Risks: the teen can feel watched, so the teen should see their own balance and goals too."
+  },
+  "Tell me about a time your product failed post-launch.": {
+   "hint": "Use STAR: Situation, Task, Action, Result. Choose a real failure, own your part, and be specific about what you changed afterwards.",
+   "solution": "Model structure (replace with your own real story):\n1. Situation: we launched a feature that users said they wanted, but adoption stayed under 5% for six weeks.\n2. Task: decide whether to fix, pivot, or sunset it.\n3. Action: I looked at funnel data and interviewed 12 users. I found the feature sat behind a setup step most users never finished. I proposed a simpler version and ran a two-week test.\n4. Result: the simpler version reached 22% adoption. I also shared the lesson with the team about testing the smallest version first.\n5. Reflection: I should have tested the setup step before building the full feature. I now run a prototype test before any build.\nThe interviewer wants ownership, specific data, and what you learned, not a perfect outcome."
+  },
+  "How many Uber rides happen in Mumbai on a rainy day?": {
+   "hint": "Estimate riders on a normal day, then adjust for rain. Rain raises demand but lowers supply, so say which effect you think is bigger.",
+   "solution": "Assumptions (illustrative):\n1. Mumbai population: about 12 million. Share who use ride-hailing: about 10%, so 1.2 million people.\n2. Rides per user per month: about 4, so about 4.8 million rides a month, roughly 160,000 a day.\n3. Rainy day: demand may rise by about 50% as people avoid two-wheelers and walking. That gives about 240,000 rides.\n4. Supply drop: fewer drivers are online in flooding, so completed rides may fall in some areas.\n5. Answer: a range of about 150,000 to 250,000, with the number of completed rides lower than requests.\n6. Say which assumptions matter most and how you would validate them with data."
+  },
+  "Driver cancellations have spiked by 30%. How to fix?": {
+   "hint": "Split cancellations by who cancels (driver or rider) and when. The cause is usually different for each side.",
+   "solution": "1. Define the metric: cancellation rate per request, split by driver-side and rider-side cancellations.\n2. Segment: by city zone, time of day, trip length, and surge level. Spikes in specific zones point to supply or policy issues.\n3. Driver-side causes: long pickup distance, low fares after surge changes, or policy changes on acceptance rates.\n4. Rider-side causes: long wait times, price shocks, or a driver's ETA that keeps changing.\n5. Fixes: tighter matching to shorter pickups, clearer fare estimates, and a fair cancellation policy for both sides.\n6. Metrics: cancellation rate by side, rider wait time, and driver earnings per hour."
+  },
+  "Design Jira for a non-software team (e.g., HR).": {
+   "hint": "Non-software teams don't think in sprints or tickets. Start from what HR does every week and rename the jargon.",
+   "solution": "1. Users: HR operations, recruiters, and employees raising requests.\n2. Jobs: onboarding checklists, leave approvals, policy questions, and hiring pipelines.\n3. Design: ready-made templates for these jobs, plain-language labels (sprints become cycles, issues become requests), and simple approval flows.\n4. Onboarding: a first-run template picker so the team starts with a working board, not an empty screen.\n5. Metrics: time to first request created, weekly active HR users, and approval turnaround time.\n6. Risk: stripping too much out makes it useless for power users. Keep advanced features behind a clear 'more options' path."
+  },
+  "What happens when you type Jira.com in the browser?": {
+   "hint": "Walk through the layers in order: DNS, TCP and TLS, HTTP, server, and then rendering in the browser.",
+   "solution": "1. Address bar: the browser checks its cache and history, then parses the input into a URL.\n2. DNS: the browser resolves the domain to an IP address, using caches first, then recursive resolvers.\n3. TCP: a three-way handshake opens a connection to the server's IP on port 443.\n4. TLS: client and server negotiate encryption and the server proves its identity with a certificate.\n5. HTTP: the browser sends a GET request. The server (often behind a CDN or load balancer) returns HTML.\n6. Rendering: the browser parses HTML into the DOM, loads CSS and JavaScript, builds the layout, and paints the page.\n7. Extras: redirects, caching headers, and HTTP/2 or HTTP/3 may change the details."
+  },
+  "Should Paytm build its own credit card?": {
+   "hint": "Consider regulation first. Who can issue a credit card in India, and what does Paytm need to partner with?",
+   "solution": "1. Regulation: credit cards in India are issued by banks or licensed partners. Paytm would need a bank partner.\n2. Recommendation: partner with a bank on a co-branded card rather than building the lending book in-house.\n3. Why: lower credit risk, faster launch, and a fit with Paytm's payments base.\n4. Economics: interchange fees, late fees, and merchant partnerships. Model the margin per active card.\n5. Risks: credit losses, regulatory change, and brand trust if defaults rise.\n6. Metrics: activation rate, spend per card, repayment rate, and cost of acquisition per active user."
+  },
+  "UPI failure rates increased from 1% to 4%. Diagnose.": {
+   "hint": "Follow the payment path step by step and find the step where failures started. Then check whether it is one bank, one device, or one version.",
+   "solution": "1. Clarify: when did it start, and is the 4% from all users or a segment?\n2. Follow the flow: app, payment provider, bank, and the national switch. Find which hop shows the new errors.\n3. Segment: by bank, device type, app version, transaction amount, and time of day. A single bank or app version is a strong clue.\n4. Check recent changes: app releases, bank-side changes, and upstream outages.\n5. Immediate actions: roll back a bad release, retry logic for transient failures, and a clear message to users.\n6. Escalate: bank and switch partners with specific examples and timestamps.\n7. Metrics: success rate by bank and version, and time to recovery."
+  },
+  "How would you increase average order value (AOV) on Zomato?": {
+   "hint": "AOV is orders times items times price. Ask which of these you can move, and what it costs in margin.",
+   "solution": "1. Diagnose: AOV is items per order times price per item. Find which one is low.\n2. Levers: a free-delivery threshold just above the typical basket, bundles (meal plus drink), 'complete your meal' suggestions at checkout, and add-on items with good margin.\n3. Experiment: test thresholds and bundles on a random slice of users, and track both AOV and conversion.\n4. Guardrails: watch delivery cost, cancellations, and discount spend. A higher AOV that loses margin is not a win.\n5. Metrics: AOV, orders per user, margin per order, and repeat rate.\n6. Recommendation: start with the threshold test because it is cheap and reversible."
+  },
+  "Estimate the amount of biryani ordered on Zomato on New Years Eve.": {
+   "hint": "Use assumptions about how many people order in the city on New Year's Eve, what share order biryani, and how many orders a biryani order represents.",
+   "solution": "Assumptions (illustrative):\n1. Zomato orders in a large city on a normal night: about 200,000.\n2. New Year's Eve may be about 2x normal: about 400,000.\n3. Share of orders that include biryani: about 15%, so about 60,000 orders.\n4. Biryani per order: about 1.5 portions on average.\n5. Answer: about 90,000 portions, or roughly 90,000 to 100,000 in a range.\n6. Check: compare the number of biryani restaurants and their typical daily volumes. The method matters more than the exact figure."
+  },
+  "Design a library app for kids.": {
+   "hint": "Design for two users at once: the child who uses it and the parent or librarian who sets it up. Reading level changes the design a lot.",
+   "solution": "1. Users: children (ages 5 to 10 in this example), parents, and school librarians.\n2. Child needs: pictures before words, easy browsing, and a sense of progress.\n3. Parent needs: safe content, reading-time reports, and control over what is available.\n4. Features: reading levels, read-aloud audio, a bookshelf with progress badges, and parent-approved lists.\n5. Constraints: offline reading for weak connections, and no ads or in-app purchases aimed at children.\n6. Metrics: books finished per child per month, weekly active readers, and parent satisfaction."
+  },
+  "How does Google Search indexing work? Explain to a non-technical person.": {
+   "hint": "Explain it with three steps: crawl (find pages), index (store what they say), and rank (decide what to show first).",
+   "solution": "1. Crawl: automated programs called crawlers visit pages by following links and read their content.\n2. Index: Google stores what it found in a huge catalogue, like a library index, noting words, topics, and freshness.\n3. Rank: when you search, Google finds matching pages in the index and orders them by relevance and quality.\n4. Analogy: a librarian who has read every book, keeps a card catalogue, and picks the best matches for your question.\n5. Keep it short. The non-technical listener needs the three steps, not the algorithms."
+  },
+  "Gmail sign-ups dropped 10% today. Debug.": {
+   "hint": "Check whether the drop is real and where it happens in the sign-up flow. The problem could be a bug, a traffic change, or a new step.",
+   "solution": "1. Confirm: is the 10% a real drop or a tracking issue? Compare with the same weekday last week.\n2. Funnel: landing page visits, start of sign-up, completion, and verification. Find the step with the biggest drop.\n3. Segment: by country, device, browser, and traffic source. A failure on one device or region is a strong clue.\n4. Recent changes: releases, experiments, and new verification or captcha steps.\n5. External: a change in search ranking or an outage in SMS or email verification.\n6. Action: roll back a bad change, fix the failing step, and monitor the funnel hourly until it recovers."
+  },
+  "How would you monetize WhatsApp without ads?": {
+   "hint": "Look for revenue that does not depend on showing ads: business messaging, payments, and paid features for channels or groups.",
+   "solution": "1. Constraint: WhatsApp's user base is privacy-sensitive, so the answer should not depend on reading messages.\n2. Options: charge businesses for customer-service messaging, take a fee on payments through UPI-style rails, and sell paid subscriptions for channels or large groups.\n3. Recommendation: lead with business messaging, which already has demand and clear pricing.\n4. Risks: charging users directly could push them to alternatives; business fees can frustrate small sellers.\n5. Metrics: business accounts paid, message volume per business, and revenue per active business.\n6. Guardrail: no change that weakens end-to-end encryption for users."
+  },
+  "Should Instagram build a dating feature?": {
+   "hint": "Weigh the upside (engagement, new users) against the risk (trust, safety, and a crowded market). Then recommend a clear position.",
+   "solution": "1. Recommendation: do not build a standalone dating app. Test a limited feature inside Instagram if the data supports it.\n2. Upside: young users already share profiles and connect, and a feature could increase time spent.\n3. Risks: safety and harassment at scale, teen protection, and a crowded market with focused players.\n4. Pilot design: a feature for adults only, opt-in, with strong safety controls and a small test.\n5. Metrics: matches leading to real conversations, safety reports per 1,000 users, and retention of pilot users.\n6. Decision rule: expand only if safety metrics stay within a set threshold."
+  },
+  "Facebook Marketplace transactions decreased by 15%. Why?": {
+   "hint": "Follow the marketplace funnel: listing views, contact, offer, purchase, and completion. Find where the drop began.",
+   "solution": "1. Clarify: 15% fewer transactions versus what baseline? Is it sudden or a trend?\n2. Funnel: views, listing clicks, messages, offers, and completed purchases. Find the step that dropped.\n3. Segment: by category, region, seller type, and device.\n4. Likely causes: a change in fees or trust and safety rules, fewer active sellers, or a bug in checkout.\n5. Check the supply side: are sellers listing less? Did a competitor take share?\n6. Action: fix the step that broke, then test incentives for the segment that dropped most."
+  },
+  "Design an Amazon delivery tracker for the visually impaired.": {
+   "hint": "Accessibility is the core of this product. Design for someone who cannot see the screen, and then make the design better for everyone.",
+   "solution": "1. Users: blind and low-vision customers tracking a delivery.\n2. Needs: knowing when the parcel is near, where it is, and what to do if it's late.\n3. Design: screen-reader labels on every element, audio and haptic alerts for key stages (out for delivery, arriving, delivered), and voice commands for common questions.\n4. Content: short, plain sentences in the notifications, with no reliance on colour or icons alone.\n5. Testing: test with real screen-reader users, not only automated checks.\n6. Metrics: task completion by assistive-tech users, support contacts per delivery, and satisfaction."
+  },
+  "Should Amazon acquire a major movie theater chain?": {
+   "hint": "Ask what problem a theatre chain solves for Amazon. Then weigh the fit against the cost of buying physical assets.",
+   "solution": "1. Clarify the goal: entertainment engagement, a bundle with Prime, or a new revenue stream?\n2. Fit: theatres are physical, low-margin, and tied to film release schedules. Amazon's strengths are logistics, data, and digital distribution.\n3. Alternative: partner with theatre chains or run a Prime perk for discounted tickets without owning the real estate.\n4. Risks: cinema attendance trends, capital tied up in property, and an unclear link to Prime's core value.\n5. Recommendation: partner first, measure the lift in Prime engagement, and decide on acquisition only with that evidence.\n6. Metrics: Prime engagement uplift, partner margin, and incremental members."
+  },
+  "Estimate the number of Amazon Prime packages delivered in Delhi daily.": {
+   "hint": "Estimate parcels by households and deliveries per household, then sanity-check against the number of delivery vehicles.",
+   "solution": "Assumptions (illustrative):\n1. Delhi population: about 20 million; households about 4 million.\n2. Share of households that get Prime deliveries in a given day: about 30%, so about 1.2 million households.\n3. Packages per household per delivery day: about 1.5.\n4. Estimate: about 1.8 million packages a day.\n5. Sanity check: at about 150 parcels per van per day, that needs about 12,000 vans. That is plausible for a metro with several delivery networks.\n6. State that the number is a rough range and explain which assumption you would validate first."
+  },
+  "Build Stripe for creators/influencers.": {
+   "hint": "Pick the creator's real pain: getting paid fast, across platforms, and from many brands. Stripe's strength is payments infrastructure.",
+   "solution": "1. Users: creators with brand deals, subscriptions, and tips across platforms.\n2. Pain: delayed payouts, tax paperwork, and no single view of income.\n3. Product: one account that collects brand payments and subscriptions, pays out fast, and produces tax-ready statements.\n4. Monetisation: a small fee on payouts and a premium tier for faster or multi-currency payouts.\n5. Metrics: payout time, active creators, and volume processed per creator.\n6. Risk: creators may churn to platform-native payouts, so differentiate on cross-platform income in one place."
+  },
+  "Payment failure rates on Stripe Checkout increased by 2%. Diagnose.": {
+   "hint": "A 2-point rise in failures is significant at scale. Split by payment method, country, and device before blaming the checkout UI.",
+   "solution": "1. Clarify: failure rate went from a baseline to baseline plus 2 percentage points. Confirm the baseline and time window.\n2. Segment: payment method (cards, wallets, bank debits), issuing bank, country, device, and merchant size.\n3. Recent changes: a new fraud rule, an SDK update, or a change in 3D Secure prompts.\n4. External: a bank outage or a card network issue.\n5. Action: roll back or tune the rule, work with the bank on specific error codes, and show a clear retry message.\n6. Metrics: authorisation rate by segment, false-decline rate for fraud rules, and time to recovery."
+  },
+  "Design Uber for taking kids to school.": {
+   "hint": "Parents will only trust a service for kids if safety and trust come first. Start there and let the features follow.",
+   "solution": "1. Users: parents who want a safe ride for children to school, and the children themselves.\n2. Must-haves: verified drivers, live tracking shared with the parent, a trip log, and an SOS button.\n3. Scheduling: recurring school-run subscriptions, with the same driver where possible.\n4. Trust: background checks, child-seat options, and an option for an adult to ride along.\n5. Business model: a monthly subscription for recurring trips, priced against the cost of a private driver.\n6. Metrics: repeat weekly trips, parent NPS, and safety incident rate."
+  },
+  "How would you differentiate Uber from Ola in India today?": {
+   "hint": "Differentiation means a clear reason someone picks you over the other option. Name the customer segment and the value you own.",
+   "solution": "1. Context: both apps are strong in India. Differentiation needs a clear reason, not just a feature list.\n2. Options: Uber for business travellers and premium trips; Ola for value-focused riders and local-language reach; or a combined pitch on reliability and safety.\n3. For Uber specifically: lean into premium cars, corporate accounts, and a reliable airport experience.\n4. Proof: track share of trips in each segment and whether riders who try Uber keep using it.\n5. Risk: competing only on price drives a race to the bottom.\n6. Keep the answer to one clear sentence of positioning."
+  },
+  "Design an Airbnb experience targeted at digital nomads.": {
+   "hint": "Digital nomads need reliable Wi-Fi, flexible stays, a community, and a way to handle work and taxes. Pick the two that matter most.",
+   "solution": "1. Users: remote workers living in a city for weeks or months.\n2. Needs: reliable internet, a quiet workspace, flexible booking, and a community of others working remotely.\n3. Features: a verified-Wi-Fi filter with speed tests, monthly stays with a work-friendly listing tag, and local meetups or coworking passes.\n4. Experience: a set-up checklist after booking (Wi-Fi speed, power backup, desk).\n5. Metrics: monthly stay bookings, repeat nomad guests, and reviews that mention work.\n6. Note: this question is near-identical to question 71 on this list. Use the same answer but tailor the examples for each interview."
+  },
+  "Bookings in Paris dropped 30% week-over-week. What happened?": {
+   "hint": "A drop of this size in one city is usually a supply, demand, or competitor issue. Start with the funnel and the calendar.",
+   "solution": "1. Clarify: is it bookings or booking value? Compare with the same weeks last year to remove seasonality.\n2. Funnel: searches, listing views, and bookings. Find which step fell.\n3. Supply: fewer active listings in Paris, host cancellations, or a pricing or rule change.\n4. Demand: events or holidays moved, a strike, or a competitor promotion.\n5. Segment: by listing type, guest country, and device.\n6. Action: contact top hosts, adjust pricing tools for the market, and test a promotion if the cause is demand."
+  },
+  "Should Airbnb enter the flight booking space?": {
+   "hint": "Frame it as a strategy question: does flight booking fit the core of a stay marketplace, and can Airbnb win against incumbents?",
+   "solution": "1. Fit: travellers plan trip-level purchases, so flights could raise repeat visits and cross-sell stays.\n2. Against: airline and aggregator incumbents have deep supply and strong margins are thin.\n3. Recommendation: test a bundle of flight plus stay in a few routes before building a full booking engine.\n4. Risks: a thin margin business, customer support load, and partner dependency.\n5. Metrics: bundle attachment rate, margin per bundle, and repeat bookings from bundle users.\n6. Decision rule: scale only if the bundle lifts stay bookings without cutting margins."
+  },
+  "Improve Spotify podcast discovery.": {
+   "hint": "Discovery problems are about matching people to shows they will like. Think about what users search for and what they skip.",
+   "solution": "1. Problem: users find popular podcasts but not new ones, and many search results are dominated by a few shows.\n2. Users: new listeners who don't know where to start, and existing listeners looking for niches.\n3. Ideas: a 'start here' path for each topic, episode-level recommendations that explain why a show was picked, and surfacing new creators in a balanced way.\n4. Measure: first-listen rate from search, follow rate after a first episode, and completion rate of recommended episodes.\n5. Risks: over-promoting paid partners reduces trust.\n6. Test with a holdout group to compare follows and listening time."
+  },
+  "Listening hours per user dropped 5%. Investigate.": {
+   "hint": "A drop in hours per user can come from fewer users listening or from each user listening less. Separate the two first.",
+   "solution": "1. Clarify: 5% fewer hours per user, or fewer total hours? Which markets and plans?\n2. Split: active users (reach) and hours per active user (engagement).\n3. Internal: a release that changed playback or recommendations, a change in the free tier's ad load, or a bug in session tracking.\n4. External: a season change, a viral trend that moved listeners elsewhere, or a competitor promotion.\n5. Segment: by plan, device, country, and cohort. A drop only in free users points to ads or limits.\n6. Action: fix a bug, adjust ad frequency for free users, or launch content for the segment that fell."
+  },
+  "How much data does Spotify serve in a minute globally?": {
+   "hint": "Estimate from users, the streams each user plays per day, and the size of an average stream. State the bitrate assumption.",
+   "solution": "Assumptions (illustrative):\n1. Monthly active users: about 600 million.\n2. Average listening: about 1.5 hours a day per active user, so about 900 million listening hours per day.\n3. Per minute: about 900 million / 1,440 ≈ 625,000 listening hours per minute.\n4. Data per hour: about 100 MB at a typical streaming quality (about 0.2 Mbps average over an hour as an illustration).\n5. Total per minute: about 625,000 hours × 100 MB ≈ 62.5 TB, or roughly 60 to 70 TB.\n6. Note: the exact number depends on the audio quality mix, so present it as a range."
+  },
+  "How to increase Grocery adoption on Flipkart?": {
+   "hint": "Grocery adoption depends on trust and habit. Ask why someone who shops for fashion on Flipkart would not buy vegetables there.",
+   "solution": "1. Diagnose: awareness is low, and users do not trust freshness or delivery windows.\n2. Users: households already buying other categories on Flipkart.\n3. Levers: a first-order discount with a freshness guarantee, slot-based delivery in covered pincodes, and a 'regular list' that reorders staples.\n4. Supply: partner with local farms or kirana stores to ensure freshness and reach.\n5. Metrics: grocery first-order rate, repeat orders in 30 days, and basket size.\n6. Risk: thin margins on perishables, so start with dry goods and pantry staples."
+  },
+  "Design a feature to reduce apparel returns.": {
+   "hint": "Returns are a cost and a trust problem. Find the reason customers return, then fix the cause before adding features.",
+   "solution": "1. Diagnose: which sizes, brands, and categories return most? Why do customers return (fit, colour, quality)?\n2. Fit: size guides based on the buyer's measurements, and fit feedback from past buyers on each product page.\n3. Expectations: better photos, model measurements, and reviews that mention fit.\n4. Logistics: discourage bracketing with clear policies, not hard blocks.\n5. Metrics: return rate by category, fit-related returns, and conversion after the change.\n6. Guardrail: do not reduce conversion so much that sales fall more than returns."
+  },
+  "Customer support tickets related to food spillage increased. Action?": {
+   "hint": "Support spikes after a food spillage question usually point to packaging, the route, or a specific restaurant. Find the cause first.",
+   "solution": "1. Clarify: which period and which cities? Is it a spike across orders or a few restaurants?\n2. Segment: by restaurant, packaging type, delivery partner, and distance. A spike tied to one restaurant or packaging type is a clear lead.\n3. Check: recent packaging changes, a new partner onboarding, or longer delivery times in peak hours.\n4. Immediate action: refund policy for verified spillage, and an alert to restaurants with high rates.\n5. Structural fix: packaging standards, spill-proof sealing, and partner training.\n6. Metrics: spillage tickets per 1,000 orders, refund cost, and repeat orders after a spillage."
+  },
+  "Between Instamart and Dineout, where should Swiggy allocate 70% of its budget?": {
+   "hint": "Use a simple allocation framework: value to customers, value to Swiggy, and how much you can win. Then state the split and why.",
+   "solution": "1. Compare: Instamart is a fast-growing, high-frequency category. Dineout serves occasional dining decisions.\n2. Criteria: frequency of use, margin per transaction, cross-sell with the core food app, and competitive intensity.\n3. Recommendation: put most of the budget in Instamart, where frequency and cross-sell are highest, and keep a smaller test budget for Dineout.\n4. Explain the 70% split: a clear majority to the stronger engine with measured growth, and room for Dineout to prove its unit economics.\n5. Metrics and review: revisit the split each quarter against contribution margin and growth.\n6. Be explicit about what you would not fund."
+  },
+  "How to increase Zepto Pass subscriptions?": {
+   "hint": "Zepto Pass is about frequency. Ask what makes a member order more often and which benefits they actually use.",
+   "solution": "1. Diagnose: check how many members use each benefit (free delivery, discounts, faster slots). Unused benefits cost money and do not drive loyalty.\n2. Levers: a benefit tied to frequent categories, such as a discount on daily staples, and a reminder to use the pass before it expires.\n3. Acquisition: trial periods for users who order twice in a month.\n4. Economics: fee versus delivery and discount costs. Model the breakeven order count per member.\n5. Metrics: member order frequency, pass renewal rate, and margin per member.\n6. Test: a targeted discount for users close to the threshold."
+  },
+  "How would you architect the inventory management for a dark store?": {
+   "hint": "Think in layers: what the dark store needs to know (stock, orders, bins), and what must stay fast and reliable during rushes.",
+   "solution": "1. Requirements: real-time stock by SKU per store, reliable order updates, and fast picks.\n2. Architecture: store-level inventory service as the source of truth, event streams for stock changes, and a sync to the app catalogue.\n3. Reliability: handle outages at a store by queuing updates, and avoid selling items the store cannot pick.\n4. Forecasting: a demand model per store and per time slot to plan replenishment.\n5. Trade-offs: real-time accuracy versus latency. Cache carefully and accept small delays on non-critical data.\n6. Metrics: stock accuracy, out-of-stock rate on the app, and picks per hour."
+  },
+  "Paytm Soundbox activations dropped in rural areas. Why?": {
+   "hint": "Rural drops often come from distribution, connectivity, or language. Check each before assuming the product is the problem.",
+   "solution": "1. Clarify: which states and how big is the drop? Is it installations or active use?\n2. Funnel: distributor reach, merchant onboarding, activation, and first transaction.\n3. Likely causes: fewer field agents or distributors in those areas, poor mobile network for the device, and language or setup steps that need help.\n4. Action: local-language setup guides, offline activation, and more distributors in the affected districts.\n5. Test: a support call option for merchants who fail activation.\n6. Metrics: activation rate by district, first-week transactions per device, and retention after 30 days."
+  },
+  "Design an investment feature for Paytm users with low income.": {
+   "hint": "Low-income users need safety and small amounts. Design for those constraints before adding product features.",
+   "solution": "1. Users: salaried users earning low incomes who want to save but fear losses.\n2. Needs: small amounts, clear risk, and easy withdrawal.\n3. Features: SIPs starting at very small amounts, a simple risk label on each option, a goal-based savings view, and no hidden fees.\n4. Compliance: partner with regulated providers and show clear disclosures.\n5. Metrics: first-time investors, average monthly contribution, and 12-month retention.\n6. Risk: mis-selling and churn after a market dip. Use default options with lower risk for new users."
+  },
+  "How does Confluence compete with Notion?": {
+   "hint": "Compare the jobs each product does for teams, then find where Confluence is strong and where Notion is more flexible.",
+   "solution": "1. Jobs: Confluence is built for documentation in engineering-heavy teams, with deep links to Jira. Notion is a flexible workspace that also holds notes, tasks, and wikis.\n2. Strengths: Confluence has enterprise permissions and Atlassian integration. Notion has a simpler design and strong personal and small-team use.\n3. Where Notion wins: small teams and mixed-use workspaces. Where Confluence wins: large organisations with strict access needs.\n4. Recommendation: double down on the Jira-linked enterprise audience and the admin features they pay for.\n5. Metrics: enterprise seats, retention of large accounts, and documentation pages linked to tickets."
+  },
+  "Trello board creation is down 15%. How to investigate?": {
+   "hint": "A 15% drop in one action is a funnel question. Check whether users can see the button, start the flow, and finish it.",
+   "solution": "1. Clarify: which platform, which region, and since when? Compare with the same period last year.\n2. Funnel: opening the new-board screen, choosing a template, naming the board, and saving.\n3. Recent changes: a navigation change that hid the button, a template bug, or a slow save.\n4. Segment: by device and by user type (new vs existing). A drop only on mobile points to a UI change.\n5. Action: roll back the change, fix the step that failed, and check the in-app help text.\n6. Metrics: boards created per active user and time to first board."
+  },
+  "Improve Microsoft Teams for university students.": {
+   "hint": "Students are a different user from enterprise staff. Think about group work, free access, and tools they already use.",
+   "solution": "1. Users: university students working on group projects and classes.\n2. Needs: easy group calls, shared notes, free access, and mobile use on a weak connection.\n3. Features: a free education tier with larger meetings, easy file sharing from the campus email, and integrations with common note tools.\n4. Adoption: campus ambassadors, class-based onboarding, and templates for assignments.\n5. Metrics: weekly active student teams, meeting minutes per team, and conversion to paid after graduation.\n6. Risk: giving away too much free use cannibalises paid education and business plans."
+  },
+  "Should Microsoft integrate ChatGPT into Excel?": {
+   "hint": "Work out what an Excel user actually wants from AI. Usually it is faster formulas and cleaning data, not chat.",
+   "solution": "1. Users: analysts and finance teams who spend time on formulas and cleanup.\n2. Jobs: write a formula from a plain-language request, explain an existing formula, and clean messy columns.\n3. Design: AI inside the cell or formula bar, with a preview before any change is applied.\n4. Trust: never overwrite data without confirmation. Show what the formula does.\n5. Risks: wrong formulas that look right, and data privacy for company spreadsheets.\n6. Metrics: AI actions accepted, errors reverted, and time saved per task."
+  },
+  "Design YouTube for elderly users.": {
+   "hint": "Elderly users need bigger text, simpler navigation, and fewer surprises. Start with their everyday tasks.",
+   "solution": "1. Users: older adults who watch videos from family, cooking, news, and religious or community content.\n2. Needs: large text, high contrast, simple home screen, and clear voice search.\n3. Features: a 'favourites' home row, one-tap play with no autoplay of unrelated videos, and a 'call a family member to watch together' option.\n4. Safety: stronger controls against scams and misleading content.\n5. Testing: test with users over 65 and their families.\n6. Metrics: sessions per week, task completion, and reports of confusion."
+  },
+  "Tell me about a time you had to influence engineers without authority.": {
+   "hint": "Use STAR. Show how you built support without formal authority: data, relationships, and a clear shared goal.",
+   "solution": "Model structure (replace with your own story):\n1. Situation: an engineering team did not agree with a change to the onboarding flow.\n2. Task: align the team on a test without having authority over them.\n3. Action: I built the case with usage data, asked the lead engineer to pick the success metric, and proposed a two-week test that let them stop if it failed.\n4. Result: the test lifted completion by 12%. The team adopted the change and asked for similar tests.\n5. Reflection: influence came from making their concern part of the test design, not from winning the argument.\nThe interviewer wants specific actions and a realistic outcome."
+  },
+  "Estimate server costs for storing WhatsApp status updates in India.": {
+   "hint": "Estimate users with status, the size of an update, and the time each status is stored. Then state the storage and cost assumptions.",
+   "solution": "Assumptions (illustrative):\n1. WhatsApp users in India: about 500 million. Assume 30% post a status each day: about 150 million statuses.\n2. Average size of a status (compressed media): about 1 MB.\n3. Daily storage: about 150 TB. Each status is kept for 24 hours, so the live footprint is about 150 TB at any time.\n4. Cost: cloud object storage at a few cents per GB per month. About 150 TB is about 150,000 GB, so a few thousand dollars a month before replication and delivery costs.\n5. Real cost is dominated by bandwidth and replication, so mention those.\n6. Present it as a range and name the assumption that matters most: how many people post."
+  },
+  "Explain latency vs throughput using a supermarket analogy.": {
+   "hint": "Use a shop that takes orders. Latency is how long one customer waits; throughput is how many customers you serve per hour.",
+   "solution": "1. Latency: how long a single customer waits from entering the queue to leaving with their items.\n2. Throughput: how many customers the store serves per hour.\n3. Analogy: a single cashier who is very quick has low latency. Adding more cashiers raises throughput, even if each customer still waits the same time.\n4. Trade-off: a queue that batches orders can raise throughput while making each customer wait longer.\n5. Product link: a delivery app should track both to keep promises and handle peak volume.\n6. Keep the explanation in plain words; the interviewer is checking that you can explain it."
+  },
+  "Prime Video streams buffered 5% more yesterday. Why?": {
+   "hint": "A 5% rise in buffering is a quality problem. Check the network, the device, and the release before the content.",
+   "solution": "1. Clarify: is the rise across all users or a segment? Which hours, regions, and devices?\n2. Segment: by ISP, country, device, and video quality. A spike in one ISP points to network or CDN routing.\n3. Recent changes: a player update, a new encoding profile, or a CDN change.\n4. External: a major live event or an outage at a provider.\n5. Action: roll back the player or encoding change, shift traffic to a healthier CDN node, and lower the default bitrate where needed.\n6. Metrics: rebuffer rate per session, time to first frame, and abandonment."
+  },
+  "What is Stripe's moat?": {
+   "hint": "A moat is something that keeps customers and competitors out. Be specific about which kind it is: network, scale, switching cost, or brand.",
+   "solution": "1. Define a moat: a durable advantage that protects margin.\n2. Stripe candidates: developer trust and clean APIs (switching cost), a large merchant network (network effects are limited), and scale in processing costs.\n3. Evidence: developers build on Stripe, and migrating payment systems is costly and risky.\n4. Weak spots: pricing pressure from cheaper processors and bank-led rails.\n5. Recommendation: the moat is developer experience plus integrated products (billing, fraud, payouts) that raise switching costs.\n6. Metrics: retention of integrated products, developer adoption, and share of volume per merchant."
+  },
+  "What metric would you look at to evaluate Stripe Link?": {
+   "hint": "Stripe Link is a checkout product. Ask what a checkout customer does next, and which action signals real value.",
+   "solution": "1. Purpose: Link lets customers check out quickly on any Stripe-powered site.\n2. Core metric: returning checkout rate, meaning the share of checkouts where a saved Link user completes purchase.\n3. Supporting metrics: time to checkout, conversion uplift for merchants versus standard checkout, and saved payment methods per user.\n4. Health checks: repeat use across merchants, not just one store.\n5. Guardrail: fraud rate and failed payments for Link users.\n6. Explain why the metric matters to both merchants (conversion) and users (speed)."
+  },
+  "Should Uber acquire a bike-sharing (Yulu) startup?": {
+   "hint": "Acquisitions need a clear reason. Ask what Uber gains beyond a fleet: density, data, or a product gap.",
+   "solution": "1. Clarify the goal: short-distance trips, last-mile links to rides, or an EV transition?\n2. Value: bikes add short trips that fill gaps in Uber's network and attract urban riders.\n3. Risks: integration cost, a smaller market size, and regulatory exposure for two-wheeler services.\n4. Alternative: a partnership or a commercial deal for bike access instead of buying the company.\n5. Recommendation: partner first, measure short-trip demand, and buy only if the data shows the gap and the margins work.\n6. Metrics: short-trip share, repeat riders, and unit economics per trip."
+  },
+  "Average ETA increased by 2 minutes. What do you do?": {
+   "hint": "A 2-minute ETA rise matters because riders cancel. Work out whether the cause is supply, demand, or routing.",
+   "solution": "1. Clarify: which cities, hours, and trip types? Is the change sudden or a trend?\n2. Supply: fewer drivers online, shorter shifts, or a driver policy change.\n3. Demand: more requests at peak times or a surge in a zone.\n4. Routing: a map or traffic data change that added distance or time.\n5. Action: incentives to bring drivers online at the affected hours, a matching change that favours nearby drivers, or a routing fix.\n6. Metrics: average ETA, cancellation rate after the ETA is shown, and driver utilisation."
+  },
+  "Describe a time you used data to solve a problem.": {
+   "hint": "Pick a real example with a clear data question, the analysis you did, and the decision it changed.",
+   "solution": "Model structure (replace with your own story):\n1. Situation: a booking conversion rate dropped after a change to the listing page, and the team had different theories.\n2. Task: find which change caused the drop and recommend a fix.\n3. Action: I split the funnel by device and listing type, found the drop was concentrated on mobile for one listing layout, and checked load times for that layout.\n4. Result: fixing the layout recovered most of the lost conversion within two weeks.\n5. Reflection: I now check the funnel by device before running broad analysis.\nThe interviewer wants a question, a method, and a decision."
+  },
+  "Zomato Gold sales dropped. Diagnose.": {
+   "hint": "Gold is a subscription. Start with signups, renewals, and churn, then check the offers that drive new members.",
+   "solution": "1. Clarify: is it new subscriptions or renewals that fell? Which cities and plans?\n2. Funnel: offer views, trial starts, paid conversions, and renewals.\n3. Causes: a change to the benefit set, a price change, a competitor's offer, or fewer restaurants offering member deals.\n4. Segment: by new vs existing members, and by city. A drop in renewals means value is slipping; a drop in new members means acquisition.\n5. Action: fix the value gap for members, adjust trial offers, and recruit partner restaurants in weak cities.\n6. Metrics: renewal rate, trial-to-paid conversion, and benefit usage per member."
+  },
+  "What should Zomato build next: event ticketing or ride-hailing?": {
+   "hint": "Pick by a clear criterion: which option has the strongest demand, can use existing assets, and fits the business model.",
+   "solution": "1. Criteria: user demand, reuse of existing data and partners, margin, and speed to test.\n2. Ride-hailing: a crowded market with heavy competition and high operating costs.\n3. Event ticketing: a clearer fit with an audience that already plans nights out, and it reuses the discovery and reviews the platform already has.\n4. Recommendation: test event ticketing with a limited set of cities and partners first.\n5. Metrics: tickets sold, repeat buyers, and margin per ticket.\n6. Be explicit about the assumption you would validate first."
+  },
+  "How does live location tracking work?": {
+   "hint": "Think about the phone sending its location and the server sharing it with other users, in near real time.",
+   "solution": "1. The phone uses GPS, Wi-Fi, and cell towers to estimate its location, then sends updates every few seconds.\n2. Transport: a persistent connection such as WebSockets, or frequent short requests, carries location to the server.\n3. Server: stores the latest location and pushes it to the people who should see it, filtering by permissions and privacy.\n4. Map: the app draws the position on the map with smoothing so the marker does not jump.\n5. Trade-offs: update frequency versus battery use, and accuracy versus privacy.\n6. Keep it simple and mention how the app handles weak connections."
+  },
+  "Improve search for a user who doesn't speak English well.": {
+   "hint": "Search for users who do not type in English may need voice, transliteration, or regional-language input. Start with their actual queries.",
+   "solution": "1. Users: shoppers who search in Hindi, Tamil, or mixed-language text.\n2. Problem: queries in local scripts or transliteration return few results.\n3. Solutions: transliteration (typing Hindi words in Latin letters), voice search in regional languages, and synonym mapping for common product names.\n4. Data: use logs of failed searches to find the most common gaps.\n5. Metrics: zero-result search rate, search-to-purchase rate for regional-language users, and time to first click.\n6. Risk: wrong matches for similar words. Test each language before wide release."
+  },
+  "Zepto Cafe vs Instamart. How to win?": {
+   "hint": "Compare the two models on speed, basket size, and where each one wins. Then decide what Zepto should lead with.",
+   "solution": "1. Instamart: a grocery and essentials store with a wide assortment and a high order frequency.\n2. Cafe: a food-first product with a narrower assortment and a higher margin per order.\n3. Question to answer: where is the customer's unmet need? Frequency suggests groceries; occasional cravings suggest food.\n4. Recommendation: lead with the high-frequency base, then use cafe items to lift basket size and test margin.\n5. Metrics: orders per user, basket size, margin per order, and share of users ordering both.\n6. Be clear about the trade-off between breadth and focus."
+  },
+  "Tell me about a time you prioritized ruthlessly.": {
+   "hint": "Use STAR and show a real trade-off: what you dropped, why, and how you explained it to stakeholders.",
+   "solution": "Model structure (replace with your own story):\n1. Situation: a quarter with five requested projects and capacity for two.\n2. Task: choose the two with the biggest expected impact.\n3. Action: I scored each project by reach, impact, and effort, then took the decision to three stakeholders with the reasons and what would happen to the other projects.\n4. Result: the two chosen projects delivered the planned impact, and the team stopped debating the others.\n5. Reflection: writing down what we would not do early saved weeks of argument later.\nThe interviewer wants a clear framework and honest trade-offs."
+  },
+  "Design Google Docs for code (a collaborative IDE).": {
+   "hint": "Ask what a collaborative IDE needs that Docs does not: running code, debugging, and version control. Then pick the core.",
+   "solution": "1. Users: developers who pair program, teach, or review code together.\n2. Needs: real-time editing, comments, safe code execution, and version history.\n3. MVP: shared editing and comments first. Add running code in a sandbox next.\n4. Differences from Docs: code needs syntax highlighting, language servers, and secure execution.\n5. Risks: security of executing user code and cost of compute.\n6. Metrics: active sessions per user, time to first shared edit, and number of teams that return weekly."
+  },
+  "Oculus headset daily playtime dropped. Why?": {
+   "hint": "Playtime dropped for a hardware-linked product. Check the device, the content, and the users before blaming the headset.",
+   "solution": "1. Clarify: is it daily playtime per user or the number of users? Which regions and models?\n2. Hardware: a battery or firmware update, a comfort issue, or a new headset that is harder to set up.\n3. Content: fewer new releases, a popular title leaving the store, or a multiplayer server issue.\n4. Segment: by device model, age of headset, and user type. A drop on one model points to hardware or firmware.\n5. Action: fix the update, add content for the segment that fell, and improve set-up.\n6. Metrics: weekly active users, sessions per user, and churn after a firmware update."
+  },
+  "Design a self-destruct feature for AWS S3 buckets.": {
+   "hint": "Reframe the idea as data lifecycle rules: automatic expiry, retention limits, and safe deletion. That is what customers need.",
+   "solution": "1. Reframe: a self-destruct feature for storage is a data lifecycle control, so describe it as automatic expiry rules.\n2. Users: teams with temporary data, compliance needs, and cost limits.\n3. Features: set a deletion date per bucket, require two-person approval for deletion, and send warnings before data is removed.\n4. Safety: prevent accidental deletion with versioning and a recovery window.\n5. Metrics: storage cost saved, accidental-deletion incidents, and admin time spent.\n6. Trade-off: data loss is irreversible, so the default should be a recovery period."
+  },
+  "Should Spotify introduce paid audiobooks separately from Premium?": {
+   "hint": "Look at what audiobook buyers want and what Premium subscribers already get. Separate the market test from the pricing question.",
+   "solution": "1. Users: heavy listeners who want full-length books, and Premium subscribers who already listen to podcasts and music.\n2. Options: include a limited number of audiobook hours in Premium, sell audiobook add-ons, or price a separate audiobook tier.\n3. Recommendation: test a small add-on first to see demand and price sensitivity before changing Premium.\n4. Risks: cannibalising Premium value or confusing the plan structure.\n5. Metrics: add-on attach rate, audiobook hours per user, and churn of Premium users.\n6. Decision rule: change Premium only if the add-on test shows clear willingness to pay."
+  },
+  "Should Instagram spin out Reels into a separate app?": {
+   "hint": "Ask why a separate app would help Reels. Think about discovery, creators, and whether splitting the audience hurts it.",
+   "solution": "1. Arguments for: a focused experience could grow faster and avoid distraction from the core app.\n2. Arguments against: Reels draws on the same social graph and creators. Splitting the audience can weaken both.\n3. Test first: a standalone short-video experience inside the main app with its own feed and tab.\n4. Metrics: time spent on Reels, creator retention, and whether the core app's engagement falls after the test.\n5. Recommendation: do not spin out unless the data shows the core app loses value.\n6. Be clear on what would make you change your mind."
+  },
+  "Time spent on Instagram feed dropped, but Stories time went up. Is this bad?": {
+   "hint": "Time spent is one number. Look at what the user is doing instead, and whether the total value of the app is rising.",
+   "solution": "1. Clarify: is the total time falling, or does it just move between formats?\n2. Measure: total time on the app, time per format, and whether users return daily.\n3. Interpretation: if Stories time rises and total time holds, users are shifting. If total time falls, that is a concern.\n4. Value check: are users who use Stories more likely to stay, post, or buy? Retention matters more than format share.\n5. Action: keep investing in the format that drives retention, and watch feed quality so the shift is not a sign of a broken feed.\n6. Metrics: daily active users, retention by format, and session count."
+  },
+  "Design an Airbnb experience for digital nomads.": {
+   "hint": "Digital nomads need reliable Wi-Fi, flexible stays, a community, and a way to handle work and taxes. Pick the two that matter most.",
+   "solution": "1. Users: remote workers staying in one city for weeks or months.\n2. Needs: reliable internet, a quiet workspace, flexible booking, and a community of other remote workers.\n3. Features: a verified-Wi-Fi filter with speed tests, monthly stays tagged as work-friendly, and local coworking passes or meetups.\n4. Experience: a set-up checklist after booking (Wi-Fi speed, power backup, desk).\n5. Metrics: monthly stay bookings, repeat nomad guests, and reviews that mention work.\n6. Risk: hosts may list 'work-friendly' without real standards, so verify with guest reviews and speed tests."
+  },
+  "How do you handle conflicting feedback from two key stakeholders?": {
+   "hint": "Separate the content of the two feedback points from the people giving them. Then decide based on the goal, and tell both stakeholders why.",
+   "solution": "Structure (adapt to a real example):\n1. Clarify the goal and the facts behind each stakeholder's view.\n2. Find the shared goal (for example, a successful launch) and the real disagreement (scope, timing, or risk).\n3. Get the data or customer evidence that settles the question, if it exists.\n4. Make a decision, explain the reasons to both stakeholders, and say what would change it.\n5. Follow up with the one who lost the argument and show how their concern was addressed.\nThe interviewer is checking for calm judgment, clear communication, and respect for both views."
+  },
+  "How does Cred monetize if they give everything away for free?": {
+   "hint": "Free products still make money. Ask where Cred's revenue comes from besides the card interchange: partnerships, credit products, and data-driven offers.",
+   "solution": "1. Diagnose: free-to-user products usually earn from partners, not users.\n2. Revenue sources: credit card partnerships and referral fees, loan distribution, rewards and offer partners, and premium features for power users.\n3. Recommendation: deepen lending partnerships and offer targeted financial products to engaged users.\n4. Risks: regulatory limits on lending and dependence on partner terms.\n5. Metrics: revenue per active user, partner conversion rate, and repayment quality.\n6. Guardrail: do not push credit to users who cannot repay."
+  },
+  "Cred coins redemption rate is dropping. Why?": {
+   "hint": "Redemption drops happen when rewards lose value or the process gets harder. Check both before changing the offer.",
+   "solution": "1. Clarify: is the drop in redemptions per user or in the number of users redeeming?\n2. Check the reward: did the value fall, or did the choice of reward change?\n3. Check the process: more steps, a new minimum threshold, or a bug in the redemption flow.\n4. Segment: by user tenure and by reward type. A drop only in one reward suggests supply or appeal.\n5. Action: fix the flow, add popular rewards, or make small value changes with clear communication.\n6. Metrics: redemption rate, coins held per user (a liability), and churn after a change."
+  },
+  "Design a smart mirror for Amazon.": {
+   "hint": "A smart mirror is a home device. Start with the daily routine it could support and the privacy concerns it raises.",
+   "solution": "1. Users: households that want quick information and shopping at home.\n2. Use cases: a morning summary (weather, calendar, orders), try-on for clothes, and quick reordering.\n3. Design: voice first, a glance-level display, and a clear privacy setting for cameras.\n4. Commerce link: a quick reorder for household staples and style suggestions.\n5. Metrics: daily active use, orders placed from the mirror, and privacy opt-in rate.\n6. Risk: camera data and high hardware cost. Start with a software companion for existing displays."
+  },
+  "Design the backend architecture for Amazon Prime Day.": {
+   "hint": "Start with the load: how many requests per second during the sale, and which services are hit hardest. Then design around those peaks.",
+   "solution": "1. Scope: requirements for traffic, latency, and availability during the sale.\n2. Load estimate: peak requests per second, split by browse, cart, and checkout.\n3. Architecture: CDN for static pages, caching for catalogue reads, a queue for orders, and separate scaling for checkout and payments.\n4. Protection: rate limiting, graceful degradation (show cached prices if live pricing fails), and a waiting room for extreme spikes.\n5. Operations: load testing before the event, feature flags for rollback, and live dashboards.\n6. Trade-offs: consistency of stock counts versus speed. Use reservations with short expiry."
+  },
+  "Is there room for a new payment gateway in India given Razorpay/PayU?": {
+   "hint": "Competition and regulation shape this answer. Ask what Razorpay and PayU already do well, and where a new gateway would win.",
+   "solution": "1. Market: incumbents have deep bank relationships, strong developer tools, and broad acceptance.\n2. Gaps: a specialised gateway for a segment (for example, creators, marketplaces, or cross-border sellers) that incumbents serve poorly.\n3. Recommendation: enter only with a clear wedge, not as another general gateway.\n4. Requirements: bank integrations, compliance, and fraud controls from the start.\n5. Economics: pricing pressure and the cost of acquiring merchants.\n6. Metrics: merchant activation, success rate, and pricing per transaction versus incumbents."
+  },
+  "API latency spiked to 500ms. What is your immediate action?": {
+   "hint": "Immediate action comes before root cause. Stabilise the service first, then find the cause.",
+   "solution": "1. Stabilise: check the on-call dashboard, shed non-critical traffic, and roll back the last deploy if the timing matches.\n2. Communicate: tell support and key customers what is happening and when the next update will come.\n3. Diagnose: check the slowest services, database load, and recent config changes. Compare the spike time with deploys.\n4. Fix: add capacity or fix the offending query, then remove the temporary limits.\n5. Learn: write a short post-incident review with a clear owner for each action.\n6. Metrics: time to detect, time to mitigate, and error rate."
+  },
+  "How would you adapt Spotify for the Indian rural market?": {
+   "hint": "Rural India has different devices, data costs, languages, and payment habits. Design for those constraints first.",
+   "solution": "1. Users: rural households with basic smartphones, limited data, and mixed literacy.\n2. Needs: local languages, audio-first content, low data use, and offline downloads.\n3. Features: a lite app, offline playlists, voice navigation in regional languages, and a low-cost plan.\n4. Distribution: partner with local telecom or community networks and let family members share accounts.\n5. Metrics: active users in rural areas, data used per session, and listening hours per user.\n6. Risk: low willingness to pay. Test a low-price tier with clear value."
+  },
+  "Tell me about a time you missed a deadline.": {
+   "hint": "Use STAR. Show what you owned, what you did to recover, and what you changed so it would not happen again.",
+   "solution": "Model structure (replace with your own story):\n1. Situation: a launch date was at risk because a dependency slipped two weeks.\n2. Task: decide whether to hold the date or cut scope.\n3. Action: I told the stakeholders early, listed three options with their trade-offs, and agreed a smaller launch with the feature that mattered most.\n4. Result: we launched on the revised date. The missed feature shipped four weeks later.\n5. Reflection: I should have flagged the dependency risk two weeks earlier. I now review dependencies in every planning meeting.\nThe interviewer wants ownership and clear communication."
+  },
+  "How would you restructure Google Cloud to compete with AWS in India?": {
+   "hint": "Cloud competes on enterprise trust, partner networks, and local data needs. Start with what enterprises in India need.",
+   "solution": "1. Users: Indian enterprises and public sector buyers who care about data residency, support in local time zones, and pricing.\n2. Positioning: local-region data centres, partner-led sales for mid-market, and industry bundles (banking, retail, government).\n3. Structure: a dedicated India business unit with its own pricing and go-to-market.\n4. Partners: system integrators and startups that resell or build on the platform.\n5. Metrics: enterprise accounts, partner-sourced revenue, and workload migration rate.\n6. Trade-off: local pricing can cut margins, so set a clear target for growth versus profit."
+  },
+  "YouTube Shorts is cannibalizing watch time from long-form. How do you manage this?": {
+   "hint": "Cannibalisation can be fine if total watch time grows. Measure the total, not only the format.",
+   "solution": "1. Clarify: is total watch time flat, growing, or falling after Shorts launched?\n2. Measure: watch time per user across formats, creator revenue, and retention.\n3. Interpretation: if Shorts brings new viewers who later watch long-form, the total may grow. If long-form creators leave, that is a risk.\n4. Actions: help long-form creators with clip tools, link Shorts to longer videos, and balance the feed.\n5. Metrics: total watch time, creator retention in both formats, and ad revenue per hour.\n6. Decision rule: act on the total and the creator health, not the share of one format."
+  },
+  "Should Google build its own chip for Pixel phones instead of using Tensor?": {
+   "hint": "Ask what Pixel gains from its own chip and what it costs. Think about performance, cost, and the risk of a long project.",
+   "solution": "1. Gains: tighter integration between hardware and software, control over AI features, and differentiation in camera and battery life.\n2. Costs: chip design is expensive, slow to pay back, and needs a team with rare skills.\n3. Risks: delays that leave Pixel behind, and a lower-volume product that cannot amortise the cost.\n4. Recommendation: keep building custom silicon, but scope it to the features that differentiate the phone, and measure the benefit each generation.\n5. Metrics: battery life, camera processing speed, and AI feature performance per watt versus alternatives.\n6. Decision point: continue only if the gains beat the cost each generation."
+  },
+  "How would you build a B2B division within Meta?": {
+   "hint": "A B2B division needs a different sales motion and product. Start with the clearest business customer and what they buy.",
+   "solution": "1. Target: small and mid-sized businesses that already advertise on Meta and want better tools.\n2. Products: business messaging, managed ad services, and analytics for commerce.\n3. Motion: self-serve for small businesses, sales-led for larger accounts, and partner channels.\n4. Structure: a separate team with its own pricing, support, and compliance.\n5. Metrics: business accounts, revenue per account, and retention.\n6. Risk: enterprise sales is slow, and the company's brand is consumer-first. Pick a narrow segment to start."
+  },
+  "Threads is losing DAU after initial hype. What is your 90-day plan?": {
+   "hint": "A 90-day plan needs goals, a diagnosis, and checkpoints. Start with why DAU fell and what users want from the product.",
+   "solution": "1. Diagnose: separate new users who left from existing users who stopped posting. Check cohort retention.\n2. Days 0 to 30: talk to churned users, fix any onboarding or notification issues, and add a clear reason to return.\n3. Days 31 to 60: test features based on the top reasons users give, such as better follows or topic feeds.\n4. Days 61 to 90: scale the winners, cut losers, and set a target for retention.\n5. Metrics: D7 and D30 retention, daily posts per user, and DAU by cohort.\n6. Checkpoints: a review at each 30-day mark with a decision to continue, change, or stop."
+  },
+  "Design a 3-year roadmap for Amazon India to dominate Tier 3 cities.": {
+   "hint": "A roadmap for Tier 3 cities needs customer needs, distribution, and sequence. Think in phases over three years.",
+   "solution": "1. Customers: Tier 3 shoppers who want value, local language, and reliable delivery.\n2. Year 1: regional languages, cash-on-delivery options, and a delivery network in the top 50 districts.\n3. Year 2: local sellers and kirana partners, value brands, and faster delivery in clusters.\n4. Year 3: financing for sellers, a loyalty programme, and expansion to smaller towns.\n5. Economics: track contribution margin per order in each cluster before expanding.\n6. Metrics: active shoppers, orders per cluster, and seller revenue growth."
+  },
+  "Should Amazon build a healthcare platform in India?": {
+   "hint": "Healthcare has strict rules and trust needs. Be clear about which part of the market Amazon should enter and why.",
+   "solution": "1. Opportunity: pharmacy delivery, diagnostics booking, and health insurance distribution.\n2. Advantages: logistics, a large customer base, and digital payments.\n3. Constraints: regulation on pharmacy and medical data, and trust in healthcare brands.\n4. Recommendation: start with pharmacy delivery and wellness products, which fit logistics, before clinical services.\n5. Partners: licensed pharmacies, diagnostic labs, and insurers.\n6. Metrics: repeat medicine orders, prescription compliance, and customer satisfaction."
+  },
+  "Design a loyalty program that makes Flipkart the default shopping app.": {
+   "hint": "A loyalty programme only works if it changes behaviour. Ask what users would have to do to earn and keep the benefit.",
+   "solution": "1. Users: frequent shoppers who buy across categories.\n2. Design: points for regular categories, tiers based on spend, and member-only prices on essentials.\n3. Make it the default: auto-apply points at checkout, and a reminder before points expire.\n4. Economics: points cost, breakage, and margin on member deals. Model the cost of each tier.\n5. Experiment: test tier thresholds and reward types on different cohorts.\n6. Metrics: share of orders from members, orders per member per month, and programme cost as a share of revenue."
+  },
+  "Flipkart Big Billion Days conversion rate dropped vs last year. Root cause analysis.": {
+   "hint": "Root cause analysis for a sale means comparing this year with last year on traffic, conversion, and the offers themselves.",
+   "solution": "1. Clarify: which metric fell (conversion rate) and by how much versus last year?\n2. Traffic: did visits or the mix of traffic change? Paid campaigns may have brought less ready-to-buy shoppers.\n3. Offers: were deals weaker, or did popular products sell out early?\n4. Experience: were there slow pages, payment failures, or app crashes at peak?\n5. Segment: by device, city, and new vs returning users.\n6. Action: fix the funnel problem found, plan stock depth, and check payment success at peak next time."
+  },
+  "Build a 5-year vision for Uber in the EV transition.": {
+   "hint": "A 5-year vision needs a clear reason to win, the capital needed, and milestones. EVs change the cost and the customer experience.",
+   "solution": "1. Vision: Uber as the default way to get around in cities where EVs make rides cheaper and cleaner.\n2. Customers: drivers who want lower fuel costs and riders who want lower prices and emissions.\n3. Milestones: year 1 EV ride share in pilot cities, year 2 partnerships with charging networks, year 3 EV-only city zones, years 4 to 5 scale across markets.\n4. Economics: EV purchase or lease support for drivers, charging costs, and the value of lower maintenance.\n5. Risks: charging access, battery cost, and driver adoption.\n6. Metrics: EV trip share, driver earnings per hour, and cost per mile."
+  },
+  "How should Swiggy think about profitability vs growth in 2025?": {
+   "hint": "Profitability versus growth is a trade-off. Use unit economics and the market to decide the balance, and say what you'd measure.",
+   "solution": "1. Framing: growth builds share, profitability builds resilience. The right balance depends on capital and competition.\n2. Unit economics: contribution margin per order in each category and city. Fix the cities that lose money before expanding.\n3. Recommendation: grow where margin per order is positive, and cut subsidy in categories that lose money.\n4. Guardrails: a target for contribution margin and a cap on discounts as a share of revenue.\n5. Metrics: contribution margin, orders per user, and cost per order.\n6. Be explicit that the balance is a dial you review each quarter."
+  },
+  "Should Zomato enter the events and nightlife space beyond Blinkit?": {
+   "hint": "Ask what Zomato gains from events and nightlife, and whether it fits the core food and discovery business.",
+   "solution": "1. Fit: discovery, reviews, and bookings for restaurants already exist. Events and nightlife share the same customer and the same partners.\n2. Options: ticketing for live events, bookings for nightlife venues, and bundles with dining offers.\n3. Recommendation: test ticketing and table bookings in two cities, using existing restaurant partners.\n4. Risks: a crowded ticketing market and a different operations model.\n5. Metrics: bookings per venue, repeat users, and margin per booking.\n6. Decision rule: expand only if the test brings new users who also order food."
+  },
+  "Design a payment solution for street vendors.": {
+   "hint": "Street vendors are cash-based with low margins and little formal credit history. Design for simple, low-cost payments.",
+   "solution": "1. Users: vendors who take small payments all day, often on a basic phone.\n2. Needs: fast QR payments, no fees for small amounts, daily sales records, and simple tax reports.\n3. Features: a voice-confirmed payment alert, a daily summary by SMS, and a credit line based on sales history.\n4. Distribution: partner with local associations and wholesalers.\n5. Economics: low fees on small payments need volume. Model the breakeven per vendor.\n6. Metrics: active vendors, daily transactions, and repayment rate on credit."
+  },
+  "Should Razorpay build a full-stack neobank?": {
+   "hint": "Neobanking needs a license, a bank partner or licence, and a clear reason to win. Ask what Razorpay has that banks do not.",
+   "solution": "1. Advantages: merchant and developer relationships, payments data, and integration with business accounts.\n2. Constraints: banking licences and partner rules, capital needs, and fraud risk.\n3. Recommendation: build business banking features on a partner bank before a full neobank.\n4. Products: current accounts for small businesses, payouts, and working capital.\n5. Metrics: active business accounts, deposits, and cross-sell to payments customers.\n6. Risk: a bank brings regulation and capital requirements. Phase the build with decision gates."
+  },
+  "Payment success rate dropped for a specific bank. What do you do?": {
+   "hint": "Success rate for one bank is a specific problem. Check the bank's errors and whether your integration changed.",
+   "solution": "1. Clarify: when did the drop start, and what share of transactions go through this bank?\n2. Check the bank's error codes: are declines from the bank, from fraud rules, or from timeouts?\n3. Check your side: a recent change to the integration, retry rules, or a timeout setting.\n4. Escalate: share examples and timestamps with the bank's team.\n5. Mitigate: route traffic to other banks where possible, and show clearer messages to users.\n6. Metrics: success rate by bank, decline reasons, and recovery time."
+  },
+  "Design Ola for intercity travel.": {
+   "hint": "Intercity travel is about planning and trust. Ask what riders need beyond a short ride: pricing, comfort, and safety.",
+   "solution": "1. Users: families and professionals who travel between nearby cities.\n2. Needs: fixed prices, comfortable cars, safe drivers, and luggage space.\n3. Features: fixed-fare intercity routes, pre-booking with driver details, and shared rides where it makes sense.\n4. Supply: partner with local operators and reward drivers for long trips.\n5. Metrics: intercity bookings, repeat riders, and on-time arrival rate.\n6. Risk: long trips tie up drivers, so price for the full trip time."
+  },
+  "Ola Electric scooter complaints are surging online. How to handle?": {
+   "hint": "Surging complaints need a fast response. Acknowledge the issue, find the cause, and fix what you control.",
+   "solution": "1. Immediate: acknowledge the complaints publicly, give a clear timeline, and set up a fast support route for affected customers.\n2. Diagnose: group complaints by problem (battery, quality, delivery, service). Find the top two.\n3. Fix: work with the manufacturer or supplier on the top defect, and give affected customers clear remedies.\n4. Communicate: regular updates on progress, not only at the end.\n5. Learn: a quality review before the next batch and a feedback loop from service data.\n6. Metrics: complaints per 1,000 units, response time, and resolution rate."
+  },
+  "Should Ola focus on ride-hailing or EV manufacturing?": {
+   "hint": "Ride-hailing and EVs need different skills and capital. Pick one based on margins, strengths, and the time to win.",
+   "solution": "1. Compare: ride-hailing is a platform business with fast cash flow but fierce competition. EV manufacturing is capital-heavy and slow to pay back.\n2. Synergy: ride-hailing could create demand for EVs, and EVs could cut ride costs.\n3. Recommendation: focus on ride-hailing with an EV fleet strategy (partner or lease) before building manufacturing.\n4. Metrics: margin per ride, EV share of trips, and driver earnings.\n5. Decision rule: consider manufacturing only after the fleet proves unit economics.\n6. Name what you would give up with each choice."
+  },
+  "How would you improve the reseller experience on Meesho?": {
+   "hint": "Resellers are the customers. Start with their daily tasks: finding products, managing orders, and getting paid.",
+   "solution": "1. Users: home-based resellers who sell on social media and run shops from their phones.\n2. Pain points: finding trending products, managing orders across channels, and slow payouts.\n3. Features: a catalogue with margin calculator, an order tracker, and faster payout options.\n4. Support: a helpline in local languages and tutorials for beginners.\n5. Metrics: active resellers, orders per reseller, and payout time.\n6. Risk: sellers' margins are thin, so check that each feature saves time or money."
+  },
+  "Estimate the number of active resellers on Meesho.": {
+   "hint": "Estimate from the number of buyers, how many of them resell, and how often a reseller places orders.",
+   "solution": "Assumptions (illustrative):\n1. Monthly buyers on Meesho: about 100 million.\n2. Share who resell: about 5%, so about 5 million resellers.\n3. Share who are active in a given month (ordered at least once): about 60%.\n4. Estimate: about 3 million active resellers.\n5. Sanity check: most small resellers are part-time, so the active count should be well below the registered count.\n6. Present a range and name the assumption you'd validate with platform data."
+  },
+  "Meesho vs Flipkart Shopsy. How is Meesho differentiated?": {
+   "hint": "Compare the two on who they serve, the price, and the experience. Then say what Meesho does that the other doesn't.",
+   "solution": "1. Meesho: a social commerce model with resellers who sell to their networks, focused on value and Tier 2 and Tier 3 buyers.\n2. Shopsy: Flipkart's value offer, supported by Flipkart's logistics and brand.\n3. Differentiation: Meesho's reseller network and social sharing create demand that Shopsy does not have at the same scale.\n4. Risks: Flipkart's logistics and sellers. Meesho must keep prices and delivery competitive.\n5. Metrics: reseller share of orders, repeat buyers, and delivery time.\n6. Recommendation: double down on the reseller network and the tools that make it easy."
+  },
+  "Design a fantasy sports feature for a sport that has never been on Dream11.": {
+   "hint": "A new sport needs a new roster, rules for fantasy play, and enough fans. Start with a sport that has a fan base and clear stats.",
+   "solution": "1. Choice: pick a sport with a large following, clear player stats, and regular matches.\n2. Data: you need a reliable stats feed for players and events, and rules that users understand.\n3. Launch: start with one league or tournament, then add more.\n4. Fairness: rules for player pools and anti-fraud controls.\n5. Metrics: contests entered, retention in the first season, and average entry per user.\n6. Risk: legal rules differ by state, so check compliance before launch."
+  },
+  "Dream11 app is crashing during IPL match starts. Action plan?": {
+   "hint": "Crashes at match starts are a traffic spike problem. Check capacity, caching, and the app release before blaming the users.",
+   "solution": "1. Immediate: reduce load with a waiting room or staged entry, and push a fix or rollback if a release changed.\n2. Diagnose: check server errors, database load, and the app versions that crash.\n3. Likely causes: a traffic spike that the backend cannot absorb, or a bug in a recent release on certain devices.\n4. Long-term: load test before big matches, auto-scaling, and caching of contest data.\n5. Communicate: status updates to users during the incident.\n6. Metrics: crash rate per session, time to join a contest, and error rate at match start."
+  },
+  "Should Dream11 expand internationally or deepen India?": {
+   "hint": "Compare the market size, the cost to win abroad, and how much Dream11 can grow in India. Pick the one with the best return.",
+   "solution": "1. India: strong demand, a proven product, and regulatory risk that is changing.\n2. International: new regulations, different sports, and high cost to win.\n3. Recommendation: deepen India first, where Dream11 has a brand, then test one international market with a clear regulatory path.\n4. Metrics: users per market, revenue per user, and compliance cost.\n5. Risk: regulation can change quickly, so plan for compliance in every market.\n6. Decision rule: expand only in markets with clear legal rules."
+  },
+  "How to increase insurance penetration through PhonePe?": {
+   "hint": "Insurance is a trust product. Start with how users decide to buy it and which products suit a payments user.",
+   "solution": "1. Users: PhonePe users who already pay bills and recharge but have little insurance.\n2. Barriers: confusion about policies, low trust, and paperwork.\n3. Products: simple policies such as health, phone, and travel, with clear prices.\n4. Nudges: suggest cover after a relevant purchase, such as a phone purchase, with a clear explanation.\n5. Partners: insurers who handle claims and compliance.\n6. Metrics: policies sold, attach rate after payments, and claim satisfaction."
+  },
+  "PhonePe merchant onboarding in Tier 3 cities is slow. Why?": {
+   "hint": "Merchant onboarding in Tier 3 is slow for specific reasons. Find them in the funnel before adding staff.",
+   "solution": "1. Clarify: how long does onboarding take, and where do merchants drop out?\n2. Funnel: sign-up, document upload, verification, device delivery, and first transaction.\n3. Likely causes: document requirements that are hard to meet, slow field visits, device shortages, and poor connectivity for verification.\n4. Fixes: accept more document types, offer a phone-based verification path, and place devices in local hubs.\n5. Metrics: time to onboard, drop-off by step, and first-month transactions.\n6. Test: a pilot in two districts before a wide roll-out."
+  },
+  "Should PhonePe build a super-app similar to WeChat?": {
+   "hint": "A super-app works when many services share one account and one habit. Ask what would make the bundle useful to users.",
+   "solution": "1. Users: people who want payments, credit, insurance, and shopping in one place.\n2. Requirements: a single account, trust in each service, and simple switching between them.\n3. Recommendation: build out the services with the highest frequency first (payments and bills), then add credit and insurance.\n4. Risks: diluting focus, regulation for each service, and users who don't want everything in one app.\n5. Metrics: services per active user, retention, and revenue per user.\n6. Decision rule: add a service only when it shares users and data with the core."
+  },
+  "Design a meal planning feature for BigBasket.": {
+   "hint": "Meal planning is about helping people decide what to cook for the week. Start with the planning pain and the shopping list.",
+   "solution": "1. Users: families who plan weekly meals and want the ingredients delivered.\n2. Features: a weekly meal plan from pantry staples, a shopping list that adds ingredients to the cart in one tap, and recipes that match what's already at home.\n3. Personalisation: diet preferences, family size, and budget.\n4. Metrics: weekly plans created, plan-to-cart conversion, and repeat use per family.\n5. Risk: plans that waste food if quantities are wrong. Show portion sizes clearly.\n6. Test with a small group before a full launch."
+  },
+  "Estimate how many kg of fruits BigBasket delivers daily in Bangalore.": {
+   "hint": "Estimate households, fruit per household per day, and how much one delivery covers. State the units clearly.",
+   "solution": "Assumptions (illustrative):\n1. Bangalore population: about 13 million, about 3 million households.\n2. Share who buy fruit through BigBasket on a given day: about 10%, so about 300,000 households.\n3. Fruit per household per day: about 0.5 kg.\n4. Estimate: about 150,000 kg a day, roughly 150 tonnes.\n5. Sanity check: fresh fruit is also bought in shops, so online share is a fraction of the total.\n6. Give a range and say which assumption you'd validate first with order data."
+  },
+  "Design an AI-powered eye health monitoring feature for Lenskart.": {
+   "hint": "Health monitoring needs clear accuracy and a sensible use case. Ask what Lenskart's customers want from an eye check.",
+   "solution": "1. Users: customers who want to check their eye health or know when they need new glasses.\n2. Features: a screen-distance and screen-time tracker, a simple vision test on the phone, and reminders for check-ups.\n3. Boundary: the feature informs but does not diagnose. Refer users to an optometrist for concerns.\n4. Business link: book an eye test or buy glasses when the check suggests it.\n5. Metrics: tests completed, eye-test bookings from the feature, and user trust scores.\n6. Risks: medical claims and accuracy. Work with clinicians and check regulatory limits."
+  },
+  "How to increase Lenskart adoption in Tier 2 cities?": {
+   "hint": "Tier 2 adoption depends on trust in the store, quick delivery, and price. Find which of these is the blocker.",
+   "solution": "1. Diagnose: awareness, trust, or convenience? Check search volume and store visits in Tier 2 cities.\n2. Levers: a local optometrist network, home eye tests, and trial offers on frames.\n3. Logistics: faster fitting and delivery, and stock of popular frames locally.\n4. Pricing: value ranges for price-sensitive buyers.\n5. Metrics: store visits per city, first-purchase rate, and repeat purchase.\n6. Test: two cities with local marketing and a home-test offer before wider roll-out."
+  },
+  "How would you evaluate if a new AI feature is ready to ship?": {
+   "hint": "Readiness is not one number. Define the quality bar, test it on real cases, and set the guardrails before launch.",
+   "solution": "1. Define success: the quality metric (accuracy or helpfulness), the user metric (task success), and the harm metric (unsafe or wrong outputs).\n2. Test: an evaluation set of realistic cases, including edge cases and sensitive topics. Human raters score outputs.\n3. Thresholds: ship only if the quality bar is met and harm stays below a set level.\n4. Rollout: staged release to a small group, with monitoring and a rollback plan.\n5. Post-launch: track real-user feedback and error reports, and keep the eval set updated.\n6. Metrics: task success, harmful output rate, and user satisfaction."
+  },
+  "Should Gmail auto-draft replies using AI? What are the risks?": {
+   "hint": "Auto-drafts save time, but they can say the wrong thing in a user's name. Weigh the value against the risks.",
+   "solution": "1. Value: faster replies to routine emails, with the user in control.\n2. Risks: wrong facts or tone, leaking private information, and users sending replies they did not read.\n3. Design: drafts only, never auto-send. Mark AI drafts clearly. Let users edit before sending.\n4. Privacy: process email on the user's device or within clear data terms, and let users opt out.\n5. Metrics: drafts accepted without edits, time saved, and reports of wrong content.\n6. Recommendation: launch to a small opt-in group with strong controls, then expand."
+  },
+  "How would you build responsible AI guidelines for Instagram content moderation?": {
+   "hint": "Responsible AI needs clear principles, measurable rules, and a way to appeal. Think about harm, fairness, and transparency.",
+   "solution": "1. Principles: safety, fairness across languages and regions, transparency about automated decisions, and a human appeal path.\n2. Policy: define what content is removed, what is labelled, and what is left alone, in plain language.\n3. Operations: a mix of AI detection and trained human reviewers, with clear escalation for borderline cases.\n4. Fairness: test error rates across languages and communities, and fix gaps found.\n5. Metrics: precision and recall by category, appeal reversal rate, and time to review.\n6. Governance: an external review board and a regular public report."
+  },
+  "Design an AI shopping assistant for Amazon.": {
+   "hint": "A shopping assistant has to be useful and honest. Start with the shopper's task and when the assistant should hand off to a person.",
+   "solution": "1. Users: shoppers who want to find products, compare options, or check delivery.\n2. Jobs: search with natural language, compare two products, and answer questions about delivery and returns.\n3. Guardrails: show real product data only, cite reviews, and never invent prices or stock.\n4. Handoff: escalate to support for refunds or complaints.\n5. Metrics: task completion, conversion from assistant sessions, and accuracy of product answers.\n6. Risk: wrong product details. Ground every answer in the catalogue."
+  },
+  "How would AI improve Flipkart customer support?": {
+   "hint": "AI support works best for repeat questions and must hand off the hard cases. Find the top questions first.",
+   "solution": "1. Diagnose: rank support contacts by topic. Automate the top repeat topics such as order status, refunds, and delivery changes.\n2. Design: an assistant that answers from the order system, with a clear 'talk to a person' button.\n3. Handoff: route complaints and high-value cases to humans with the context already summarised.\n4. Quality: sample conversations each week and check accuracy.\n5. Metrics: resolution without human help, customer satisfaction, and time to resolution.\n6. Guardrail: never promise refunds the policy does not allow."
+  },
+  "Design an AI feature to predict and prevent order cancellations.": {
+   "hint": "Predicting cancellations is useful only if the business can act on the prediction. Define the action first.",
+   "solution": "1. Causes: restaurant closed or out of stock, payment failures, long waits, and address problems.\n2. Predict: a model that scores each order's risk of cancellation before it's accepted.\n3. Act: for risky orders, suggest a different restaurant, confirm the address, or ask the restaurant to check stock.\n4. Guardrails: avoid penalising restaurants unfairly, and keep the customer experience clear.\n5. Metrics: cancellation rate, prevented cancellations, and customer satisfaction.\n6. Risk: false alarms that annoy customers, so test the action on a small group first."
+  },
+  "Design the data pipeline for Google Trends.": {
+   "hint": "Think about the data sources, how often data must refresh, and how you serve queries fast enough to be useful.",
+   "solution": "1. Inputs: search query logs, aggregated and anonymised; and privacy filters.\n2. Processing: batch jobs for history, and streaming jobs for recent trends.\n3. Storage: a columnar store for aggregates and a cache for popular queries.\n4. Serving: an API that returns trends for any term and region quickly.\n5. Quality: remove spam, handle sudden spikes, and check for bias in region coverage.\n6. Trade-offs: freshness versus cost. Most trends can refresh hourly; spikes need near-real-time updates."
+  },
+  "How should Copilot handle conflicting instructions in a Word document?": {
+   "hint": "Conflicting instructions are a trust problem. Decide which instruction wins, and make it visible to the user.",
+   "solution": "1. Define the hierarchy: the user's explicit request in the current prompt beats older document instructions, and safety rules beat both.\n2. Surface conflicts: when instructions conflict, tell the user what was ignored and why.\n3. Ask: for ambiguous cases, offer a short clarifying question instead of guessing.\n4. Test: create conflict cases and check the behaviour each time.\n5. Metrics: user corrections per session, conflict reports, and task success.\n6. Principle: never hide that a conflict happened."
+  },
+  "LinkedIn feed engagement is down 8%. What is your hypothesis?": {
+   "hint": "An 8% drop is a specific question. Form hypotheses by stage: is it fewer people opening the feed, fewer posts, or lower engagement per post?",
+   "solution": "1. Clarify: which users, regions, and time window? Is the drop in sessions, posts, or engagement per post?\n2. Hypotheses: a ranking change, fewer creators posting, a notification or app change, or a shift in content quality.\n3. Check: compare feed exposure and engagement per impression. If impressions fell, it's a distribution problem.\n4. Segment: by user type and device. A drop on one platform points to a release.\n5. Action: roll back or tune ranking, and support creators who have posted less.\n6. Metrics: feed sessions, posts per active user, and engagement per impression."
+  },
+  "How should Microsoft position LinkedIn against professional networking startups?": {
+   "hint": "Compare LinkedIn's advantages (identity, network, and jobs data) with what startups can offer. Then say where to focus.",
+   "solution": "1. LinkedIn's advantages: verified profiles, a large network, and job and hiring data.\n2. Startup threats: niche communities, AI-first tools, and better experiences for specific groups.\n3. Position: double down on what only LinkedIn has, such as trusted identities and hiring data, and build for the job-seeker and recruiter loop.\n4. Partnerships: integrations with other work tools.\n5. Metrics: weekly active members, job applications, and recruiter retention.\n6. Watch for: users spending time outside LinkedIn if communities get better elsewhere."
+  },
+  "Design a feature to help Cred users save more money.": {
+   "hint": "Save-more features need to be simple and trusted. Start with the user's savings goal and how to make it automatic.",
+   "solution": "1. Users: Cred members who spend more than they save.\n2. Feature: automatic round-up savings from card payments, with a clear savings goal.\n3. Nudges: a weekly summary of progress and an option to pause.\n4. Safety: money stays in a safe account and can be withdrawn at any time.\n5. Metrics: active savers, average monthly savings, and 90-day retention.\n6. Risk: users may feel they are losing money. Make the benefit visible each month."
+  },
+  "Should Cred expand to Tier 2 cities?": {
+   "hint": "Tier 2 expansion depends on the same questions as any new market. Ask about customers, margins, and the product fit.",
+   "solution": "1. Customers: Tier 2 users with growing incomes and a need for credit and payments.\n2. Fit: check whether the product works without the metro spend pattern.\n3. Economics: acquisition cost per user versus lifetime value in each city.\n4. Recommendation: pilot in two Tier 2 cities with lower-cost marketing before a full launch.\n5. Metrics: active users, credit repayment, and acquisition cost.\n6. Decision rule: expand only if the pilot's margins match the metro business."
+  },
+  "Build an AI-powered restaurant recommendation engine for Zomato.": {
+   "hint": "A recommendation engine needs signals about the user, the restaurant, and the context (time, location, weather).",
+   "solution": "1. Users: diners who want the right restaurant for the moment, not just the highest rated.\n2. Signals: past orders, ratings, time of day, location, and what similar users ordered.\n3. Model: rank candidate restaurants with a model that combines these signals, and balance relevance with variety.\n4. Cold start: for new users, use location and popular restaurants nearby.\n5. Business rules: promote good-margin restaurants only when relevance holds.\n6. Metrics: click-through, order rate, repeat orders, and variety of cuisines chosen."
+  },
+  "Estimate the number of dark stores Zepto needs in Mumbai.": {
+   "hint": "Estimate from the number of orders, the orders each store can handle, and the area each store serves.",
+   "solution": "Assumptions (illustrative):\n1. Mumbai daily quick-commerce orders on the platform: about 300,000.\n2. Orders per dark store per day at a mature store: about 1,500.\n3. Stores needed to serve current demand: about 200.\n4. Coverage check: a 2 to 3 km radius per store, which fits the 10-minute delivery promise in dense areas.\n5. Answer: about 150 to 250 stores, depending on density and mature order volume.\n6. Name the assumptions you would confirm with the company's own data."
+  },
+  "How would you use AI to improve driver-rider matching?": {
+   "hint": "Matching is a two-sided problem. Balance rider pickup time against rider earnings and the fairness of the match.",
+   "solution": "1. Goals: short pickups for riders, fair earnings for drivers, and fewer cancellations.\n2. Signals: driver location, ETA, acceptance history, trip destination, and surge levels.\n3. Model: predict the best match by ETA and acceptance probability, then optimise across many requests at once.\n4. Fairness: check that the model does not send low-rated drivers only to low-value trips.\n5. Metrics: pickup time, cancellation rate, driver earnings per hour, and match acceptance.\n6. Guardrail: explain matches to drivers and keep the model's rules auditable."
+  },
+  "How should Stripe think about crypto payments?": {
+   "hint": "Crypto payments mix regulation, volatility, and customer demand. Be clear about which part Stripe should serve.",
+   "solution": "1. Demand: merchants and developers who want to accept crypto, and users who hold it.\n2. Risks: price volatility, regulation that varies by country, and fraud or money-laundering checks.\n3. Recommendation: offer stablecoin settlement for businesses first, with strong compliance, before consumer crypto.\n4. Partners: licensed custodians and exchanges.\n5. Metrics: merchant volume in stablecoins, settlement time, and compliance incidents.\n6. Decision rule: expand only in markets with clear rules."
+  },
+  "Design Airbnb for long-term stays (1-6 months).": {
+   "hint": "Long stays change what guests need: kitchens, laundry, a stable address, and a different pricing model.",
+   "solution": "1. Guests: remote workers, students, and people relocating for work for one to six months.\n2. Needs: monthly pricing, reliable internet, a kitchen, laundry, and clear rules on deposits.\n3. Features: a monthly-stay filter, flexible lease terms, and move-in checklists.\n4. Hosts: longer-term pricing tools and support for tenancy paperwork.\n5. Metrics: monthly stay bookings, average stay length, and host retention.\n6. Risk: long stays are closer to renting, so local rules apply. Check regulations per city."
+  },
+  "Design a collaborative playlist feature for road trips.": {
+   "hint": "A road trip playlist is shared, live, and about the journey. Design for group taste and the moment.",
+   "solution": "1. Users: a group of friends or family on a trip, where one person often controls the music.\n2. Features: multiple contributors, a vote or skip system, and a playlist that adapts to the route and the time.\n3. Fairness: balance tracks by who added them, so no one person dominates.\n4. Offline: download the playlist before the trip for weak signal.\n5. Metrics: songs added per session, playlist plays on trips, and repeat use.\n6. Keep the feature simple and fun."
+  },
+  "Post-RBI restrictions, how should Paytm rebuild trust and market share?": {
+   "hint": "After a regulatory shock, trust comes first. Start with what customers need from the company now and what can be fixed quickly.",
+   "solution": "1. Priorities: restore trust with users, keep payments working, and comply fully with the regulator.\n2. Users: move affected users to services that still work, and be clear about what changed.\n3. Business: focus on the business lines that remain strong, and build partnerships with licensed banks.\n4. Communication: regular, honest updates to users and merchants.\n5. Metrics: user churn, merchant retention, and compliance milestones.\n6. Long-term: build a clear path to regaining market share through compliance and product quality."
+  },
+  "Design a fraud detection system for Razorpay.": {
+   "hint": "Fraud detection needs a clear design: signals, a scoring model, and a review process for uncertain cases.",
+   "solution": "1. Signals: device, location, velocity of transactions, payment history, and network links between accounts.\n2. Architecture: real-time scoring at checkout, a slower batch model for patterns, and a review queue for uncertain cases.\n3. Balance: block clear fraud, allow clear good payments, and send the rest to step-up checks.\n4. Feedback: confirmed fraud and disputes retrain the model.\n5. Metrics: fraud rate, false decline rate, and review time.\n6. Trade-off: each extra block can lose a good customer, so measure both sides."
+  },
+  "Estimate the number of Google Meet calls happening right now globally.": {
+   "hint": "This is a rough estimate. Think about the users who might be in a call right now, the share who use Meet, and the call size.",
+   "solution": "Assumptions (illustrative):\n1. Google Meet monthly users worldwide: assume about 300 million.\n2. Share active at a given hour: about 1 in 25 users is in a call at the same time, so about 12 million people.\n3. Average participants per call: about 3, so roughly 4 million calls at once.\n4. Answer: a range of about 3 to 6 million concurrent calls, depending on time of day.\n5. Note: the number changes over the day with time zones, so pick a time window.\n6. Name which assumption you would verify first."
+  },
+  "Design a parental controls system for Instagram.": {
+   "hint": "Parental controls must protect teens without making them feel watched. Start with the risks parents worry about most.",
+   "solution": "1. Users: parents of teen accounts and the teens themselves.\n2. Controls: time limits, a quiet mode at night, restricted messages from unknown accounts, and a view of who the teen follows.\n3. Balance: teens see what is shared with parents, and parents see summaries rather than full messages.\n4. Safety defaults: stricter privacy and content settings for accounts that declare they are teens.\n5. Metrics: parent-set controls in use, teen account retention, and reports of unwanted contact.\n6. Risk: teens can lie about age, so combine settings with age-assurance tools."
+  },
+  "Amazon product reviews seem to have more fake reviews lately. How do you tackle it?": {
+   "hint": "Fake reviews hurt trust. Find out how they get in, then remove the incentive and the easy path.",
+   "solution": "1. Diagnose: which categories and sellers have the most suspicious reviews? Look for bursts of reviews, similar text, and reviewers who only review one brand.\n2. Prevent: verify purchases before a review can be posted, and limit reviews from new accounts.\n3. Detect: a model that flags suspicious patterns, with human review.\n4. Remove: take down flagged reviews and penalise sellers who buy them.\n5. Metrics: fake review rate, share of reviews from verified buyers, and customer trust scores.\n6. Guardrail: avoid removing genuine negative reviews."
+  },
+  "Flipkart app load time increased by 2 seconds after an update. Debug.": {
+   "hint": "A 2-second load time increase after a release is clear evidence. Compare the build and the device before blaming the server.",
+   "solution": "1. Confirm: compare load time before and after the release, by device and network.\n2. Diff: what changed in the release? Bigger images, extra API calls, or a new SDK.\n3. Segment: slow loads on low-end devices or weak networks point to payload size.\n4. Fix: roll back if the cause is clear, or lazy-load images and cut the extra calls.\n5. Guardrail: add performance budgets to releases so this is caught earlier.\n6. Metrics: time to interactive, crash rate, and conversion on slow devices."
+  },
+  "Design a restaurant analytics dashboard for Swiggy restaurant partners.": {
+   "hint": "Restaurant partners need data they can act on: orders, ratings, peak times, and what customers search for.",
+   "solution": "1. Users: restaurant owners and managers who want to grow orders and manage the business.\n2. Key views: daily orders and revenue, peak hours, top items and low sellers, and rating trends.\n3. Actions: suggested menu changes, promotion tests, and prep-time alerts.\n4. Design: a mobile-first dashboard for quick checks, and a web view for weekly review.\n5. Metrics: weekly dashboard use, actions taken from insights, and change in orders for partners who use it.\n6. Privacy: show only the partner's own data, never another restaurant's."
+  },
+  "Uber surge pricing is causing PR backlash during emergencies. Solution?": {
+   "hint": "The problem is trust during emergencies, not only pricing. Decide what the policy should be in a crisis and how to explain it.",
+   "solution": "1. Users: riders who need a ride during an emergency, and drivers who want fair pay.\n2. Policy: cap surge during declared emergencies, and offer free or discounted rides for emergency services and affected people.\n3. Communication: explain the policy clearly in the app and to the press.\n4. Operations: notify drivers of the cap and the incentive to keep supply.\n5. Metrics: complaints during emergencies, supply in affected zones, and trust scores.\n6. Trade-off: caps can reduce driver supply, so pair them with incentives."
+  },
+  "Ola has ride-hailing, EVs, and fintech. How do you prioritize?": {
+   "hint": "Prioritise by return on focus, not by how interesting each business is. Compare growth, margin, and fit with the core.",
+   "solution": "1. Options: ride-hailing (large but competitive), EVs (capital-heavy), and fintech (growing with regulation).\n2. Criteria: margin, growth, capital needed, and synergy between businesses.\n3. Recommendation: focus on the business with the strongest margin and user overlap, and reduce spend on the others until they prove unit economics.\n4. Metrics: contribution margin per business, cross-use between services, and capital per unit of growth.\n5. Review: revisit the priorities each half-year.\n6. Be explicit about what you would stop funding."
+  },
+  "How should PhonePe compete with Google Pay for the next 100M users?": {
+   "hint": "Compete on the user's habit and the merchant's needs, not only on features. Find where PhonePe is already strong.",
+   "solution": "1. Position: PhonePe's strengths include wide merchant acceptance and a large user base.\n2. Growth: target the next 100 million users in smaller towns with local languages and low-cost payments.\n3. Products: credit, insurance, and merchant tools for small businesses.\n4. Competition: Google Pay has a strong base, so win on the services users add after payments.\n5. Metrics: active users, merchant transactions, and the share of users using two or more services.\n6. Risk: price pressure on payments. Lead with value-added services."
+  },
+  "How to reduce fraud (multiple accounts) on Dream11?": {
+   "hint": "Fraud rings look for patterns across accounts: shared devices, payment methods, and referral chains. Detect the network, not each account.",
+   "solution": "1. Diagnose: how big is the fraud problem? Measure bonus abuse and payouts to suspicious accounts.\n2. Signals: shared devices and IPs, same payment instruments, referral chains, and unusual activity timing.\n3. Detection: a graph model that links accounts, plus rules for obvious cases.\n4. Actions: block linked accounts together, hold payouts for review, and tighten bonuses for new accounts.\n5. Guardrail: avoid blocking families sharing a device by mistake. Give users an appeal path.\n6. Metrics: fraud loss, false-block rate, and appeal reversal rate."
+  },
+  "Should Lenskart enter the hearing aids market?": {
+   "hint": "A hearing aids entry is a health product with regulation and trust needs. Ask whether it fits Lenskart's customers and skills.",
+   "solution": "1. Fit: Lenskart already serves eye care and sells to a health-conscious audience, so there is an adjacent base.\n2. Gaps: hearing care needs audiologists, fitting, and after-sales service that differ from eyewear.\n3. Recommendation: test a hearing screening and referral service with partner clinics before selling devices.\n4. Regulation: device sales and medical claims need clear compliance.\n5. Metrics: screenings booked, referral-to-purchase rate, and customer satisfaction.\n6. Decision rule: sell devices only if the partner model proves demand and margin."
+  },
+  "How to build Meesho into a brand platform vs marketplace?": {
+   "hint": "A marketplace earns a commission on others' goods. A brand platform owns the customer relationship. Pick the direction and say what it takes.",
+   "solution": "1. Marketplace: Meesho connects sellers and buyers and earns on each order.\n2. Brand platform: build owned brands, sell direct, and invest in product quality and marketing.\n3. Path: start with a private-label line in categories where sellers already succeed, and back the best-performing sellers with brand support.\n4. Requirements: quality control, brand marketing, and inventory or design capability.\n5. Metrics: repeat rate of owned brands, margin per order, and seller growth.\n6. Trade-off: owned brands can compete with sellers on the platform, so set clear rules."
+  },
+  "Wastage of perishable goods is eating into margins. How to reduce it?": {
+   "hint": "Wastage is a forecasting and handling problem. Start by finding where in the chain the waste happens: ordering, storage, picking, or delivery.",
+   "solution": "1. Diagnose: measure wastage by category, store, and stage. Find the largest share.\n2. Forecasting: predict demand by SKU and day, so orders match sales.\n3. Storage: cold-chain checks and first-expiry-first-out picking at dark stores.\n4. Pricing: discount near-expiry items through a clear markdown rule.\n5. Partners: work with farmers on smaller, more frequent deliveries.\n6. Metrics: wastage as a share of sales, markdown recovery, and out-of-stock rate, which should not rise."
+  }
+ },
+ "cases": {
+  "Google Maps offline monetization": {
+   "hint": "Start with who uses offline mode: travellers, rural users, and privacy-minded people. They don't see ads at all. Ask what could work without the internet.",
+   "solution": "1. Users: offline users who value privacy or have weak connections.\n2. Constraint: ads need a connection, so offline monetisation must be built around what the user pays for or what they download.\n3. Options: a paid offline map pack or subscription, offline map updates sold per region, and partnerships with travel brands for downloadable guides.\n4. Recommendation: a one-time or subscription pack for offline regions, with a free basic offline map.\n5. Risks: piracy of map data and reduced value of online features.\n6. Metrics: pack purchases, offline sessions, and renewals."
+  },
+  "Instagram Feed Algorithm shift": {
+   "hint": "Define the goal first: time spent, relevance, or creator reach. Then argue both sides with user evidence, and pick the one that serves that goal.",
+   "solution": "1. Chronological: transparent, gives creators and friends more reach, but can surface low-quality or spammy content.\n2. Algorithmic: finds relevant content for each user and drives time spent, but can amplify outrage and lower trust.\n3. Recommendation: algorithmic ranking with a 'Following' tab that is chronological, and user controls for topics and accounts.\n4. Guardrails: measure satisfaction and content quality, not just time spent.\n5. Metrics: time well spent, follows per user, and reports per 1,000 views.\n6. The choice is a default, and users should be able to switch."
+  },
+  "Uber driver retention in Tier 2": {
+   "hint": "Start with why drivers leave: pay, rides, and working conditions. Compare drivers who stay with those who leave in their first month.",
+   "solution": "1. Clarify: is the 40% churn among new drivers or long-term drivers? Are they quitting for good or pausing?\n2. Data: earnings per hour, trips per week, cancellation rates, and wait time between trips.\n3. Likely causes: low demand in smaller cities, weak incentives, and long idle time.\n4. Fixes: guaranteed earnings in the first 60 days, incentives for peak hours in each city, and better trip density.\n5. Segment: by city, vehicle type, and onboarding source.\n6. Metrics: 30 and 60-day driver retention, earnings per online hour, and utilisation."
+  },
+  "Spotify Podcasts vs Music": {
+   "hint": "Net effect depends on which music listeners would otherwise do. Check whether podcast listeners also stream music, and whether podcasts bring new subscribers.",
+   "solution": "1. Clarify: compare total listening hours and revenue, not only music hours.\n2. Ask: do podcast listeners also stream music? If they do, the total time rises even if music falls.\n3. Revenue: podcasts often carry ads and exclusive deals with fixed costs. Compare margin per hour, not only hours.\n4. Subscribers: check whether podcast-driven users convert and stay.\n5. Conclusion: likely net positive if podcasts bring new subscribers and listening time; check the margin before deciding.\n6. Metrics: total listening hours per user, subscriber retention, and margin per hour by content type."
+  },
+  "Airbnb Host acquisition": {
+   "hint": "Hosts need a reason to join and a way to operate legally where the platform cannot. Ask what Airbnb can offer without a formal presence.",
+   "solution": "1. Clarify: the regulatory situation. A ban changes what Airbnb can do.\n2. Option: work with existing property managers and local operators who can list properties legally under their own names.\n3. Host support: an onboarding path that does not require Airbnb's local entity, and clear guidance on local rules.\n4. Risks: legal exposure for hosts and the company, and reputational harm.\n5. Recommendation: do not run an acquisition push in a country where the service is banned. Focus on regions where it is legal and wait for regulatory change.\n6. Metrics: legal host signups, compliance incidents, and partner retention."
+  },
+  "Netflix shared accounts restriction": {
+   "hint": "Guardrails protect the business while you tighten sharing. Watch sign-ups, churn, and the users who are not sharing accounts illegally.",
+   "solution": "1. Primary metric: paid subscriber count and revenue from extra member slots.\n2. Guardrails: churn rate by region, cancellations after the message, support contacts, and sign-ups from new accounts.\n3. Fairness: watch for households that share legitimately (family in different homes) and provide a clear path to pay for extra members.\n4. Phasing: roll out by region and check each guardrail before expanding.\n5. Experience: messages that are clear, not punitive.\n6. Success: paid members rise without a jump in churn."
+  },
+  "Amazon returns optimization": {
+   "hint": "Returns usually come from fit. Without sizing charts, use customers' own past purchases and reviews to show fit.",
+   "solution": "1. Diagnose: which products and customers return most, and why (fit, colour, quality)?\n2. Feature: a 'fits like what you own' signal that compares a product to items the buyer kept and liked.\n3. Reviews: surface fit feedback from people with similar body types or past purchases.\n4. Nudges: a clear note when a return-prone item is in the cart, with suggested alternatives.\n5. Metrics: return rate for apparel, conversion after the feature, and customer satisfaction.\n6. Risk: the feature could reduce sales. Track net revenue, not only returns."
+  },
+  "Apple Watch for the elderly": {
+   "hint": "Users over 80 may have low vision, reduced dexterity, and hearing loss. Design for those first and make the watch useful for everyday safety.",
+   "solution": "1. Users: adults over 80 who want safety, health reminders, and contact with family.\n2. Design: very large text and icons, high contrast, a single main action per screen, and haptic alerts that are easy to feel.\n3. Input: a crown and a large button, with voice input for messages.\n4. Features: fall detection with a clear confirmation, medication reminders, and a one-tap family call.\n5. Set-up: caregivers configure the watch remotely.\n6. Metrics: fall alerts answered, medication reminders completed, and daily use."
+  },
+  "Swiggy Instamart dark store placement": {
+   "hint": "Count the area to cover, the number of customers, and how far a store can reach in 10 minutes. The coverage radius drives the answer.",
+   "solution": "Assumptions (illustrative):\n1. Mumbai area: about 600 square km of city area to serve.\n2. A dark store covers about 2 to 3 km in dense areas, or about 10 to 25 square km.\n3. Coverage needed: about 600 / 15 ≈ 40 stores as a minimum for full geographic coverage.\n4. Demand check: dense areas need more stores for demand, so the total is higher than the geography alone suggests, perhaps 100 to 150 stores.\n5. Constraint: real-world coverage depends on roads, traffic, and rider speed.\n6. Say which assumption you would validate with route data first."
+  },
+  "Zomato Gold cannibalization": {
+   "hint": "Compare the value of Gold members' extra orders against the delivery cost they create. Check margin per member, not only order count.",
+   "solution": "1. Clarify: is the loss per order, per member, or in total? Gold members may order 3x but at a lower margin per order.\n2. Economics: contribution margin per member after delivery fees, discounts, and support costs.\n3. Options: keep Gold but raise the minimum order or fee, restrict free delivery to peak-off hours, or add a fee tier.\n4. Retention: check whether Gold members would leave if the benefit shrinks.\n5. Recommendation: keep the membership but fix its economics, rather than shutting it down or doubling down blindly.\n6. Metrics: margin per member, churn after a benefit change, and order frequency."
+  },
+  "Stripe crypto payouts": {
+   "hint": "Look at the risks first: price volatility, regulation in each market, and accounting for merchants. Then weigh the reward for merchants.",
+   "solution": "1. Demand: a small set of merchants might want Bitcoin payouts, but most want stable local currency.\n2. Risks: price volatility between sale and payout, regulatory limits across countries, and compliance costs.\n3. Rewards: a differentiated offering for crypto-native merchants and cross-border payments.\n4. Recommendation: offer stablecoin settlement first, which removes most volatility, before direct Bitcoin payouts.\n5. Metrics: merchant adoption, settlement volume, and compliance incidents.\n6. Decision rule: launch only where regulation is clear."
+  },
+  "Flipkart vernacular adoption": {
+   "hint": "Adoption can be low for many reasons. Separate awareness, discovery, and the Hindi experience itself.",
+   "solution": "1. Clarify: is the 2% of users who could switch, or of all users? What share of Hindi speakers use the app?\n2. Funnel: how many users can find the Hindi option, switch to it, and then keep using it?\n3. Discovery: is the setting easy to find? Is the language choice shown during onboarding?\n4. Quality: are translations accurate, and do product names and offers read naturally?\n5. Segment: by state and device. Some regions may need dialect support.\n6. Actions: prompt the switch at onboarding, improve translations based on feedback, and track retention of Hindi users."
+  },
+  "Cred monetization beyond credit cards": {
+   "hint": "If card fees go to zero, the business has to earn from other things. Find what Cred already owns: users, data, and trust.",
+   "solution": "1. Impact: card fees are part of the revenue, so model the gap first.\n2. Options: lending partnerships and referral income, subscriptions for premium features, and rewards and offers from partners.\n3. Data: use the spending insights to sell targeted financial products with clear consent.\n4. Cost discipline: keep the cost of rewards in line with the revenue each user brings.\n5. Risks: regulatory limits on lending and partner dependence.\n6. Metrics: revenue per active user, product attach rates, and contribution margin per user."
+  },
+  "PhonePe insurance cross-sell": {
+   "hint": "The user just paid a bill, so they are already in the payments mindset. Use that moment and keep the offer clear and relevant.",
+   "solution": "1. Moment: right after a bill payment, the user is thinking about household costs.\n2. Journey: a short confirmation screen that mentions the value of health cover, with a quote based on age and city.\n3. Trust: show the insurer name, what is covered, and the premium before asking for details.\n4. Friction: pre-filled details from KYC and a one-step purchase.\n5. Follow-up: a reminder if the user did not buy, and a clear way to say no.\n6. Metrics: quote-to-purchase rate, cost per policy, and claim satisfaction."
+  },
+  "Paytm Soundbox v2": {
+   "hint": "Hardware limits the options: fewer buttons, a small screen, and a noisy shop. Focus on what the merchant hears and sees most.",
+   "solution": "1. Users: small merchants who need to know payments are received without checking their phone.\n2. Ideas: a clearer voice message with the amount and customer name, a daily summary by voice on request, and a language choice.\n3. Hardware-friendly features: a simple LED pattern for success and failure, and a button for repeat or mute.\n4. Connectivity: an offline queue so the device announces payments once the connection returns.\n5. Metrics: merchant satisfaction, missed-payment reports, and device retention.\n6. Trade-off: each feature must fit the device's cost and power budget."
+  },
+  "LinkedIn Feed pollution": {
+   "hint": "Engagement is a lagging result of trust in the feed. Decide if the drop is the real goal or a side effect of a better product.",
+   "solution": "1. Clarify: which users complain, and are they the users who would leave? Engagement from low-quality content is not a real win.\n2. Measure: long-term retention and satisfaction, not just short-term engagement.\n3. Options: a 'professional feed' setting, stronger topic controls, and better ranking for expert posts.\n4. Test: a staged change for a segment, watching retention and professional outcomes (job interest, connections).\n5. Recommendation: accept a smaller engagement drop if long-term value and trust rise. Show the trade-off to leadership.\n6. Metrics: weekly retention, satisfaction, and professional actions per user."
+  },
+  "WhatsApp business spam": {
+   "hint": "Blocking is the signal. Look at which messages get blocked and what users expected when they messaged the business.",
+   "solution": "1. Clarify: what share of messages are blocked, and by which businesses?\n2. Signals: blocks after first contact, reports, and messages sent without a prior relationship.\n3. Separate: legitimate promotions usually have consent, a clear sender, and an opt-out. Spam usually lacks consent.\n4. Rules: require opt-in before marketing, rate-limit new businesses, and show a clear 'unsubscribe' option.\n5. Action: penalise senders with high block rates and reward those with high consent.\n6. Metrics: block rate per 1,000 messages, opt-in rate, and complaint rate."
+  },
+  "Tinder for professional networking": {
+   "hint": "Swipes work for quick choices. Co-founder matching needs deeper signals: skills, goals, and how people work together.",
+   "solution": "1. Users: founders looking for a co-founder.\n2. Keep the swipe for a quick first look, but add a profile with skills, stage, commitment, and location.\n3. Trust: verify profiles and add a short structured question about working style.\n4. Match flow: after mutual interest, start a short chat with a shared prompt to test fit.\n5. Safety: protect against scams and unsolicited pitching.\n6. Metrics: matches leading to real conversations, and teams formed after 90 days."
+  },
+  "Slack alert fatigue": {
+   "hint": "Triage means deciding what needs attention now. Design the AI around the user's role, activity, and the message's urgency.",
+   "solution": "1. Users: employees who need to focus, and managers who need to respond to urgent issues.\n2. Triage: rank notifications by urgency using sender role, mention type, thread activity, and past behaviour.\n3. Actions: a daily digest, quiet hours, and a 'batch' setting for low-priority channels.\n4. Trust: let users correct rankings and explain why a message was flagged.\n5. Guardrails: never hide urgent messages from people who must see them.\n6. Metrics: notifications per user per day, time to response for urgent messages, and satisfaction scores."
+  },
+  "Zoom post-pandemic growth": {
+   "hint": "A valuation depends on growth, retention, and expansion beyond the core use case. Look for what Zoom can sell to a company.",
+   "solution": "1. Core: meetings are a commodity, so growth needs more value per customer.\n2. Expansion: contact centre, events, webinars, phone, and workplace tools bundled with meetings.\n3. Retention: enterprise contracts with clear ROI and strong security.\n4. Pricing: bundles that increase average revenue per account.\n5. Risks: competition from bundled suites and slowing enterprise seats.\n6. Metrics: net revenue retention, average revenue per enterprise account, and attach rate of new products."
+  },
+  "Duolingo monetization": {
+   "hint": "Ads pay for free users, but they hurt the learning experience. Look for a model where learners pay for value they get.",
+   "solution": "1. Principle: learners value progress and feel respect for their time. Ads break focus.\n2. Options: a family or classroom plan, a premium tier with no ads, and paid certificates or tests.\n3. Partnerships: sponsored content that is clearly labelled and relevant to learning, such as language courses for travel.\n4. Test: ad-free trial in one market and watch conversion and retention.\n5. Metrics: paid conversion, daily active users, lesson completion, and ad revenue lost versus subscription revenue gained.\n6. Recommendation: move toward subscriptions and let ads be an option for free users."
+  },
+  "Canva collaborative video": {
+   "hint": "Non-designers need guardrails and templates. Start with the simplest collaboration: several people commenting and reordering clips together.",
+   "solution": "1. Users: teams with no design background who edit short videos together.\n2. Start: shared timeline with comments, live cursors, and a clear owner for each clip.\n3. Simplicity: templates, auto-captions, and a 'suggest edit' mode for those who should only comment.\n4. Conflicts: version history and undo that works per person.\n5. Performance: sync changes in small pieces to keep the experience quick.\n6. Metrics: projects shared with collaborators, edits per project, and completion rate of first videos."
+  },
+  "Notion offline mode": {
+   "hint": "Offline support touches the data model, sync, and conflict handling. Explain the real trade-off rather than saying it is hard.",
+   "solution": "1. Why it is hard: Notion's data is a shared database. Offline edits need a way to merge changes without losing work.\n2. Constraints: conflict resolution for blocks and databases, storage limits on devices, and permissions that change while offline.\n3. Approach: local cache with a sync queue, field-level merging, and a clear conflict warning.\n4. Phasing: read-only offline first, then edits to single pages, then databases.\n5. Trade-off: scope versus correctness. Ship a safe version for the most common use.\n6. Metrics: offline sessions, sync failures, and conflicts per 1,000 edits."
+  },
+  "Figma design to code": {
+   "hint": "Think about who buys developer tools and what happens to their work when translation improves. Expansion is possible if the tool moves developers up.",
+   "solution": "1. Likely outcome: the tool removes repetitive work and raises the bar for front-end craft, rather than removing developers.\n2. Expansion: more people build interfaces, including designers and product managers. Demand for developers who handle logic, data, and performance remains.\n3. Risk: lower-quality generated code and reduced skills for junior developers.\n4. Product response: generate clean, maintainable code, keep it editable, and support design systems.\n5. Metrics: handoff time, code quality scores, and developer satisfaction.\n6. Conclusion: a net expansion of who can build, with a shift in what developers do."
+  },
+  "Discord onboarding for non-gamers": {
+   "hint": "Study groups need to start talking in minutes. Remove setup decisions and show one clear first action.",
+   "solution": "1. Users: students who are new to Discord and do not want to learn server structure.\n2. Onboarding: a single invite link that drops users into a ready channel for the group, with the group's name and purpose.\n3. Defaults: pre-set channels for schedule, notes, and questions. Hide advanced settings.\n4. First action: a prompt to introduce oneself or post the next session's topic.\n5. Mobile first: most students join from phones.\n6. Metrics: time to first message, weekly active members, and return rate after day seven."
+  },
+  "Twitch creator burnout": {
+   "hint": "Protecting creators and growing the platform can conflict. Look for tools that reduce burnout without caps on the hours creators choose.",
+   "solution": "1. Clarify: why do top streamers burn out? Schedules, audience pressure, or harassment?\n2. Options: scheduling tools that let creators plan breaks, delegation (moderators and co-hosts), and recovery features like scheduled rest notices for audiences.\n3. Avoid hard caps that push creators to YouTube. Offer support instead: income stability and team support.\n4. Measure: creator retention, hours streamed per week, and reported burnout.\n5. Platform health: protect viewers from fatigue too.\n6. Metrics: creator retention at 12 months, and time to recover after a break."
+  },
+  "Roblox virtual economy inflation": {
+   "hint": "Virtual currency loses value when supply grows faster than demand, or when secondary markets allow trades that bypass the platform's rules.",
+   "solution": "1. Diagnose: measure Robux supply, spending, and the secondary market price against the platform's price.\n2. Levers: sinks that remove currency (items that cost Robux and do not return), controlled supply through rewards, and tighter rules on resale.\n3. Stability: a clear official exchange rate for creators, and transparent policies.\n4. Trust: explain changes early to developers and players.\n5. Guardrail: avoid so many sinks that players feel they are constantly paying.\n6. Metrics: currency velocity, secondary market spreads, and spend per active user."
+  },
+  "TikTok shop conversion": {
+   "hint": "Users leave because they don't trust the purchase path or it feels slower than Amazon. Design checkout that feels as fast and trusted as the video.",
+   "solution": "1. Diagnose: where do users drop out? The video, the product page, or the checkout form?\n2. Checkout: one-tap pay with saved details, and a price and delivery estimate on the video.\n3. Trust: verified sellers, reviews visible in the video, and a clear return policy.\n4. Fallback: a secure link to buy when payment is not available in the app.\n5. Experiment: test the one-tap flow against the current path.\n6. Metrics: video-to-checkout rate, checkout completion, and repeat purchases."
+  },
+  "Bumble male user engagement": {
+   "hint": "The rule that women message first is central to the product. Keep it, and give men a clear path to get matched and start conversations.",
+   "solution": "1. Clarify: why do men churn? Few matches, few replies, or waiting for messages that never come?\n2. Keep the mechanic: women still start the conversation.\n3. Give men a path: better profile prompts, a 'compliment' feature that starts a match, or matches that show interest.\n4. Quality: better matching so more matches are real.\n5. Test: changes for a subset of men, tracking matches and replies.\n6. Metrics: first-message rate for men, reply rate, and 30-day retention of male users."
+  },
+  "DoorDash driver tipping": {
+   "hint": "Tipping timing changes behaviour. Look for a design that gives people a reason to tip without making drivers wait or feel pressure.",
+   "solution": "1. Trade-off: asking before delivery can annoy customers and slow service. Asking after reduces tips because people forget.\n2. Option: show a tip prompt in the order tracking screen once the driver is near, with a clear amount and a default.\n3. Driver side: show how tips affect earnings and make the process quick.\n4. Fairness: avoid defaults that feel pushy. Let customers choose a tip after delivery if they want.\n5. Metrics: tip rate, average tip, and delivery time.\n6. Recommendation: prompt during tracking, not at checkout, and measure both tips and delivery satisfaction."
+  },
+  "Fractional investing in India": {
+   "hint": "Fractional investing has to fit the remittance rules. Check the limits, the disclosures, and the user's tax position first.",
+   "solution": "1. Compliance: LRS sets limits on how much an Indian resident can send abroad each year. Check the limit and the purpose of each purchase.\n2. Product: fractional shares with a clear remittance limit, and a tracker of how much the user has used.\n3. Disclosure: explain taxes, currency risk, and the rules for selling.\n4. Journey: start with a small amount and show the limit before each purchase.\n5. Partners: work with regulated providers for the overseas leg.\n6. Metrics: active users, remittance utilisation, and complaints."
+  },
+  "Meesho logistics": {
+   "hint": "Logistics is a core capability with heavy capital needs. Compare the cost and control of 3PL with building an arm, and phase any move.",
+   "solution": "1. Current model: 3PL partners give flexibility and no fixed cost, but less control over delivery speed and cost.\n2. Build case: a logistics arm gives control over quality and cost, and helps when volume is large.\n3. Risks: large capital needs, operational complexity, and a slow payback.\n4. Recommendation: negotiate better 3PL terms and build a small owned network in the largest cities first, with clear milestones.\n5. Metrics: cost per order, on-time delivery rate, and return rate.\n6. Decision rule: build only when volume and margin justify the fixed cost."
+  },
+  "Zepto Cafe scaling": {
+   "hint": "Estimate from the number of dark stores, the orders each one handles, and the average order value. Name each assumption.",
+   "solution": "Assumptions (illustrative):\n1. Operational dark stores in India: about 500.\n2. Cafe orders per store per day: about 150.\n3. Average order value for Cafe items: about ₹300.\n4. Daily revenue: 500 × 150 × ₹300 = about ₹2.25 crore a day.\n5. Caveat: many stores may not have Cafe yet, so the real number is lower.\n6. The method and the assumptions matter more than the figure."
+  },
+  "Nykaa B2B expansion": {
+   "hint": "Think about the wholesale buyer, the margin, and whether Nykaa has the supply and trust to win against a B2B leader.",
+   "solution": "1. Customers: small beauty retailers who buy stock on credit and need reliable supply.\n2. Advantages: brand relationships and a large catalogue.\n3. Challenges: thin margins, credit risk, and competition from B2B specialists.\n4. Recommendation: pilot a B2B channel with selected brands in a few cities, using Nykaa's logistics and retailer relationships.\n5. Risks: channel conflict with Nykaa's own retail and brand partners.\n6. Metrics: retailer activation, repeat orders, and credit losses."
+  },
+  "Group travel feature": {
+   "hint": "Group trips fail when splitting money is awkward. Design for planning together and settling up without awkward reminders.",
+   "solution": "1. Users: a group of friends or family planning a trip with different budgets and preferences.\n2. Itinerary: a shared plan that anyone can edit, with voting on options.\n3. Payments: track who paid each booking and split costs automatically, with a simple settle-up screen.\n4. Trust: show each booking's price and cancellation policy.\n5. Reminders: nudges for pending payments that feel friendly.\n6. Metrics: group bookings, participants per trip, and settle-up completion rate."
+  },
+  "Licious plant-based meat": {
+   "hint": "Does a premium meat brand have the right to play in plant-based? Check brand fit, margin, and whether the customers are the same.",
+   "solution": "1. Fit: Licious serves customers who buy quality protein and value freshness and trust.\n2. Opportunity: some of those customers want to reduce meat, and a plant-based line can keep them in the basket.\n3. Risks: lower margins than fresh meat, a crowded plant-based market, and brand confusion.\n4. Recommendation: test a small plant-based range with clear labelling, measure basket retention, and keep it separate from core meat.\n5. Metrics: basket retention for plant-based buyers, margin per kg, and repeat purchases.\n6. Decision rule: expand only if the line keeps customers who would otherwise leave."
+  },
+  "Groww Gen Z acquisition": {
+   "hint": "Gen Z wants to invest and trusts apps they already use. Look at the entry points that don't require crypto.",
+   "solution": "1. Users: young investors who want to start with small amounts and learn.\n2. Entry: SIPs from as little as the minimum amount, easy education content, and goals such as travel or a first car.\n3. Trust: clear fees, simple explanations, and community features that do not encourage speculation.\n4. Channel: short videos and creator partnerships that explain investing in plain language.\n5. Metrics: new SIP starts from users under 30, 12-month retention, and average monthly contribution.\n6. Guardrail: never push high-risk products to new investors."
+  },
+  "Spotify concert discovery": {
+   "hint": "Discovery is the problem for independent artists. Give fans a reason to buy tickets from the listening experience.",
+   "solution": "1. Users: fans who listen to local artists and want to see them live.\n2. Feature: concert cards in the artist's page and 'shows near you' based on listening history.\n3. Support: ticket links with clear prices, and reminders before presales.\n4. Artists: a simple tool to add shows and share them to followers.\n5. Fairness: rank shows by location and interest, not by label budget.\n6. Metrics: ticket clicks, purchases from Spotify, and repeat ticket buyers."
+  },
+  "YouTube Shorts monetization": {
+   "hint": "Shorts earn less per minute because ads are shorter and fewer. Close the gap through better ad formats and creator sharing, not more ads.",
+   "solution": "1. Diagnose: revenue per minute is lower for Shorts, but the watch time is high. Find the ad load and format limits.\n2. Options: longer Shorts with ads between clips, a revenue share for Shorts that grows with views, and shopping links.\n3. UX: keep ads unobtrusive and avoid interrupting the swipe.\n4. Creators: a clear revenue split so good creators make Shorts.\n5. Measure: revenue per 1,000 views, watch time, and creator payouts.\n6. Guardrail: don't add so many ads that users leave the feed."
+  },
+  "Oyo quality control": {
+   "hint": "Hygiene complaints can come from cleaning checklists, staff, or a specific property. Find the pattern before changing the process.",
+   "solution": "1. Clarify: which cities and properties? Are the complaints about cleanliness, bedding, or bathrooms?\n2. Segment: by property, housekeeping vendor, and check-in date. A spike at a few properties points to local issues.\n3. Process: check cleaning checklists and whether they are completed and verified.\n4. Fix: retrain housekeeping vendors, add photo verification at check-in, and penalise repeated failures.\n5. Customer side: quick refunds or upgrades for verified complaints.\n6. Metrics: hygiene complaints per 1,000 stays, rating for cleanliness, and repeat stay rate."
+  },
+  "Blinkit print service": {
+   "hint": "Print delivery for students is a quick, urgent need. Iterate on speed, price, and the kinds of prints students actually need.",
+   "solution": "1. Users: college students printing assignments, notes, and forms before deadlines.\n2. Improvements: upload from the phone and pick a nearby print point, with a preview, paper type, and binding options.\n3. Pricing: student pricing and a bundle for common jobs.\n4. Speed: show estimated time and a live status.\n5. Partners: campus shops and nearby stores.\n6. Metrics: prints per student, repeat orders, and time from order to delivery."
+  },
+  "Cred coin inflation": {
+   "hint": "The economy fails when coins can be earned easily but rewards are scarce. Balance the supply of rewards with the value of coins.",
+   "solution": "1. Diagnose: how many coins are earned per month, and how many are spent? What is the cost of each reward?\n2. Fix supply: more reward stock, and rewards that cost fewer coins.\n3. Fix demand: show the coin value clearly and add a way to spend coins on more everyday items.\n4. Governance: a regular review of reward costs and stock.\n5. Communication: explain changes and give users time to spend existing coins.\n6. Metrics: coin redemption rate, stock-out events, and user satisfaction with rewards."
+  },
+  "Netflix sports streaming": {
+   "hint": "Sports rights are expensive and can be a big reach driver. Weigh the cost, the audience, and the value to subscribers who would not otherwise pay.",
+   "solution": "1. Value: live sports drives new subscribers and reduces churn, but they often cost more than they bring.\n2. Economics: rights fees, ad revenue for live events, and subscriber growth per dollar spent.\n3. Options: bid for selected events, share rights with partners, or buy a package in one market.\n4. Recommendation: bid selectively in markets where sports lifts subscribers, and measure churn before and after.\n5. Risks: high cost and short-term viewing.\n6. Metrics: new subscribers from sports, churn reduction, and cost per retained subscriber."
+  },
+  "Google Pay split expenses": {
+   "hint": "Roommates split bills often and sometimes forget who paid. Design for recurring costs, reminders, and settling up without awkwardness.",
+   "solution": "1. Users: roommates who share rent, bills, and groceries.\n2. Features: recurring bills with automatic splits, a shared list of expenses, and reminders for pending payments.\n3. Settle up: a running balance with one tap to pay through UPI.\n4. Fairness: split by share, not only equal parts.\n5. Privacy: each roommate sees only the shared expenses.\n6. Metrics: active shared groups, settle-up completion, and time between bill and payment."
+  },
+  "Apple Services bundle": {
+   "hint": "A bundle must be clearly better than buying separately. Price by what each user is willing to pay and what the bundle costs Apple.",
+   "solution": "1. Customers: users who buy hardware and subscribe to services, and those who want to upgrade more often.\n2. Structure: a monthly plan that includes a device upgrade every year or two, plus services.\n3. Price: the monthly fee must cover device depreciation and service costs. Model the breakeven.\n4. Retention: upgrade rights keep users in the Apple ecosystem.\n5. Risks: long-term costs and the value of each device at trade-in.\n6. Metrics: plan subscribers, upgrade rate, churn, and margin per plan."
+  },
+  "MakeMyTrip flight cancellations": {
+   "hint": "Passengers need to know early, have options, and get rebooked quickly. Design the flow around the decision they face.",
+   "solution": "1. Predict: use weather and airline data to warn passengers before cancellation.\n2. Communicate: push alerts with clear options (rebook, refund, or wait), and an estimate of delay.\n3. Rebook: one-tap rebooking on the next available flight or train, with fare differences shown.\n4. Support: a chat option for complex cases and a refund path for those who prefer it.\n5. Trust: be honest about what is known and when the next update will come.\n6. Metrics: time to rebook, complaint rate, and refunds versus rebookings."
+  },
+  "LinkedIn creator mode": {
+   "hint": "B2B creators earn from trust. Make it easy for them to sell expertise directly to their audience without leaving LinkedIn.",
+   "solution": "1. Users: finance and business creators with large professional audiences.\n2. Features: paid newsletters or courses inside LinkedIn, a tip button on posts, and a booking link for consulting calls.\n3. Trust: verified expertise and clear pricing, with refund rules.\n4. Platform fee: a clear share of revenue for LinkedIn that rewards creators who grow.\n5. Guardrails: block misleading financial advice and clearly label paid content.\n6. Metrics: creators earning, revenue per creator, and buyer repeat rate."
+  },
+  "Paytm wallet vs UPI": {
+   "hint": "Ask if the wallet still has a job that UPI does not do. Then decide to keep, merge, or reposition it.",
+   "solution": "1. Diagnose: which wallet users still use it, and for what? Mobile top-ups, small merchant payments, or credit?\n2. Options: keep the wallet for the jobs UPI cannot do (stored balance for offers, bill credits), merge it into a UPI-linked account, or retire it.\n3. Recommendation: reposition as a rewards and credit product rather than a payment method.\n4. Users: give a clear migration path for balances and avoid surprises.\n5. Risks: regulatory limits and user confusion.\n6. Metrics: active wallet users, balance held, and migration rate."
+  },
+  "Zepto white-label products": {
+   "hint": "Private label can raise margin, but it needs trust, quality, and volume. Start with categories where Zepto already sells well.",
+   "solution": "1. Opportunity: higher margin on repeat staples where brands have little differentiation.\n2. Categories: staples and daily essentials with steady demand.\n3. Requirements: supplier quality checks, packaging, and a clear brand.\n4. Risks: channel conflict with brand partners and reduced choice for shoppers.\n5. Test: launch in a few categories and watch repeat rate and margin.\n6. Metrics: margin per order, repeat rate for private label, and satisfaction scores."
+  },
+  "Myntra virtual try-on": {
+   "hint": "AR try-on for shoes is about fit and look. Users want to see the shoe on their feet and know the size is right.",
+   "solution": "1. Users: buyers who want to see how sneakers look and fit before buying.\n2. Feature: AR preview on the foot, with size guidance based on past purchases.\n3. Accuracy: calibrate for foot size and lighting, and show a confidence signal.\n4. Experience: one tap from the product page, with a quick share option.\n5. Returns: track whether the feature cuts size-related returns.\n6. Metrics: AR try-on use, conversion lift, and return rate for shoes."
+  },
+  "Duolingo streak loss": {
+   "hint": "A streak is a habit, and losing one hurts. Find a way to let users recover that does not make the streak meaningless.",
+   "solution": "1. Diagnose: when do the streak losses happen, and how many users come back after?\n2. Intervention: a one-time streak freeze or repair that users can earn, and a reminder before the streak ends.\n3. Recovery: a short challenge that lets users restore progress.\n4. Guardrail: avoid making freezes so easy that the streak loses meaning.\n5. Test: different freeze rules on a sample of users.\n6. Metrics: retention after streak loss, freeze use, and long-term streak length."
+  },
+  "Razorpay offline POS": {
+   "hint": "A POS market means hardware, trust with merchants, and a long sales cycle. Compare the fit with Razorpay's strengths.",
+   "solution": "1. Fit: Razorpay has merchant relationships and payments infrastructure, which helps.\n2. Gaps: hardware, service network, and merchant support for offline stores.\n3. Recommendation: start with a software-first POS on a partner device, and add terminals later.\n4. Competition: Pine Labs has a strong hardware base, so compete on integrated payments and reporting.\n5. Metrics: merchant activations, transaction volume per terminal, and churn.\n6. Decision rule: build hardware only if the software shows strong merchant demand."
+  },
+  "Swiggy Genie optimization": {
+   "hint": "Multi-stop errands are complex. The feature must track each stop, handle changes, and keep the customer informed.",
+   "solution": "1. Users: customers who need several tasks done in one trip, such as pickup, delivery, and payment.\n2. Design: a shared list of stops with time windows and a map showing the route.\n3. Efficiency: group stops that are near each other and suggest the best order.\n4. Transparency: live updates at each stop, and clear costs for each task.\n5. Failure handling: what happens if a stop cannot be completed.\n6. Metrics: errands completed per trip, time to complete, and satisfaction."
+  },
+  "Amazon Prime delivery speed": {
+   "hint": "The answer depends on whether delivery speed is a top reason users choose Prime. Measure it before spending billions.",
+   "solution": "1. Clarify: which users value speed, and does faster delivery increase purchase frequency?\n2. Evidence: test faster delivery in a city and track orders per member and churn.\n3. Trade-off: selection and price may matter more to many users. Compare the value of each.\n4. Cost: the investment in faster delivery versus the expected lift in retention.\n5. Recommendation: invest in speed where it changes behaviour, and keep selection and price strong elsewhere.\n6. Metrics: orders per member, retention, and the cost per incremental order."
+  },
+  "ClearTrip corporate bookings": {
+   "hint": "Estimate from the number of corporate travellers, trips per year, and average ticket price. Name the assumptions.",
+   "solution": "Assumptions (illustrative):\n1. Corporate travellers in India who book domestic flights: about 3 million.\n2. Trips per traveller per year: about 6.\n3. Average fare: about ₹6,000.\n4. Total: 3 million × 6 × ₹6,000 = about ₹10,800 crore a year.\n5. ClearTrip's share of corporate bookings: a fraction of the total, so its handled value would be a share of this figure.\n6. Present a range and name which assumption you would verify with company data."
+  },
+  "Discord server discovery": {
+   "hint": "Discovery needs quality signals. Ask how users find a niche server today and what makes a good one.",
+   "solution": "1. Users: people looking for a specific community, such as a study group or hobby.\n2. Signals: activity level, member quality, and clear rules, rather than only member count.\n3. Discovery: category browsing, search by interest, and a 'similar servers' suggestion.\n4. Trust: moderation scores and an option to preview a server before joining.\n5. Metrics: joins from discovery, retention after 30 days, and member activity.\n6. Guardrail: avoid rewarding servers that buy members."
+  },
+  "Tinder algorithm transparency": {
+   "hint": "Showing a hidden score can build trust or cause harm. Think about what users would do with the number and whether it is accurate.",
+   "solution": "1. Risks: an ELO-style score is a relative and noisy measure. Showing it could cause anxiety, gaming, and harassment.\n2. Trust: explain what affects matches in plain language and show users how to improve their profiles.\n3. Options: show a simple explanation of visibility, not the raw score. Offer a reset or a 'why am I seeing this' tool.\n4. Recommendation: do not expose the raw score. Be transparent about the system's rules.\n5. Metrics: complaints about visibility, user trust score, and retention.\n6. Test with a small group before any change."
+  },
+  "Notion enterprise sales": {
+   "hint": "The shift from bottom-up to enterprise sales needs a new team, pricing, and proof. Plan the sequence and the gates.",
+   "solution": "1. Foundation: keep PLG for individuals and small teams, which brings in leads.\n2. Enterprise: add a sales team for large Indian companies, starting with accounts already using Notion.\n3. Product: admin controls, security, SSO, and reporting.\n4. Pricing: enterprise plans with annual contracts and support tiers.\n5. Gates: move forward only when enterprise pipeline and retention meet targets.\n6. Metrics: enterprise accounts, average contract value, net retention, and sales cycle length."
+  },
+  "WhatsApp event planning": {
+   "hint": "Event planning in groups is a coordination problem. Keep it inside the chat, with one clear RSVP action.",
+   "solution": "1. Users: group members organising meetups, birthdays, and trips.\n2. Flow: create an event in the chat with date, place, and one RSVP button.\n3. Reminders: automatic reminder before the event and a summary of who is coming.\n4. Privacy: the event is visible only to the group.\n5. Calendar: add to calendar with one tap.\n6. Metrics: events created per group, RSVP rate, and attendance rate."
+  },
+  "Ola driver cancellations": {
+   "hint": "Systemic problems need incentives, policy, and product design together. Start by finding which destinations drivers avoid and why.",
+   "solution": "1. Diagnose: which destinations and times lead to cancellations? Is it distance, low fare, or traffic?\n2. Pricing: fair fares for inconvenient trips, shown before the driver accepts.\n3. Acceptance rules: limit cancellations after acceptance and give riders a clear wait-time option.\n4. Driver side: show trip value and destination earlier so drivers can decide.\n5. Measure: cancellations per destination type, rider satisfaction, and driver earnings.\n6. Metrics: cancellation rate, rider wait time, and driver retention."
+  },
+  "Flipkart quick commerce": {
+   "hint": "Build or buy depends on speed to market, capabilities, and cost. Think about what a 10-minute network needs that you don't have.",
+   "solution": "1. Requirements: dense dark stores, a rider fleet, inventory systems, and brand trust for groceries.\n2. Build: slow and costly, but full control of the model.\n3. Buy: faster access to stores and riders, but integration and culture risks.\n4. Recommendation: partner or acquire in a few cities to learn the economics, then decide on a broader build.\n5. Metrics: time to first store, orders per store, and contribution margin.\n6. Decision rule: commit to a build only after the unit economics are proven."
+  },
+  "Licious subscription model": {
+   "hint": "Subscriptions should drive new value, not just reward existing buyers. Compare the change in orders with the change in delivery fees collected.",
+   "solution": "1. Clarify: how many members were already power users who paid delivery fees?\n2. Measure: incremental orders per member versus fees given up. Compare with a control group.\n3. Churn: check whether the subscription keeps users who would have left.\n4. Mix: a subscription that brings new buyers is valuable. One that only discounts existing buyers is a cost.\n5. Recommendation: keep the offer if incremental orders cover the lost fees, and adjust the tier for power users.\n6. Metrics: incremental orders, retention, and LTV by cohort."
+  },
+  "Canva AI presentation builder": {
+   "hint": "A prompt-to-presentation feature needs structure, editable outputs, and brand control. Design for the first draft, not the final deck.",
+   "solution": "1. Users: non-designers who need a clear presentation fast.\n2. Flow: a prompt, an outline the user can edit, then slides with templates.\n3. Brand: use the team's brand kit and fonts automatically.\n4. Editing: every slide stays fully editable and the user can regenerate one slide.\n5. Quality: check text length and layout issues before showing the result.\n6. Metrics: presentations created, edits per deck, and exported or shared decks."
+  },
+  "Slack search degradation": {
+   "hint": "Start by finding the change that caused the slowdown. Triage by segment before reading code.",
+   "solution": "1. Clarify: which workspaces, query types, and regions? Did the problem start on a date?\n2. Compare: a release or infrastructure change that matches the start date.\n3. Segment: large workspaces only, or all? Certain query types or filters?\n4. Mitigate: roll back if the release is the cause, add caching for common searches, and shard the index for large workspaces.\n5. Communicate: status updates to enterprise customers.\n6. Metrics: p95 search latency, timeouts, and search usage by workspace size."
+  },
+  "Uber intercity expansion": {
+   "hint": "Intercity bus ticketing is a crowded market with many players. Find an angle that fits Uber's riders and strengths.",
+   "solution": "1. Fit: Uber already has riders who travel between cities and a strong booking app.\n2. Angle: bundle a bus ticket with a ride to and from the station, and offer one booking for the full trip.\n3. Partners: bus operators and aggregators for supply, instead of building fleets.\n4. Risks: a crowded market, thin margins, and operator reliability.\n5. Recommendation: test the bundle in a few routes with strong operator partners.\n6. Metrics: bundle attach rate, margin per booking, and repeat use."
+  },
+  "Twitch exclusive contracts": {
+   "hint": "Exclusive deals buy attention, but they can cost more than they bring back. Measure the return on each deal.",
+   "solution": "1. Value: a top streamer can attract viewers and subscribers who stay on the platform.\n2. Cost: multi-million deals must be recovered through subscriptions, ads, and creator loyalty.\n3. Measure: viewers gained, subscription growth, and retention of the streamer's audience after the contract.\n4. Alternatives: revenue-share deals that link payments to performance.\n5. Recommendation: use exclusives selectively, with clear milestones and performance-based pay.\n6. Metrics: return on deal spend, retention of viewers after the deal, and subscriber growth."
+  },
+  "UrbanCompany beauty services": {
+   "hint": "Working professionals want predictable, quick services at home. A subscription should remove the need to book each time.",
+   "solution": "1. Users: working professionals in cities who want regular grooming without taking time off.\n2. Packages: monthly plans with a fixed set of services and preferred time slots.\n3. Convenience: one-tap rebooking and reminders before each visit.\n4. Quality: the same trained professional where possible.\n5. Pricing: a monthly fee that is cheaper than booking each service.\n6. Metrics: subscriber retention, visits per month, and satisfaction."
+  },
+  "Bumble BFF expansion": {
+   "hint": "BFF users pay less than dating users. Find features that are worth paying for, like group events or premium friend matching, without locking basic friendship.",
+   "solution": "1. Users: people who want new friends, often in a new city.\n2. Monetisation: paid events and group activities, a premium matching filter, and a 'friend ready' badge.\n3. Keep the core free: basic matching and chat should stay free to build the network.\n4. Test: premium events in a few cities and watch attendance and repeat use.\n5. Risk: a paywall can block the friend network that makes the product work.\n6. Metrics: paying users, event attendance, and friends formed per user."
+  }
+ },
+ "weekGuides": {
+  "0-0": {
+   "intro": "This week builds the PM basics: how to think about users and jobs before features.",
+   "keyIdeas": [
+    "A job-to-be-done is the progress a user is trying to make, not the feature they asked for.",
+    "Strong product cases start with the user and the problem, then options, then a recommendation.",
+    "Write your own JTBD analysis for a real app you use; the interviewer will ask why, not just what."
+   ],
+   "doneWhen": "You can explain JTBD in two sentences and write one structured product case without help."
+  },
+  "0-1": {
+   "intro": "Metrics tell you if a product is working. This week you learn to pick one that matters.",
+   "keyIdeas": [
+    "A North Star metric captures the core value users get; OMTM is the one metric the team focuses on this month.",
+    "Input metrics are what you control; output metrics are the results you care about.",
+    "A one-pager ties a user problem to a flow and a metric. Keep it to one page."
+   ],
+   "doneWhen": "You can name a North Star for a product and justify it with an input metric and an output metric."
+  },
+  "0-2": {
+   "intro": "Get enough AI literacy to talk to engineers and to judge what an AI feature can and cannot do.",
+   "keyIdeas": [
+    "Tokens, context windows and inference cost decide what a feature can afford.",
+    "Supervised learning learns from labelled examples; embeddings turn text into vectors so similar things sit close together.",
+    "Use an AI tool daily for five different tasks and note where it fails."
+   ],
+   "doneWhen": "You can explain tokens, context windows, and embeddings to a non-technical friend in plain language."
+  },
+  "0-3": {
+   "intro": "Data and retrieval skills let you check your product's numbers and build a simple AI prototype.",
+   "keyIdeas": [
+    "JOINs combine tables, GROUP BY summarises, window functions compare rows, and CTEs break queries into steps.",
+    "RAG works in four steps: embed documents, store them, retrieve the closest ones, then generate an answer grounded in them.",
+    "A small RAG prototype teaches you more about failure modes than reading about them."
+   ],
+   "doneWhen": "Your 10 SQL queries run correctly and your RAG prototype answers questions from your own documents."
+  },
+  "1-0": {
+   "intro": "Analysis and specs: this week you turn data questions and product ideas into a clear PRD.",
+   "keyIdeas": [
+    "Cohort queries show whether users stick around; compare cohorts, not just totals.",
+    "A PRD for an AI feature needs the problem, users, success metrics, and the failure cases.",
+    "Competitor features show what users already accept; study three before you propose yours."
+   ],
+   "doneWhen": "Your analytics notebook answers a real question and your PRD lists success metrics and failure cases."
+  },
+  "1-1": {
+   "intro": "Experiments and prompts: test product changes properly, and get reliable output from language models.",
+   "keyIdeas": [
+    "An A/B test needs a hypothesis, a sample size set in advance, and guardrail metrics that must not get worse.",
+    "Prompts work better with a clear role, the task, the context, and the output format.",
+    "A prompt library lets you reuse what works for common PM tasks."
+   ],
+   "doneWhen": "You can design an A/B test with a sample size and guardrails, and your prompt library works on five tasks."
+  },
+  "1-2": {
+   "intro": "Start the flagship project: a working AI product you can show, built from a real user problem.",
+   "keyIdeas": [
+    "Define the user and problem before you choose the stack.",
+    "An MVP can be a simple app with one model call; the value is in the system prompt and the testing.",
+    "Test with real examples, including messy ones, and record what changed each iteration."
+   ],
+   "doneWhen": "You have a working prototype and a log of five test cases with what you changed after each."
+  },
+  "1-3": {
+   "intro": "Evaluation is how you know an AI product is good. This week you build a way to measure it.",
+   "keyIdeas": [
+    "Deterministic checks catch format errors; LLM-as-judge scores quality, but check the judge against human scores.",
+    "Observability tools record each model call, cost and latency so you can debug real usage.",
+    "Hallucinations and bias need specific tests, not general worry."
+   ],
+   "doneWhen": "Your eval pipeline runs automatically, scores the flagship, and your case study has real numbers."
+  },
+  "2-0": {
+   "intro": "Go deeper on retrieval: a domain assistant shows whether you can make RAG work on hard material.",
+   "keyIdeas": [
+    "Chunk size and overlap change what the retriever can find; test them, do not guess.",
+    "Hybrid search combines keyword and vector matches and often beats either alone.",
+    "Metadata filters stop the model answering from the wrong document."
+   ],
+   "doneWhen": "Your domain assistant returns sources for its answers, and your notes compare two chunking strategies."
+  },
+  "2-1": {
+   "intro": "Ship it. A product with real users teaches more than any amount of practice.",
+   "keyIdeas": [
+    "Deploying to a public URL is part of the product, so treat it as a launch.",
+    "Structured feedback (a thumbs-up with a reason) gives you usable data.",
+    "Iterate on the top two complaints before adding features."
+   ],
+   "doneWhen": "Your flagship is live, ten people have used it, and you have changed it based on their feedback."
+  },
+  "2-2": {
+   "intro": "Advanced prompting and evaluation: learn the tools that make AI output reliable in production.",
+   "keyIdeas": [
+    "Function calling and structured outputs turn free text into data your product can use.",
+    "Compare models on the same eval set; the cheapest model is often good enough for simple steps.",
+    "Cost and latency per request decide whether a feature is viable at scale."
+   ],
+   "doneWhen": "You have a rubric, a model comparison table, and a cost-per-task number for your flagship."
+  },
+  "2-3": {
+   "intro": "Turn your work into a portfolio that a hiring manager can scan in two minutes.",
+   "keyIdeas": [
+    "Lead with the problem and the measured impact, not the tech stack.",
+    "A two-minute demo shows the product working; record it once, keep it short.",
+    "A clean README explains what the product does, how to run it, and what you learned."
+   ],
+   "doneWhen": "Your case study has a number for impact, your demo is under two minutes, and your repo is clean."
+  },
+  "3-0": {
+   "intro": "Agents chain steps together. Learn when that is worth the complexity and when it is not.",
+   "keyIdeas": [
+    "An agent is a model that picks tools and steps; each extra step adds cost and failure.",
+    "Graphs make the steps and branches explicit, so you can test each one.",
+    "Document what the agent cannot do yet, as clearly as what it can."
+   ],
+   "doneWhen": "Your agent completes a two-step task and your architecture note explains each step and its failure mode."
+  },
+  "3-1": {
+   "intro": "Multimodal products (images, audio, video) bring new costs and new failure modes.",
+   "keyIdeas": [
+    "Diffusion models generate images by refining noise; video is costly because each frame adds work.",
+    "Vision and audio APIs cost more per request than text; estimate per-task cost before you design.",
+    "Multimodal features need clear fallbacks when the input is poor (blur, noise, accents)."
+   ],
+   "doneWhen": "Your multimodal prototype works on good input, falls back gracefully on bad input, and has a cost estimate."
+  },
+  "3-2": {
+   "intro": "Safety is part of the product. Design guardrails before a user finds the gap.",
+   "keyIdeas": [
+    "PII (personal data) must be detected and handled before it reaches a model or a log.",
+    "Jailbreaks try to make a model ignore its rules; test with adversarial inputs.",
+    "Human-in-the-loop means a person reviews the decisions the model is unsure about."
+   ],
+   "doneWhen": "Your guardrail blocks the test cases you wrote, and your HITL flow names who reviews what."
+  },
+  "3-3": {
+   "intro": "Build in public: sharing real data about your work builds trust and gets you noticed.",
+   "keyIdeas": [
+    "Show trade-offs with numbers: cost, latency and quality, not only screenshots.",
+    "Write for the reader who is learning what you learned.",
+    "Engagement comes from specific claims that others can check."
+   ],
+   "doneWhen": "You have published two or three posts, each with a real number from your project."
+  },
+  "4-0": {
+   "intro": "Your resume is a filter. Make it easy for both software and a recruiter to read.",
+   "keyIdeas": [
+    "Use a plain, reverse-chronological layout; avoid tables and graphics that parsers misread.",
+    "Each bullet is action, tool, and outcome with a number.",
+    "A reviewer who is a PM will catch what you miss."
+   ],
+   "doneWhen": "Every bullet has an outcome with a number, and one PM or mentor has reviewed it."
+  },
+  "4-1": {
+   "intro": "Your LinkedIn is the second resume. Make it match the story your resume tells.",
+   "keyIdeas": [
+    "A headline that names the role you want and one proof point works better than a job title.",
+    "Feature your portfolio links so a visitor sees the work first.",
+    "Use the keywords recruiters search for, in the About section and the skills list."
+   ],
+   "doneWhen": "Your headline, Featured section and About section all tell the same story as your resume."
+  },
+  "4-2": {
+   "intro": "Product sense interviews test how you think under constraints. Practice out loud.",
+   "keyIdeas": [
+    "Structure matters more than the answer: clarify, options, trade-offs, recommendation.",
+    "A constraint curveball (a budget cut, a regulation) tests whether your plan still holds.",
+    "Record one mock and listen back for filler and unclear steps."
+   ],
+   "doneWhen": "You have done five mocks and can handle a constraint change without restarting your answer."
+  },
+  "4-3": {
+   "intro": "Guesstimates and behavioural stories are where many candidates lose points. Practise both.",
+   "keyIdeas": [
+    "Say your assumptions out loud and sanity-check the final number against something you know.",
+    "Behavioural answers use STAR: situation, task, action, result; spend most time on your action.",
+    "Anchor each story in a project you can talk about in depth."
+   ],
+   "doneWhen": "You have four to six STAR stories and five guesstimates with written structures."
+  },
+  "5-0": {
+   "intro": "Enterprise AI is where many jobs are. Learn what businesses buy and why.",
+   "keyIdeas": [
+    "Enterprise buyers care about data access, security, and measurable return.",
+    "Personalisation and recommender systems are a common product area; know the basics.",
+    "Good conversations at meetups lead to referrals; prepare two questions for each."
+   ],
+   "doneWhen": "You can explain your enterprise agent design to a non-engineer and got feedback from one person in the field."
+  },
+  "5-1": {
+   "intro": "Prioritise AI opportunities with a framework, then reach out with a specific reason.",
+   "keyIdeas": [
+    "Score opportunities on value, feasibility, and risk, and say what would change your ranking.",
+    "Synthetic data helps when real data is scarce or sensitive; know its limits.",
+    "Outreach works when it names something specific the company did."
+   ],
+   "doneWhen": "You have a ranked list of ten target companies and a short, specific outreach message for each."
+  },
+  "5-2": {
+   "intro": "This is the application push. Quality per application matters more than volume.",
+   "keyIdeas": [
+    "Tailor the first two lines of each application to the role.",
+    "Referrals are faster than cold applications; ask for them in person or by message.",
+    "Keep solving two or three cases a week so your skill does not drop during the search."
+   ],
+   "doneWhen": "You have sent the target number of applications, and your referral conversations are logged."
+  },
+  "5-3": {
+   "intro": "Final push: small improvements and steady practice. Do not start new projects now.",
+   "keyIdeas": [
+    "Check your totals against the plan: applications, referrals, cases, mocks.",
+    "Your final mocks should replay the most common questions, not new ones.",
+    "Rest is part of preparation; avoid cramming the night before interviews."
+   ],
+   "doneWhen": "Your totals match the plan, and your last mocks went smoothly without new material."
+  }
+ }
+}

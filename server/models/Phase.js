@@ -16,6 +16,11 @@ const phaseSchema = new mongoose.Schema({
             options: [String],
             answer: Number
         }],
+        guide: {
+            intro: String,
+            keyIdeas: [String],
+            doneWhen: String
+        },
         resources: [{
             title: String,
             url: String

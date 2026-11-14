@@ -1723,6 +1723,14 @@
         }
 
         /* ---- MOBILE RESPONSIVE ---- */
+        .diff-pills { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 14px; }
+        .dpill { font: inherit; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border-h); background: var(--card); color: var(--t2); cursor: pointer; }
+        .dpill:hover { border-color: var(--accent); color: var(--t1); }
+        .dpill.on { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+        .dpill.d-easy.on { background: var(--green); border-color: var(--green); }
+        .dpill.d-medium.on { background: var(--amber); border-color: var(--amber); }
+        .dpill.d-hard.on { background: var(--red); border-color: var(--red); }
+
         /* ============ Visual refresh: calm paper/ink theme ============ */
         html { font-size: 15px; }
 
@@ -2277,8 +2285,16 @@
                     if (S.startDate) document.getElementById('startDate').value = S.startDate;
                 }
 
+                // Default start date = the day the account was created (user can still change it)
+                if (!S.startDate && user.createdAt) {
+                    S.startDate = new Date(user.createdAt).toISOString().slice(0, 10);
+                    document.getElementById('startDate').value = S.startDate;
+                    save();
+                }
+
                 const _origSave = save;
                 save = function () { _origSave(); saveToAPI(); };
+                if (!progressData.startDate && S.startDate) saveToAPI();
 
                 render();
             } catch (err) {
