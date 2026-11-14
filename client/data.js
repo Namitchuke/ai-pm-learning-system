@@ -42,12 +42,9 @@ const PHASES = [
                     { text: 'Solve 3 product cases from Decode and Conquer', detail: 'Start with "improve product X" type cases. Use a structured framework: clarify → user segments → pain points → solutions → prioritize → metrics. Practice writing, not just thinking.', done_when: '3 cases solved with written structures. Each case has: user segments identified, 3+ solutions, prioritization rationale, and success metrics.' },
                     { text: 'Create GitHub portfolio repository', detail: 'Create a public GitHub repo called "ai-pm-portfolio" or similar. Add a README with sections: About Me, Projects, Case Studies, Skills. This becomes your living portfolio throughout the 24 weeks.', done_when: 'Public GitHub repo created with structured README and at least one initial commit.' }
                 ], resources: [
-                    { title: 'Inspired by Marty Cagan - Summary & Key Ideas', url: 'https://www.productplan.com/glossary/inspired/' },
                     { title: 'JTBD Framework Explained - HBS', url: 'https://hbswk.hbs.edu/item/what-is-jobs-to-be-done' },
                     { title: 'CRED Product Teardown - The Product Folks', url: 'https://medium.com/@theproductfolks/cred-product-teardown' },
                     { title: 'Decode and Conquer - Lewis Lin (Book)', url: 'https://www.lewis-lin.com/decode-and-conquer' },
-                    { title: 'Product Manager Portfolio Examples', url: 'https://www.lennysnewsletter.com/p/how-to-build-a-pm-portfolio' },
-                    { title: 'GitHub for Non-Engineers - Guide', url: 'https://product-craft.com/github-for-product-managers/' },
                     { title: 'PhonePe UX Case Study', url: 'https://bootcamp.uxdesign.cc/phonepe-case-study' },
                     { title: 'PM Case Interview Practice - Product School', url: 'https://productschool.com/blog/product-management/case-study-interview' }
                 ], quiz: [
@@ -69,9 +66,8 @@ const PHASES = [
                     { title: 'OMTM Explained - Lean Analytics', url: 'https://leananalyticsbook.com/one-metric-that-matters/' },
                     { title: 'Input vs Output Metrics for PMs', url: 'https://www.reforge.com/blog/input-output-metrics' },
                     { title: 'Product Metrics That Matter - Lenny\'s Newsletter', url: 'https://www.lennysnewsletter.com/p/what-is-a-north-star-metric' },
-                    { title: 'Swiggy Metrics Deep Dive', url: 'https://bytes.swiggy.com/' },
+                    { title: 'Swiggy Metrics Deep Dive', url: 'http://web.archive.org/web/20250516144818/https://bytes.swiggy.com/' },
                     { title: 'How to Diagnose a Metrics Drop - Exponent', url: 'https://www.tryexponent.com/courses/pm/metrics-decline' },
-                    { title: 'Product Development Lifecycle - Mind the Product', url: 'https://www.mindtheproduct.com/product-development-lifecycle/' },
                     { title: 'Flipkart Product Strategy Analysis', url: 'https://medium.com/swlh/product-teardown-flipkart' }
                 ], quiz: [
                     { q: 'What is a North Star Metric?', options: ['Revenue', 'The single metric that best captures the core value your product delivers to users', 'Daily Active Users', 'App downloads'], answer: 1 },
@@ -115,7 +111,7 @@ const PHASES = [
                     { title: 'LeetCode SQL Practice Problems', url: 'https://leetcode.com/problemset/database/' },
                     { title: 'RAG Explained - Pinecone Guide', url: 'https://www.pinecone.io/learn/retrieval-augmented-generation/' },
                     { title: 'LangChain RAG Tutorial', url: 'https://python.langchain.com/docs/tutorials/rag/' },
-                    { title: 'Chroma Vector Database - Getting Started', url: 'https://docs.trychroma.com/getting-started' },
+                    { title: 'Chroma Vector Database - Getting Started', url: 'http://web.archive.org/web/20241207012003/https://docs.trychroma.com/getting-started' },
                     { title: 'SQL for Product Managers - Sisense', url: 'https://www.sisense.com/blog/sql-for-product-managers/' },
                     { title: 'OpenAI Embeddings API Guide', url: 'https://platform.openai.com/docs/guides/embeddings' },
                     { title: 'DataLemur - SQL Interview Questions', url: 'https://datalemur.com/questions' }
@@ -137,11 +133,9 @@ const PHASES = [
                     { text: 'Create product analytics SQL notebook', detail: 'Build a notebook with 15+ queries organized by category: user acquisition, activation, retention, revenue, referral (pirate metrics). Each query should have a comment explaining the business question.', done_when: 'A structured SQL notebook in your GitHub repo with 15+ queries across all pirate metric categories.' },
                     { text: 'Study 3 competitor AI features', detail: 'Pick 3 AI features in Indian apps (e.g., Swiggy voice search, CRED financial insights, PhonePe smart suggestions). Document: what it does, likely architecture, strengths, weaknesses, how you\'d improve it.', done_when: 'Written analysis of 3 AI features with architecture guesses and improvement suggestions.' }
                 ], resources: [
-                    { title: 'CTE Tutorial - SQLBolt', url: 'https://sqlbolt.com/lesson/select_queries_with_ctes' },
                     { title: 'How to Write a PRD - Lenny\'s Newsletter', url: 'https://www.lennysnewsletter.com/p/how-to-write-a-great-prd' },
                     { title: 'AI PRD Template - Reforge', url: 'https://www.reforge.com/blog/ai-product-prd-template' },
                     { title: 'Pirate Metrics (AARRR) Framework', url: 'https://www.productplan.com/glossary/aarrr-framework/' },
-                    { title: 'Cohort Analysis with SQL - Mode', url: 'https://mode.com/sql-tutorial/sql-cohort-analysis/' },
                     { title: 'CRED AI Features Analysis', url: 'https://medium.com/@theproductfolks/cred-product-teardown' },
                     { title: 'DataLemur - SQL Interview Practice', url: 'https://datalemur.com/questions' }
                 ], quiz: [
@@ -181,7 +175,6 @@ const PHASES = [
                     { title: 'OpenAI API Quickstart', url: 'https://platform.openai.com/docs/quickstart' },
                     { title: 'Build a Streamlit + OpenAI App - Tutorial', url: 'https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps' },
                     { title: 'System Prompt Best Practices - Anthropic', url: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts' },
-                    { title: 'Resume Writing Best Practices for PMs', url: 'https://www.lewis-lin.com/blog/pm-resume' },
                     { title: 'Streamlit Deploy to Cloud - Free', url: 'https://streamlit.io/cloud' }
                 ], quiz: [
                     { q: 'Why Streamlit for the MVP?', options: ['It is the fastest framework', 'It allows rapid prototyping of data/AI apps with minimal frontend code - perfect for PM-builders', 'It is the only option', 'It scales to millions of users'], answer: 1 },
@@ -203,8 +196,7 @@ const PHASES = [
                     { title: 'LLM Evaluation Best Practices - Hugging Face', url: 'https://huggingface.co/docs/evaluate/' },
                     { title: 'How to Evaluate LLM Outputs - Anthropic', url: 'https://docs.anthropic.com/en/docs/build-with-claude/develop-tests' },
                     { title: 'Building Eval Pipelines - DeepLearning.AI', url: 'https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/' },
-                    { title: 'PM Case Study Writing Guide', url: 'https://www.lennysnewsletter.com/p/how-to-build-a-pm-portfolio' }
-                ], quiz: [
+                    ], quiz: [
                     { q: 'Why use both deterministic evals AND LLM-as-judge?', options: ['Overkill', 'Deterministic catches format/structure issues; LLM-as-judge evaluates subjective quality. Together they give complete coverage.', 'Only one is needed', 'LLM-as-judge is always better'], answer: 1 },
                     { q: 'LangSmith/Langfuse help PMs because:', options: ['They write code', 'They provide visibility into every LLM call - input, output, cost, latency - so you can debug quality issues and track improvements', 'They replace the product', 'They are free'], answer: 1 },
                     { q: 'Your eval shows the tool scores 3/5 on "actionability." What do you do?', options: ['Ship it anyway', 'Analyze low-scoring outputs, identify patterns, and iterate on the system prompt to improve actionability', 'Rebuild from scratch', 'Ignore the eval'], answer: 1 }
@@ -281,8 +273,7 @@ const PHASES = [
                     { title: 'README Writing Guide - Make a README', url: 'https://www.makeareadme.com' },
                     { title: 'How to Present Projects in PM Interviews', url: 'https://www.tryexponent.com/courses/pm/project-deep-dive' },
                     { title: 'GitHub Profile README Ideas', url: 'https://github.com/abhisheknaiidu/awesome-github-profile-readme' },
-                    { title: 'Case Study Writing for PM Portfolios', url: 'https://www.lennysnewsletter.com/p/how-to-build-a-pm-portfolio' }
-                ], quiz: [
+                    ], quiz: [
                     { q: 'The most impactful part of a PM case study is:', options: ['The technology used', 'Quantified results that show business impact and iteration based on data', 'The length of the document', 'The formatting'], answer: 1 },
                     { q: 'Your demo video should emphasize:', options: ['How you wrote the code', 'The user experience, output quality, and the problem it solves', 'Your face', 'The number of lines of code'], answer: 1 }
                 ]
@@ -301,9 +292,7 @@ const PHASES = [
                     { title: 'Agentic AI - IBM Explainer', url: 'https://www.ibm.com/think/topics/agentic-ai' },
                     { title: 'LangGraph Tutorial - Medium', url: 'https://medium.com/@kbdeshpande/langgraph-tutorial-beginners-2025' },
                     { title: 'LangGraph Official Docs', url: 'https://langchain-ai.github.io/langgraph/' },
-                    { title: 'Build AI Agents - FreeCodeCamp', url: 'https://www.freecodecamp.org/news/build-ai-agents-with-langgraph/' },
                     { title: 'n8n - Visual Workflow Automation', url: 'https://n8n.io' },
-                    { title: 'Agentic RAG - Towards AI', url: 'https://towardsai.net/p/agentic-rag' },
                     { title: 'LangGraph Quickstart (YouTube)', url: 'https://www.youtube.com/results?search_query=langgraph+tutorial+beginner+2025' },
                     { title: 'Getzep - LangGraph Memory Guide', url: 'https://python.langchain.com/docs/how_to/memory/' }
                 ], quiz: [
@@ -323,7 +312,6 @@ const PHASES = [
                     { title: 'How Diffusion Models Work - Computerphile', url: 'https://www.youtube.com/watch?v=1CIpzeNxIhU' },
                     { title: 'OpenAI Vision API Guide', url: 'https://platform.openai.com/docs/guides/vision' },
                     { title: 'Whisper Audio Model', url: 'https://openai.com/research/whisper' },
-                    { title: 'Multi-Modality in AI Products', url: 'https://a16z.com/multi-modal-ai/' },
                     { title: 'Stable Diffusion Explained', url: 'https://jalammar.github.io/illustrated-stable-diffusion/' },
                     { title: 'Generative AI Pricing Calculator', url: 'https://artificialanalysis.ai/' }
                 ], quiz: [
@@ -358,11 +346,9 @@ const PHASES = [
                     { text: 'Get meaningful engagement', detail: 'Respond to every comment. Cross-post in PM communities.', done_when: '20+ engagements, 3+ from product/tech roles.' }
                 ], resources: [
                     { title: 'Building in Public - IndieHackers', url: 'https://www.indiehackers.com/post/building-in-public' },
-                    { title: 'LinkedIn Content Strategy', url: 'https://taplio.com/linkedin-strategy' },
                     { title: 'Product Leaders Forum India', url: 'https://productleadersforum.org' },
                     { title: 'GrowthX Community', url: 'https://growthx.club' },
-                    { title: 'How to Write Technical Posts', url: 'https://www.freecodecamp.org/news/how-to-write-a-great-technical-blog-post/' }
-                ], quiz: [
+                    ], quiz: [
                     { q: '"Built AI tool" vs "GPT-4 cost $0.03 but only 5% better than mini for resumes." Which shows PM thinking?', options: ['First', 'Second - data-driven cost/quality trade-off', 'Equal', 'Neither'], answer: 1 },
                     { q: 'Why build in public?', options: ['Gets likes', 'Demonstrates execution, technical literacy, and communication simultaneously', 'Replaces resume', 'Guarantees job'], answer: 1 }
                 ]
@@ -379,8 +365,6 @@ const PHASES = [
                     { text: 'Get resume reviewed by 1 PM/mentor', detail: 'Someone who has hired PMs, not a friend.', done_when: 'Resume reviewed, 2+ changes made based on feedback.' }
                 ], resources: [
                     { title: 'Jobscan - ATS Checker', url: 'https://www.jobscan.co' },
-                    { title: 'APM Resume Tips - HelloPM', url: 'https://hellopm.co/pm-resume-tips' },
-                    { title: 'PM Resume Bullets - Lewis Lin', url: 'https://www.lewis-lin.com/blog/pm-resume' },
                     { title: 'Google APM Guide - igotanoffer', url: 'https://igotanoffer.com/blogs/product-manager/google-apm-program' },
                     { title: 'Novoresume - ATS Templates', url: 'https://novoresume.com' },
                     { title: 'Decode and Conquer', url: 'https://www.lewis-lin.com/decode-and-conquer' },
@@ -397,8 +381,6 @@ const PHASES = [
                     { text: 'Endorsements for key skills', detail: 'Ask 5 connections to endorse SQL, Python, Product Management.', done_when: '5+ endorsements for top 3 skills.' },
                     { text: 'Optimized About section with keywords', detail: '3-4 sentences + keywords: product management, AI, data analysis, SQL.', done_when: 'Full profile optimized with keywords and project highlights.' }
                 ], resources: [
-                    { title: 'LinkedIn Optimization for PMs', url: 'https://www.lennysnewsletter.com/p/linkedin-tips-for-pms' },
-                    { title: 'LinkedIn Featured Section', url: 'https://www.linkedin.com/help/linkedin/answer/a726960' },
                     { title: 'LinkedIn SEO', url: 'https://buffer.com/resources/linkedin-seo/' },
                     { title: 'Headline Formula - Jobscan', url: 'https://www.jobscan.co/blog/linkedin-headline-examples/' }
                 ], quiz: [
@@ -414,7 +396,6 @@ const PHASES = [
                 ], resources: [
                     { title: 'Exponent - PM Interviews', url: 'https://www.tryexponent.com/courses/pm' },
                     { title: 'Decode and Conquer', url: 'https://www.lewis-lin.com/decode-and-conquer' },
-                    { title: 'Product Sense - Aakash Gupta', url: 'https://www.aakashg.com/product-sense' },
                     { title: 'Google APM Guide', url: 'https://igotanoffer.com/blogs/product-manager/google-apm-program' },
                     { title: 'Pramp - Free Mock Interviews', url: 'https://www.pramp.com' },
                     { title: 'PM Exercises', url: 'https://www.productmanagementexercises.com' },
@@ -435,7 +416,6 @@ const PHASES = [
                     { title: 'Top 40 Guesstimates - NextLeap', url: 'https://nextleap.app/next-leap-blog/guesstimates' },
                     { title: 'STAR Method - The Muse', url: 'https://www.themuse.com/advice/star-interview-method' },
                     { title: 'Behavioral Questions - Exponent', url: 'https://www.tryexponent.com/courses/behavioral' },
-                    { title: 'Indian Market Sizing', url: 'https://jobuai.com/guesstimate' },
                     { title: 'Mock Guesstimates (YouTube)', url: 'https://www.youtube.com/results?search_query=guesstimate+practice+india+pm' }
                 ], quiz: [
                     { q: 'Correct approach for "How many ATMs in India?"', options: ['Google it', 'Top-down: Population → Urban% → Banked% → ATMs per capita', 'Bottom-up from city', 'Random guess'], answer: 1 },
@@ -453,7 +433,6 @@ const PHASES = [
                     { text: 'Network at Physical Product/AI Meetups', detail: 'Attend offline meetups like ProductTank Bengaluru or eChai. Goal is genuine relationship building with other builders.', done_when: 'Attend 2+ physical events and connect with 5+ founders/PMs on LinkedIn.' },
                     { text: 'Seek feedback on your Enterprise Agent design', detail: 'Show your Knowledge Agent architecture to someone at a meetup. "I designed this for parsing Confluence, what would break in production?"', done_when: 'Received actionable feedback from an industry professional.' }
                 ], resources: [
-                    { title: 'Enterprise RAG Best Practices - Pinecone', url: 'https://www.pinecone.io/learn/enterprise-rag/' },
                     { title: 'Recommender Systems Basics - Google', url: 'https://developers.google.com/machine-learning/recommendation' },
                     { title: 'Building Persistent Memory in Agents', url: 'https://python.langchain.com/docs/how_to/memory/' },
                     { title: 'The Product Folks (Community)', url: 'https://theproductfolks.com' },
@@ -488,7 +467,6 @@ const PHASES = [
                     { text: 'Continue 2-3 cases/week', detail: 'Don\'t stop practice during application season.', done_when: 'Case notebook at 30+.' },
                     { text: 'Polish all portfolio artifacts', detail: 'Final review of everything. Fix broken links, update metrics, proofread.', done_when: 'All artifacts reviewed and updated.' }
                 ], resources: [
-                    { title: 'Cover Notes for PMs - Lenny', url: 'https://www.lennysnewsletter.com/p/how-to-write-cover-letters' },
                     { title: 'How to Ask for Referrals', url: 'https://www.themuse.com/advice/how-to-ask-for-a-referral' },
                     { title: 'Naukri', url: 'https://www.naukri.com' },
                     { title: 'LinkedIn Jobs', url: 'https://www.linkedin.com/jobs/' },
@@ -506,8 +484,6 @@ const PHASES = [
                     { text: 'Small improvements only - no new projects', detail: 'Resist new projects. Deepen existing work. Depth > breadth.', done_when: 'Portfolio refined, no new projects started.' },
                     { text: 'Check totals: 30-40+ apps, 10+ referrals, 30+ cases', detail: 'Full tracker documentation of your journey.', done_when: 'All targets met. Interview-ready.' }
                 ], resources: [
-                    { title: 'PM Interview Prep Checklist', url: 'https://www.tryexponent.com/blog/pm-interview-prep' },
-                    { title: 'Negotiate Your Offer - Lenny', url: 'https://www.lennysnewsletter.com/p/how-to-negotiate-compensation' },
                     { title: 'Glassdoor Interview Reviews', url: 'https://www.glassdoor.co.in/Interview/' },
                     { title: 'Handling Rejection', url: 'https://www.themuse.com/advice/job-rejection' },
                     { title: 'PM Career Growth', url: 'https://productschool.com/blog/product-management/career-growth' }
@@ -521,21 +497,21 @@ const PHASES = [
     }
 ];
 const SKILL_RESOURCES = {
-    jtbd: [{ title: 'JTBD Framework - HBS', url: 'https://hbswk.hbs.edu/item/what-is-jobs-to-be-done' }, { title: 'Intercom on JTBD', url: 'https://www.intercom.com/resources/books/intercom-on-jobs-to-be-done' }],
+    jtbd: [{ title: 'JTBD Framework - HBS', url: 'https://hbswk.hbs.edu/item/what-is-jobs-to-be-done' }, ],
     prd: [{ title: 'How to Write a PRD - Lenny', url: 'https://www.lennysnewsletter.com/p/how-to-write-a-great-prd' }, { title: 'PRD Template - Notion', url: 'https://www.notion.com/templates/product-requirements-document-prd' }],
     northstar: [{ title: 'North Star Metric Guide - Amplitude', url: 'https://amplitude.com/blog/north-star-metric' }, { title: 'Guardrail Metrics - Statsig', url: 'https://www.statsig.com/blog/guardrail-metrics' }],
     abtesting: [{ title: 'A/B Testing Guide - Optimizely', url: 'https://www.optimizely.com/optimization-glossary/ab-testing/' }, { title: 'Sample Size Calculator', url: 'https://www.evanmiller.org/ab-testing/sample-size.html' }],
     design: [{ title: 'Design Thinking - IDEO', url: 'https://designthinking.ideo.com/' }, { title: 'Laws of UX', url: 'https://lawsofux.com/' }],
     sql: [{ title: 'SQL Tutorial - Mode', url: 'https://mode.com/sql-tutorial/' }, { title: 'DataLemur SQL Practice', url: 'https://datalemur.com/questions' }],
-    cohort: [{ title: 'Cohort Analysis Guide - Amplitude', url: 'https://amplitude.com/blog/cohort-analysis' }, { title: 'SQL Cohort Analysis - Mode', url: 'https://mode.com/sql-tutorial/sql-cohort-analysis/' }],
-    prioritize: [{ title: 'RICE Scoring - Intercom', url: 'https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/' }, { title: 'Prioritization Frameworks Compared', url: 'https://www.productplan.com/glossary/prioritization-frameworks/' }],
+    cohort: [{ title: 'Cohort Analysis Guide - Amplitude', url: 'https://amplitude.com/blog/cohort-analysis' }, ],
+    prioritize: [{ title: 'RICE Scoring - Intercom', url: 'https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/' }, ],
     rag: [{ title: 'RAG Explained - Pinecone', url: 'https://www.pinecone.io/learn/retrieval-augmented-generation/' }, { title: 'LangChain RAG Tutorial', url: 'https://python.langchain.com/docs/tutorials/rag/' }],
     aillm: [{ title: 'AI for Everyone - Andrew Ng', url: 'https://www.coursera.org/learn/ai-for-everyone' }, { title: 'LLM Basics for PMs', url: 'https://www.lennysnewsletter.com/p/ai-for-product-managers' }],
     eval: [{ title: 'LLM Eval Best Practices', url: 'https://docs.confident-ai.com/' }, { title: 'Building Eval Pipelines - DeepLearning.AI', url: 'https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/' }],
     prompt: [{ title: 'Prompt Engineering - OpenAI', url: 'https://platform.openai.com/docs/guides/prompt-engineering' }, { title: 'Prompt Engineering Course - DeepLearning.AI', url: 'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/' }],
     agentic: [{ title: 'Agentic AI - IBM', url: 'https://www.ibm.com/think/topics/agentic-ai' }, { title: 'LangGraph Docs', url: 'https://langchain-ai.github.io/langgraph/' }],
     responsible: [{ title: 'Responsible AI - Google', url: 'https://ai.google/responsibility/principles/' }, { title: 'AI Ethics Guide - UNESCO', url: 'https://www.unesco.org/en/artificial-intelligence/recommendation-ethics' }],
-    mlops: [{ title: 'MLOps Explained - Google', url: 'https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning' }, { title: 'MLOps for PMs', url: 'https://neptune.ai/blog/mlops-for-product-managers' }],
+    mlops: [{ title: 'MLOps Explained - Google', url: 'https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning' }, ],
     aicost: [{ title: 'OpenAI Pricing', url: 'https://openai.com/api/pricing/' }, { title: 'LLM Cost Optimization - Anyscale', url: 'https://www.anyscale.com/blog/comparing-llms' }]
 };
 const MOCK_INTERVIEWS = [

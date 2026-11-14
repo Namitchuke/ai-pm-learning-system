@@ -6,7 +6,10 @@ const mockInterviewSchema = new mongoose.Schema({
     level: { type: String, enum: ['Easy', 'Medium', 'Hard'], required: true },
     role: { type: String, required: true },
     q: { type: String, required: true },
-    flow: { type: String, required: true }
+    flow: { type: String, required: true },   // approach outline
+    hint: { type: String, default: '' },
+    solution: { type: String, default: '' },  // model answer
+    videoUrl: { type: String, default: '' }
 });
 
 module.exports = mongoose.model('MockInterview', mockInterviewSchema);

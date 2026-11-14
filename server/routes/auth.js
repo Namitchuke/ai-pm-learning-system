@@ -123,7 +123,7 @@ router.post('/logout', (req, res) => {
 router.get('/me', (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).json({ error: 'Not authenticated' });
     const u = req.user;
-    res.json({ user: { id: u._id, name: u.name, email: u.email, role: u.role, studyRole: u.studyRole, avatar: u.avatar, username: u.username } });
+    res.json({ user: { id: u._id, name: u.name, email: u.email, role: u.role, studyRole: u.studyRole, avatar: u.avatar, username: u.username, createdAt: u.createdAt } });
 });
 
 module.exports = router;

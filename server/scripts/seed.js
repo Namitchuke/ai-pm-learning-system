@@ -66,13 +66,21 @@ async function seed() {
         await CaseStudy.deleteMany({});
         console.log('🗑️  Cleared existing content');
 
-        // Seed Phases
+        // Hints, model answers and weekly study guides (server/content/answers.json)
+        const answers = JSON.parse(fs.readFileSync(path.join(__dirname, '../content/answers.json'), 'utf8'));
+        const withAnswers = (item, src) => ({ ...item, ...(src || {}) });
+
+        // Seed Phases (weeks get their study guide from answers.json)
         for (let i = 0; i < data.PHASES.length; i++) {
             const phase = data.PHASES[i];
+            const weeks = phase.weeks.map((w, wi) => {
+                const g = answers.weekGuides && answers.weekGuides[`${i}-${wi}`];
+                return g ? { ...w, guide: g } : w;
+            });
             await Phase.create({
                 phaseIndex: i,
                 name: phase.name,
-                weeks: phase.weeks
+                weeks
             });
         }
         console.log(`✅ Seeded ${data.PHASES.length} phases`);
@@ -93,13 +101,19 @@ async function seed() {
 
         // Seed Mock Interviews
         if (data.MOCK_INTERVIEWS.length > 0) {
-            await MockInterview.insertMany(data.MOCK_INTERVIEWS);
+            const mockDocs = data.MOCK_INTERVIEWS.map(m => withAnswers(m, answers.mock[m.q]));
+            const missingMock = mockDocs.filter(m => !m.solution).length;
+            if (missingMock) console.warn(`   ⚠️  ${missingMock} mock interviews have no answer text yet`);
+            await MockInterview.insertMany(mockDocs);
             console.log(`✅ Seeded ${data.MOCK_INTERVIEWS.length} mock interviews`);
         }
 
         // Seed Case Studies
         if (data.MOCK_CASES.length > 0) {
-            await CaseStudy.insertMany(data.MOCK_CASES);
+            const caseDocs = data.MOCK_CASES.map(c => withAnswers(c, answers.cases[c.title]));
+            const missingCase = caseDocs.filter(c => !c.solution).length;
+            if (missingCase) console.warn(`   ⚠️  ${missingCase} case studies have no answer text yet`);
+            await CaseStudy.insertMany(caseDocs);
             console.log(`✅ Seeded ${data.MOCK_CASES.length} case studies`);
         }
 

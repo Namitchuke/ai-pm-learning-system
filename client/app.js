@@ -26,7 +26,7 @@ function calcPhasePct(pi) { let t = 0, d = 0; PHASES[pi].weeks.forEach((wk, wi) 
 function calcOverallPct() { let t = 0, d = 0; PHASES.forEach((ph, pi) => ph.weeks.forEach((wk, wi) => wk.items.forEach((_, ii) => { t++; if (S.items[ik(pi, wi, ii)]) d++ }))); return t ? Math.round(d / t * 100) : 0 }
 function getPhaseAndWeekIdx(globalWeek) { let pi = Math.floor((globalWeek - 1) / 4), wi = (globalWeek - 1) % 4; return { pi: Math.min(pi, 5), wi: Math.min(wi, 3) } }
 // ---- RENDER ----
-function render() { renderTab0(); renderTab1(); renderTab2(); renderTab3(); renderTab4(); }
+function render() { renderTab0(); renderTab1(); renderTab2(); renderTab3(); renderTab4(); renderTab5(); }
 // ++ UI ADJ FNs ++
 function adjWeek(delta) { S.weekOffset = (S.weekOffset || 0) + delta; save(); render(); }
 function adjWM(key, delta) { let v = getWM(key) + delta; if (v < 0) v = 0; setWM(key, v); render(); }
@@ -65,6 +65,7 @@ function renderTab0() {
     if (week) {
         let wp = calcWeekPct(pi, wi);
         h += `<div class="card"><div class="card-title">${week.label} - ${week.focus} <span style="margin-left:auto;font-size:12px;color:var(--accent2)">${wp}%</span></div>`;
+        h += weekGuideHTML(week.guide);
         h += week.items.map((it, ii) => {
             let k = ik(pi, wi, ii), d = S.items[k] || false;
             return `<div class="ci ${d ? 'done' : ''}" onclick="toggleItem('${k}')"><div class="ck">${d ? '✓' : ''}</div><div class="ci-text">${it.text}</div></div>
@@ -266,6 +267,7 @@ function renderTab3() {
 
     let doneCount = Object.values(S.mocksDone).filter(Boolean).length;
     h += `<div class="card"><div class="card-title">Mock Interviews <span style="margin-left:auto;font-size:11px;color:var(--accent2);font-weight:500">${doneCount} practiced</span></div>
+            ${diffPills('mock', st.lv)}
             <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
                 <select class="modern-select" onchange="updMockFlt('co', this.value)">
                     <option value="" disabled ${st.co === 'All' ? 'selected' : ''}>Company</option>
@@ -276,11 +278,6 @@ function renderTab3() {
                     <option value="" disabled ${st.cat === 'All' ? 'selected' : ''}>Category</option>
                     <option value="All">All Categories</option>
                     ${categories.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}
-                </select>
-                <select class="modern-select" onchange="updMockFlt('lv', this.value)">
-                    <option value="" disabled ${st.lv === 'All' ? 'selected' : ''}>Difficulty</option>
-                    <option value="All">All Difficulties</option>
-                    ${levels.filter(c => c !== 'All').map(c => `<option value="${c}" ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}
                 </select>
                 <select class="modern-select" onchange="updMockFlt('role', this.value)">
                     <option value="" disabled ${st.role === 'All' ? 'selected' : ''}>Role</option>
@@ -331,7 +328,7 @@ function renderTab3() {
                             <span style="background:var(--btn);color:#fff;padding:1px 7px;border-radius:10px">${m.cat}</span>
                         </div>
                         <div style="font-weight:600;font-size:13px;line-height:1.4;${isDone ? 'text-decoration:line-through;color:var(--t3)' : ''}">${m.q}</div>
-                        ${open ? `<div style="font-size:12px;color:var(--t2);margin-top:8px;padding:8px 12px;border-left:3px solid var(--accent);background:var(--box-bg);border:1px solid var(--box-border);border-radius:4px"><strong>Hints:</strong><br>${m.flow}</div>` : ''}
+                        ${open ? answerBlock('mk_' + mk, m, 3) : ''}
                     </div>
                 </div>
                 </div>`;
@@ -340,6 +337,46 @@ function renderTab3() {
     el.innerHTML = h;
 }
 
+
+// ---- Hints, approach and model answers (mock interviews + case studies) ----
+function answerBlock(key, item, tab) {
+    const hasHint = !!(item.hint || item.flow);
+    const hasSol = !!item.solution;
+    if (!hasHint && !hasSol && !item.videoUrl) return '';
+    const hOpen = !!S.expanded[key + '_h'], sOpen = !!S.expanded[key + '_s'];
+    const btn = (part, label, on) => `<button type="button" onclick="event.stopPropagation();toggleAns('${key}','${part}',${tab})" aria-expanded="${on}" style="font:inherit;font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--border-h);background:${on ? 'var(--accent)' : 'var(--card)'};color:${on ? '#fff' : 'var(--t2)'};cursor:pointer">${label}</button>`;
+    let h = `<div style="margin-top:10px;display:flex;flex-direction:column;gap:8px" onclick="event.stopPropagation()">`;
+    h += `<div style="display:flex;gap:6px;flex-wrap:wrap">`;
+    if (hasHint) h += btn('h', hOpen ? 'Hide hint' : 'Show hint', hOpen);
+    if (hasSol) h += btn('s', sOpen ? 'Hide solution' : 'Show solution', sOpen);
+    h += `</div>`;
+    if (hasHint && hOpen) {
+        h += `<div style="font-size:12.5px;color:var(--t2);padding:10px 12px;border-left:3px solid var(--accent);background:var(--box-bg);border-radius:6px;line-height:1.6"><strong style="color:var(--t1)">Hint</strong><div>${esc(item.hint || '')}</div>${item.flow ? `<div style="margin-top:6px"><strong style="color:var(--t1)">Approach</strong><div>${esc(item.flow)}</div></div>` : ''}</div>`;
+    }
+    if (hasSol && sOpen) {
+        h += `<div style="font-size:12.5px;color:var(--t1);padding:10px 12px;border:1px solid var(--border);background:var(--card2);border-radius:6px;line-height:1.65;white-space:pre-line"><strong>Model answer</strong>\n${esc(item.solution)}</div>`;
+    }
+    if (item.videoUrl && /^https:\/\//.test(item.videoUrl)) {
+        h += `<a href="${esc(item.videoUrl)}" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:var(--accent);font-weight:600">Watch a walkthrough &#8599;</a>`;
+    }
+    return h + `</div>`;
+}
+function toggleAns(key, part, tab) {
+    S.expanded[key + '_' + part] = !S.expanded[key + '_' + part];
+    save();
+    if (tab === 3) renderTab3(); else renderTab4();
+}
+
+// Weekly study guide: collapsible, shown above the week's checklist
+function weekGuideHTML(g) {
+    if (!g) return '';
+    return `<details style="margin-bottom:12px;border:1px solid var(--border);border-radius:8px;padding:10px 14px;background:var(--card2)">
+        <summary style="cursor:pointer;font-weight:600;font-size:13.5px;color:var(--t1)">Study guide for this week</summary>
+        <p style="font-size:13px;color:var(--t2);margin:8px 0 6px;line-height:1.6">${esc(g.intro || '')}</p>
+        <ul style="margin:0 0 8px 18px;font-size:13px;color:var(--t2);line-height:1.6">${(g.keyIdeas || []).map(k => `<li style="margin-bottom:4px">${esc(k)}</li>`).join('')}</ul>
+        ${g.doneWhen ? `<div style="font-size:12.5px;color:var(--accent);font-weight:600">Done when: <span style="color:var(--t1);font-weight:500">${esc(g.doneWhen)}</span></div>` : ''}
+    </details>`;
+}
 
 function renderTab4() {
     let el = document.getElementById('tab4'), h = '';
@@ -360,7 +397,7 @@ function renderTab4() {
             <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
                 <div style="display:flex;flex-direction:column;min-width:140px"><label style="${lblS}">Company</label><select class="modern-select" onchange="S.casesState.co=this.value;save();renderTab4()">${companies.map(c => `<option ${st.co === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
                 <div style="display:flex;flex-direction:column;min-width:140px"><label style="${lblS}">Category</label><select class="modern-select" onchange="S.casesState.cat=this.value;save();renderTab4()">${categories.map(c => `<option ${st.cat === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
-                <div style="display:flex;flex-direction:column;min-width:140px"><label style="${lblS}">Difficulty</label><select class="modern-select" onchange="S.casesState.lv=this.value;save();renderTab4()">${levels.map(c => `<option ${st.lv === c ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
+                ${diffPills('case', st.lv)}
                 <div style="display:flex;flex-direction:column;min-width:140px"><label style="${lblS}">Status</label><select class="modern-select" style="border-color:var(--accent)" onchange="S.casesState.status=this.value;save();renderTab4()"><option ${st.status === 'All' ? 'selected' : ''}>All</option><option ${st.status === 'Done' ? 'selected' : ''}>Done</option><option ${st.status === 'Not Done' ? 'selected' : ''}>Not Done</option></select></div>
             </div>`;
 
@@ -386,6 +423,7 @@ function renderTab4() {
                     </div>
                     <div style="font-weight:700;font-size:13px;color:${isDone ? 'var(--t3)' : 'var(--t1)'};margin-bottom:6px;line-height:1.4;${isDone ? 'text-decoration:line-through;' : ''}">${c.title}</div>
                     <div style="font-size:12px;color:var(--t2);line-height:1.5;flex-grow:1">${c.desc}</div>
+                    ${answerBlock('cs_' + c.title.replace(/[^a-zA-Z0-9]/g, '_'), c, 4)}
                 </div>`;
     });
     h += `</div></div>`;
@@ -444,6 +482,14 @@ function toggleCaseDone(tit) {
 
 function calcOverallQuizPct() { let t = 0, c = 0; PHASES.forEach((ph, pi) => ph.weeks.forEach((wk, wi) => { if (wk.quiz) wk.quiz.forEach((q, qi) => { t++; if (S.quizAnswers[`q${pi}${wi}${qi}`] === q.answer) c++ }) })); return t ? Math.round(c / t * 100) : 0 }
 // ---- INTERACTIONS ----
+// Difficulty as buttons (All / Easy / Medium / Hard)
+function diffPills(ctx, cur) {
+    return `<div class="diff-pills" role="group" aria-label="Filter by difficulty">${['All', 'Easy', 'Medium', 'Hard'].map(l => `<button type="button" class="dpill d-${l.toLowerCase()} ${cur === l ? 'on' : ''}" aria-pressed="${cur === l}" onclick="setDiff('${ctx}','${l}')">${l}</button>`).join('')}</div>`;
+}
+function setDiff(ctx, v) {
+    if (ctx === 'mock') { S.mockInterviewsState.lv = v; save(); renderTab3(); }
+    else { S.casesState.lv = v; save(); renderTab4(); }
+}
 function updMockFlt(k, v) { if (!S.mockInterviewsState) S.mockInterviewsState = { co: 'All', cat: 'All', lv: 'All', role: 'All', status: 'All' }; S.mockInterviewsState[k] = v; save(); renderTab3(); }
 function toggleMki(mId) { S.expanded[mId] = !S.expanded[mId]; save(); renderTab3(); }
 function toggleMockDone(mk) { if (!S.mocksDone) S.mocksDone = {}; S.mocksDone[mk] = !S.mocksDone[mk]; if (S.mocksDone[mk]) { S.overallMetrics.mocks = (S.overallMetrics.mocks || 0) + 1; } else { S.overallMetrics.mocks = Math.max(0, (S.overallMetrics.mocks || 0) - 1); } save(); renderTab3(); }
