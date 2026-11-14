@@ -30,8 +30,10 @@ jobs:
           SCHEDULE: ${{ github.event.schedule }}
           INPUT: ${{ github.event.inputs.endpoint }}
         run: |
+          # Not configured yet: skip without failing (avoids a failure email on every schedule)
           if [ -z "$PIPELINE_URL" ] || [ -z "$CRON_SECRET" ]; then
-            echo "::error::Set PIPELINE_URL variable and CRON_SECRET secret."; exit 1
+            echo "::notice::Pipeline cron skipped: set the PIPELINE_URL variable and the CRON_SECRET secret to enable it."
+            exit 0
           fi
           if [ "$SCHEDULE" = "0 3 * * *" ] || [ "$INPUT" = "email" ]; then ep=email; else ep=rss; fi
           base="${PIPELINE_URL%/}"
