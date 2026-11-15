@@ -75,6 +75,11 @@ const models = {
     cases: CaseStudy
 };
 
+const EDITABLE = {
+    interviews: ['co', 'cat', 'level', 'role', 'q', 'flow', 'hint', 'solution', 'videoUrl'],
+    cases: ['title', 'desc', 'co', 'cat', 'level', 'hint', 'solution', 'videoUrl']
+};
+
 // Add content
 router.post('/content/:type', isAdmin, async (req, res) => {
     try {
@@ -93,10 +98,22 @@ router.put('/content/:type/:id', isAdmin, async (req, res) => {
         const Model = models[req.params.type];
         if (!Model) return res.status(400).json({ error: 'Invalid content type' });
         if (!mongoose.isValidObjectId(req.params.id)) return res.status(400).json({ error: 'Invalid id' });
-        const item = await Model.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        // Only these fields can be edited; anything else in the body is ignored
+        const allowed = EDITABLE[req.params.type];
+        const update = {};
+        for (const f of allowed) {
+            if (req.body[f] === undefined) continue;
+            if (typeof req.body[f] !== 'string' || req.body[f].length > 20000) return res.status(400).json({ error: `Invalid ${f}` });
+            update[f] = req.body[f].trim();
+        }
+        if (update.videoUrl && !/^https:\/\/[^\s"'<>]+$/.test(update.videoUrl)) {
+            return res.status(400).json({ error: 'Video link must be a full https:// URL' });
+        }
+        const item = await Model.findByIdAndUpdate(req.params.id, { $set: update }, { new: true, runValidators: true });
         if (!item) return res.status(404).json({ error: 'Not found' });
         res.json(item);
     } catch (err) {
+        if (err.name === 'ValidationError') return res.status(400).json({ error: 'Invalid value: ' + Object.keys(err.errors).join(', ') });
         res.status(500).json({ error: 'Failed to update content' });
     }
 });

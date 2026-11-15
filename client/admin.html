@@ -375,6 +375,39 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- CONTENT EDITOR: hints, model answers, video links -->
+        <h2 style="font-size:22px;margin:36px 0 6px">Content</h2>
+        <p style="color:var(--txt3);font-size:13px;margin:0 0 14px">Edit the hint, model answer and video link for any mock interview or case study. Changes go live as soon as you save.</p>
+        <div class="toolbar" style="flex-wrap:wrap">
+            <select id="ceType" class="search-input" style="flex:0 0 180px" onchange="loadContent()">
+                <option value="interviews">Mock interviews</option>
+                <option value="cases">Case studies</option>
+            </select>
+            <input type="text" class="search-input" id="ceSearch" placeholder="Search questions..." oninput="renderContentList()">
+            <select id="ceFilter" class="search-input" style="flex:0 0 200px" onchange="renderContentList()">
+                <option value="all">All items</option>
+                <option value="noanswer">Missing model answer</option>
+                <option value="novideo">Missing video link</option>
+            </select>
+        </div>
+        <div class="table-wrap" style="max-height:520px;overflow:auto" id="ceList"><div class="state-msg">Loading...</div></div>
+
+        <div id="ceForm" class="stat-card" style="display:none;margin-top:16px">
+            <div class="stat-lbl" id="ceFormTitle">Edit</div>
+            <div id="ceQuestion" style="font-weight:600;margin:6px 0 14px;font-size:15px"></div>
+            <label class="stat-lbl" for="ceHint">Hint</label>
+            <textarea id="ceHint" class="search-input" rows="3" style="width:100%;margin-bottom:12px"></textarea>
+            <label class="stat-lbl" for="ceSolution">Model answer</label>
+            <textarea id="ceSolution" class="search-input" rows="10" style="width:100%;margin-bottom:12px"></textarea>
+            <label class="stat-lbl" for="ceVideo">Video link (https://, optional)</label>
+            <input id="ceVideo" class="search-input" style="width:100%;margin-bottom:14px" placeholder="https://www.youtube.com/watch?v=...">
+            <div style="display:flex;gap:10px;align-items:center">
+                <button class="btn-logout" style="background:var(--acc);color:#fff;border-color:var(--acc)" onclick="saveContent()">Save</button>
+                <button class="btn-logout" onclick="document.getElementById('ceForm').style.display='none'">Cancel</button>
+                <span id="ceMsg" style="font-size:13px;color:var(--txt3)"></span>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -499,6 +532,67 @@
         }
 
         init();
+        loadContent();
+
+        // ---- Content editor ----
+        let ceItems = [], ceEditing = null;
+        async function loadContent() {
+            const type = document.getElementById('ceType').value;
+            document.getElementById('ceForm').style.display = 'none';
+            document.getElementById('ceList').innerHTML = '<div class="state-msg">Loading...</div>';
+            try {
+                const res = await fetch('/api/content/' + type);
+                ceItems = res.ok ? await res.json() : [];
+            } catch (e) { ceItems = []; }
+            renderContentList();
+        }
+        function ceLabel(it) { return it.q || it.title || ''; }
+        function renderContentList() {
+            const term = document.getElementById('ceSearch').value.toLowerCase();
+            const f = document.getElementById('ceFilter').value;
+            const rows = ceItems.filter(it =>
+                ceLabel(it).toLowerCase().includes(term) &&
+                (f === 'all' || (f === 'noanswer' && !it.solution) || (f === 'novideo' && !it.videoUrl)));
+            const el = document.getElementById('ceList');
+            if (!rows.length) { el.innerHTML = '<div class="state-msg">No items match.</div>'; return; }
+            el.innerHTML = '<table><tbody>' + rows.map(it => `<tr style="cursor:pointer" onclick="editContent('${it._id}')">
+                <td><div class="u-name">${escapeHTML(ceLabel(it))}</div><div class="u-email">${escapeHTML([it.co, it.level, it.cat].filter(Boolean).join(' · '))}</div></td>
+                <td class="u-date" style="white-space:nowrap">${it.solution ? 'Answer ✓' : '<span style="color:var(--warn)">No answer</span>'}${it.videoUrl ? ' · Video ✓' : ''}</td>
+            </tr>`).join('') + '</tbody></table>';
+        }
+        function editContent(id) {
+            ceEditing = ceItems.find(it => it._id === id);
+            if (!ceEditing) return;
+            document.getElementById('ceQuestion').textContent = ceLabel(ceEditing);
+            document.getElementById('ceHint').value = ceEditing.hint || '';
+            document.getElementById('ceSolution').value = ceEditing.solution || '';
+            document.getElementById('ceVideo').value = ceEditing.videoUrl || '';
+            document.getElementById('ceMsg').textContent = '';
+            const form = document.getElementById('ceForm');
+            form.style.display = 'block';
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        async function saveContent() {
+            if (!ceEditing) return;
+            const type = document.getElementById('ceType').value;
+            const body = {
+                hint: document.getElementById('ceHint').value,
+                solution: document.getElementById('ceSolution').value,
+                videoUrl: document.getElementById('ceVideo').value
+            };
+            const msg = document.getElementById('ceMsg');
+            msg.textContent = 'Saving...';
+            try {
+                const res = await fetch(`/admin/content/${type}/${ceEditing._id}`, {
+                    method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+                });
+                const data = await res.json();
+                if (!res.ok) { msg.style.color = 'var(--warn)'; msg.textContent = data.error || 'Save failed'; return; }
+                Object.assign(ceEditing, data);
+                msg.style.color = 'var(--ok)'; msg.textContent = 'Saved';
+                renderContentList();
+            } catch (e) { msg.style.color = 'var(--warn)'; msg.textContent = 'Network error'; }
+        }
     </script>
 </body>
 
