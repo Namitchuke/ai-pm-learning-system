@@ -17,35 +17,7 @@ const SkillQuiz = require('../models/SkillQuiz');
 const MockInterview = require('../models/MockInterview');
 const CaseStudy = require('../models/CaseStudy');
 
-// We need to extract the JS constants from data.js
-// data.js uses 'const' declarations, so we need to eval it in a controlled way
-function loadDataFile() {
-    const dataPath = path.join(__dirname, '../../client/data.js');
-    let content = fs.readFileSync(dataPath, 'utf8');
-
-    // Replace 'const' with 'var' so they become accessible after eval
-    content = content.replace(/\bconst\b/g, 'var');
-
-    // Create a sandbox to execute the data file
-    const sandbox = {};
-    const fn = new Function(content + `
-        return {
-            PHASES: typeof PHASES !== 'undefined' ? PHASES : [],
-            SKILL_QUIZZES: typeof SKILL_QUIZZES !== 'undefined' ? SKILL_QUIZZES : {},
-            MOCK_INTERVIEWS: typeof MOCK_INTERVIEWS !== 'undefined' ? MOCK_INTERVIEWS : [],
-            MOCK_CASES: typeof MOCK_CASES !== 'undefined' ? MOCK_CASES : [],
-            CORE_SKILLS: typeof CORE_SKILLS !== 'undefined' ? CORE_SKILLS : [],
-            AI_SKILLS: typeof AI_SKILLS !== 'undefined' ? AI_SKILLS : [],
-            SKILL_RESOURCES: typeof SKILL_RESOURCES !== 'undefined' ? SKILL_RESOURCES : {},
-            WEEKLY_METRICS: typeof WEEKLY_METRICS !== 'undefined' ? WEEKLY_METRICS : [],
-            INTERVIEW_BANK: typeof INTERVIEW_BANK !== 'undefined' ? INTERVIEW_BANK : [],
-            ARTIFACTS: typeof ARTIFACTS !== 'undefined' ? ARTIFACTS : [],
-            K: typeof K !== 'undefined' ? K : ''
-        };
-    `);
-
-    return fn();
-}
+const { loadDataFile } = require('../content/loadData');
 
 async function seed() {
     try {

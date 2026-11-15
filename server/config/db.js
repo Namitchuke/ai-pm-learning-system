@@ -17,6 +17,8 @@ const connectDB = async (attempt = 1) => {
     try {
         await mongoose.connect(process.env.MONGODB_URI, { serverSelectionTimeoutMS: 10000 });
         console.log('MongoDB connected');
+        // Push repo content changes (answers, guides, link fixes) into the database
+        require('../content/sync').syncContent().catch(err => console.error('Content sync failed:', err.message));
     } catch (err) {
         const delay = Math.min(30000, 2000 * attempt);
         console.error(`MongoDB connection error (attempt ${attempt}): ${err.message}. Retrying in ${delay / 1000}s`);

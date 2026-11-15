@@ -86,7 +86,7 @@
   },
   "How would you monetize WhatsApp without ads?": {
    "hint": "Look for revenue that does not depend on showing ads: business messaging, payments, and paid features for channels or groups.",
-   "solution": "1. Constraint: WhatsApp's user base is privacy-sensitive, so the answer should not depend on reading messages.\n2. Options: charge businesses for customer-service messaging, take a fee on payments through UPI-style rails, and sell paid subscriptions for channels or large groups.\n3. Recommendation: lead with business messaging, which already has demand and clear pricing.\n4. Risks: charging users directly could push them to alternatives; business fees can frustrate small sellers.\n5. Metrics: business accounts paid, message volume per business, and revenue per active business.\n6. Guardrail: no change that weakens end-to-end encryption for users."
+   "solution": "1. Constraint: WhatsApp's user base is privacy-sensitive, so the answer should not depend on reading messages.\n2. Options: charge businesses for customer-service messaging, earn on merchant payments (person-to-person UPI transfers are free in India), and sell paid subscriptions for channels or large groups.\n3. Recommendation: lead with business messaging, which already has demand and clear pricing.\n4. Risks: charging users directly could push them to alternatives; business fees can frustrate small sellers.\n5. Metrics: business accounts paid, message volume per business, and revenue per active business.\n6. Guardrail: no change that weakens end-to-end encryption for users."
   },
   "Should Instagram build a dating feature?": {
    "hint": "Weigh the upside (engagement, new users) against the risk (trust, safety, and a crowded market). Then recommend a clear position.",
@@ -283,10 +283,6 @@
   "Time spent on Instagram feed dropped, but Stories time went up. Is this bad?": {
    "hint": "Time spent is one number. Look at what the user is doing instead, and whether the total value of the app is rising.",
    "solution": "1. Clarify: is the total time falling, or does it just move between formats?\n2. Measure: total time on the app, time per format, and whether users return daily.\n3. Interpretation: if Stories time rises and total time holds, users are shifting. If total time falls, that is a concern.\n4. Value check: are users who use Stories more likely to stay, post, or buy? Retention matters more than format share.\n5. Action: keep investing in the format that drives retention, and watch feed quality so the shift is not a sign of a broken feed.\n6. Metrics: daily active users, retention by format, and session count."
-  },
-  "Design an Airbnb experience for digital nomads.": {
-   "hint": "Digital nomads need reliable Wi-Fi, flexible stays, a community, and a way to handle work and taxes. Pick the two that matter most.",
-   "solution": "1. Users: remote workers staying in one city for weeks or months.\n2. Needs: reliable internet, a quiet workspace, flexible booking, and a community of other remote workers.\n3. Features: a verified-Wi-Fi filter with speed tests, monthly stays tagged as work-friendly, and local coworking passes or meetups.\n4. Experience: a set-up checklist after booking (Wi-Fi speed, power backup, desk).\n5. Metrics: monthly stay bookings, repeat nomad guests, and reviews that mention work.\n6. Risk: hosts may list 'work-friendly' without real standards, so verify with guest reviews and speed tests."
   },
   "How do you handle conflicting feedback from two key stakeholders?": {
    "hint": "Separate the content of the two feedback points from the people giving them. Then decide based on the goal, and tell both stakeholders why.",
